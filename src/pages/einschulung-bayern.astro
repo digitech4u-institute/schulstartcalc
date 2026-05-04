@@ -1,5 +1,3 @@
-
-
 ---
 const pageTitle =
   "Einschulung Bayern: Stichtag, Schuljahr und Einschulungskorridor";
@@ -136,6 +134,15 @@ const pageDescription =
             der zuständigen Grundschule oder beim Bayerischen Staatsministerium für
             Unterricht und Kultus.
           </p>
+
+          <a
+            class="source-link"
+            href="https://www.km.bayern.de/lernen/schularten/grundschule/einschulung-und-schulwegsicherheit"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Bayerisches Staatsministerium: Einschulung und Schulwegsicherheit
+          </a>
 
           <p class="stand">Stand der Informationen: Mai 2026</p>
         </section>
@@ -333,6 +340,27 @@ const pageDescription =
     line-height: 1.6;
   }
 
+  .source-link {
+    display: inline-flex;
+    width: fit-content;
+    margin-top: 18px;
+    padding: 12px 14px;
+    border: 1px solid rgba(129, 97, 38, 0.18);
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.58);
+    color: #172033;
+    font-size: 0.96rem;
+    font-weight: 850;
+    line-height: 1.35;
+    text-decoration: none;
+  }
+
+  .source-link:hover {
+    border-color: rgba(129, 97, 38, 0.32);
+    background: rgba(255, 255, 255, 0.82);
+    text-decoration: underline;
+  }
+
   .stand {
     display: inline-flex;
     width: fit-content;
@@ -393,7 +421,8 @@ const pageDescription =
       border-radius: 20px;
     }
 
-    .cta-link {
+    .cta-link,
+    .source-link {
       width: 100%;
     }
   }

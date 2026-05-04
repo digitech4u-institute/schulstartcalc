@@ -329,7 +329,7 @@ const webApplicationSchema = {
 					<td>Regulärer Stichtag</td>
 				  </tr>
 				  <tr>
-					<td>Bayern</td>
+					<td><a class="state-table-link" href="/einschulung-bayern/">Bayern</a></td>
 					<td>30. September</td>
 					<td>Einschulungskorridor vom 1. Juli bis 30. September</td>
 				  </tr>
@@ -1733,6 +1733,19 @@ select {
 .state-table td:first-child {
   color: #172033;
   font-weight: 850;
+}
+.state-table-link {
+  color: #172033;
+  font-weight: 900;
+  text-decoration: underline;
+  text-decoration-color: rgba(129, 97, 38, 0.35);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+}
+
+.state-table-link:hover {
+  color: #816126;
+  text-decoration-color: #816126;
 }
 
 .state-table td:nth-child(2) {
