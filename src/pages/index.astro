@@ -2226,4 +2226,91 @@ select {
     font-size: 1.18rem !important;
   }
 }
+/* === Emergency Mobile Width Fix === */
+
+@media (max-width: 640px) {
+  html,
+  body {
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow-x: hidden !important;
+  }
+
+  .page,
+  .hero,
+  .calculator-card,
+  .calculator-form,
+  .result-box,
+  .content-section,
+  .content-block {
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow-x: hidden !important;
+    box-sizing: border-box !important;
+  }
+
+  .calculator-card {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+
+  .calculator-form {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+
+  .date-row,
+  .date-grid,
+  .date-fields,
+  .date-inputs,
+  .birthdate-grid {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr 1fr !important;
+    gap: 8px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .date-row > *,
+  .date-grid > *,
+  .date-fields > *,
+  .date-inputs > *,
+  .birthdate-grid > * {
+    min-width: 0 !important;
+    max-width: 100% !important;
+  }
+
+  input,
+  select,
+  button {
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  #calcDay,
+  #calcMonth,
+  #calcYear {
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    padding-left: 6px !important;
+    padding-right: 6px !important;
+    font-size: 1.15rem !important;
+  }
+
+  #calcYear {
+    font-size: 1.08rem !important;
+  }
+
+  #state {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .result-box {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+}
   </style>
