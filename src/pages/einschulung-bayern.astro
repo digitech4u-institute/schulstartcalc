@@ -13,6 +13,38 @@ const pageDescription =
     <title>{pageTitle}</title>
     <meta name="description" content={pageDescription} />
     <link rel="canonical" href="https://www.einschulungsrechner.de/einschulung-bayern/" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Welcher Einschulungsstichtag gilt in Bayern?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "In Bayern gilt grundsätzlich der 30. September als Stichtag für die Einschulung. Kinder, die bis zu diesem Datum sechs Jahre alt werden, kommen grundsätzlich für die Einschulung im entsprechenden Schuljahr in Betracht."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Was ist der Einschulungskorridor in Bayern?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Der Einschulungskorridor betrifft Kinder, die zwischen dem 1. Juli und dem 30. September sechs Jahre alt werden. Für diese Kinder ist die Einschulung grundsätzlich vorgesehen; Eltern können unter bestimmten Voraussetzungen aber erklären, dass ihr Kind erst ein Jahr später eingeschult werden soll."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Ist das Ergebnis zur Einschulung in Bayern verbindlich?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Nein. Der Einschulungsrechner und diese Informationsseite dienen der Orientierung. Verbindliche Informationen erhältst du bei der zuständigen Schule oder Schulbehörde in Bayern."
+            }
+          }
+        ]
+      }
+    </script>
   </head>
 
   <body>
