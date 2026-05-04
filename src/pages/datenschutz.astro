@@ -1,0 +1,242 @@
+---
+const pageTitle = "Datenschutzerklärung";
+const pageDescription =
+  "Datenschutzerklärung des Einschulungsrechners Deutschland.";
+---
+
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={pageDescription} />
+  </head>
+
+  <body>
+    <main class="legal-page">
+      <a class="back-link" href="/">← Zurück zum Einschulungsrechner</a>
+
+      <section class="legal-card">
+        <p class="legal-kicker">Datenschutz</p>
+
+        <h1>Datenschutzerklärung</h1>
+
+        <h2>1. Verantwortlicher</h2>
+
+        <p>
+          Verantwortlich für die Datenverarbeitung auf dieser Website ist:<br /><br />
+
+          DigiTech4U Institute<br />
+          M. Lanzend. Str. 6-8<br />
+          2333 Leopoldsdorf<br />
+          Österreich<br /><br />
+
+          E-Mail: <a href="mailto:info@digitech4u.org">info@digitech4u.org</a>
+        </p>
+
+        <h2>2. Allgemeine Hinweise</h2>
+
+        <p>
+          Der Schutz deiner personenbezogenen Daten ist uns wichtig. Diese Website
+          stellt einen Einschulungsrechner bereit, der direkt im Browser ausgeführt
+          wird. Die von dir eingegebenen Daten zum Geburtsdatum und Bundesland werden
+          nicht an uns übermittelt und nicht auf unserem Server gespeichert.
+        </p>
+
+        <h2>3. Berechnung im Browser</h2>
+
+        <p>
+          Die Berechnung des voraussichtlichen Einschulungsjahres erfolgt lokal in
+          deinem Browser. Die Eingaben werden nicht gespeichert, nicht an uns
+          gesendet und nicht für Profile oder Auswertungen verwendet.
+        </p>
+
+        <h2>4. Server-Logfiles</h2>
+
+        <p>
+          Beim Aufruf dieser Website können durch den Hosting-Anbieter automatisch
+          technische Daten verarbeitet werden. Dazu können insbesondere IP-Adresse,
+          Datum und Uhrzeit des Zugriffs, aufgerufene Seite, Browsertyp,
+          Betriebssystem und Referrer-URL gehören. Diese Daten dienen der technischen
+          Bereitstellung, Sicherheit und Stabilität der Website.
+        </p>
+
+        <h2>5. Rechtsgrundlage</h2>
+
+        <p>
+          Die Verarbeitung technisch erforderlicher Daten erfolgt auf Grundlage von
+          Art. 6 Abs. 1 lit. f DSGVO. Das berechtigte Interesse liegt in der sicheren,
+          stabilen und nutzerfreundlichen Bereitstellung dieser Website.
+        </p>
+
+        <h2>6. Cookies, Tracking und Analyse</h2>
+
+        <p>
+          Diese Website verwendet derzeit keine Analyse-Cookies, kein Tracking und
+          keine Werbe- oder Marketingdienste.
+        </p>
+
+        <h2>7. Externe Links</h2>
+
+        <p>
+          Diese Website enthält Links zu externen Informationsquellen. Wenn du einen
+          externen Link anklickst, verlässt du diese Website. Für die Verarbeitung
+          personenbezogener Daten auf externen Websites sind die jeweiligen Anbieter
+          verantwortlich.
+        </p>
+
+        <h2>8. Speicherdauer</h2>
+
+        <p>
+          Die im Rahmen des Websiteaufrufs technisch erforderlichen Daten werden nur
+          so lange verarbeitet, wie dies für die Bereitstellung, Sicherheit und
+          Stabilität der Website erforderlich ist oder gesetzliche Pflichten bestehen.
+        </p>
+
+        <h2>9. Betroffenenrechte</h2>
+
+        <p>
+          Du hast im Rahmen der gesetzlichen Vorgaben das Recht auf Auskunft,
+          Berichtigung, Löschung, Einschränkung der Verarbeitung,
+          Datenübertragbarkeit sowie Widerspruch gegen bestimmte Verarbeitungen.
+          Außerdem hast du das Recht, dich bei einer zuständigen Datenschutzaufsicht
+          zu beschweren.
+        </p>
+
+        <h2>10. Hinweis zur Verbindlichkeit des Rechners</h2>
+
+        <p>
+          Der Einschulungsrechner dient ausschließlich der Orientierung. Verbindliche
+          Informationen erhältst du bei der zuständigen Schule, beim Schulamt oder
+          bei der Bildungsbehörde deines Bundeslands.
+        </p>
+
+        <h2>11. Stand dieser Datenschutzerklärung</h2>
+
+        <p>
+          Stand: Mai 2026
+        </p>
+      </section>
+    </main>
+  </body>
+</html>
+
+<style>
+  :root {
+    font-family:
+      system-ui,
+      -apple-system,
+      BlinkMacSystemFont,
+      "Segoe UI",
+      Roboto,
+      Helvetica,
+      Arial,
+      sans-serif;
+    color: #172033;
+    background: #f6f3ec;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0;
+    background:
+      radial-gradient(circle at top left, rgba(255, 208, 122, 0.28), transparent 32rem),
+      linear-gradient(180deg, #fbf8f1 0%, #f2eee5 100%);
+  }
+
+  .legal-page {
+    min-height: 100vh;
+    padding: 32px 20px 64px;
+  }
+
+  .back-link {
+    display: block;
+    max-width: 860px;
+    margin: 0 auto 20px;
+    color: #465266;
+    font-weight: 800;
+    text-decoration: none;
+  }
+
+  .back-link:hover {
+    color: #172033;
+    text-decoration: underline;
+  }
+
+  .legal-card {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: clamp(28px, 4vw, 48px);
+    border: 1px solid rgba(42, 35, 21, 0.08);
+    border-radius: 30px;
+    background: rgba(255, 255, 255, 0.78);
+    box-shadow: 0 20px 70px rgba(42, 35, 21, 0.08);
+  }
+
+  .legal-kicker {
+    margin: 0 0 12px;
+    color: #816126;
+    font-size: 0.86rem;
+    font-weight: 850;
+    letter-spacing: 0.09em;
+    line-height: 1.25;
+    text-transform: uppercase;
+  }
+
+  h1 {
+    margin: 0 0 28px;
+    color: #172033;
+    font-size: clamp(2.2rem, 5vw, 4rem);
+    font-weight: 900;
+    line-height: 0.98;
+    letter-spacing: -0.06em;
+  }
+
+  h2 {
+    margin: 28px 0 10px;
+    color: #172033;
+    font-size: 1.25rem;
+    font-weight: 900;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+  }
+
+  p {
+    margin: 0;
+    color: #465266;
+    font-size: 1rem;
+    line-height: 1.7;
+  }
+
+  a {
+    color: #172033;
+    font-weight: 800;
+  }
+
+  @media (max-width: 520px) {
+    .legal-page {
+      padding: 22px 14px 42px;
+    }
+
+    .legal-card {
+      padding: 24px;
+      border-radius: 24px;
+    }
+
+    h1 {
+      font-size: 2.3rem;
+    }
+
+    h2 {
+      font-size: 1.12rem;
+    }
+
+    p {
+      font-size: 0.96rem;
+      line-height: 1.62;
+    }
+  }
+</style>
