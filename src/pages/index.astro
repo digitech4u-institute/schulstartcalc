@@ -2313,4 +2313,52 @@ select {
     margin-right: 0 !important;
   }
 }
+/* === Mobile Result Typography Fix === */
+
+@media (max-width: 640px) {
+  .result-box h3,
+  .result-box .result-title,
+  .result-box .result-year,
+  .result-box .school-year,
+  .result-box .highlight,
+  .result-box strong {
+    max-width: 100% !important;
+    overflow-wrap: normal !important;
+    word-break: normal !important;
+  }
+
+  .result-box .result-title,
+  .result-box .result-year,
+  .result-box .school-year,
+  .result-box .highlight {
+    font-size: clamp(2.1rem, 9vw, 3rem) !important;
+    line-height: 1.05 !important;
+    letter-spacing: -0.045em !important;
+  }
+
+  .result-box p {
+    max-width: 100% !important;
+    overflow-wrap: normal !important;
+    word-break: normal !important;
+  }
+
+  .result-box {
+    padding-left: 22px !important;
+    padding-right: 22px !important;
+  }
+}
+
+@media (max-width: 390px) {
+  .result-box .result-title,
+  .result-box .result-year,
+  .result-box .school-year,
+  .result-box .highlight {
+    font-size: clamp(1.95rem, 8.4vw, 2.65rem) !important;
+  }
+
+  .result-box {
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+  }
+}
   </style>
