@@ -798,7 +798,7 @@ const webApplicationSchema = {
           return {
             status: "regular",
             title: `Dein Kind wird voraussichtlich im Schuljahr ${sixthBirthdayYear}/${sixthBirthdayYear + 1} eingeschult.`,
-            shortText: `Der 6. Geburtstag liegt vor oder am Stichtag in<br class="mobile-only" /> ${stateRule.name}.`,
+            shortText: `Der 6. Geburtstag liegt vor oder am Stichtag in<br class="desktop-only" /> ${stateRule.name}.`,
             whyText: `In ${stateRule.name} gilt der ${stateRule.label}. Dein Kind wird am ${formatDate(sixthBirthday)} sechs Jahre alt und erreicht damit den Stichtag.`,
             nextStep: `Informiere dich rechtzeitig bei der zuständigen Grundschule über Anmeldung und Fristen.`,
             meta: {
@@ -815,7 +815,7 @@ const webApplicationSchema = {
         return {
           status: "next_year",
           title: `Dein Kind wird voraussichtlich im Schuljahr ${nextEnrollmentYear}/${nextEnrollmentYear + 1} eingeschult.`,
-		  shortText: `Der 6. Geburtstag liegt nach dem Stichtag in<br class="mobile-only" /> ${stateRule.name}.`,
+		  shortText: `Der 6. Geburtstag liegt nach dem Stichtag in<br class="desktop-only" /> ${stateRule.name}.`,
           whyText: `In ${stateRule.name} gilt der ${stateRule.label}. Dein Kind wird am ${formatDate(sixthBirthday)} sechs Jahre alt und erreicht den Stichtag in diesem Jahr voraussichtlich nicht.`,
           nextStep: `Wenn du über eine frühere Einschulung nachdenkst, informiere dich bei der zuständigen Grundschule über die Voraussetzungen.`,
           meta: {
@@ -2359,6 +2359,17 @@ select {
   .result-box {
     padding-left: 20px !important;
     padding-right: 20px !important;
+  }
+}
+/* === Desktop-only break in result explanation === */
+
+.desktop-only {
+  display: inline;
+}
+
+@media (max-width: 640px) {
+  .desktop-only {
+    display: none;
   }
 }
   </style>
