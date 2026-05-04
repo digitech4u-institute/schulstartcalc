@@ -2184,5 +2184,46 @@ select {
     font-size: 0.92rem !important;
   }
 }
+/* === Mobile Fix: Datumsfelder dürfen nicht überlaufen === */
 
+@media (max-width: 520px) {
+  .calculator-card {
+    overflow: hidden !important;
+  }
+
+  .date-grid,
+  .date-fields,
+  .date-inputs,
+  .birthdate-grid {
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: 8px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .date-field,
+  .date-group,
+  .input-group {
+    min-width: 0 !important;
+    max-width: 100% !important;
+  }
+
+  #calcDay,
+  #calcMonth,
+  #calcYear {
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    padding-left: 8px !important;
+    padding-right: 8px !important;
+    font-size: 1.25rem !important;
+    letter-spacing: 0.02em !important;
+  }
+
+  #calcYear {
+    font-size: 1.18rem !important;
+  }
+}
   </style>
