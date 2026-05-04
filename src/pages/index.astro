@@ -1896,11 +1896,12 @@ select {
   line-height: 1.35;
 }
 
-.result-schoolyear {
-  font-size: clamp(1.85rem, 8.4vw, 2.25rem);
-  line-height: 1;
-  white-space: nowrap;
-}
+  .result-schoolyear {
+    font-size: clamp(1.55rem, 6.8vw, 1.9rem) !important;
+    line-height: 1.04 !important;
+    letter-spacing: -0.045em !important;
+    white-space: nowrap;
+  }
 
 .result-facts {
   grid-template-columns: 1fr;
@@ -2336,6 +2337,13 @@ select {
     letter-spacing: -0.045em !important;
   }
 
+  .result-box .result-schoolyear {
+    font-size: clamp(1.55rem, 6.8vw, 1.9rem) !important;
+    line-height: 1.04 !important;
+    letter-spacing: -0.045em !important;
+    white-space: nowrap !important;
+  }
+
   .result-box p {
     max-width: 100% !important;
     overflow-wrap: normal !important;
@@ -2354,6 +2362,12 @@ select {
   .result-box .school-year,
   .result-box .highlight {
     font-size: clamp(1.95rem, 8.4vw, 2.65rem) !important;
+  }
+
+  .result-box .result-schoolyear {
+    font-size: clamp(1.42rem, 6.3vw, 1.72rem) !important;
+    line-height: 1.04 !important;
+    letter-spacing: -0.04em !important;
   }
 
   .result-box {
