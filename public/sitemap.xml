@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="https://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://www.einschulungsrechner.de/</loc>
+    <lastmod>2026-05-04</lastmod>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://www.einschulungsrechner.de/impressum/</loc>
+    <lastmod>2026-05-04</lastmod>
+    <priority>0.2</priority>
+  </url>
+  <url>
+    <loc>https://www.einschulungsrechner.de/datenschutz/</loc>
+    <lastmod>2026-05-04</lastmod>
+    <priority>0.2</priority>
+  </url>
+</urlset>
