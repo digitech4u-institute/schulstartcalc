@@ -54,7 +54,11 @@ const pageDescription =
       <article class="state-card">
         <p class="state-kicker">Baden-Württemberg</p>
 
-        <h1>Einschulung in Baden-Württemberg: Stichtag und Schuljahr</h1>
+        <h1>
+          Einschulung in<br />
+          Baden-Württemberg:<br />
+          Stichtag und Schuljahr
+        </h1>
 
         <p class="lead">
           In Baden-Württemberg gilt für die Einschulung grundsätzlich der Stichtag
@@ -70,12 +74,12 @@ const pageDescription =
 
           <div class="fact-card">
             <span>Sonderregel</span>
-            <strong>Stichtagsflexibilisierung</strong>
+            <strong>Stichtags<span class="desktop-break">-<br /></span>flexibilisierung</strong>
           </div>
 
           <div class="fact-card">
             <span>Wichtig</span>
-            <strong>Anmeldung über die Grundschule</strong>
+            <strong>Anmeldung über<span class="desktop-break"><br /></span> Grundschule</strong>
           </div>
         </div>
 
@@ -274,25 +278,32 @@ const pageDescription =
 
   .fact-card {
     display: grid;
-    gap: 7px;
-    padding: 18px;
+    align-content: center;
+    gap: 12px;
+    min-height: 132px;
+    padding: 22px 24px;
     border: 1px solid rgba(42, 35, 21, 0.1);
-    border-radius: 20px;
-    background: rgba(255, 255, 255, 0.74);
+    border-radius: 22px;
+    background: rgba(255, 255, 255, 0.78);
   }
 
   .fact-card span {
     color: #816126;
-    font-size: 0.74rem;
-    font-weight: 850;
-    letter-spacing: 0.085em;
+    font-size: clamp(1.02rem, 1.35vw, 1.22rem);
+    font-weight: 950;
+    letter-spacing: 0.11em;
+    line-height: 1.12;
     text-transform: uppercase;
   }
 
   .fact-card strong {
     color: #172033;
-    font-size: 1.05rem;
-    line-height: 1.25;
+    font-size: clamp(1.34rem, 2vw, 1.72rem);
+    font-weight: 950;
+    line-height: 1.12;
+    letter-spacing: -0.03em;
+    overflow-wrap: normal;
+    word-break: normal;
   }
 
   section {
@@ -424,9 +435,9 @@ const pageDescription =
 
     h1 {
       max-width: 100%;
-      font-size: clamp(2rem, 9.2vw, 2.65rem);
-      line-height: 1.02;
-      letter-spacing: -0.055em;
+      font-size: clamp(1.86rem, 8.15vw, 2.36rem);
+      line-height: 1.04;
+      letter-spacing: -0.052em;
       overflow-wrap: normal;
       word-break: normal;
       hyphens: none;
@@ -435,6 +446,19 @@ const pageDescription =
     .lead {
       font-size: 1.02rem;
       line-height: 1.55;
+    }
+
+    .fact-card {
+      min-height: 116px;
+      padding: 22px 26px;
+    }
+
+    .fact-card span {
+      font-size: clamp(0.92rem, 4vw, 1.05rem);
+    }
+
+    .fact-card strong {
+      font-size: clamp(1.32rem, 5.8vw, 1.55rem);
     }
 
     section {
@@ -471,9 +495,19 @@ const pageDescription =
 
   @media (max-width: 390px) {
     h1 {
-      font-size: clamp(1.85rem, 8.7vw, 2.35rem);
-      line-height: 1.04;
-      letter-spacing: -0.05em;
+      font-size: clamp(1.72rem, 7.75vw, 2.12rem);
+      line-height: 1.05;
+      letter-spacing: -0.048em;
+    }
+  }
+
+  .desktop-break {
+    display: inline;
+  }
+
+  @media (max-width: 720px) {
+    .desktop-break {
+      display: none;
     }
   }
 </style>
