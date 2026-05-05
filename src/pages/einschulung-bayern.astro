@@ -70,12 +70,12 @@ const pageDescription =
 
           <div class="fact-card">
             <span>Sonderregel</span>
-            <strong>Einschulungskorridor</strong>
+            <strong>Einschulungs-<br class="desktop-only" />korridor</strong>
           </div>
 
           <div class="fact-card">
             <span>Zeitraum</span>
-            <strong>1. Juli bis 30. September</strong>
+            <strong>1. Juli bis<br class="desktop-only" />30. September</strong>
           </div>
         </div>
 
@@ -274,27 +274,32 @@ const pageDescription =
   }
 
   .fact-card {
-    display: grid;
-    gap: 7px;
-    padding: 18px;
-    border: 1px solid rgba(42, 35, 21, 0.1);
-    border-radius: 20px;
-    background: rgba(255, 255, 255, 0.74);
-  }
+  display: grid;
+  align-content: center;
+  gap: 12px;
+  min-height: 132px;
+  padding: 22px 24px;
+  border: 1px solid rgba(42, 35, 21, 0.1);
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.78);
+}
 
-  .fact-card span {
-    color: #816126;
-    font-size: 0.74rem;
-    font-weight: 850;
-    letter-spacing: 0.085em;
-    text-transform: uppercase;
-  }
+.fact-card span {
+  color: #816126;
+  font-size: clamp(1.02rem, 1.35vw, 1.22rem);
+  font-weight: 950;
+  letter-spacing: 0.11em;
+  line-height: 1.12;
+  text-transform: uppercase;
+}
 
-  .fact-card strong {
-    color: #172033;
-    font-size: 1.05rem;
-    line-height: 1.25;
-  }
+.fact-card strong {
+  color: #172033;
+  font-size: clamp(1.34rem, 2vw, 1.72rem);
+  font-weight: 950;
+  line-height: 1.12;
+  letter-spacing: -0.03em;
+}
 
   section {
     margin-top: 38px;
@@ -438,6 +443,19 @@ const pageDescription =
       line-height: 1.55;
     }
 
+    .fact-card {
+  min-height: 116px;
+  padding: 22px 26px;
+}
+
+.fact-card span {
+  font-size: clamp(0.92rem, 4vw, 1.05rem);
+}
+
+.fact-card strong {
+  font-size: clamp(1.32rem, 5.8vw, 1.55rem);
+}
+
     section {
       margin-top: 30px;
       padding-top: 28px;
@@ -475,6 +493,16 @@ const pageDescription =
     font-size: clamp(1.85rem, 8.7vw, 2.35rem);
     line-height: 1.04;
     letter-spacing: -0.05em;
+  }
+}
+
+.desktop-only {
+  display: inline;
+}
+
+@media (max-width: 720px) {
+  .desktop-only {
+    display: none;
   }
 }
 
