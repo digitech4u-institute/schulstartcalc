@@ -1695,24 +1695,42 @@ select {
 }
 .table-wrap {
   margin-top: 22px;
+  max-width: 100%;
   overflow-x: auto;
   border: 1px solid rgba(42, 35, 21, 0.1);
   border-radius: 20px;
   background: rgba(255, 255, 255, 0.78);
+  -webkit-overflow-scrolling: touch;
 }
 
 .state-table {
   width: 100%;
+  min-width: 1060px;
   border-collapse: collapse;
-  min-width: 720px;
 }
 
 .state-table th,
 .state-table td {
   padding: 15px 18px;
   text-align: left;
-  vertical-align: top;
+  vertical-align: middle;
+  white-space: nowrap;
   border-bottom: 1px solid rgba(42, 35, 21, 0.08);
+}
+
+.state-table th:first-child,
+.state-table td:first-child {
+  min-width: 280px;
+}
+
+.state-table th:nth-child(2),
+.state-table td:nth-child(2) {
+  min-width: 150px;
+}
+
+.state-table th:nth-child(3),
+.state-table td:nth-child(3) {
+  min-width: 560px;
 }
 
 .state-table th {
@@ -2015,6 +2033,10 @@ select {
     border-radius: 18px;
   }
 
+  .state-table {
+    min-width: 980px;
+  }
+
   .state-table th,
   .state-table td {
     padding: 13px 14px;
@@ -2022,6 +2044,21 @@ select {
 
   .state-table td {
     font-size: 0.9rem;
+  }
+
+  .state-table th:first-child,
+  .state-table td:first-child {
+    min-width: 250px;
+  }
+
+  .state-table th:nth-child(2),
+  .state-table td:nth-child(2) {
+    min-width: 135px;
+  }
+
+  .state-table th:nth-child(3),
+  .state-table td:nth-child(3) {
+    min-width: 520px;
   }
 }
 
