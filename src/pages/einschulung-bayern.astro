@@ -70,12 +70,12 @@ const pageDescription =
 
           <div class="fact-card">
             <span>Sonderregel</span>
-            <strong>Einschulungs-<br class="desktop-only" />korridor</strong>
+            <strong>Einschulungs<span class="desktop-break">-<br /></span>korridor</strong>
           </div>
 
           <div class="fact-card">
             <span>Zeitraum</span>
-            <strong>1. Juli bis<br class="desktop-only" />30. September</strong>
+            <strong>1. Juli bis <span class="desktop-break"><br /></span>30. September</strong>
           </div>
         </div>
 
@@ -496,12 +496,12 @@ const pageDescription =
   }
 }
 
-.desktop-only {
+.desktop-break {
   display: inline;
 }
 
 @media (max-width: 720px) {
-  .desktop-only {
+  .desktop-break {
     display: none;
   }
 }
