@@ -16,11 +16,17 @@
     <priority>0.8</priority>
   </url>
 
-<url>
-  <loc>https://www.einschulungsrechner.de/einschulung-nordrhein-westfalen/</loc>
-  <lastmod>2026-05-05</lastmod>
-  <priority>0.8</priority>
-</url>
+
+  <url>
+    <loc>https://www.einschulungsrechner.de/einschulung-nordrhein-westfalen/</loc>
+    <lastmod>2026-05-05</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.einschulungsrechner.de/einschulung-hessen/</loc>
+    <lastmod>2026-05-05</lastmod>
+    <priority>0.8</priority>
+  </url>
 
   <url>
     <loc>https://www.einschulungsrechner.de/impressum/</loc>
