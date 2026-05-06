@@ -1,3 +1,8 @@
+				  <tr>
+					<td><a class="state-table-link" href="/einschulung-hamburg/">Hamburg</a></td>
+					<td>1. Juli</td>
+					<td>Regulärer Stichtag</td>
+				  </tr>
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="https://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
@@ -15,8 +20,6 @@
     <lastmod>2026-05-04</lastmod>
     <priority>0.8</priority>
   </url>
-
-
   <url>
     <loc>https://www.einschulungsrechner.de/einschulung-nordrhein-westfalen/</loc>
     <lastmod>2026-05-05</lastmod>
