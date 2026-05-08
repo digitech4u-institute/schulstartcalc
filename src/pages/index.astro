@@ -264,6 +264,17 @@ const webApplicationSchema = {
 			Rolle spielt.
 		  </p>
 		</div>
+
+		<div class="guide-teaser">
+		  <p class="content-kicker">Ratgeber</p>
+		  <h2>Einschulung einfach erklärt</h2>
+		  <p>
+			Du möchtest nicht nur das Schuljahr berechnen, sondern auch verstehen,
+			was Stichtag, Schulpflicht, Kann-Kind, Zurückstellung und Schulanmeldung
+			bedeuten? Unser Ratgeber führt dich Schritt für Schritt durch die wichtigsten Fragen.
+		  </p>
+		  <a class="guide-teaser-link" href="/einschulung/">Zum Einschulungs-Ratgeber</a>
+		</div>
 	  
 		<div class="content-grid">
 		  <article class="info-card">
@@ -1624,6 +1635,34 @@ select {
   max-width: 760px;
 }
 
+.guide-teaser {
+  max-width: 780px;
+  margin-top: 28px;
+  padding: 24px;
+  border: 1px solid rgba(129, 97, 38, 0.16);
+  border-radius: 22px;
+  background: rgba(245, 210, 138, 0.12);
+}
+
+.guide-teaser-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 18px;
+  min-height: 50px;
+  padding: 0 20px;
+  border-radius: 15px;
+  background: #172033;
+  color: #fff;
+  font-weight: 850;
+  line-height: 1.2;
+  text-decoration: none;
+}
+
+.guide-teaser-link:hover {
+  background: #2a3550;
+}
+
 .content-kicker {
   margin: 0 0 12px;
   color: #816126 !important;
@@ -2024,6 +2063,16 @@ select {
 
   .content-note {
     padding: 20px !important;
+  }
+
+  .guide-teaser {
+    margin-top: 24px !important;
+    padding: 20px !important;
+    border-radius: 20px !important;
+  }
+
+  .guide-teaser-link {
+    width: 100% !important;
   }
 }
 
