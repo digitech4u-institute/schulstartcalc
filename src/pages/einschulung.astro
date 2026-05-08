@@ -66,8 +66,7 @@ const pageDescription =
 
         <h1>
           Einschulung:<br />
-          Wann kommt mein Kind<br />
-          in die Schule?
+          <span class="headline-question">Wann kommt mein Kind in die Schule?</span>
         </h1>
 
         <p class="lead">
@@ -383,7 +382,15 @@ const pageDescription =
     font-weight: 950;
     line-height: 1.01;
     letter-spacing: -0.06em;
+    text-wrap: balance;
   }
+
+  .headline-question {
+    display: inline-block;
+    max-width: 780px;
+    text-wrap: balance;
+  }
+
 
   .lead {
     max-width: 780px;
@@ -548,7 +555,25 @@ const pageDescription =
     margin-top: 22px;
   }
 
+
   @media (max-width: 760px) {
+    h1 {
+      max-width: 100%;
+      font-size: clamp(2.2rem, 7.8vw, 2.85rem);
+      line-height: 1.045;
+      letter-spacing: -0.06em;
+      overflow-wrap: normal;
+      word-break: normal;
+      hyphens: none;
+      text-wrap: balance;
+    }
+
+    .headline-question {
+      display: inline;
+      max-width: none;
+      text-wrap: balance;
+    }
+
     .journey-box,
     .next-steps {
       grid-template-columns: 1fr;
@@ -571,12 +596,13 @@ const pageDescription =
 
     h1 {
       max-width: 100%;
-      font-size: clamp(1.86rem, 8vw, 2.45rem);
-      line-height: 1.06;
-      letter-spacing: -0.05em;
+      font-size: clamp(2.12rem, 7.65vw, 2.55rem);
+      line-height: 1.045;
+      letter-spacing: -0.06em;
       overflow-wrap: normal;
       word-break: normal;
       hyphens: none;
+      text-wrap: balance;
     }
 
     .lead {
@@ -593,6 +619,12 @@ const pageDescription =
     .project-note {
       padding: 20px;
       border-radius: 20px;
+    }
+
+    .highlight-section h2 {
+      font-size: 1.42rem;
+      line-height: 1.12;
+      letter-spacing: -0.045em;
     }
 
     h2 {
