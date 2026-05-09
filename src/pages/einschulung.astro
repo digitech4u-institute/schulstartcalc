@@ -228,6 +228,8 @@ const pageDescription =
             praktische Vorbereitung auf den Schulstart.
           </p>
 
+          <a class="guide-inline-link" href="/einschulung-checkliste/">Zur Einschulungs-Checkliste</a>
+
           <div class="next-steps">
             <article>
               <h3>1. Ergebnis einordnen</h3>
@@ -499,6 +501,25 @@ const pageDescription =
     background: #2a3550;
   }
 
+  .guide-inline-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+    min-height: 52px;
+    padding: 0 20px;
+    border-radius: 16px;
+    background: #172033;
+    color: #fff;
+    font-weight: 850;
+    line-height: 1.2;
+    text-decoration: none;
+  }
+
+  .guide-inline-link:hover {
+    background: #2a3550;
+  }
+
   .state-grid {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -637,7 +658,8 @@ const pageDescription =
       line-height: 1.62;
     }
 
-    .cta-link {
+    .cta-link,
+    .guide-inline-link {
       width: 100%;
     }
   }
