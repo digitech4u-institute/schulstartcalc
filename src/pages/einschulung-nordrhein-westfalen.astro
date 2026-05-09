@@ -1,4 +1,6 @@
 ---
+import StateEnrollmentCalculator from "../components/StateEnrollmentCalculator.astro";
+
 const pageTitle =
   "Einschulung Nordrhein-Westfalen: Stichtag, Schuljahr und Regeln";
 
@@ -41,6 +43,14 @@ const pageDescription =
               "@type": "Answer",
               "text": "Nein. Der Einschulungsrechner und diese Informationsseite dienen der Orientierung. Verbindliche Informationen erhältst du bei der zuständigen Grundschule oder Schulbehörde in Nordrhein-Westfalen."
             }
+          },
+          {
+            "@type": "Question",
+            "name": "Wann ist der erste Schultag in Nordrhein-Westfalen 2026?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Die Sommerferien in Nordrhein-Westfalen enden 2026 am 1. September. Daraus ergibt sich voraussichtlich Mittwoch, der 2. September 2026, als erster Schultag. Einschulungstermine können je nach Schule organisatorisch abweichen."
+            }
           }
         ]
       }
@@ -49,7 +59,7 @@ const pageDescription =
 
   <body>
     <main class="state-page">
-      <a class="back-link" href="/">← Zum Einschulungsrechner</a>
+      <a class="back-link" href="/">← Zur Startseite</a>
 
       <article class="state-card">
         <p class="state-kicker">Nordrhein-Westfalen</p>
@@ -65,6 +75,15 @@ const pageDescription =
           Stichtag 30. September. Kinder, die bis zu diesem Zeitpunkt sechs Jahre
           alt werden, werden am 1. August desselben Kalenderjahres schulpflichtig.
         </p>
+
+        <StateEnrollmentCalculator
+          stateName="Nordrhein-Westfalen"
+          stateSlug="nordrhein-westfalen"
+          calculatorKicker="Nordrhein-Westfalen-Rechner"
+          resultKicker="Nordrhein-Westfalen-Ergebnis"
+          headline="Einschulung in Nordrhein-Westfalen berechnen"
+          intro="Gib das Geburtsdatum deines Kindes ein. Nordrhein-Westfalen ist hier bereits vorausgewählt. Wenn du von der Startseite kommst, übernehmen wir das Geburtsdatum automatisch aus dem Link."
+        />
 
         <div class="quick-facts" aria-label="Kurzüberblick Einschulung Nordrhein-Westfalen">
           <div class="fact-card">
@@ -106,6 +125,17 @@ const pageDescription =
           </p>
         </section>
 
+        <section>
+          <h2>Kann die Einschulung zurückgestellt werden?</h2>
+
+          <p>
+            Ob ein schulpflichtiges Kind tatsächlich eingeschult wird oder eine
+            andere Entscheidung sinnvoll ist, wird im Einzelfall mit der zuständigen
+            Grundschule geklärt. Der Rechner ersetzt diese schulische Prüfung nicht,
+            sondern dient nur der ersten Orientierung.
+          </p>
+        </section>
+
         <section class="example-box">
           <h2>Beispiel: Geburtsdatum im September</h2>
 
@@ -115,18 +145,6 @@ const pageDescription =
             Stichtag 30. September liegt, wird das Kind in Nordrhein-Westfalen
             voraussichtlich im Schuljahr 2026/2027 eingeschult.
           </p>
-        </section>
-
-        <section>
-          <h2>Einschulung Nordrhein-Westfalen berechnen</h2>
-
-          <p>
-            Am einfachsten prüfst du das voraussichtliche Schuljahr mit dem
-            Einschulungsrechner. Gib dort das Geburtsdatum deines Kindes ein und
-            wähle als Bundesland Nordrhein-Westfalen aus.
-          </p>
-
-          <a class="cta-link" href="/">Jetzt Einschulung berechnen</a>
         </section>
 
         <section>
@@ -147,6 +165,15 @@ const pageDescription =
                 Für Kinder, die bis zum Beginn des 30. September sechs Jahre alt
                 werden, beginnt die Schulpflicht am 1. August desselben
                 Kalenderjahres.
+              </p>
+            </article>
+
+            <article class="faq-item">
+              <h3>Kann mein Kind früher eingeschult werden?</h3>
+              <p>
+                Ja. Kinder, die nach dem Stichtag sechs Jahre alt werden, können
+                auf Antrag der Eltern aufgenommen werden, wenn sie die notwendigen
+                Voraussetzungen für den Schulbesuch erfüllen.
               </p>
             </article>
 
@@ -178,6 +205,15 @@ const pageDescription =
             rel="noopener noreferrer"
           >
             Schulministerium Nordrhein-Westfalen: Wann wird mein Kind schulpflichtig?
+          </a>
+
+          <a
+            class="source-link"
+            href="https://www.schulministerium.nrw/schulferien"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Schulministerium Nordrhein-Westfalen: Schulferien
           </a>
 
           <p class="stand">Stand der Informationen: Mai 2026</p>
@@ -245,10 +281,10 @@ const pageDescription =
   .state-kicker {
     margin: 0 0 14px;
     color: #816126;
-    font-size: 0.88rem;
-    font-weight: 850;
-    letter-spacing: 0.09em;
-    line-height: 1.25;
+    font-size: clamp(0.9rem, 1vw, 1rem);
+    font-weight: 900;
+    letter-spacing: 0.095em;
+    line-height: 1.2;
     text-transform: uppercase;
   }
 
@@ -258,16 +294,17 @@ const pageDescription =
     color: #172033;
     font-size: clamp(2.25rem, 5vw, 4.05rem);
     font-weight: 950;
-    line-height: 1.01;
-    letter-spacing: -0.06em;
+    line-height: 1.02;
+    letter-spacing: -0.055em;
   }
 
   .lead {
     max-width: 760px;
     margin: 24px 0 0;
     color: #465266;
-    font-size: clamp(1.08rem, 1.7vw, 1.22rem);
-    line-height: 1.65;
+    font-size: clamp(1.08rem, 1.55vw, 1.2rem);
+    font-weight: 500;
+    line-height: 1.64;
   }
 
   .quick-facts {
@@ -290,19 +327,19 @@ const pageDescription =
 
   .fact-card span {
     color: #816126;
-    font-size: clamp(1.02rem, 1.35vw, 1.22rem);
+    font-size: clamp(0.92rem, 1.1vw, 1.04rem);
     font-weight: 950;
-    letter-spacing: 0.11em;
-    line-height: 1.12;
+    letter-spacing: 0.095em;
+    line-height: 1.16;
     text-transform: uppercase;
   }
 
   .fact-card strong {
     color: #172033;
-    font-size: clamp(1.34rem, 2vw, 1.72rem);
+    font-size: clamp(1.32rem, 1.85vw, 1.68rem);
     font-weight: 950;
     line-height: 1.12;
-    letter-spacing: -0.03em;
+    letter-spacing: -0.035em;
   }
 
   section {
@@ -314,26 +351,27 @@ const pageDescription =
   h2 {
     margin: 0;
     color: #172033;
-    font-size: clamp(1.65rem, 2.6vw, 2.25rem);
-    font-weight: 900;
-    line-height: 1.08;
-    letter-spacing: -0.05em;
+    font-size: clamp(1.58rem, 2.35vw, 2.12rem);
+    font-weight: 950;
+    line-height: 1.1;
+    letter-spacing: -0.045em;
   }
 
   h3 {
     margin: 0;
     color: #172033;
-    font-size: 1.06rem;
+    font-size: clamp(1.06rem, 1.25vw, 1.18rem);
     font-weight: 900;
-    line-height: 1.25;
-    letter-spacing: -0.02em;
+    line-height: 1.24;
+    letter-spacing: -0.025em;
   }
 
   p {
     margin: 14px 0 0;
     color: #465266;
-    font-size: 1.03rem;
-    line-height: 1.7;
+    font-size: clamp(1rem, 1.2vw, 1.08rem);
+    font-weight: 500;
+    line-height: 1.68;
   }
 
   .example-box,
@@ -342,24 +380,6 @@ const pageDescription =
     border: 1px solid rgba(129, 97, 38, 0.16);
     border-radius: 22px;
     background: rgba(245, 210, 138, 0.12);
-  }
-
-  .cta-link {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 20px;
-    min-height: 54px;
-    padding: 0 22px;
-    border-radius: 16px;
-    background: #172033;
-    color: #fff;
-    font-weight: 850;
-    text-decoration: none;
-  }
-
-  .cta-link:hover {
-    background: #2a3550;
   }
 
   .faq-list {
@@ -378,8 +398,9 @@ const pageDescription =
   .faq-item p {
     margin-top: 12px;
     color: #465266;
-    font-size: clamp(1.08rem, 1.7vw, 1.22rem);
-    line-height: 1.65;
+    font-size: clamp(1rem, 1.2vw, 1.08rem);
+    font-weight: 500;
+    line-height: 1.66;
   }
 
   .source-link {
@@ -468,17 +489,17 @@ const pageDescription =
     }
 
     h2 {
-      font-size: 1.55rem;
-      line-height: 1.12;
+      font-size: 1.62rem;
+      line-height: 1.1;
     }
 
     p {
-      font-size: 0.96rem;
+      font-size: 1rem;
       line-height: 1.62;
     }
 
     .faq-item p {
-      font-size: 1.02rem;
+      font-size: 1rem;
       line-height: 1.62;
     }
 
@@ -488,7 +509,6 @@ const pageDescription =
       border-radius: 20px;
     }
 
-    .cta-link,
     .source-link {
       width: 100%;
     }

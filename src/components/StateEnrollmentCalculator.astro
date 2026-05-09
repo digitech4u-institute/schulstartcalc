@@ -421,6 +421,52 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
     };
   }
 
+  function calculateNordrheinWestfalenEnrollment(birthdateValue) {
+    const birthdate = new Date(`${birthdateValue}T12:00:00`);
+    const birthYear = birthdate.getFullYear();
+    const sixthBirthdayYear = birthYear + 6;
+    const month = birthdate.getMonth() + 1;
+    const day = birthdate.getDate();
+
+    let schoolStartYear = sixthBirthdayYear;
+    let statusLabel = "Regulär schulpflichtig";
+    let statusTone = "regular";
+    let resultHeadline = "Dein Kind wird voraussichtlich<br class=\"regular-mobile-result-break\" /> regulär eingeschult.";
+    let explanation =
+      "Dein Kind wird in Nordrhein-Westfalen regulär schulpflichtig, weil es bis zum Beginn des 30. September sechs Jahre alt wird.";
+    let nextStepTitle = "Nächster sinnvoller Schritt";
+    let nextStepText =
+      "Informiere dich frühzeitig bei der zuständigen Grundschule über Anmeldung, Unterlagen und konkrete Termine.";
+
+    const afterSeptember = month > 9 || (month === 9 && day >= 30);
+
+    if (afterSeptember) {
+      schoolStartYear = sixthBirthdayYear + 1;
+      statusLabel = "Voraussichtlich im Folgejahr";
+      statusTone = "following";
+      resultHeadline = "Dein Kind wird voraussichtlich<br class=\"mobile-result-break\" /> ein Jahr später eingeschult.";
+      explanation =
+        "Dein Kind wird nach dem nordrhein-westfälischen Einschulungsstichtag sechs Jahre alt. Daher ist voraussichtlich das folgende Schuljahr relevant. Eine frühere Einschulung kann auf Antrag der Eltern geprüft werden.";
+      nextStepTitle = "Zur Orientierung";
+      nextStepText =
+        "Sprich mit der zuständigen Grundschule, wenn du eine vorzeitige Einschulung prüfen möchtest.";
+    }
+
+    const schoolYear = `${schoolStartYear}/${schoolStartYear + 1}`;
+    const hasConfirmedDate = schoolYear === "2026/2027";
+
+    return {
+      schoolYear,
+      statusLabel,
+      statusTone,
+      resultHeadline,
+      explanation,
+      nextStepTitle,
+      nextStepText,
+      hasConfirmedDate,
+    };
+  }
+
   function renderSachsenResult(birthdateValue) {
     if (!resultBox || !birthdateValue) return;
 
@@ -432,6 +478,10 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
 
     if (normalizedSlug === "baden-wuerttemberg") {
       result = calculateBadenWuerttembergEnrollment(birthdateValue);
+    }
+
+    if (normalizedSlug === "nordrhein-westfalen") {
+      result = calculateNordrheinWestfalenEnrollment(birthdateValue);
     }
 
     let dateDetails = `
@@ -510,6 +560,31 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
           Daraus ergibt sich voraussichtlich Montag, der 14. September 2026,
           als erster Schultag. Eine mögliche Einschulung kann bereits am Samstag
           davor stattfinden; der konkrete Termin ist jedoch schulabhängig.
+        </p>
+      `;
+    }
+
+    if (result.hasConfirmedDate && normalizedSlug === "nordrhein-westfalen") {
+      dateDetails = `
+        <div class="state-result-grid" aria-label="Einschulungstermin ${stateName}">
+          <div class="state-result-card">
+            <span>Erster Schultag</span>
+            <strong>Mi, 02.09.2026</strong>
+          </div>
+          <div class="state-result-card">
+            <span>Mögliche Einschulung</span>
+            <strong>schulabhängig</strong>
+          </div>
+          <div class="state-result-card">
+            <span>Terminstatus</span>
+            <strong>schulabhängig</strong>
+          </div>
+        </div>
+        <p class="state-calculator-note">
+          Für ${stateName} enden die Sommerferien 2026 am 1. September.
+          Daraus ergibt sich voraussichtlich Mittwoch, der 2. September 2026,
+          als erster Schultag. Eine mögliche Einschulung kann je nach Schule
+          organisatorisch abweichen.
         </p>
       `;
     }
