@@ -1,4 +1,6 @@
 ---
+import StateEnrollmentCalculator from "../components/StateEnrollmentCalculator.astro";
+
 const pageTitle =
   "Einschulung Bayern: Stichtag, Schuljahr und Einschulungskorridor";
 
@@ -23,7 +25,7 @@ const pageDescription =
             "name": "Welcher Einschulungsstichtag gilt in Bayern?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "In Bayern gilt grundsätzlich der 30. September als Stichtag für die Einschulung. Kinder, die bis zu diesem Datum sechs Jahre alt werden, kommen grundsätzlich für die Einschulung im entsprechenden Schuljahr in Betracht."
+              "text": "In Bayern gilt grundsätzlich der 30. September als Stichtag für die Einschulung. Kinder, die bis zu diesem Datum sechs Jahre alt werden, sind schulpflichtig."
             }
           },
           {
@@ -31,7 +33,7 @@ const pageDescription =
             "name": "Was ist der Einschulungskorridor in Bayern?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Der Einschulungskorridor betrifft Kinder, die zwischen dem 1. Juli und dem 30. September sechs Jahre alt werden. Für diese Kinder ist die Einschulung grundsätzlich vorgesehen; Eltern können unter bestimmten Voraussetzungen aber erklären, dass ihr Kind erst ein Jahr später eingeschult werden soll."
+              "text": "Der Einschulungskorridor betrifft Kinder, die zwischen dem 1. Juli und dem 30. September sechs Jahre alt werden. Für diese Kinder kann der Beginn der Schulpflicht um ein Jahr nach hinten verschoben werden."
             }
           },
           {
@@ -39,7 +41,15 @@ const pageDescription =
             "name": "Ist das Ergebnis zur Einschulung in Bayern verbindlich?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Nein. Der Einschulungsrechner und diese Informationsseite dienen der Orientierung. Verbindliche Informationen erhältst du bei der zuständigen Schule oder Schulbehörde in Bayern."
+              "text": "Nein. Der Einschulungsrechner und diese Informationsseite dienen der Orientierung. Verbindliche Informationen erhältst du bei der zuständigen Grundschule oder Schulbehörde in Bayern."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Wann ist der erste Schultag in Bayern 2026?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Für Bayern enden die Sommerferien 2026 am 14. September 2026. Daraus ergibt sich voraussichtlich Dienstag, der 15. September 2026, als erster Schultag. Einzelne organisatorische Details können je nach Schule abweichen."
             }
           }
         ]
@@ -49,7 +59,7 @@ const pageDescription =
 
   <body>
     <main class="state-page">
-      <a class="back-link" href="/">← Zum Einschulungsrechner</a>
+      <a class="back-link" href="/">← Zur Startseite</a>
 
       <article class="state-card">
         <p class="state-kicker">Bayern</p>
@@ -65,6 +75,15 @@ const pageDescription =
           1. Juli und dem 30. September sechs Jahre alt werden.
         </p>
 
+        <StateEnrollmentCalculator
+          stateName="Bayern"
+          stateSlug="bayern"
+          calculatorKicker="Bayern-Rechner"
+          resultKicker="Bayern-Ergebnis"
+          headline="Einschulung in Bayern berechnen"
+          intro="Gib das Geburtsdatum deines Kindes ein. Bayern ist hier bereits vorausgewählt. Wenn du von der Startseite kommst, übernehmen wir das Geburtsdatum automatisch aus dem Link."
+        />
+
         <div class="quick-facts" aria-label="Kurzüberblick Einschulung Bayern">
           <div class="fact-card">
             <span>Stichtag</span>
@@ -73,12 +92,17 @@ const pageDescription =
 
           <div class="fact-card">
             <span>Sonderregel</span>
-            <strong>Einschulungs<span class="desktop-break">-<br /></span>korridor</strong>
+            <strong>
+              Einschulungs<span class="desktop-break">-<br /></span>korridor
+            </strong>
           </div>
 
           <div class="fact-card">
             <span>Zeitraum</span>
-            <strong>1. Juli bis <span class="desktop-break"><br /></span>30. September</strong>
+            <strong>
+              1. Juli bis<br class="desktop-break" />
+              30. September
+            </strong>
           </div>
         </div>
 
@@ -86,10 +110,9 @@ const pageDescription =
           <h2>Wann ist ein Kind in Bayern schulpflichtig?</h2>
 
           <p>
-            In Bayern wird ein Kind regulär schulpflichtig, wenn es bis zum
-            30. September des jeweiligen Jahres sechs Jahre alt wird. Das bedeutet:
-            Wird dein Kind vor oder am 30. September sechs Jahre alt, kommt es
-            grundsätzlich für das entsprechende Schuljahr in Betracht.
+            Ein Kind wird in Bayern grundsätzlich schulpflichtig, wenn es bis zum
+            30. September des jeweiligen Kalenderjahres sechs Jahre alt wird. Die
+            Schulpflicht beginnt dann mit dem Start des neuen Schuljahres.
           </p>
         </section>
 
@@ -99,9 +122,19 @@ const pageDescription =
           <p>
             Der Einschulungskorridor betrifft Kinder, die zwischen dem 1. Juli und
             dem 30. September sechs Jahre alt werden. Für diese Kinder ist die
-            Einschulung grundsätzlich vorgesehen. Eltern können unter bestimmten
-            Voraussetzungen aber erklären, dass ihr Kind erst ein Jahr später
-            eingeschult werden soll.
+            Einschulung grundsätzlich vorgesehen. Der Beginn der Schulpflicht kann
+            aber um ein Jahr nach hinten verschoben werden.
+          </p>
+        </section>
+
+        <section>
+          <h2>Kann mein Kind früher eingeschult werden?</h2>
+
+          <p>
+            Kinder, die erst nach dem 30. September sechs Jahre alt werden, können
+            unter bestimmten Voraussetzungen vorzeitig eingeschult werden. Die
+            Entscheidung hängt vom Entwicklungsstand des Kindes und der Einschätzung
+            der zuständigen Schule ab.
           </p>
         </section>
 
@@ -114,18 +147,6 @@ const pageDescription =
             30. September liegt, fällt das Kind in Bayern in den Einschulungskorridor
             für das Schuljahr 2026/2027.
           </p>
-        </section>
-
-        <section>
-          <h2>Einschulung Bayern berechnen</h2>
-
-          <p>
-            Am einfachsten prüfst du das voraussichtliche Schuljahr mit dem
-            Einschulungsrechner. Gib dort das Geburtsdatum deines Kindes ein und
-            wähle als Bundesland Bayern aus.
-          </p>
-
-          <a class="cta-link" href="/">Jetzt Einschulung berechnen</a>
         </section>
 
         <section>
@@ -144,8 +165,8 @@ const pageDescription =
               <h3>Was ist der Einschulungskorridor?</h3>
               <p>
                 Der Einschulungskorridor betrifft Kinder, die zwischen dem 1. Juli
-                und dem 30. September sechs Jahre alt werden. In diesem Zeitraum
-                gibt es eine besondere Entscheidungsmöglichkeit für Eltern.
+                und dem 30. September sechs Jahre alt werden. Für diese Kinder kann
+                der Beginn der Schulpflicht um ein Jahr verschoben werden.
               </p>
             </article>
 
@@ -155,6 +176,16 @@ const pageDescription =
                 Nein. Der Rechner und diese Seite dienen der Orientierung.
                 Verbindliche Informationen erhältst du bei der zuständigen Schule
                 oder Schulbehörde in Bayern.
+              </p>
+            </article>
+
+            <article class="faq-item">
+              <h3>Wann ist der erste Schultag in Bayern 2026?</h3>
+              <p>
+                Für Bayern enden die Sommerferien 2026 am 14. September. Daraus
+                ergibt sich voraussichtlich Dienstag, der 15. September 2026, als
+                erster Schultag. Einzelne organisatorische Details können je nach
+                Schule abweichen.
               </p>
             </article>
           </div>
@@ -176,7 +207,16 @@ const pageDescription =
             target="_blank"
             rel="noopener noreferrer"
           >
-            Bayerisches Staatsministerium: Einschulung und Schulwegsicherheit
+            km.bayern.de: Einschulung und Schulwegsicherheit
+          </a>
+
+          <a
+            class="source-link"
+            href="https://www.km.bayern.de/ministerium/termine/ferientermine.html"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            km.bayern.de: Ferien und Feiertage
           </a>
 
           <p class="stand">Stand der Informationen: Mai 2026</p>
@@ -244,10 +284,10 @@ const pageDescription =
   .state-kicker {
     margin: 0 0 14px;
     color: #816126;
-    font-size: 0.88rem;
-    font-weight: 850;
-    letter-spacing: 0.09em;
-    line-height: 1.25;
+    font-size: clamp(0.9rem, 1vw, 1rem);
+    font-weight: 900;
+    letter-spacing: 0.095em;
+    line-height: 1.2;
     text-transform: uppercase;
   }
 
@@ -257,16 +297,17 @@ const pageDescription =
     color: #172033;
     font-size: clamp(2.25rem, 5vw, 4.05rem);
     font-weight: 950;
-    line-height: 1.01;
-    letter-spacing: -0.06em;
+    line-height: 1.02;
+    letter-spacing: -0.055em;
   }
 
   .lead {
     max-width: 760px;
     margin: 24px 0 0;
     color: #465266;
-    font-size: clamp(1.08rem, 1.7vw, 1.22rem);
-    line-height: 1.65;
+    font-size: clamp(1.08rem, 1.55vw, 1.2rem);
+    font-weight: 500;
+    line-height: 1.64;
   }
 
   .quick-facts {
@@ -289,19 +330,19 @@ const pageDescription =
 
   .fact-card span {
     color: #816126;
-    font-size: clamp(1.02rem, 1.35vw, 1.22rem);
+    font-size: clamp(0.92rem, 1.1vw, 1.04rem);
     font-weight: 950;
-    letter-spacing: 0.11em;
-    line-height: 1.12;
+    letter-spacing: 0.095em;
+    line-height: 1.16;
     text-transform: uppercase;
   }
 
   .fact-card strong {
     color: #172033;
-    font-size: clamp(1.34rem, 2vw, 1.72rem);
+    font-size: clamp(1.32rem, 1.85vw, 1.68rem);
     font-weight: 950;
     line-height: 1.12;
-    letter-spacing: -0.03em;
+    letter-spacing: -0.035em;
   }
 
   section {
@@ -313,26 +354,27 @@ const pageDescription =
   h2 {
     margin: 0;
     color: #172033;
-    font-size: clamp(1.65rem, 2.6vw, 2.25rem);
-    font-weight: 900;
-    line-height: 1.08;
-    letter-spacing: -0.05em;
+    font-size: clamp(1.58rem, 2.35vw, 2.12rem);
+    font-weight: 950;
+    line-height: 1.1;
+    letter-spacing: -0.045em;
   }
 
   h3 {
     margin: 0;
     color: #172033;
-    font-size: 1.06rem;
+    font-size: clamp(1.06rem, 1.25vw, 1.18rem);
     font-weight: 900;
-    line-height: 1.25;
-    letter-spacing: -0.02em;
+    line-height: 1.24;
+    letter-spacing: -0.025em;
   }
 
   p {
     margin: 14px 0 0;
     color: #465266;
-    font-size: 1.03rem;
-    line-height: 1.7;
+    font-size: clamp(1rem, 1.2vw, 1.08rem);
+    font-weight: 500;
+    line-height: 1.68;
   }
 
   .example-box,
@@ -341,24 +383,6 @@ const pageDescription =
     border: 1px solid rgba(129, 97, 38, 0.16);
     border-radius: 22px;
     background: rgba(245, 210, 138, 0.12);
-  }
-
-  .cta-link {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 20px;
-    min-height: 54px;
-    padding: 0 22px;
-    border-radius: 16px;
-    background: #172033;
-    color: #fff;
-    font-weight: 850;
-    text-decoration: none;
-  }
-
-  .cta-link:hover {
-    background: #2a3550;
   }
 
   .faq-list {
@@ -377,8 +401,9 @@ const pageDescription =
   .faq-item p {
     margin-top: 12px;
     color: #465266;
-    font-size: clamp(1.08rem, 1.7vw, 1.22rem);
-    line-height: 1.65;
+    font-size: clamp(1rem, 1.2vw, 1.08rem);
+    font-weight: 500;
+    line-height: 1.66;
   }
 
   .source-link {
@@ -415,9 +440,17 @@ const pageDescription =
     line-height: 1.2;
   }
 
+  .desktop-break {
+    display: inline;
+  }
+
   @media (max-width: 720px) {
     .quick-facts {
       grid-template-columns: 1fr;
+    }
+
+    .desktop-break {
+      display: none;
     }
   }
 
@@ -467,17 +500,17 @@ const pageDescription =
     }
 
     h2 {
-      font-size: 1.55rem;
-      line-height: 1.12;
+      font-size: 1.62rem;
+      line-height: 1.1;
     }
 
     p {
-      font-size: 0.96rem;
+      font-size: 1rem;
       line-height: 1.62;
     }
 
     .faq-item p {
-      font-size: 1.02rem;
+      font-size: 1rem;
       line-height: 1.62;
     }
 
@@ -487,7 +520,6 @@ const pageDescription =
       border-radius: 20px;
     }
 
-    .cta-link,
     .source-link {
       width: 100%;
     }
@@ -500,15 +532,4 @@ const pageDescription =
       letter-spacing: -0.046em;
     }
   }
-
-  .desktop-break {
-    display: inline;
-  }
-
-  @media (max-width: 720px) {
-    .desktop-break {
-      display: none;
-    }
-  }
-
 </style>
