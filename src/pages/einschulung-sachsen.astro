@@ -128,51 +128,51 @@ const pageDescription =
           </p>
         </section>
 
-        <section class="enrollment-date-box">
-          <p class="date-kicker">Pilotfunktion</p>
-          <h2>Voraussichtlicher Einschulungstag in Sachsen 2026</h2>
+<section class="enrollment-date-box">
+  <p class="date-kicker">Einschulungstag 2026</p>
 
-          <div class="date-grid" aria-label="Einschulungstermin Sachsen 2026">
-            <div class="date-card">
-              <span>Schuleinführung</span>
-              <strong>Sa, 15.08.2026</strong>
-            </div>
+  <h2 class="enrollment-date-title">
+    <span class="date-title-desktop">Voraussichtlicher Einschulungstag 2026<br />in Sachsen</span>
+    <span class="date-title-mobile">Voraussichtlicher<br />Einschulungstag 2026<br />in Sachsen</span>
+  </h2>
 
-            <div class="date-card">
-              <span>Erster Schultag</span>
-              <strong>Mo, 17.08.2026</strong>
-            </div>
+  <div class="date-grid" aria-label="Einschulungstermin Sachsen 2026">
+    <div class="date-card">
+      <span>Schuleinführung</span>
+      <strong>Sa, 15.08.2026</strong>
+    </div>
 
-            <div class="date-card">
-              <span>Verlässlichkeit</span>
-              <strong>hoch</strong>
-            </div>
-          </div>
+    <div class="date-card">
+      <span>Erster Schultag</span>
+      <strong>Mo, 17.08.2026</strong>
+    </div>
 
-          <p>
-            Für Sachsen ist der Termin besonders gut belegbar: Die Schuleinführung
-            für das Schuljahr 2026/2027 ist offiziell für Samstag, den 15. August
-            2026, genannt. Der erste Schultag ist Montag, der 17. August 2026.
-          </p>
+    <div class="date-card">
+      <span>Verlässlichkeit</span>
+      <strong>hoch</strong>
+    </div>
+  </div>
 
-          <p class="date-note">
-            Hinweis: Auch bei offiziell veröffentlichten Terminen können einzelne
-            organisatorische Details je nach Schule abweichen. Bitte prüfe den
-            verbindlichen Ablauf zusätzlich bei der zuständigen Grundschule.
-          </p>
-        </section>
+  <p>
+    Für Sachsen ist der Termin besonders gut belegbar: Die Schuleinführung
+    für das Schuljahr 2026/2027 ist offiziell für Samstag, den 15. August
+    2026, genannt. Der erste Schultag ist Montag, der 17. August 2026.
+  </p>
 
-        <section>
-          <h2>Einschulung Sachsen berechnen</h2>
+  <p class="date-note">
+    Hinweis: Auch bei offiziell veröffentlichten Terminen können einzelne
+    organisatorische Details je nach Schule abweichen. Bitte prüfe den
+    verbindlichen Ablauf zusätzlich bei der zuständigen Grundschule.
+  </p>
 
-          <p>
-            Am einfachsten prüfst du das voraussichtliche Schuljahr mit dem
-            Einschulungsrechner. Gib dort das Geburtsdatum deines Kindes ein und
-            wähle als Bundesland Sachsen aus.
-          </p>
+  <p>
+    Am einfachsten prüfst du das voraussichtliche Schuljahr mit dem
+    Einschulungsrechner. Gib dort das Geburtsdatum deines Kindes ein und
+    wähle als Bundesland Sachsen aus.
+  </p>
 
-          <a class="cta-link" href="/">Jetzt Einschulung berechnen</a>
-        </section>
+  <a class="cta-link" href="/">Jetzt Einschulung berechnen</a>
+</section>
 
         <section>
           <h2>Häufige Fragen zur Einschulung in Sachsen</h2>
@@ -452,6 +452,10 @@ const pageDescription =
     line-height: 1.62;
   }
 
+  .date-title-mobile {
+    display: none;
+  }
+
   .cta-link {
     display: inline-flex;
     align-items: center;
@@ -534,8 +538,12 @@ const pageDescription =
       grid-template-columns: 1fr;
     }
 
-    .desktop-break {
+    .desktop-break,
+    .date-title-desktop {
       display: none;
+    }
+    .date-title-mobile {
+      display: inline;
     }
   }
 
@@ -625,5 +633,3 @@ const pageDescription =
     }
   }
 </style>
-  
-</file>
