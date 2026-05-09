@@ -1,0 +1,931 @@
+
+
+---
+interface Props {
+  stateName: string;
+  stateSlug: string;
+  calculatorKicker: string;
+  resultKicker: string;
+  headline: string;
+  intro: string;
+}
+
+const {
+  stateName,
+  stateSlug,
+  calculatorKicker,
+  resultKicker,
+  headline,
+  intro,
+} = Astro.props;
+
+const normalizedSlug = stateSlug.toLowerCase();
+const formId = `${normalizedSlug}CalculatorForm`;
+const dayInputId = `${normalizedSlug}CalcDay`;
+const monthInputId = `${normalizedSlug}CalcMonth`;
+const yearInputId = `${normalizedSlug}CalcYear`;
+const errorId = `${normalizedSlug}DateError`;
+const buttonId = `${normalizedSlug}CalculateButton`;
+const resultId = `${normalizedSlug}CalculatorResult`;
+const inputNamePrefix = `${normalizedSlug}_calc_part`;
+---
+
+<section class="state-calculator-box" aria-label={`Einschulung ${stateName} berechnen`}>
+  <p class="calculator-kicker">{calculatorKicker}</p>
+  <h2>{headline}</h2>
+  <p>{intro}</p>
+
+  <form
+    class="state-calculator-form"
+    id={formId}
+    autocomplete="off"
+    data-lpignore="true"
+    data-1p-ignore="true"
+    data-form-type="other"
+    data-state-name={stateName}
+    data-state-slug={normalizedSlug}
+    data-result-kicker={resultKicker}
+  >
+    <div class="form-group form-group-centered">
+      <span class="form-label form-label-large">Geburtsdatum deines Kindes</span>
+
+      <div class="date-input-group" aria-label="Geburtsdatum deines Kindes">
+        <div class="date-field">
+          <input
+            id={dayInputId}
+            name={`${inputNamePrefix}_a`}
+            type="tel"
+            inputmode="numeric"
+            pattern="[0-9]*"
+            maxlength="2"
+            placeholder="TT"
+            autocomplete="off"
+            autocorrect="off"
+            autocapitalize="off"
+            spellcheck="false"
+            data-lpignore="true"
+            data-1p-ignore="true"
+            data-form-type="other"
+            aria-label="Tag des Datums"
+          />
+          <span>Tag</span>
+        </div>
+
+        <div class="date-field">
+          <input
+            id={monthInputId}
+            name={`${inputNamePrefix}_b`}
+            type="tel"
+            inputmode="numeric"
+            pattern="[0-9]*"
+            maxlength="2"
+            placeholder="MM"
+            autocomplete="off"
+            autocorrect="off"
+            autocapitalize="off"
+            spellcheck="false"
+            data-lpignore="true"
+            data-1p-ignore="true"
+            data-form-type="other"
+            aria-label="Monat des Datums"
+          />
+          <span>Monat</span>
+        </div>
+
+        <div class="date-field date-field-year">
+          <input
+            id={yearInputId}
+            name={`${inputNamePrefix}_c`}
+            type="tel"
+            inputmode="numeric"
+            pattern="[0-9]*"
+            maxlength="4"
+            placeholder="JJJJ"
+            autocomplete="off"
+            autocorrect="off"
+            autocapitalize="off"
+            spellcheck="false"
+            data-lpignore="true"
+            data-1p-ignore="true"
+            data-form-type="other"
+            aria-label="Jahr des Datums"
+          />
+          <span>Jahr</span>
+        </div>
+      </div>
+
+      <p id={errorId} class="field-error" aria-live="polite"></p>
+    </div>
+
+    <button id={buttonId} type="submit">Einschulung berechnen</button>
+  </form>
+
+  <div class="state-calculator-result" id={resultId} hidden></div>
+</section>
+
+<script define:vars={{ normalizedSlug, stateName, resultKicker }}>
+  const form = document.getElementById(`${normalizedSlug}CalculatorForm`);
+  const birthDayInput = document.getElementById(`${normalizedSlug}CalcDay`);
+  const birthMonthInput = document.getElementById(`${normalizedSlug}CalcMonth`);
+  const birthYearInput = document.getElementById(`${normalizedSlug}CalcYear`);
+  const dateError = document.getElementById(`${normalizedSlug}DateError`);
+  const calculateButton = document.getElementById(`${normalizedSlug}CalculateButton`);
+  const resultBox = document.getElementById(`${normalizedSlug}CalculatorResult`);
+
+  function onlyDigits(value) {
+    return value.replace(/\D/g, "");
+  }
+
+  function setDateError(message) {
+    if (!dateError) return;
+    dateError.textContent = message || "";
+  }
+
+  function pad2(value) {
+    return value.toString().padStart(2, "0");
+  }
+
+  function focusInput(input) {
+    if (!input) return;
+    input.focus();
+  }
+
+  function isRealDate(day, month, year) {
+    const date = new Date(year, month - 1, day);
+
+    return (
+      date.getFullYear() === year &&
+      date.getMonth() === month - 1 &&
+      date.getDate() === day
+    );
+  }
+
+  function buildBirthdateValueFromFields() {
+    const dayValue = onlyDigits(birthDayInput?.value || "");
+    const monthValue = onlyDigits(birthMonthInput?.value || "");
+    const yearValue = onlyDigits(birthYearInput?.value || "");
+
+    if (!dayValue || !monthValue || !yearValue) {
+      return {
+        value: "",
+        error: "Bitte gib Tag, Monat und Jahr des Geburtsdatums ein.",
+      };
+    }
+
+    const day = Number(dayValue);
+    const month = Number(monthValue);
+    const year = Number(yearValue);
+    const currentYear = new Date().getFullYear();
+
+    if (day < 1 || day > 31) {
+      return {
+        value: "",
+        error: "Bitte prüfe den Tag. Der Wert muss zwischen 1 und 31 liegen.",
+      };
+    }
+
+    if (month < 1 || month > 12) {
+      return {
+        value: "",
+        error: "Bitte prüfe den Monat. Der Wert muss zwischen 1 und 12 liegen.",
+      };
+    }
+
+    if (yearValue.length !== 4) {
+      return {
+        value: "",
+        error: "Bitte gib das Geburtsjahr vierstellig ein, zum Beispiel 2020.",
+      };
+    }
+
+    if (year > currentYear) {
+      return {
+        value: "",
+        error: "Das Geburtsjahr liegt in der Zukunft. Bitte prüfe deine Eingabe.",
+      };
+    }
+
+    if (year < currentYear - 12) {
+      return {
+        value: "",
+        error:
+          "Das Geburtsdatum wirkt für einen Einschulungsrechner ungewöhnlich. Bitte prüfe deine Eingabe.",
+      };
+    }
+
+    if (!isRealDate(day, month, year)) {
+      return {
+        value: "",
+        error: "Dieses Datum gibt es nicht. Bitte prüfe Tag und Monat.",
+      };
+    }
+
+    return {
+      value: `${year}-${pad2(month)}-${pad2(day)}`,
+      error: "",
+    };
+  }
+
+  function fillBirthdateFields(birthdateValue) {
+    const [year, month, day] = birthdateValue.split("-");
+
+    if (birthDayInput) birthDayInput.value = day || "";
+    if (birthMonthInput) birthMonthInput.value = month || "";
+    if (birthYearInput) birthYearInput.value = year || "";
+  }
+
+  function updateCalculateButtonState() {
+    if (!calculateButton) return;
+
+    const birthdateResult = buildBirthdateValueFromFields();
+
+    if (birthdateResult.value) {
+      calculateButton.classList.add("is-ready");
+    } else {
+      calculateButton.classList.remove("is-ready");
+    }
+  }
+
+  function normalizeDateFieldOnBlur(input, maxValue) {
+    if (!input) return;
+
+    const value = onlyDigits(input.value);
+    if (!value) return;
+
+    const numberValue = Number(value);
+
+    if (numberValue >= 1 && numberValue <= maxValue) {
+      input.value = pad2(numberValue);
+    }
+  }
+
+  function calculateSachsenEnrollment(birthdateValue) {
+    const birthdate = new Date(`${birthdateValue}T12:00:00`);
+    const birthYear = birthdate.getFullYear();
+    const sixthBirthdayYear = birthYear + 6;
+    const month = birthdate.getMonth() + 1;
+    const day = birthdate.getDate();
+
+    let schoolStartYear = sixthBirthdayYear;
+    let statusLabel = "Regulär schulpflichtig";
+    let statusTone = "regular";
+    let resultHeadline = "Dein Kind wird voraussichtlich regulär eingeschult.";
+    let explanation =
+      "Dein Kind wird in Sachsen regulär schulpflichtig, weil es bis zum 30. Juni sechs Jahre alt wird.";
+    let nextStepTitle = "Nächster sinnvoller Schritt";
+    let nextStepText =
+      "Informiere dich frühzeitig bei der zuständigen Grundschule über Anmeldung, Unterlagen und konkrete Termine.";
+
+    const afterJune = month > 6 || (month === 6 && day > 30);
+    const bySeptember = month < 9 || (month === 9 && day <= 30);
+
+    if (afterJune && bySeptember) {
+      statusLabel = "Schulpflicht durch Anmeldung möglich";
+      statusTone = "optional";
+      resultHeadline = "Dein Kind liegt im erweiterten Einschulungs&shy;zeitraum.";
+      explanation =
+        "Dein Kind wird nach dem 30. Juni, aber bis zum 30. September sechs Jahre alt. In Sachsen kann es durch Anmeldung der Eltern ebenfalls als schulpflichtig gelten.";
+      nextStepTitle = "Wichtig für dich";
+      nextStepText =
+        "Sprich rechtzeitig mit der zuständigen Grundschule, wenn du eine Einschulung in diesem Schuljahr prüfen oder anmelden möchtest.";
+    }
+
+    if (month > 9 || (month === 9 && day > 30)) {
+      schoolStartYear = sixthBirthdayYear + 1;
+      statusLabel = "Voraussichtlich im Folgejahr";
+      statusTone = "following";
+      resultHeadline = "Dein Kind wird voraussichtlich<br class=\"mobile-result-break\" /> ein Jahr später eingeschult.";
+      explanation =
+        "Dein Kind wird nach dem 30. September sechs Jahre alt. Daher ist voraussichtlich das folgende Schuljahr relevant.";
+      nextStepTitle = "Zur Orientierung";
+      nextStepText =
+        "Prüfe die konkreten Anmeldefristen und Termine, sobald das relevante Schuljahr von Sachsen veröffentlicht wurde.";
+    }
+
+    const schoolYear = `${schoolStartYear}/${schoolStartYear + 1}`;
+    const hasConfirmedDate = schoolYear === "2026/2027";
+
+    return {
+      schoolYear,
+      statusLabel,
+      statusTone,
+      resultHeadline,
+      explanation,
+      nextStepTitle,
+      nextStepText,
+      hasConfirmedDate,
+    };
+  }
+
+  function renderSachsenResult(birthdateValue) {
+    if (!resultBox || !birthdateValue) return;
+
+    const result = calculateSachsenEnrollment(birthdateValue);
+    const dateDetails = result.hasConfirmedDate
+      ? `
+        <div class="state-result-grid" aria-label="Einschulungstermin ${stateName}">
+          <div class="state-result-card">
+            <span>Schuleinführung</span>
+            <strong>Sa, 15.08.2026</strong>
+          </div>
+          <div class="state-result-card">
+            <span>Erster Schultag</span>
+            <strong>Mo, 17.08.2026</strong>
+          </div>
+          <div class="state-result-card">
+            <span>Terminstatus</span>
+            <strong>offiziell veröffentlicht</strong>
+          </div>
+        </div>
+        <p class="state-calculator-note">
+          Für ${stateName} ist die Schuleinführung 2026 offiziell veröffentlicht.
+          Einzelne organisatorische Details können je nach Schule abweichen.
+        </p>
+      `
+      : `
+        <p class="state-calculator-note">
+          Für dieses Schuljahr zeigen wir aktuell noch keinen konkreten
+          Einschulungstag an. Der konkrete Termin wird ergänzt, sobald eine
+          ausreichend belastbare Quelle vorliegt.
+        </p>
+      `;
+
+    resultBox.hidden = false;
+    resultBox.innerHTML = `
+      <div class="state-result-header">
+        <p class="result-kicker-light">${resultKicker}</p>
+        <h2>${result.resultHeadline}</h2>
+      </div>
+
+      <div class="state-result-top-grid">
+        <div class="state-result-summary">
+          <span>Voraussichtliches Schuljahr</span>
+          <strong>${result.schoolYear}</strong>
+        </div>
+
+        <div class="state-result-status state-result-status-${result.statusTone}">
+          <span>Status</span>
+          <strong>${result.statusLabel}</strong>
+        </div>
+      </div>
+
+      <div class="state-result-explanation-box">
+        <strong>Was bedeutet das?</strong>
+        <p>${result.explanation}</p>
+      </div>
+
+      ${dateDetails}
+
+      <div class="state-result-next-step">
+        <span>${result.nextStepTitle}</span>
+        <p>${result.nextStepText}</p>
+      </div>
+
+      <p class="state-calculator-note state-calculator-note-muted">
+        Hinweis: Der Rechner dient der Orientierung. Verbindliche Informationen
+        erhältst du bei der zuständigen Grundschule oder Schulbehörde.
+      </p>
+    `;
+
+    resultBox.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
+  birthDayInput?.addEventListener("input", () => {
+    setDateError("");
+    birthDayInput.value = onlyDigits(birthDayInput.value).slice(0, 2);
+
+    const day = Number(birthDayInput.value);
+
+    if (birthDayInput.value.length === 2) {
+      if (day < 1 || day > 31) {
+        setDateError("Bitte prüfe den Tag. Der Wert darf höchstens 31 sein.");
+        updateCalculateButtonState();
+        return;
+      }
+
+      focusInput(birthMonthInput);
+    }
+
+    updateCalculateButtonState();
+  });
+
+  birthDayInput?.addEventListener("blur", () => {
+    normalizeDateFieldOnBlur(birthDayInput, 31);
+    updateCalculateButtonState();
+  });
+
+  birthMonthInput?.addEventListener("input", () => {
+    setDateError("");
+    birthMonthInput.value = onlyDigits(birthMonthInput.value).slice(0, 2);
+
+    const value = birthMonthInput.value;
+
+    if (value.length === 2) {
+      const month = Number(value);
+
+      if (month >= 1 && month <= 12) {
+        focusInput(birthYearInput);
+        updateCalculateButtonState();
+        return;
+      }
+
+      const firstDigit = Number(value[0]);
+      const secondDigit = value[1];
+
+      const shouldUseSmartSpillover =
+        firstDigit >= 1 && firstDigit <= 9 && secondDigit === "2";
+
+      if (shouldUseSmartSpillover) {
+        birthMonthInput.value = pad2(firstDigit);
+
+        if (birthYearInput) {
+          birthYearInput.value = secondDigit;
+          focusInput(birthYearInput);
+        }
+
+        updateCalculateButtonState();
+        return;
+      }
+
+      setDateError("Bitte prüfe den Monat. Der Wert darf höchstens 12 sein.");
+    }
+
+    updateCalculateButtonState();
+  });
+
+  birthMonthInput?.addEventListener("blur", () => {
+    normalizeDateFieldOnBlur(birthMonthInput, 12);
+    updateCalculateButtonState();
+  });
+
+  birthYearInput?.addEventListener("input", () => {
+    setDateError("");
+    birthYearInput.value = onlyDigits(birthYearInput.value).slice(0, 4);
+
+    if (birthYearInput.value.length === 4) {
+      const { error } = buildBirthdateValueFromFields();
+
+      if (error) {
+        setDateError(error);
+        updateCalculateButtonState();
+        return;
+      }
+
+      setDateError("");
+    }
+
+    updateCalculateButtonState();
+  });
+
+  birthYearInput?.addEventListener("blur", () => {
+    updateCalculateButtonState();
+  });
+
+  const params = new URLSearchParams(window.location.search);
+  const birthdateFromUrl = params.get("geburtsdatum");
+
+  if (birthdateFromUrl) {
+    fillBirthdateFields(birthdateFromUrl);
+    renderSachsenResult(birthdateFromUrl);
+  }
+
+  form?.addEventListener("submit", (event) => {
+    event.preventDefault();
+
+    const birthdateResult = buildBirthdateValueFromFields();
+
+    if (birthdateResult.error) {
+      setDateError(birthdateResult.error);
+      updateCalculateButtonState();
+      return;
+    }
+
+    setDateError("");
+    renderSachsenResult(birthdateResult.value);
+    updateCalculateButtonState();
+  });
+
+  updateCalculateButtonState();
+</script>
+
+<style>
+  .state-calculator-box {
+    padding: 24px;
+    border: 1px solid rgba(129, 97, 38, 0.16);
+    border-radius: 22px;
+    background: rgba(245, 210, 138, 0.12);
+  }
+
+  .calculator-kicker,
+  .result-kicker-light {
+    margin: 0 0 12px;
+    color: #816126;
+    font-size: clamp(0.86rem, 1vw, 0.98rem);
+    font-weight: 950;
+    letter-spacing: 0.095em;
+    line-height: 1.18;
+    text-transform: uppercase;
+  }
+
+  :global(.result-kicker-light) {
+    display: block;
+    margin: 0;
+    color: #816126;
+    font-size: clamp(0.9rem, 1vw, 1rem);
+    font-weight: 950;
+    letter-spacing: 0.095em;
+    line-height: 1.18;
+    text-transform: uppercase;
+  }
+
+  .state-calculator-form {
+    display: grid;
+    gap: 18px;
+    width: 100%;
+    max-width: 760px;
+    margin: 22px auto 0;
+  }
+
+  .form-group {
+    display: grid;
+  }
+
+  .form-group-centered {
+    text-align: center;
+  }
+
+  .form-label {
+    color: #293246;
+    font-weight: 700;
+  }
+
+  .form-label-large {
+    display: block;
+    margin-bottom: 12px;
+    font-size: clamp(1.2rem, 1.55vw, 1.42rem);
+    font-weight: 950;
+    letter-spacing: -0.035em;
+    line-height: 1.12;
+  }
+
+  .date-input-group {
+    display: grid;
+    grid-template-columns: minmax(76px, 0.8fr) minmax(76px, 0.8fr) minmax(112px, 1.25fr);
+    gap: 10px;
+  }
+
+  .date-field {
+    display: grid;
+    gap: 8px;
+  }
+
+  .date-field input {
+    width: 100%;
+    min-height: 64px;
+    border: 1px solid rgba(42, 35, 21, 0.12);
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.82);
+    color: #172033;
+    font-size: clamp(1.34rem, 2.5vw, 1.7rem);
+    font-weight: 900;
+    letter-spacing: 0.02em;
+    text-align: center;
+    outline: none;
+  }
+
+  .date-field input:focus {
+    border-color: rgba(129, 97, 38, 0.42);
+    box-shadow: 0 0 0 4px rgba(245, 210, 138, 0.22);
+  }
+
+  .date-field span {
+    color: #6c7484;
+    font-size: 0.86rem;
+    font-weight: 850;
+    line-height: 1.2;
+    text-align: center;
+  }
+
+  .field-error {
+    min-height: 1.25em;
+    margin: 10px 0 0;
+    color: #9b2c2c;
+    font-size: 0.86rem;
+    font-weight: 750;
+    line-height: 1.35;
+    text-align: left;
+  }
+
+  .state-calculator-form button {
+    width: 100%;
+    max-width: 640px;
+    min-height: 58px;
+    justify-self: center;
+    padding: 0 22px;
+    border: 0;
+    border-radius: 18px;
+    background: #172033;
+    color: #fff;
+    cursor: pointer;
+    font: inherit;
+    font-weight: 850;
+  }
+
+  .state-calculator-form button:hover {
+    background: #2a3550;
+  }
+
+  .state-calculator-form button.is-ready {
+    background: #2f7d46;
+  }
+
+  .state-calculator-form button.is-ready:hover {
+    background: #27683b;
+  }
+
+  .state-calculator-result {
+    display: grid;
+    gap: 16px;
+    margin-top: 26px;
+    padding: clamp(22px, 3vw, 34px);
+    border: 1px solid rgba(47, 125, 70, 0.2);
+    border-radius: 26px;
+    background:
+      radial-gradient(circle at top right, rgba(47, 125, 70, 0.1), transparent 18rem),
+      rgba(255, 255, 255, 0.86);
+    box-shadow: 0 18px 48px rgba(42, 35, 21, 0.08);
+    scroll-margin-top: 24px;
+  }
+
+  :global(.state-result-header) {
+    display: grid;
+    gap: 4px;
+  }
+
+  :global(.state-result-header h2) {
+    max-width: 760px;
+    font-size: clamp(1.72rem, 2.8vw, 2.48rem);
+    font-weight: 950;
+    line-height: 1.06;
+    letter-spacing: -0.05em;
+    overflow-wrap: normal;
+    word-break: normal;
+    hyphens: manual;
+  }
+
+  :global(.mobile-result-break) {
+    display: block;
+  }
+
+  :global(.state-result-top-grid) {
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+    gap: 12px;
+    margin-top: 6px;
+  }
+
+  :global(.state-result-summary),
+  :global(.state-result-status) {
+    display: grid;
+    align-content: center;
+    gap: 10px;
+    min-height: 124px;
+    padding: 22px;
+    border: 1px solid rgba(129, 97, 38, 0.16);
+    border-radius: 20px;
+    background: rgba(245, 210, 138, 0.16);
+  }
+
+  :global(.state-result-status-regular) {
+    border-color: rgba(47, 125, 70, 0.24);
+    background: rgba(47, 125, 70, 0.1);
+  }
+
+  :global(.state-result-status-optional) {
+    border-color: rgba(129, 97, 38, 0.22);
+    background: rgba(245, 210, 138, 0.2);
+  }
+
+  :global(.state-result-status-following) {
+    border-color: rgba(70, 82, 102, 0.18);
+    background: rgba(70, 82, 102, 0.08);
+  }
+
+  :global(.state-result-summary span),
+  :global(.state-result-status span),
+  :global(.state-result-card span) {
+    display: block;
+    color: #816126;
+    font-size: clamp(0.92rem, 1.1vw, 1.04rem);
+    font-weight: 950;
+    letter-spacing: 0.095em;
+    line-height: 1.16;
+    text-transform: uppercase;
+  }
+
+  :global(.state-result-summary strong) {
+    color: #172033;
+    font-size: clamp(2rem, 3.45vw, 2.72rem);
+    font-weight: 950;
+    line-height: 1;
+    letter-spacing: -0.055em;
+  }
+
+  :global(.state-result-status strong),
+  :global(.state-result-card strong) {
+    display: block;
+    margin-top: 8px;
+    color: #172033;
+    font-size: clamp(1.22rem, 1.85vw, 1.5rem);
+    font-weight: 950;
+    line-height: 1.1;
+    letter-spacing: -0.04em;
+  }
+
+  :global(.state-result-explanation-box) {
+    padding: 18px 20px;
+    border: 1px solid rgba(42, 35, 21, 0.08);
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.72);
+  }
+
+  :global(.state-result-explanation-box strong) {
+    display: block;
+    color: #172033;
+    font-size: clamp(1.18rem, 1.45vw, 1.34rem);
+    font-weight: 950;
+    line-height: 1.14;
+    letter-spacing: -0.03em;
+  }
+
+  :global(.state-result-explanation-box p) {
+    margin-top: 12px;
+    color: #293246;
+    font-size: clamp(1rem, 1.2vw, 1.08rem);
+    font-weight: 500;
+    line-height: 1.66;
+  }
+
+  :global(.state-result-grid) {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  :global(.state-result-card) {
+    padding: 18px;
+    border: 1px solid rgba(42, 35, 21, 0.1);
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.78);
+  }
+
+  .state-calculator-note {
+    margin-top: 0;
+    padding: 14px 16px;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.58);
+    color: #465266;
+    font-size: clamp(0.96rem, 1.1vw, 1.02rem);
+    font-weight: 500;
+    line-height: 1.62;
+  }
+
+  .state-calculator-note-muted {
+    background: rgba(70, 82, 102, 0.06);
+    color: #5b6576;
+    font-size: 0.9rem;
+  }
+
+  :global(.state-result-next-step) {
+    padding: 18px 20px;
+    border: 1px solid rgba(47, 125, 70, 0.18);
+    border-radius: 18px;
+    background: rgba(47, 125, 70, 0.08);
+  }
+
+  :global(.state-result-next-step span) {
+    display: block;
+    color: #2f7d46;
+    font-size: clamp(0.92rem, 1.1vw, 1.04rem);
+    font-weight: 950;
+    letter-spacing: 0.095em;
+    line-height: 1.16;
+    text-transform: uppercase;
+  }
+
+  :global(.state-result-next-step p) {
+    margin-top: 12px;
+    color: #293246;
+    font-size: clamp(1.04rem, 1.35vw, 1.14rem);
+    font-weight: 800;
+    line-height: 1.58;
+  }
+
+  @media (max-width: 720px) {
+    :global(.state-result-top-grid),
+    :global(.state-result-grid) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 520px) {
+    .state-calculator-box {
+      padding: 20px;
+      border-radius: 20px;
+    }
+
+    .date-input-group {
+      grid-template-columns: minmax(72px, 0.8fr) minmax(72px, 0.8fr) minmax(112px, 1.25fr);
+      gap: 8px;
+    }
+
+    .date-field-year {
+      grid-column: auto;
+    }
+
+    .date-field input {
+      min-height: 58px;
+      border-radius: 16px;
+      font-size: clamp(1.18rem, 6.2vw, 1.48rem);
+    }
+
+    .state-calculator-result {
+      padding: 18px;
+      border-radius: 18px;
+    }
+
+    :global(.state-result-header) {
+      gap: 4px;
+    }
+
+    :global(.result-kicker-light) {
+      margin: 0;
+    }
+
+    :global(.state-result-header h2) {
+      font-size: clamp(1.95rem, 8.4vw, 2.45rem);
+      line-height: 1.06;
+      letter-spacing: -0.05em;
+      overflow-wrap: normal;
+      word-break: normal;
+      hyphens: manual;
+    }
+
+    :global(.mobile-result-break) {
+      display: block;
+    }
+
+    :global(.state-result-summary span),
+    :global(.state-result-status span),
+    :global(.state-result-card span),
+    :global(.state-result-next-step span) {
+      font-size: 0.96rem;
+      letter-spacing: 0.085em;
+      line-height: 1.16;
+    }
+
+    :global(.state-result-summary strong) {
+      font-size: 2.35rem;
+      line-height: 1;
+    }
+
+    :global(.state-result-status strong),
+    :global(.state-result-card strong) {
+      font-size: 1.36rem;
+      line-height: 1.12;
+    }
+
+    :global(.state-result-explanation-box strong) {
+      font-size: 1.28rem;
+      line-height: 1.12;
+    }
+
+    :global(.state-result-explanation-box p) {
+      font-size: 1rem;
+      line-height: 1.62;
+    }
+
+    :global(.state-result-next-step p) {
+      font-size: 1.04rem;
+      line-height: 1.58;
+    }
+
+    :global(.state-result-explanation-box),
+    :global(.state-result-next-step) {
+      padding: 16px 18px;
+      border-radius: 16px;
+    }
+
+    :global(.state-result-summary),
+    :global(.state-result-status),
+    :global(.state-result-card) {
+      min-height: auto;
+      padding: 16px 18px;
+      border-radius: 16px;
+    }
+
+    .state-calculator-form button {
+      width: 100%;
+    }
+  }
+</style>

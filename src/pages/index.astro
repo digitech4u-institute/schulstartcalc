@@ -923,6 +923,19 @@ const webApplicationSchema = {
     return;
   }
 
+  const selectedStateKey = stateSelect?.value || "";
+  const selectedBirthdate = buildBirthdateValueFromFields().value;
+  const stateDetailUrl = selectedStateKey
+    ? `/einschulung-${selectedStateKey}/${selectedBirthdate ? `?geburtsdatum=${selectedBirthdate}` : ""}`
+    : "";
+  const stateDetailLink = stateDetailUrl
+    ? `
+    <a class="result-detail-link" href="${stateDetailUrl}">
+      Mehr Details zur Einschulung in ${result.meta.state}
+    </a>
+    `
+    : "";
+
   resultBox.innerHTML = `
     <p class="result-kicker">Dein Ergebnis</p>
 
@@ -963,6 +976,8 @@ const webApplicationSchema = {
       <h3>Dein nächster Schritt</h3>
       <p>${result.nextStep}</p>
     </div>
+
+    ${stateDetailLink}
 
     <p class="result-note">
       Dieser Rechner dient der Orientierung. Verbindliche Informationen erhältst du bei der zuständigen Schule oder Schulbehörde.
@@ -1621,6 +1636,28 @@ select {
   font-weight: 600;
   line-height: 1.45;
 }
+
+.result-detail-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 50px;
+  padding: 0 18px;
+  border: 1px solid rgba(245, 210, 138, 0.28);
+  border-radius: 16px;
+  background: rgba(245, 210, 138, 0.12);
+  color: #f5d28a;
+  font-size: 0.96rem;
+  font-weight: 850;
+  line-height: 1.2;
+  text-align: center;
+  text-decoration: none;
+}
+
+.result-detail-link:hover {
+  background: rgba(245, 210, 138, 0.18);
+  border-color: rgba(245, 210, 138, 0.42);
+}
 .content-section {
   max-width: 960px;
   margin: 42px auto 0;
@@ -1997,9 +2034,16 @@ select {
   line-height: 1.45;
 }
 
-.result-note {
+  .result-note {
   font-size: 0.8rem;
   line-height: 1.4;
+}
+
+.result-detail-link {
+  width: 100%;
+  min-height: 52px;
+  padding: 0 14px;
+  font-size: 0.92rem;
 }
 	}
 
