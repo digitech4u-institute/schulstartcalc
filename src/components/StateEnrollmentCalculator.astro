@@ -783,7 +783,7 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
     background: rgba(255, 255, 255, 0.78);
   }
 
-  .state-calculator-note {
+  :global(.state-calculator-note) {
     margin-top: 0;
     padding: 14px 16px;
     border-radius: 16px;
@@ -794,7 +794,7 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
     line-height: 1.62;
   }
 
-  .state-calculator-note-muted {
+  :global(.state-calculator-note-muted) {
     background: rgba(70, 82, 102, 0.06);
     color: #5b6576;
     font-size: 0.9rem;
@@ -876,10 +876,7 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
       hyphens: manual;
     }
 
-    :global(.mobile-result-break) {
-      display: block;
-    }
-
+    
     :global(.state-result-summary span),
     :global(.state-result-status span),
     :global(.state-result-card span),
