@@ -317,12 +317,133 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
     };
   }
 
+  function calculateBayernEnrollment(birthdateValue) {
+    const birthdate = new Date(`${birthdateValue}T12:00:00`);
+    const birthYear = birthdate.getFullYear();
+    const sixthBirthdayYear = birthYear + 6;
+    const month = birthdate.getMonth() + 1;
+    const day = birthdate.getDate();
+
+    let schoolStartYear = sixthBirthdayYear;
+    let statusLabel = "Regulär schulpflichtig";
+    let statusTone = "regular";
+    let resultHeadline = "Dein Kind wird voraussichtlich<br class=\"regular-mobile-result-break\" /> regulär eingeschult.";
+    let explanation =
+      "Dein Kind wird in Bayern regulär schulpflichtig, weil es bis zum 30. Juni sechs Jahre alt wird.";
+    let nextStepTitle = "Nächster sinnvoller Schritt";
+    let nextStepText =
+      "Informiere dich frühzeitig bei der zuständigen Grundschule über Schuleinschreibung, Unterlagen und konkrete Termine.";
+
+    const inCorridor =
+      (month > 6 || (month === 6 && day > 30)) &&
+      (month < 10 || (month === 9 && day <= 30));
+
+    if (inCorridor) {
+      statusLabel = "Einschulungskorridor";
+      statusTone = "optional";
+      resultHeadline = "Dein Kind liegt im Einschulungs&shy;korridor.";
+      explanation =
+        "Dein Kind wird zwischen dem 1. Juli und dem 30. September sechs Jahre alt. In Bayern ist die Einschulung grundsätzlich vorgesehen; Eltern können den Schulstart unter bestimmten Voraussetzungen aber um ein Jahr verschieben.";
+      nextStepTitle = "Wichtig für dich";
+      nextStepText =
+        "Sprich rechtzeitig mit der zuständigen Grundschule, wenn du den Einschulungskorridor nutzen oder eine spätere Einschulung prüfen möchtest.";
+    }
+
+    if (month > 9 || (month === 9 && day > 30)) {
+      schoolStartYear = sixthBirthdayYear + 1;
+      statusLabel = "Voraussichtlich im Folgejahr";
+      statusTone = "following";
+      resultHeadline = "Dein Kind wird voraussichtlich<br class=\"mobile-result-break\" /> ein Jahr später eingeschult.";
+      explanation =
+        "Dein Kind wird nach dem 30. September sechs Jahre alt. Daher ist voraussichtlich das folgende Schuljahr relevant.";
+      nextStepTitle = "Zur Orientierung";
+      nextStepText =
+        "Prüfe die konkreten Termine zur Schuleinschreibung, sobald das relevante Schuljahr von Bayern veröffentlicht wurde.";
+    }
+
+    const schoolYear = `${schoolStartYear}/${schoolStartYear + 1}`;
+    const hasConfirmedDate = schoolYear === "2026/2027";
+
+    return {
+      schoolYear,
+      statusLabel,
+      statusTone,
+      resultHeadline,
+      explanation,
+      nextStepTitle,
+      nextStepText,
+      hasConfirmedDate,
+    };
+  }
+
+  function calculateBadenWuerttembergEnrollment(birthdateValue) {
+    const birthdate = new Date(`${birthdateValue}T12:00:00`);
+    const birthYear = birthdate.getFullYear();
+    const sixthBirthdayYear = birthYear + 6;
+    const month = birthdate.getMonth() + 1;
+    const day = birthdate.getDate();
+
+    let schoolStartYear = sixthBirthdayYear;
+    let statusLabel = "Regulär schulpflichtig";
+    let statusTone = "regular";
+    let resultHeadline = "Dein Kind wird voraussichtlich<br class=\"regular-mobile-result-break\" /> regulär eingeschult.";
+    let explanation =
+      "Dein Kind wird in Baden-Württemberg regulär schulpflichtig, weil es bis zum 30. Juni sechs Jahre alt wird.";
+    let nextStepTitle = "Nächster sinnvoller Schritt";
+    let nextStepText =
+      "Informiere dich frühzeitig bei der zuständigen Grundschule über Anmeldung, Unterlagen und konkrete Termine.";
+
+    const afterJune = month > 6 || (month === 6 && day > 30);
+
+    if (afterJune) {
+      statusLabel = "Einschulung durch Anmeldung möglich";
+      statusTone = "optional";
+      resultHeadline = "Dein Kind liegt in der Stichtags&shy;flexibilisierung.";
+      explanation =
+        "Dein Kind wird nach dem 30. Juni sechs Jahre alt. In Baden-Württemberg kann eine frühere Einschulung unter bestimmten Voraussetzungen durch Anmeldung an der zuständigen Grundschule möglich sein.";
+      nextStepTitle = "Wichtig für dich";
+      nextStepText =
+        "Sprich rechtzeitig mit der zuständigen Grundschule, wenn du eine frühere Einschulung prüfen oder anmelden möchtest.";
+    }
+
+    const schoolYear = `${schoolStartYear}/${schoolStartYear + 1}`;
+    const hasConfirmedDate = schoolYear === "2026/2027";
+
+    return {
+      schoolYear,
+      statusLabel,
+      statusTone,
+      resultHeadline,
+      explanation,
+      nextStepTitle,
+      nextStepText,
+      hasConfirmedDate,
+    };
+  }
+
   function renderSachsenResult(birthdateValue) {
     if (!resultBox || !birthdateValue) return;
 
-    const result = calculateSachsenEnrollment(birthdateValue);
-    const dateDetails = result.hasConfirmedDate
-      ? `
+    let result = calculateSachsenEnrollment(birthdateValue);
+
+    if (normalizedSlug === "bayern") {
+      result = calculateBayernEnrollment(birthdateValue);
+    }
+
+    if (normalizedSlug === "baden-wuerttemberg") {
+      result = calculateBadenWuerttembergEnrollment(birthdateValue);
+    }
+
+    let dateDetails = `
+      <p class="state-calculator-note">
+        Für dieses Schuljahr zeigen wir aktuell noch keinen konkreten
+        Einschulungstag an. Der konkrete Termin wird ergänzt, sobald eine
+        ausreichend belastbare Quelle vorliegt.
+      </p>
+    `;
+
+    if (result.hasConfirmedDate && normalizedSlug === "sachsen") {
+      dateDetails = `
         <div class="state-result-grid" aria-label="Einschulungstermin ${stateName}">
           <div class="state-result-card">
             <span>Schuleinführung</span>
@@ -341,14 +462,57 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
           Für ${stateName} ist die Schuleinführung 2026 offiziell veröffentlicht.
           Einzelne organisatorische Details können je nach Schule abweichen.
         </p>
-      `
-      : `
+      `;
+    }
+
+    if (result.hasConfirmedDate && normalizedSlug === "bayern") {
+      dateDetails = `
+        <div class="state-result-grid" aria-label="Einschulungstermin ${stateName}">
+          <div class="state-result-card">
+            <span>Erster Schultag</span>
+            <strong>Di, 15.09.2026</strong>
+          </div>
+          <div class="state-result-card">
+            <span>Terminbasis</span>
+            <strong>Sommerferien bis 14.09.2026</strong>
+          </div>
+          <div class="state-result-card">
+            <span>Terminstatus</span>
+            <strong>aus Ferienkalender abgeleitet</strong>
+          </div>
+        </div>
         <p class="state-calculator-note">
-          Für dieses Schuljahr zeigen wir aktuell noch keinen konkreten
-          Einschulungstag an. Der konkrete Termin wird ergänzt, sobald eine
-          ausreichend belastbare Quelle vorliegt.
+          Für ${stateName} enden die Sommerferien 2026 am 14. September.
+          Daraus ergibt sich voraussichtlich Dienstag, der 15. September 2026,
+          als erster Schultag.
         </p>
       `;
+    }
+
+    if (result.hasConfirmedDate && normalizedSlug === "baden-wuerttemberg") {
+      dateDetails = `
+        <div class="state-result-grid" aria-label="Einschulungstermin ${stateName}">
+          <div class="state-result-card">
+            <span>Erster Schultag</span>
+            <strong>Mo, 14.09.2026</strong>
+          </div>
+          <div class="state-result-card">
+            <span>Mögliche Einschulung</span>
+            <strong>Sa, 12.09.2026</strong>
+          </div>
+          <div class="state-result-card">
+            <span>Terminstatus</span>
+            <strong>schulabhängig</strong>
+          </div>
+        </div>
+        <p class="state-calculator-note">
+          Für ${stateName} enden die Sommerferien 2026 offiziell am 12. September.
+          Daraus ergibt sich voraussichtlich Montag, der 14. September 2026,
+          als erster Schultag. Eine mögliche Einschulung kann bereits am Samstag
+          davor stattfinden; der konkrete Termin ist jedoch schulabhängig.
+        </p>
+      `;
+    }
 
     resultBox.hidden = false;
     resultBox.innerHTML = `
