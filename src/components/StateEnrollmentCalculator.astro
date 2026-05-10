@@ -1,5 +1,4 @@
 
-
 ---
 interface Props {
   stateName: string;
@@ -329,7 +328,7 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
     let statusTone = "regular";
     let resultHeadline = "Dein Kind wird voraussichtlich<br class=\"regular-mobile-result-break\" /> regulär eingeschult.";
     let explanation =
-      "Dein Kind wird in Bayern regulär schulpflichtig, weil es bis zum 30. Juni sechs Jahre alt wird.";
+      "Dein Kind wird in Bayern regulär schulpflichtig, weil es bis zum 30. September sechs Jahre alt wird.";
     let nextStepTitle = "Nächster sinnvoller Schritt";
     let nextStepText =
       "Informiere dich frühzeitig bei der zuständigen Grundschule über Schuleinschreibung, Unterlagen und konkrete Termine.";
@@ -517,26 +516,36 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
 
     if (result.hasConfirmedDate && normalizedSlug === "bayern") {
       dateDetails = `
-        <div class="state-result-grid" aria-label="Einschulungstermin ${stateName}">
-          <div class="state-result-card">
+        <div class="state-result-grid state-result-grid-priority" aria-label="Einschulungstermin ${stateName}">
+          <div class="state-result-card state-result-card-wide">
+            <span>Nächste Einschulung</span>
+            <strong>Mittwoch, 16.09.2026</strong>
+          </div>
+          <div class="state-result-card state-result-card-wide">
             <span>Erster Schultag</span>
-            <strong>Di, 15.09.2026</strong>
-          </div>
-          <div class="state-result-card">
-            <span>Terminbasis</span>
-            <strong>Sommerferien bis 14.09.2026</strong>
-          </div>
-          <div class="state-result-card">
-            <span>Terminstatus</span>
-            <strong>aus Ferienkalender abgeleitet</strong>
+            <strong>Dienstag, 15.09.2026</strong>
           </div>
         </div>
         <p class="state-calculator-note">
-          Für ${stateName} enden die Sommerferien 2026 am 14. September.
-          Daraus ergibt sich voraussichtlich Dienstag, der 15. September 2026,
-          als erster Schultag.
+          Für Schulanfängerinnen und Schulanfänger in ${stateName} nennt das Bayerische
+          Kultusministerium den 16. September 2026. Der allgemeine erste Schultag
+          nach den Sommerferien ist voraussichtlich Dienstag, der 15. September 2026.
+          Der konkrete Einschulungstermin ist schulabhängig.
         </p>
       `;
+    }
+
+    let displayedHeadline = result.resultHeadline;
+
+    if (result.statusTone === "following") {
+      const enrollmentYear = result.schoolYear.split("/")[0];
+
+      displayedHeadline = `Dein Kind wird in ${stateName} voraussichtlich<br class="regular-mobile-result-break" /> ${enrollmentYear} eingeschult.`;
+    }
+
+    if (result.hasConfirmedDate && normalizedSlug === "bayern") {
+      displayedHeadline =
+        "Dein Kind wird in Bayern voraussichtlich am Mittwoch,<br class=\"result-mobile-date-break\" /> <span class=\"result-date-nowrap\">16. September 2026</span> eingeschult.";
     }
 
     if (result.hasConfirmedDate && normalizedSlug === "baden-wuerttemberg") {
@@ -593,8 +602,10 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
     resultBox.innerHTML = `
       <div class="state-result-header">
         <p class="result-kicker-light">${resultKicker}</p>
-        <h2>${result.resultHeadline}</h2>
+        <h2>${displayedHeadline}</h2>
       </div>
+
+      ${dateDetails}
 
       <div class="state-result-top-grid">
         <div class="state-result-summary">
@@ -612,8 +623,6 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
         <strong>Was bedeutet das?</strong>
         <p>${result.explanation}</p>
       </div>
-
-      ${dateDetails}
 
       <div class="state-result-next-step">
         <span>${result.nextStepTitle}</span>
@@ -955,6 +964,14 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
     display: block;
   }
 
+  :global(.result-date-nowrap) {
+    white-space: nowrap;
+  }
+
+  :global(.result-mobile-date-break) {
+    display: none;
+  }
+
   :global(.state-result-top-grid) {
     display: grid;
     grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
@@ -967,11 +984,11 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
     display: grid;
     align-content: center;
     gap: 10px;
-    min-height: 124px;
-    padding: 22px;
-    border: 1px solid rgba(129, 97, 38, 0.16);
-    border-radius: 20px;
-    background: rgba(245, 210, 138, 0.16);
+    min-height: 112px;
+    padding: 18px 20px;
+    border: 1px solid rgba(129, 97, 38, 0.14);
+    border-radius: 18px;
+    background: rgba(245, 210, 138, 0.12);
   }
 
   :global(.state-result-status-regular) {
@@ -1003,10 +1020,10 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
 
   :global(.state-result-summary strong) {
     color: #172033;
-    font-size: clamp(2rem, 3.45vw, 2.72rem);
+    font-size: clamp(1.72rem, 2.85vw, 2.24rem);
     font-weight: 950;
     line-height: 1;
-    letter-spacing: -0.055em;
+    letter-spacing: -0.05em;
   }
 
   :global(.state-result-status strong),
@@ -1050,11 +1067,31 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
     gap: 12px;
   }
 
+  :global(.state-result-grid-priority) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+    margin-top: 4px;
+  }
+
   :global(.state-result-card) {
     padding: 18px;
     border: 1px solid rgba(42, 35, 21, 0.1);
     border-radius: 18px;
     background: rgba(255, 255, 255, 0.78);
+  }
+
+  :global(.state-result-card-wide) {
+    min-height: 104px;
+    padding: 22px 26px;
+    border-color: rgba(129, 97, 38, 0.18);
+    background: rgba(245, 210, 138, 0.13);
+  }
+
+  :global(.state-result-card-wide strong) {
+    font-size: clamp(1.34rem, 2.05vw, 1.72rem);
+    line-height: 1.08;
+    letter-spacing: -0.045em;
+    white-space: nowrap;
   }
 
   :global(.state-calculator-note) {
@@ -1102,6 +1139,10 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
   @media (max-width: 720px) {
     :global(.state-result-top-grid),
     :global(.state-result-grid) {
+      grid-template-columns: 1fr;
+    }
+
+    :global(.state-result-grid-priority) {
       grid-template-columns: 1fr;
     }
   }
@@ -1163,6 +1204,10 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
       hyphens: manual;
     }
 
+    :global(.result-mobile-date-break) {
+      display: block;
+    }
+
     :global(.state-result-summary span),
     :global(.state-result-status span),
     :global(.state-result-card span),
@@ -1173,7 +1218,7 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
     }
 
     :global(.state-result-summary strong) {
-      font-size: clamp(2.05rem, 10.5vw, 2.32rem);
+      font-size: clamp(1.72rem, 8.8vw, 2rem);
       line-height: 1;
     }
 
@@ -1210,6 +1255,17 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
       min-height: auto;
       padding: 16px;
       border-radius: 16px;
+    }
+
+    :global(.state-result-card-wide) {
+      padding: 16px;
+      background: rgba(245, 210, 138, 0.13);
+    }
+
+    :global(.state-result-card-wide strong) {
+      font-size: clamp(1.28rem, 6.2vw, 1.48rem);
+      line-height: 1.1;
+      white-space: normal;
     }
 
     .state-calculator-form button {

@@ -2,10 +2,10 @@
 import StateEnrollmentCalculator from "../components/StateEnrollmentCalculator.astro";
 
 const pageTitle =
-  "Einschulung Bayern: Stichtag, Schuljahr und Einschulungskorridor";
+  "Einschulung Bayern 2026: Schulstart, Stichtag und Einschulungskorridor";
 
 const pageDescription =
-  "Wann kommt mein Kind in Bayern in die Schule? Erfahre alles zu Einschulungsstichtag, Einschulungskorridor und voraussichtlichem Schuljahr.";
+  "Wann ist die Einschulung in Bayern? Erfahre alles zu Schulstart, erstem Schultag, Einschulungstermin, Stichtag 30. September und Einschulungskorridor.";
 ---
 
 <html lang="de">
@@ -46,10 +46,18 @@ const pageDescription =
           },
           {
             "@type": "Question",
+            "name": "Wann ist die Einschulung in Bayern 2026?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Für Schulanfängerinnen und Schulanfänger in Bayern nennt das Bayerische Kultusministerium den 16. September 2026. Der konkrete Einschulungstermin kann je nach Grundschule organisatorisch abweichen."
+            }
+          },
+          {
+            "@type": "Question",
             "name": "Wann ist der erste Schultag in Bayern 2026?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Für Bayern enden die Sommerferien 2026 am 14. September 2026. Daraus ergibt sich voraussichtlich Dienstag, der 15. September 2026, als erster Schultag. Einzelne organisatorische Details können je nach Schule abweichen."
+              "text": "Der allgemeine Schulstart nach den Sommerferien in Bayern ist voraussichtlich Dienstag, der 15. September 2026. Für Schulanfängerinnen und Schulanfänger nennt das Bayerische Kultusministerium den 16. September 2026."
             }
           }
         ]
@@ -66,13 +74,14 @@ const pageDescription =
 
         <h1>
           Einschulung in Bayern:<br />
-          Stichtag und Schuljahr
+          Schulstart, Stichtag und Schuljahr
         </h1>
 
         <p class="lead">
-          In Bayern gilt für die Einschulung grundsätzlich der Stichtag 30. September.
-          Zusätzlich gibt es den Einschulungskorridor für Kinder, die zwischen dem
-          1. Juli und dem 30. September sechs Jahre alt werden.
+          Wann ist die Einschulung in Bayern? Für Schulanfängerinnen und
+          Schulanfänger nennt das Bayerische Kultusministerium den 16. September 2026.
+          Der allgemeine Schulstart nach den Sommerferien ist voraussichtlich am
+          15. September 2026. Für die Schulpflicht gilt der Stichtag 30. September.
         </p>
 
         <StateEnrollmentCalculator
@@ -85,26 +94,39 @@ const pageDescription =
         />
 
         <div class="quick-facts" aria-label="Kurzüberblick Einschulung Bayern">
+          <div class="fact-card fact-card-date">
+            <span>Nächste Einschulung</span>
+            <strong>Mittwoch, 16.09.2026</strong>
+          </div>
+
+          <div class="fact-card fact-card-date">
+            <span>Erster Schultag</span>
+            <strong>Dienstag, 15.09.2026</strong>
+          </div>
+
           <div class="fact-card">
             <span>Stichtag</span>
             <strong>30. September</strong>
           </div>
 
-          <div class="fact-card">
+          <div class="fact-card fact-card-no-wrap">
             <span>Sonderregel</span>
-            <strong>
-              Einschulungs<span class="desktop-break">-<br /></span>korridor
-            </strong>
-          </div>
-
-          <div class="fact-card">
-            <span>Zeitraum</span>
-            <strong>
-              1. Juli bis<br class="desktop-break" />
-              30. September
-            </strong>
+            <strong>Einschulungskorridor</strong>
           </div>
         </div>
+
+        <section>
+          <h2>Wann ist die Einschulung in Bayern 2026?</h2>
+
+          <p>
+            Die nächste Einschulung in Bayern für Schulanfängerinnen und
+            Schulanfänger ist nach aktueller Darstellung des Bayerischen
+            Kultusministeriums am 16. September 2026. Der allgemeine Schulstart
+            nach den Sommerferien ist voraussichtlich Dienstag, der 15. September
+            2026. Die konkrete Einschulungsfeier kann je nach Grundschule
+            organisatorisch abweichen.
+          </p>
+        </section>
 
         <section>
           <h2>Wann ist ein Kind in Bayern schulpflichtig?</h2>
@@ -154,6 +176,25 @@ const pageDescription =
 
           <div class="faq-list">
             <article class="faq-item">
+              <h3>Wann ist die Einschulung in Bayern 2026?</h3>
+              <p>
+                Für Schulanfängerinnen und Schulanfänger in Bayern nennt das
+                Bayerische Kultusministerium den 16. September 2026. Der konkrete
+                Einschulungstermin kann je nach Grundschule organisatorisch abweichen.
+              </p>
+            </article>
+
+            <article class="faq-item">
+              <h3>Wann ist der Schulstart in Bayern 2026?</h3>
+              <p>
+                Der allgemeine Schulstart nach den Sommerferien ist voraussichtlich
+                Dienstag, der 15. September 2026. Für Schulanfängerinnen und
+                Schulanfänger ist besonders der Einschulungstermin am 16. September
+                relevant.
+              </p>
+            </article>
+
+            <article class="faq-item">
               <h3>Welcher Einschulungsstichtag gilt in Bayern?</h3>
               <p>
                 In Bayern gilt grundsätzlich der 30. September als Stichtag für die
@@ -182,10 +223,10 @@ const pageDescription =
             <article class="faq-item">
               <h3>Wann ist der erste Schultag in Bayern 2026?</h3>
               <p>
-                Für Bayern enden die Sommerferien 2026 am 14. September. Daraus
-                ergibt sich voraussichtlich Dienstag, der 15. September 2026, als
-                erster Schultag. Einzelne organisatorische Details können je nach
-                Schule abweichen.
+                Der allgemeine erste Schultag nach den Sommerferien ist
+                voraussichtlich Dienstag, der 15. September 2026. Für
+                Schulanfängerinnen und Schulanfänger nennt das Bayerische
+                Kultusministerium den 16. September 2026.
               </p>
             </article>
           </div>
@@ -312,7 +353,7 @@ const pageDescription =
 
   .quick-facts {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 14px;
     margin-top: 30px;
   }
@@ -339,10 +380,24 @@ const pageDescription =
 
   .fact-card strong {
     color: #172033;
-    font-size: clamp(1.32rem, 1.85vw, 1.68rem);
+    font-size: clamp(1.22rem, 1.55vw, 1.46rem);
     font-weight: 950;
     line-height: 1.12;
     letter-spacing: -0.035em;
+  }
+
+  .fact-card-date {
+    border-color: rgba(129, 97, 38, 0.16);
+    background: rgba(245, 210, 138, 0.12);
+  }
+
+  .fact-card-date strong {
+    font-size: clamp(1.22rem, 1.65vw, 1.56rem);
+    white-space: nowrap;
+  }
+
+  .fact-card-no-wrap strong {
+    white-space: nowrap;
   }
 
   section {
@@ -492,6 +547,14 @@ const pageDescription =
     .fact-card strong {
       font-size: clamp(1.12rem, 4.9vw, 1.36rem);
       line-height: 1.14;
+    }
+
+    .fact-card-date strong {
+      white-space: normal;
+    }
+
+    .fact-card-no-wrap strong {
+      white-space: normal;
     }
 
     section {
