@@ -383,11 +383,14 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
     const day = birthdate.getDate();
 
     let schoolStartYear = sixthBirthdayYear;
+    const projectedSchoolYear = `${schoolStartYear}/${schoolStartYear + 1}`;
+    const cutoffYear = schoolStartYear;
     let statusLabel = "Regulär schulpflichtig";
     let statusTone = "regular";
-    let resultHeadline = "Dein Kind wird voraussichtlich<br class=\"regular-mobile-result-break\" /> regulär eingeschult.";
+    let resultHeadline =
+      `Dein Kind wird in Baden-Württemberg voraussichtlich im Schuljahr ${projectedSchoolYear} regulär eingeschult.`;
     let explanation =
-      "Dein Kind wird in Baden-Württemberg regulär schulpflichtig, weil es bis zum 30. Juni 2026 sechs Jahre alt wird und damit für das Schuljahr 2026/2027 schulpflichtig ist.";
+      `Dein Kind wird in Baden-Württemberg regulär schulpflichtig, weil es bis zum 30. Juni ${cutoffYear} sechs Jahre alt wird und damit für das Schuljahr ${projectedSchoolYear} schulpflichtig ist.`;
     let nextStepTitle = "Nächster sinnvoller Schritt";
     let nextStepText =
       "Informiere dich frühzeitig bei der zuständigen Grundschule über Anmeldung, Unterlagen und konkrete Termine.";
@@ -398,12 +401,12 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
       statusLabel = "Kann-Kind";
       statusTone = "optional";
       resultHeadline =
-        "Dein Kind ist in Baden-Württemberg ein Kann-Kind. Eine Einschulung im Schuljahr 2026/2027 ist durch Anmeldung an der Grundschule möglich.";
+        `Dein Kind ist in Baden-Württemberg ein Kann-Kind. Eine Einschulung im Schuljahr ${projectedSchoolYear} ist durch Anmeldung an der Grundschule möglich.`;
       explanation =
-        "Dein Kind wird nach dem 30. Juni 2026 sechs Jahre alt. Es ist daher nicht automatisch regulär schulpflichtig, kann aber über die Stichtagsflexibilisierung für das Schuljahr 2026/2027 angemeldet werden.";
+        `Dein Kind wird nach dem 30. Juni ${cutoffYear} sechs Jahre alt. Es ist daher nicht automatisch regulär schulpflichtig, kann aber über die Stichtagsflexibilisierung für das Schuljahr ${projectedSchoolYear} angemeldet werden.`;
       nextStepTitle = "Wichtig für dich";
       nextStepText =
-        "Melde dich frühzeitig bei der zuständigen Grundschule. Dort wird geprüft, ob dein Kind schulbereit ist und für das Schuljahr 2026/2027 eingeschult werden kann.";
+        `Melde dich frühzeitig bei der zuständigen Grundschule. Dort wird geprüft, ob dein Kind schulbereit ist und für das Schuljahr ${projectedSchoolYear} eingeschult werden kann.`;
     }
 
     const schoolYear = `${schoolStartYear}/${schoolStartYear + 1}`;
@@ -475,12 +478,14 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
     const day = birthdate.getDate();
 
     let schoolStartYear = sixthBirthdayYear;
+    const projectedSchoolYear = `${schoolStartYear}/${schoolStartYear + 1}`;
+    const cutoffYear = schoolStartYear;
     let statusLabel = "Regulär schulpflichtig";
     let statusTone = "regular";
     let resultHeadline =
-      "Dein Kind wird in Niedersachsen voraussichtlich im Schuljahr 2026/2027 regulär eingeschult.";
+      `Dein Kind wird in Niedersachsen voraussichtlich im Schuljahr ${projectedSchoolYear} regulär eingeschult.`;
     let explanation =
-      "Dein Kind wird in Niedersachsen regulär schulpflichtig, weil es bis zum 1. Oktober 2026 sechs Jahre alt wird und damit für das Schuljahr 2026/2027 schulpflichtig ist.";
+      `Dein Kind wird in Niedersachsen regulär schulpflichtig, weil es bis zum 1. Oktober ${cutoffYear} sechs Jahre alt wird und damit für das Schuljahr ${projectedSchoolYear} schulpflichtig ist.`;
     let nextStepTitle = "Nächster sinnvoller Schritt";
     let nextStepText =
       "Informiere dich frühzeitig bei der zuständigen Grundschule über Anmeldung, Unterlagen, Sprachstandsfeststellung und konkrete Termine.";
@@ -497,6 +502,56 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
       nextStepTitle = "Zur Orientierung";
       nextStepText =
         "Sprich mit der zuständigen Grundschule, wenn du eine vorzeitige Einschulung prüfen möchtest.";
+    }
+
+    const schoolYear = `${schoolStartYear}/${schoolStartYear + 1}`;
+    const hasConfirmedDate = schoolYear === "2026/2027";
+
+    return {
+      schoolYear,
+      statusLabel,
+      statusTone,
+      resultHeadline,
+      explanation,
+      nextStepTitle,
+      nextStepText,
+      hasConfirmedDate,
+    };
+
+  }
+
+  function calculateHessenEnrollment(birthdateValue) {
+    const birthdate = new Date(`${birthdateValue}T12:00:00`);
+    const birthYear = birthdate.getFullYear();
+    const sixthBirthdayYear = birthYear + 6;
+    const month = birthdate.getMonth() + 1;
+    const day = birthdate.getDate();
+
+    let schoolStartYear = sixthBirthdayYear;
+    const projectedSchoolYear = `${schoolStartYear}/${schoolStartYear + 1}`;
+    const cutoffYear = schoolStartYear;
+    let statusLabel = "Regulär schulpflichtig";
+    let statusTone = "regular";
+    let resultHeadline =
+      `Dein Kind wird in Hessen voraussichtlich im Schuljahr ${projectedSchoolYear} regulär eingeschult.`;
+    let explanation =
+      `Dein Kind wird in Hessen regulär schulpflichtig, weil es bis zum 30. Juni ${cutoffYear} das sechste Lebensjahr vollendet und damit zum 1. August ${cutoffYear} schulpflichtig wird.`;
+    let nextStepTitle = "Nächster sinnvoller Schritt";
+    let nextStepText =
+      "Informiere dich frühzeitig bei der zuständigen Grundschule über Anmeldung, Unterlagen, Sprachstandsfeststellung und konkrete Termine.";
+
+    const afterOfficialCutoff = month > 7 || (month === 7 && day > 1);
+
+    if (afterOfficialCutoff) {
+      statusLabel = "Kann-Kind";
+      statusTone = "optional";
+      resultHeadline =
+        `Dein Kind ist in Hessen ein Kann-Kind. Eine Einschulung im Schuljahr ${projectedSchoolYear} kann auf Antrag geprüft werden.`;
+      explanation =
+        `Dein Kind vollendet das sechste Lebensjahr nach dem hessischen Stichtag. Eine vorzeitige Einschulung für das Schuljahr ${projectedSchoolYear} kann auf schriftlichen Antrag der Eltern von der Schulleitung geprüft werden. Bei Kindern, die erst nach dem 31. Dezember das sechste Lebensjahr vollenden, kann zusätzlich eine schulpsychologische Überprüfung angeordnet werden.`;
+      nextStepTitle = "Wichtig für dich";
+      nextStepText =
+        "Sprich frühzeitig mit der zuständigen Grundschule. Dort erfährst du, wie der Antrag gestellt wird und welche Einschätzungen für die Entscheidung berücksichtigt werden.";
     }
 
     const schoolYear = `${schoolStartYear}/${schoolStartYear + 1}`;
@@ -533,6 +588,10 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
 
     if (normalizedSlug === "niedersachsen") {
       result = calculateNiedersachsenEnrollment(birthdateValue);
+    }
+
+    if (normalizedSlug === "hessen") {
+      result = calculateHessenEnrollment(birthdateValue);
     }
 
     let dateDetails = `
@@ -589,6 +648,10 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
 
     let displayedHeadline = result.resultHeadline;
 
+    if (result.statusTone === "regular") {
+      displayedHeadline = `Dein Kind wird in ${stateName} voraussichtlich im Schuljahr <span class="result-date-nowrap">${result.schoolYear}</span> regulär eingeschult.`;
+    }
+
     if (result.statusTone === "following") {
       displayedHeadline = `Dein Kind wird in ${stateName} voraussichtlich im Schuljahr <span class="result-date-nowrap">${result.schoolYear}</span> eingeschult.`;
     }
@@ -619,6 +682,15 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
     ) {
       displayedHeadline =
         "Dein Kind wird in Niedersachsen voraussichtlich im Schuljahr <span class=\"result-date-nowrap\">2026/2027</span> regulär eingeschult.";
+    }
+
+    if (
+      result.hasConfirmedDate &&
+      normalizedSlug === "hessen" &&
+      result.statusTone === "regular"
+    ) {
+      displayedHeadline =
+        "Dein Kind wird in Hessen voraussichtlich im Schuljahr <span class=\"result-date-nowrap\">2026/2027</span> regulär eingeschult.";
     }
 
     if (result.hasConfirmedDate && normalizedSlug === "baden-wuerttemberg") {
@@ -661,6 +733,27 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
           als allgemeiner erster Schultag. Die Einschulung erfolgt am Sonnabend
           nach dem ersten Schultag, also voraussichtlich am 15. August 2026;
           der konkrete Termin ist schulabhängig.
+        </p>
+      `;
+    }
+
+    if (result.hasConfirmedDate && normalizedSlug === "hessen") {
+      dateDetails = `
+        <div class="state-result-grid state-result-grid-priority" aria-label="Einschulungstermin ${stateName}">
+          <div class="state-result-card state-result-card-wide">
+            <span>Erster Schultag</span>
+            <strong>Montag, 10.08.2026</strong>
+          </div>
+          <div class="state-result-card state-result-card-wide">
+            <span>Einschulung</span>
+            <strong>Montag, 10.08.2026</strong>
+          </div>
+        </div>
+        <p class="state-calculator-note">
+          Für ${stateName} enden die Sommerferien 2026 am 7. August.
+          Daraus ergibt sich voraussichtlich Montag, der 10. August 2026,
+          als allgemeiner erster Schultag und Orientierung für die Einschulung.
+          Den konkreten Einschulungstermin legt die zuständige Grundschule fest.
         </p>
       `;
     }
