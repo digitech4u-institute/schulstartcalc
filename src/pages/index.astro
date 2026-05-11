@@ -376,7 +376,7 @@ const webApplicationSchema = {
 				  <tr>
 					<td><a class="state-table-link" href="/einschulung-hamburg/">Hamburg</a></td>
 					<td>30. Juni</td>
-					<td>Kein Einschulungskorridor — Stichtag ist hart</td>
+					<td>Kein Einschulungskorridor — vorzeitige Einschulung auf Antrag möglich</td>
 				  </tr>
 				  <tr>
             <td><a class="state-table-link" href="/einschulung-hessen/">Hessen</a></td>
@@ -824,6 +824,30 @@ const webApplicationSchema = {
 
         const cutoffDate = createDateFromMMDD(sixthBirthdayYear, stateRule.cutoff);
 
+        if (stateRule.type === "berlin_optional") {
+          const birthMonth = birthDate.getMonth() + 1;
+
+          if (birthMonth >= 10) {
+            return buildSpecialResult(
+              stateRule,
+              sixthBirthdayYear,
+              createDateFromMMDD(sixthBirthdayYear, stateRule.cutoff),
+              sixthBirthday
+            );
+          }
+
+          if (birthMonth <= 3) {
+            const optionalEnrollmentYear = sixthBirthdayYear - 1;
+
+            return buildSpecialResult(
+              stateRule,
+              optionalEnrollmentYear,
+              createDateFromMMDD(optionalEnrollmentYear, stateRule.cutoff),
+              sixthBirthday
+            );
+          }
+        }
+
         if (stateRule.specialWindow) {
           const specialFrom = createDateFromMMDD(
             sixthBirthdayYear,
@@ -871,7 +895,7 @@ const webApplicationSchema = {
           nextStep: `Wenn du über eine frühere Einschulung nachdenkst, informiere dich bei der zuständigen Grundschule über die Voraussetzungen.`,
           meta: {
             state: stateRule.name,
-            cutoff: formatDate(cutoffDate),
+            cutoff: formatDate(createDateFromMMDD(nextEnrollmentYear, stateRule.cutoff)),
             schoolYear: `${nextEnrollmentYear}/${nextEnrollmentYear + 1}`,
             statusLabel: "Regulär schulpflichtig",
           },
