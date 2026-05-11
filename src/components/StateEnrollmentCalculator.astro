@@ -567,6 +567,69 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
       nextStepText,
       hasConfirmedDate,
     };
+
+  }
+
+  function calculateBerlinEnrollment(birthdateValue) {
+    const birthdate = new Date(`${birthdateValue}T12:00:00`);
+    const birthYear = birthdate.getFullYear();
+    const sixthBirthdayYear = birthYear + 6;
+    const month = birthdate.getMonth() + 1;
+    const day = birthdate.getDate();
+
+    let schoolStartYear = sixthBirthdayYear;
+    let statusLabel = "Regulär schulpflichtig";
+    let statusTone = "regular";
+    let nextStepTitle = "Nächster sinnvoller Schritt";
+    let nextStepText =
+      "Informiere dich frühzeitig bei der zuständigen Grundschule über Anmeldung, Unterlagen, Einschulungsuntersuchung und konkrete Termine.";
+
+    const bornOctoberToDecember = month >= 10;
+    const bornJanuaryToMarch = month <= 3;
+
+    if (bornOctoberToDecember) {
+      statusLabel = "Kann-Kind";
+      statusTone = "optional";
+      nextStepTitle = "Wichtig für dich";
+      nextStepText =
+        "Sprich frühzeitig mit der zuständigen Grundschule, wenn du eine vorzeitige Einschulung beantragen möchtest. Voraussetzung ist unter anderem, dass kein Sprachförderbedarf besteht.";
+    }
+
+    if (bornJanuaryToMarch) {
+      schoolStartYear = sixthBirthdayYear - 1;
+      statusLabel = "Kann-Kind";
+      statusTone = "optional";
+      nextStepTitle = "Wichtig für dich";
+      nextStepText =
+        "Sprich frühzeitig mit der zuständigen Grundschule, wenn du eine vorzeitige Einschulung beantragen möchtest. Voraussetzung ist unter anderem, dass kein Sprachförderbedarf besteht.";
+    }
+
+    const schoolYear = `${schoolStartYear}/${schoolStartYear + 1}`;
+    const cutoffYear = schoolStartYear;
+    const hasConfirmedDate = schoolYear === "2026/2027";
+
+    let resultHeadline =
+      `Dein Kind wird in Berlin voraussichtlich im Schuljahr ${schoolYear} regulär eingeschult.`;
+    let explanation =
+      `Dein Kind wird in Berlin regulär schulpflichtig, weil es bis zum 30. September ${cutoffYear} sechs Jahre alt wird und damit mit Beginn des Schuljahres ${schoolYear} schulpflichtig ist.`;
+
+    if (statusTone === "optional") {
+      resultHeadline =
+        `Dein Kind ist in Berlin ein Kann-Kind. Eine Einschulung im Schuljahr ${schoolYear} kann auf Antrag geprüft werden.`;
+      explanation =
+        `Dein Kind vollendet das sechste Lebensjahr im Zeitraum der Berliner Kann-Kind-Regelung. Eine Einschulung im Schuljahr ${schoolYear} kann auf Antrag der Erziehungsberechtigten geprüft werden, wenn kein Sprachförderbedarf besteht.`;
+    }
+
+    return {
+      schoolYear,
+      statusLabel,
+      statusTone,
+      resultHeadline,
+      explanation,
+      nextStepTitle,
+      nextStepText,
+      hasConfirmedDate,
+    };
   }
 
   function renderSachsenResult(birthdateValue) {
@@ -592,6 +655,10 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
 
     if (normalizedSlug === "hessen") {
       result = calculateHessenEnrollment(birthdateValue);
+    }
+
+    if (normalizedSlug === "berlin") {
+      result = calculateBerlinEnrollment(birthdateValue);
     }
 
     let dateDetails = `
@@ -737,6 +804,7 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
       `;
     }
 
+
     if (result.hasConfirmedDate && normalizedSlug === "hessen") {
       dateDetails = `
         <div class="state-result-grid state-result-grid-priority" aria-label="Einschulungstermin ${stateName}">
@@ -754,6 +822,28 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
           Daraus ergibt sich voraussichtlich Montag, der 10. August 2026,
           als allgemeiner erster Schultag und Orientierung für die Einschulung.
           Den konkreten Einschulungstermin legt die zuständige Grundschule fest.
+        </p>
+      `;
+    }
+
+    if (result.hasConfirmedDate && normalizedSlug === "berlin") {
+      dateDetails = `
+        <div class="state-result-grid state-result-grid-priority" aria-label="Einschulungstermin ${stateName}">
+          <div class="state-result-card state-result-card-wide">
+            <span>Einschulungsfeier</span>
+            <strong>Samstag, 29.08.2026</strong>
+          </div>
+          <div class="state-result-card state-result-card-wide">
+            <span>Erster Schultag</span>
+            <strong>Montag, 31.08.2026</strong>
+          </div>
+        </div>
+        <p class="state-calculator-note">
+          In ${stateName} findet die Einschulungsfeier 2026 in der Regel am
+          Samstag, dem 29. August 2026, statt. Der erste Schultag der neuen
+          Schulanfängerinnen und Schulanfänger ist voraussichtlich Montag,
+          der 31. August 2026. Den konkreten Ablauf legt die zuständige
+          Grundschule fest.
         </p>
       `;
     }

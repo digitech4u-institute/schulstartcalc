@@ -1,11 +1,11 @@
-
-
 ---
+import StateEnrollmentCalculator from "../components/StateEnrollmentCalculator.astro";
+
 const pageTitle =
-  "Einschulung Berlin: Stichtag, Schuljahr und Regeln";
+  "Einschulung Berlin 2026: Schulstart, Stichtag und Schuljahr";
 
 const pageDescription =
-  "Wann kommt mein Kind in Berlin in die Schule? Erfahre alles zu Einschulungsstichtag, vorzeitiger Einschulung, Schulanmeldung und voraussichtlichem Schuljahr.";
+  "Wann kommt mein Kind in Berlin in die Schule? Erfahre alles zu Schulstart, Einschulungsfeier, Stichtag 30. September, Kann-Kind-Regelung und Schuljahr.";
 ---
 
 <html lang="de">
@@ -22,10 +22,26 @@ const pageDescription =
         "mainEntity": [
           {
             "@type": "Question",
-            "name": "Welcher Einschulungsstichtag gilt in Berlin?",
+            "name": "Wann kommt mein Kind in Berlin in die Schule?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "In Berlin werden mit Beginn eines Schuljahres am 1. August alle Kinder schulpflichtig, die das sechste Lebensjahr bereits vollendet haben oder bis zum folgenden 30. September vollenden werden."
+              "text": "Das hängt vom Geburtsdatum deines Kindes ab. In Berlin werden mit Beginn eines Schuljahres am 1. August alle Kinder schulpflichtig, die das sechste Lebensjahr bereits vollendet haben oder bis zum folgenden 30. September vollenden werden."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Wann ist die Einschulung in Berlin 2026?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "In Berlin findet die Einschulungsfeier 2026 in der Regel am Samstag, dem 29. August 2026, statt. Der reguläre Unterricht für Schulanfängerinnen und Schulanfänger beginnt voraussichtlich am Montag, dem 31. August 2026."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Welcher Stichtag gilt für die Einschulung in Berlin?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "In Berlin gilt für die reguläre Schulpflicht der 30. September. Kinder, die bis zu diesem Datum sechs Jahre alt werden, werden mit Beginn des Schuljahres am 1. August schulpflichtig."
             }
           },
           {
@@ -33,15 +49,23 @@ const pageDescription =
             "name": "Kann mein Kind in Berlin früher eingeschult werden?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Kinder, die zwischen dem 1. Oktober und dem 31. März des folgenden Kalenderjahres sechs Jahre alt werden, können auf Antrag der Erziehungsberechtigten vorzeitig aufgenommen werden, wenn kein Sprachförderbedarf besteht."
+              "text": "Kinder, die zwischen dem 1. Oktober und dem 31. März des folgenden Kalenderjahres sechs Jahre alt werden, können auf Antrag der Erziehungsberechtigten vorzeitig aufgenommen werden, wenn kein Sprachförderbedarf besteht. Mit der Aufnahme beginnt die Schulpflicht."
             }
           },
           {
             "@type": "Question",
-            "name": "Ist das Ergebnis zur Einschulung in Berlin verbindlich?",
+            "name": "Wann muss ich mein Kind in Berlin an der Grundschule anmelden?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Nein. Der Einschulungsrechner und diese Informationsseite dienen der Orientierung. Verbindliche Informationen erhältst du bei der zuständigen Grundschule oder Schulbehörde in Berlin."
+              "text": "Die Anmeldung erfolgt in Berlin in der Regel an der zuständigen Grundschule. In Berlin finden die Anmeldungen für das folgende Schuljahr meist im Herbst des Vorjahres statt. Die genauen Termine veröffentlicht die zuständige Grundschule, der Bezirk oder die Berliner Senatsverwaltung."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Welche Quelle ist für die Einschulung in Berlin verbindlich?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Diese Seite dient der Orientierung. Verbindliche Informationen erhältst du bei der zuständigen Grundschule, dem Schulamt oder der Berliner Senatsverwaltung für Bildung, Jugend und Familie."
             }
           }
         ]
@@ -51,47 +75,101 @@ const pageDescription =
 
   <body>
     <main class="state-page">
-      <a class="back-link" href="/">← Zum Einschulungsrechner</a>
+      <a class="back-link" href="/">← Zur Startseite</a>
 
       <article class="state-card">
         <p class="state-kicker">Berlin</p>
 
         <h1>
           Einschulung in Berlin:<br />
-          Stichtag und Schuljahr
+          Schulstart, Stichtag und Schuljahr
         </h1>
 
         <p class="lead">
-          In Berlin gilt für die Einschulung grundsätzlich der Stichtag
-          30. September. Kinder, die bis zu diesem Datum sechs Jahre alt werden,
-          werden mit Beginn des Schuljahres am 1. August schulpflichtig.
+          Wann kommt mein Kind in Berlin in die Schule? Der Einschulungsrechner
+          zeigt dir anhand des Geburtsdatums das voraussichtliche Schuljahr. In
+          Berlin gilt der Stichtag 30. September. Die Einschulungsfeier 2026 findet
+          in der Regel am Samstag, dem 29. August 2026, statt; der reguläre
+          Unterricht beginnt voraussichtlich am Montag, dem 31. August 2026.
         </p>
 
+        <StateEnrollmentCalculator
+          stateName="Berlin"
+          stateSlug="berlin"
+          calculatorKicker="Berlin-Rechner"
+          resultKicker="Berlin-Ergebnis"
+          headline="Einschulung in Berlin berechnen"
+          intro="Gib das Geburtsdatum deines Kindes ein. Berlin ist hier bereits vorausgewählt. Wenn du von der Startseite kommst, übernehmen wir das Geburtsdatum automatisch aus dem Link."
+        />
+
         <div class="quick-facts" aria-label="Kurzüberblick Einschulung Berlin">
+          <div class="fact-card fact-card-date">
+            <span>Einschulungsfeier</span>
+            <strong>Samstag, 29.08.2026</strong>
+          </div>
+
+          <div class="fact-card fact-card-date">
+            <span>Erster Schultag</span>
+            <strong>Montag, 31.08.2026</strong>
+          </div>
+
           <div class="fact-card">
             <span>Stichtag</span>
             <strong>30. September</strong>
           </div>
 
           <div class="fact-card">
-            <span>Schulpflicht</span>
-            <strong>ab 1. August</strong>
-          </div>
-
-          <div class="fact-card">
-            <span>Sonderfall</span>
-            <strong>Antrag möglich</strong>
+            <span>Sonderregel</span>
+            <strong>Kann-Kind</strong>
           </div>
         </div>
 
-        <section>
-          <h2>Wann ist ein Kind in Berlin schulpflichtig?</h2>
+        <section class="seo-explanation-box">
+          <h2>Wie funktioniert der Einschulungsrechner für Berlin?</h2>
 
           <p>
-            Ein Kind wird in Berlin mit Beginn eines Schuljahres schulpflichtig,
-            wenn es das sechste Lebensjahr bereits vollendet hat oder bis zum
-            folgenden 30. September vollenden wird. Das Schuljahr beginnt in
-            Berlin grundsätzlich am 1. August.
+            Der Einschulungsrechner prüft das Geburtsdatum deines Kindes und
+            vergleicht es mit den Einschulungsregeln in Berlin. Entscheidend sind
+            vor allem der Stichtag 30. September und die Berliner Kann-Kind-Regelung
+            für Kinder, die zwischen dem 1. Oktober und dem 31. März des folgenden
+            Kalenderjahres sechs Jahre alt werden.
+          </p>
+
+          <p>
+            Beispielhaft zeigt der Rechner: Wird ein Kind am 15. September 2020
+            geboren, wird es am 15. September 2026 sechs Jahre alt. Da dieses
+            Datum vor dem Stichtag 30. September liegt, ist das Kind in Berlin
+            regulär schulpflichtig und voraussichtlich für das Schuljahr 2026/2027
+            vorgesehen.
+          </p>
+
+          <p>
+            Die wichtigsten Termine zur Einschulungsfeier und zum ersten Schultag
+            findest du im Terminblock oben. Den konkreten Ablauf legt die zuständige
+            Grundschule fest.
+          </p>
+        </section>
+
+        <section>
+          <h2>Wann ist die Einschulung in Berlin 2026?</h2>
+
+          <p>
+            In Berlin findet die Einschulungsfeier 2026 in der Regel am Samstag,
+            dem 29. August 2026, statt. Der reguläre Unterricht für
+            Schulanfängerinnen und Schulanfänger beginnt voraussichtlich am Montag,
+            dem 31. August 2026. Den konkreten Ablauf legt die zuständige
+            Grundschule fest.
+          </p>
+        </section>
+
+        <section>
+          <h2>Welcher Stichtag gilt für die Einschulung in Berlin?</h2>
+
+          <p>
+            In Berlin werden mit Beginn eines Schuljahres am 1. August alle Kinder
+            schulpflichtig, die das sechste Lebensjahr bereits vollendet haben oder
+            bis zum folgenden 30. September vollenden werden. Für die reguläre
+            Einschulung ist daher der 30. September die zentrale Grenze.
           </p>
         </section>
 
@@ -99,10 +177,11 @@ const pageDescription =
           <h2>Kann mein Kind früher eingeschult werden?</h2>
 
           <p>
-            Eine vorzeitige Einschulung kann auf Antrag der Erziehungsberechtigten
-            möglich sein. Das betrifft Kinder, die zwischen dem 1. Oktober und
-            dem 31. März des folgenden Kalenderjahres sechs Jahre alt werden.
-            Voraussetzung ist, dass kein Sprachförderbedarf besteht.
+            Kinder, die zwischen dem 1. Oktober und dem 31. März des folgenden
+            Kalenderjahres sechs Jahre alt werden, können in Berlin auf Antrag der
+            Erziehungsberechtigten vorzeitig aufgenommen werden. Voraussetzung ist,
+            dass kein Sprachförderbedarf besteht. Mit der Aufnahme in die Schule
+            beginnt die Schulpflicht.
           </p>
         </section>
 
@@ -112,8 +191,9 @@ const pageDescription =
           <p>
             Die Anmeldung erfolgt in Berlin in der Regel an der zuständigen
             Grundschule. Für schulpflichtige Kinder ist die Anmeldung verpflichtend.
-            Die genauen Anmeldezeiträume werden von der Berliner Senatsverwaltung
-            beziehungsweise den zuständigen Stellen veröffentlicht.
+            In Berlin finden die Anmeldungen für das folgende Schuljahr meist im
+            Herbst des Vorjahres statt. Die genauen Termine veröffentlicht die
+            zuständige Grundschule, der Bezirk oder die Berliner Senatsverwaltung.
           </p>
         </section>
 
@@ -121,23 +201,11 @@ const pageDescription =
           <h2>Beispiel: Geburtsdatum im September</h2>
 
           <p>
-            Wird ein Kind am 15. September 2020 geboren, wird es am 15. September
-            2026 sechs Jahre alt. Da dieses Datum vor dem Stichtag 30. September
-            liegt, wird das Kind in Berlin voraussichtlich im Schuljahr 2026/2027
-            eingeschult.
+            Beispielhaft zeigt der Rechner: Wird ein Kind am 15. September 2020
+            geboren, wird es am 15. September 2026 sechs Jahre alt. Da dieses
+            Datum vor dem Stichtag 30. September liegt, wird das Kind in Berlin
+            voraussichtlich im Schuljahr 2026/2027 regulär eingeschult.
           </p>
-        </section>
-
-        <section>
-          <h2>Einschulung Berlin berechnen</h2>
-
-          <p>
-            Am einfachsten prüfst du das voraussichtliche Schuljahr mit dem
-            Einschulungsrechner. Gib dort das Geburtsdatum deines Kindes ein und
-            wähle als Bundesland Berlin aus.
-          </p>
-
-          <a class="cta-link" href="/">Jetzt Einschulung berechnen</a>
         </section>
 
         <section>
@@ -145,27 +213,61 @@ const pageDescription =
 
           <div class="faq-list">
             <article class="faq-item">
-              <h3>Welcher Einschulungsstichtag gilt in Berlin?</h3>
+              <h3>Wann kommt mein Kind in Berlin in die Schule?</h3>
               <p>
-                In Berlin gilt grundsätzlich der 30. September als Stichtag für
-                die Einschulung.
+                Das hängt vom Geburtsdatum deines Kindes ab. In Berlin werden mit
+                Beginn eines Schuljahres am 1. August alle Kinder schulpflichtig,
+                die das sechste Lebensjahr bereits vollendet haben oder bis zum
+                folgenden 30. September vollenden werden.
               </p>
             </article>
 
             <article class="faq-item">
-              <h3>Wann beginnt die Schulpflicht in Berlin?</h3>
+              <h3>Wann ist die Einschulung in Berlin 2026?</h3>
               <p>
-                Die Schulpflicht beginnt in Berlin mit Beginn des Schuljahres am
-                1. August, wenn das Kind die Altersvoraussetzungen erfüllt.
+                In Berlin findet die Einschulungsfeier 2026 in der Regel am
+                Samstag, dem 29. August 2026, statt. Der reguläre Unterricht für
+                Schulanfängerinnen und Schulanfänger beginnt voraussichtlich am
+                Montag, dem 31. August 2026.
               </p>
             </article>
 
             <article class="faq-item">
-              <h3>Ist das Ergebnis verbindlich?</h3>
+              <h3>Welcher Stichtag gilt für die Einschulung in Berlin?</h3>
               <p>
-                Nein. Der Rechner und diese Seite dienen der Orientierung.
-                Verbindliche Informationen erhältst du bei der zuständigen Schule
-                oder Schulbehörde in Berlin.
+                In Berlin gilt für die reguläre Schulpflicht der 30. September.
+                Kinder, die bis zu diesem Datum sechs Jahre alt werden, werden mit
+                Beginn des Schuljahres am 1. August schulpflichtig.
+              </p>
+            </article>
+
+            <article class="faq-item">
+              <h3>Kann mein Kind in Berlin früher eingeschult werden?</h3>
+              <p>
+                Kinder, die zwischen dem 1. Oktober und dem 31. März des folgenden
+                Kalenderjahres sechs Jahre alt werden, können auf Antrag der
+                Erziehungsberechtigten vorzeitig aufgenommen werden, wenn kein
+                Sprachförderbedarf besteht. Mit der Aufnahme beginnt die Schulpflicht.
+              </p>
+            </article>
+
+            <article class="faq-item">
+              <h3>Wann muss ich mein Kind in Berlin an der Grundschule anmelden?</h3>
+              <p>
+                Die Anmeldung erfolgt in Berlin in der Regel an der zuständigen
+                Grundschule. In Berlin finden die Anmeldungen für das folgende
+                Schuljahr meist im Herbst des Vorjahres statt. Die genauen Termine
+                veröffentlicht die zuständige Grundschule, der Bezirk oder die
+                Berliner Senatsverwaltung.
+              </p>
+            </article>
+
+            <article class="faq-item">
+              <h3>Welche Quelle ist für die Einschulung in Berlin verbindlich?</h3>
+              <p>
+                Diese Seite dient der Orientierung. Verbindliche Informationen
+                erhältst du bei der zuständigen Grundschule, dem Schulamt oder der
+                Berliner Senatsverwaltung für Bildung, Jugend und Familie.
               </p>
             </article>
           </div>
@@ -175,19 +277,58 @@ const pageDescription =
           <h2>Quelle und Hinweis</h2>
 
           <p>
-            Grundlage dieser Übersicht sind öffentlich zugängliche Informationen
-            zur Einschulung in Berlin. Bitte prüfe verbindliche Details immer bei
-            der zuständigen Grundschule oder bei der Berliner Senatsverwaltung.
+            Die folgenden offiziellen Quellen bilden die Grundlage dieser Übersicht
+            zur Einschulung in Berlin:
           </p>
 
-          <a
-            class="source-link"
-            href="https://www.berlin.de/sen/bildung/schule/bildungswege/grundschule/anmeldung/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Berlin.de: Anmeldung zum Schulanfang
-          </a>
+          <ul class="source-list" aria-label="Offizielle Quellen zur Einschulung in Berlin">
+            <li>
+              <span>Offizielle Quelle 1</span>
+              <a
+                class="source-link"
+                href="https://www.berlin.de/sen/bildung/schule/bildungswege/grundschule/anmeldung/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Berlin.de: Anmeldung zum Schulanfang
+              </a>
+            </li>
+
+            <li>
+              <span>Offizielle Quelle 2</span>
+              <a
+                class="source-link"
+                href="https://www.berlin.de/ba-steglitz-zehlendorf/politik-und-verwaltung/aemter/gesundheitsamt/kinder-und-jugendgesundheitsdienst/artikel.91465.php"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Berlin.de: Einschulung und Einschulungsuntersuchung
+              </a>
+            </li>
+
+            <li>
+              <span>Offizielle Quelle 3</span>
+              <a
+                class="source-link"
+                href="https://www.schulgesetz-berlin.de/berlin/schulgesetz/teil-iv-schulpflicht/sect-42-beginn-und-dauer-der-allgemeinen-schulpflicht.php"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Schulgesetz Berlin: Beginn und Dauer der allgemeinen Schulpflicht
+              </a>
+            </li>
+          </ul>
+
+          <p class="source-hint">
+            Hinweis: In Berlin werden mit Beginn eines Schuljahres am 1. August
+            alle Kinder schulpflichtig, die das sechste Lebensjahr bereits
+            vollendet haben oder bis zum folgenden 30. September vollenden werden.
+            Kinder, die zwischen dem 1. Oktober und dem 31. März des folgenden
+            Kalenderjahres sechs Jahre alt werden, können auf Antrag vorzeitig
+            aufgenommen werden, wenn kein Sprachförderbedarf besteht. Bitte prüfe
+            verbindliche Details immer bei der zuständigen Grundschule oder
+            Schulbehörde.
+          </p>
 
           <p class="stand">Stand der Informationen: Mai 2026</p>
         </section>
@@ -254,10 +395,10 @@ const pageDescription =
   .state-kicker {
     margin: 0 0 14px;
     color: #816126;
-    font-size: 0.88rem;
-    font-weight: 850;
-    letter-spacing: 0.09em;
-    line-height: 1.25;
+    font-size: clamp(0.9rem, 1vw, 1rem);
+    font-weight: 900;
+    letter-spacing: 0.095em;
+    line-height: 1.2;
     text-transform: uppercase;
   }
 
@@ -267,21 +408,22 @@ const pageDescription =
     color: #172033;
     font-size: clamp(2.25rem, 5vw, 4.05rem);
     font-weight: 950;
-    line-height: 1.01;
-    letter-spacing: -0.06em;
+    line-height: 1.02;
+    letter-spacing: -0.055em;
   }
 
   .lead {
     max-width: 760px;
     margin: 24px 0 0;
     color: #465266;
-    font-size: clamp(1.08rem, 1.7vw, 1.22rem);
-    line-height: 1.65;
+    font-size: clamp(1.08rem, 1.55vw, 1.2rem);
+    font-weight: 500;
+    line-height: 1.64;
   }
 
   .quick-facts {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 14px;
     margin-top: 30px;
   }
@@ -299,19 +441,29 @@ const pageDescription =
 
   .fact-card span {
     color: #816126;
-    font-size: clamp(1.02rem, 1.35vw, 1.22rem);
+    font-size: clamp(0.92rem, 1.1vw, 1.04rem);
     font-weight: 950;
-    letter-spacing: 0.11em;
-    line-height: 1.12;
+    letter-spacing: 0.095em;
+    line-height: 1.16;
     text-transform: uppercase;
   }
 
   .fact-card strong {
     color: #172033;
-    font-size: clamp(1.34rem, 2vw, 1.72rem);
+    font-size: clamp(1.22rem, 1.55vw, 1.46rem);
     font-weight: 950;
     line-height: 1.12;
-    letter-spacing: -0.03em;
+    letter-spacing: -0.035em;
+  }
+
+  .fact-card-date {
+    border-color: rgba(129, 97, 38, 0.16);
+    background: rgba(245, 210, 138, 0.12);
+  }
+
+  .fact-card-date strong {
+    font-size: clamp(1.12rem, 1.36vw, 1.32rem);
+    white-space: normal;
   }
 
   section {
@@ -323,52 +475,36 @@ const pageDescription =
   h2 {
     margin: 0;
     color: #172033;
-    font-size: clamp(1.65rem, 2.6vw, 2.25rem);
-    font-weight: 900;
-    line-height: 1.08;
-    letter-spacing: -0.05em;
+    font-size: clamp(1.58rem, 2.35vw, 2.12rem);
+    font-weight: 950;
+    line-height: 1.1;
+    letter-spacing: -0.045em;
   }
 
   h3 {
     margin: 0;
     color: #172033;
-    font-size: 1.06rem;
+    font-size: clamp(1.06rem, 1.25vw, 1.18rem);
     font-weight: 900;
-    line-height: 1.25;
-    letter-spacing: -0.02em;
+    line-height: 1.24;
+    letter-spacing: -0.025em;
   }
 
   p {
     margin: 14px 0 0;
     color: #465266;
-    font-size: 1.03rem;
-    line-height: 1.7;
+    font-size: clamp(1rem, 1.2vw, 1.08rem);
+    font-weight: 500;
+    line-height: 1.68;
   }
 
   .example-box,
-  .source-note {
+  .source-note,
+  .seo-explanation-box {
     padding: 24px;
     border: 1px solid rgba(129, 97, 38, 0.16);
     border-radius: 22px;
     background: rgba(245, 210, 138, 0.12);
-  }
-
-  .cta-link {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 20px;
-    min-height: 54px;
-    padding: 0 22px;
-    border-radius: 16px;
-    background: #172033;
-    color: #fff;
-    font-weight: 850;
-    text-decoration: none;
-  }
-
-  .cta-link:hover {
-    background: #2a3550;
   }
 
   .faq-list {
@@ -387,33 +523,64 @@ const pageDescription =
   .faq-item p {
     margin-top: 12px;
     color: #465266;
-    font-size: clamp(1.08rem, 1.7vw, 1.22rem);
-    line-height: 1.65;
+    font-size: clamp(1rem, 1.2vw, 1.08rem);
+    font-weight: 500;
+    line-height: 1.66;
+  }
+
+  .source-list {
+    display: grid;
+    gap: 14px;
+    margin: 20px 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .source-list li {
+    display: grid;
+    gap: 5px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid rgba(129, 97, 38, 0.12);
+  }
+
+  .source-list li:last-child {
+    padding-bottom: 0;
+    border-bottom: 0;
+  }
+
+  .source-list li > span {
+    color: #816126;
+    font-size: 0.78rem;
+    font-weight: 950;
+    letter-spacing: 0.095em;
+    line-height: 1.16;
+    text-transform: uppercase;
   }
 
   .source-link {
-    display: inline-flex;
-    width: fit-content;
-    margin-top: 18px;
-    padding: 12px 14px;
-    border: 1px solid rgba(129, 97, 38, 0.18);
-    border-radius: 16px;
-    background: rgba(255, 255, 255, 0.58);
     color: #172033;
-    font-size: 0.96rem;
+    font-size: 1rem;
     font-weight: 850;
-    line-height: 1.35;
-    text-decoration: none;
+    line-height: 1.42;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
   }
 
   .source-link:hover {
-    border-color: rgba(129, 97, 38, 0.32);
-    background: rgba(255, 255, 255, 0.82);
-    text-decoration: underline;
+    color: #816126;
+  }
+
+  .source-hint {
+    margin-top: 18px;
+    color: #465266;
+    font-size: 0.96rem;
+    font-weight: 500;
+    line-height: 1.58;
   }
 
   .stand {
-    display: inline-flex;
+    display: flex;
     width: fit-content;
     margin-top: 16px;
     padding: 8px 12px;
@@ -471,35 +638,35 @@ const pageDescription =
       line-height: 1.14;
     }
 
+    .fact-card-date strong {
+      white-space: normal;
+    }
+
     section {
       margin-top: 30px;
       padding-top: 28px;
     }
 
     h2 {
-      font-size: 1.55rem;
-      line-height: 1.12;
+      font-size: 1.62rem;
+      line-height: 1.1;
     }
 
     p {
-      font-size: 0.96rem;
+      font-size: 1rem;
       line-height: 1.62;
     }
 
     .faq-item p {
-      font-size: 1.02rem;
+      font-size: 1rem;
       line-height: 1.62;
     }
 
     .example-box,
-    .source-note {
+    .source-note,
+    .seo-explanation-box {
       padding: 20px;
       border-radius: 20px;
-    }
-
-    .cta-link,
-    .source-link {
-      width: 100%;
     }
   }
 
