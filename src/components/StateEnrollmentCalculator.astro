@@ -467,6 +467,53 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
     };
   }
 
+  function calculateNiedersachsenEnrollment(birthdateValue) {
+    const birthdate = new Date(`${birthdateValue}T12:00:00`);
+    const birthYear = birthdate.getFullYear();
+    const sixthBirthdayYear = birthYear + 6;
+    const month = birthdate.getMonth() + 1;
+    const day = birthdate.getDate();
+
+    let schoolStartYear = sixthBirthdayYear;
+    let statusLabel = "Regulär schulpflichtig";
+    let statusTone = "regular";
+    let resultHeadline =
+      "Dein Kind wird in Niedersachsen voraussichtlich im Schuljahr 2026/2027 regulär eingeschult.";
+    let explanation =
+      "Dein Kind wird in Niedersachsen regulär schulpflichtig, weil es bis zum 1. Oktober 2026 sechs Jahre alt wird und damit für das Schuljahr 2026/2027 schulpflichtig ist.";
+    let nextStepTitle = "Nächster sinnvoller Schritt";
+    let nextStepText =
+      "Informiere dich frühzeitig bei der zuständigen Grundschule über Anmeldung, Unterlagen, Sprachstandsfeststellung und konkrete Termine.";
+
+    const afterOctoberFirst = month > 10 || (month === 10 && day > 1);
+
+    if (afterOctoberFirst) {
+      schoolStartYear = sixthBirthdayYear + 1;
+      statusLabel = "Voraussichtlich im Folgejahr";
+      statusTone = "following";
+      resultHeadline = "Dein Kind wird in Niedersachsen voraussichtlich ein Jahr später eingeschult.";
+      explanation =
+        "Dein Kind wird nach dem 30. September sechs Jahre alt. Daher ist voraussichtlich das folgende Schuljahr relevant. Eine vorzeitige Einschulung kann auf Antrag der Eltern geprüft werden.";
+      nextStepTitle = "Zur Orientierung";
+      nextStepText =
+        "Sprich mit der zuständigen Grundschule, wenn du eine vorzeitige Einschulung prüfen möchtest.";
+    }
+
+    const schoolYear = `${schoolStartYear}/${schoolStartYear + 1}`;
+    const hasConfirmedDate = schoolYear === "2026/2027";
+
+    return {
+      schoolYear,
+      statusLabel,
+      statusTone,
+      resultHeadline,
+      explanation,
+      nextStepTitle,
+      nextStepText,
+      hasConfirmedDate,
+    };
+  }
+
   function renderSachsenResult(birthdateValue) {
     if (!resultBox || !birthdateValue) return;
 
@@ -482,6 +529,10 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
 
     if (normalizedSlug === "nordrhein-westfalen") {
       result = calculateNordrheinWestfalenEnrollment(birthdateValue);
+    }
+
+    if (normalizedSlug === "niedersachsen") {
+      result = calculateNiedersachsenEnrollment(birthdateValue);
     }
 
     let dateDetails = `
@@ -539,9 +590,7 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
     let displayedHeadline = result.resultHeadline;
 
     if (result.statusTone === "following") {
-      const enrollmentYear = result.schoolYear.split("/")[0];
-
-      displayedHeadline = `Dein Kind wird in ${stateName} voraussichtlich<br class="regular-mobile-result-break" /> ${enrollmentYear} eingeschult.`;
+      displayedHeadline = `Dein Kind wird in ${stateName} voraussichtlich im Schuljahr <span class="result-date-nowrap">${result.schoolYear}</span> eingeschult.`;
     }
 
     if (result.hasConfirmedDate && normalizedSlug === "bayern") {
@@ -563,6 +612,15 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
         "Dein Kind wird in Baden-Württemberg voraussichtlich im Schuljahr <span class=\"result-date-nowrap\">2026/2027</span> regulär eingeschult.";
     }
 
+    if (
+      result.hasConfirmedDate &&
+      normalizedSlug === "niedersachsen" &&
+      result.statusTone === "regular"
+    ) {
+      displayedHeadline =
+        "Dein Kind wird in Niedersachsen voraussichtlich im Schuljahr <span class=\"result-date-nowrap\">2026/2027</span> regulär eingeschult.";
+    }
+
     if (result.hasConfirmedDate && normalizedSlug === "baden-wuerttemberg") {
       dateDetails = `
         <div class="state-result-grid state-result-grid-priority" aria-label="Einschulungstermin ${stateName}">
@@ -581,6 +639,28 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
           als allgemeiner erster Schultag. Eine Einschulung kann je nach Schule
           bereits am Samstag davor stattfinden; der konkrete Termin ist
           schulabhängig.
+        </p>
+      `;
+    }
+
+    if (result.hasConfirmedDate && normalizedSlug === "niedersachsen") {
+      dateDetails = `
+        <div class="state-result-grid state-result-grid-priority" aria-label="Einschulungstermin ${stateName}">
+          <div class="state-result-card state-result-card-wide">
+            <span>Erster Schultag</span>
+            <strong>Donnerstag, 13.08.2026</strong>
+          </div>
+          <div class="state-result-card state-result-card-wide">
+            <span>Einschulung</span>
+            <strong>Samstag, 15.08.2026</strong>
+          </div>
+        </div>
+        <p class="state-calculator-note">
+          Für ${stateName} enden die Sommerferien 2026 am 12. August.
+          Daraus ergibt sich voraussichtlich Donnerstag, der 13. August 2026,
+          als allgemeiner erster Schultag. Die Einschulung erfolgt am Sonnabend
+          nach dem ersten Schultag, also voraussichtlich am 15. August 2026;
+          der konkrete Termin ist schulabhängig.
         </p>
       `;
     }
