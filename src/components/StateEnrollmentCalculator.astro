@@ -432,7 +432,7 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
     let statusTone = "regular";
     let resultHeadline = "Dein Kind wird voraussichtlich<br class=\"regular-mobile-result-break\" /> regulär eingeschult.";
     let explanation =
-      "Dein Kind wird in Nordrhein-Westfalen regulär schulpflichtig, weil es bis zum Beginn des 30. September sechs Jahre alt wird.";
+      "Dein Kind wird in Nordrhein-Westfalen regulär schulpflichtig, weil es bis einschließlich 30. September sechs Jahre alt wird und damit ab dem 1. August desselben Jahres schulpflichtig ist.";
     let nextStepTitle = "Nächster sinnvoller Schritt";
     let nextStepText =
       "Informiere dich frühzeitig bei der zuständigen Grundschule über Anmeldung, Unterlagen und konkrete Termine.";
@@ -548,6 +548,11 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
         "Dein Kind wird in Bayern voraussichtlich am Mittwoch,<br class=\"result-mobile-date-break\" /> <span class=\"result-date-nowrap\">16. September 2026</span> eingeschult.";
     }
 
+    if (result.hasConfirmedDate && normalizedSlug === "nordrhein-westfalen") {
+      displayedHeadline =
+        "Dein Kind wird in Nordrhein-Westfalen voraussichtlich<br class=\"regular-mobile-result-break\" /> im Schuljahr <span class=\"result-date-nowrap\">2026/2027</span> eingeschult.";
+    }
+
     if (result.hasConfirmedDate && normalizedSlug === "baden-wuerttemberg") {
       dateDetails = `
         <div class="state-result-grid" aria-label="Einschulungstermin ${stateName}">
@@ -575,25 +580,22 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
 
     if (result.hasConfirmedDate && normalizedSlug === "nordrhein-westfalen") {
       dateDetails = `
-        <div class="state-result-grid" aria-label="Einschulungstermin ${stateName}">
-          <div class="state-result-card">
+        <div class="state-result-grid state-result-grid-priority" aria-label="Einschulungstermin ${stateName}">
+          <div class="state-result-card state-result-card-wide">
             <span>Erster Schultag</span>
-            <strong>Mi, 02.09.2026</strong>
+            <strong>Mittwoch, 02.09.2026</strong>
           </div>
-          <div class="state-result-card">
-            <span>Mögliche Einschulung</span>
-            <strong>schulabhängig</strong>
-          </div>
-          <div class="state-result-card">
-            <span>Terminstatus</span>
-            <strong>schulabhängig</strong>
+          <div class="state-result-card state-result-card-wide">
+            <span>Späteste Einschulung</span>
+            <strong>Donnerstag, 03.09.2026</strong>
           </div>
         </div>
         <p class="state-calculator-note">
           Für ${stateName} enden die Sommerferien 2026 am 1. September.
           Daraus ergibt sich voraussichtlich Mittwoch, der 2. September 2026,
-          als erster Schultag. Eine mögliche Einschulung kann je nach Schule
-          organisatorisch abweichen.
+          als allgemeiner erster Schultag. Die Einschulung findet spätestens am
+          zweiten Schultag nach den Sommerferien statt; der konkrete Termin ist
+          schulabhängig.
         </p>
       `;
     }
@@ -1081,17 +1083,19 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
   }
 
   :global(.state-result-card-wide) {
-    min-height: 104px;
-    padding: 22px 26px;
+    display: grid;
+    align-content: center;
+    min-height: 96px;
+    padding: 18px 24px;
     border-color: rgba(129, 97, 38, 0.18);
     background: rgba(245, 210, 138, 0.13);
   }
 
   :global(.state-result-card-wide strong) {
-    font-size: clamp(1.34rem, 2.05vw, 1.72rem);
+    font-size: clamp(1.28rem, 1.85vw, 1.62rem);
     line-height: 1.08;
     letter-spacing: -0.045em;
-    white-space: nowrap;
+    white-space: normal;
   }
 
   :global(.state-calculator-note) {
@@ -1258,6 +1262,7 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
     }
 
     :global(.state-result-card-wide) {
+      min-height: auto;
       padding: 16px;
       background: rgba(245, 210, 138, 0.13);
     }
