@@ -387,7 +387,7 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
     let statusTone = "regular";
     let resultHeadline = "Dein Kind wird voraussichtlich<br class=\"regular-mobile-result-break\" /> regulär eingeschult.";
     let explanation =
-      "Dein Kind wird in Baden-Württemberg regulär schulpflichtig, weil es bis zum 30. Juni sechs Jahre alt wird.";
+      "Dein Kind wird in Baden-Württemberg regulär schulpflichtig, weil es bis zum 30. Juni 2026 sechs Jahre alt wird und damit für das Schuljahr 2026/2027 schulpflichtig ist.";
     let nextStepTitle = "Nächster sinnvoller Schritt";
     let nextStepText =
       "Informiere dich frühzeitig bei der zuständigen Grundschule über Anmeldung, Unterlagen und konkrete Termine.";
@@ -395,14 +395,15 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
     const afterJune = month > 6 || (month === 6 && day > 30);
 
     if (afterJune) {
-      statusLabel = "Einschulung durch Anmeldung möglich";
+      statusLabel = "Kann-Kind";
       statusTone = "optional";
-      resultHeadline = "Dein Kind liegt in der Stichtags&shy;flexibilisierung.";
+      resultHeadline =
+        "Dein Kind ist in Baden-Württemberg ein Kann-Kind. Eine Einschulung im Schuljahr 2026/2027 ist durch Anmeldung an der Grundschule möglich.";
       explanation =
-        "Dein Kind wird nach dem 30. Juni sechs Jahre alt. In Baden-Württemberg kann eine frühere Einschulung unter bestimmten Voraussetzungen durch Anmeldung an der zuständigen Grundschule möglich sein.";
+        "Dein Kind wird nach dem 30. Juni 2026 sechs Jahre alt. Es ist daher nicht automatisch regulär schulpflichtig, kann aber über die Stichtagsflexibilisierung für das Schuljahr 2026/2027 angemeldet werden.";
       nextStepTitle = "Wichtig für dich";
       nextStepText =
-        "Sprich rechtzeitig mit der zuständigen Grundschule, wenn du eine frühere Einschulung prüfen oder anmelden möchtest.";
+        "Melde dich frühzeitig bei der zuständigen Grundschule. Dort wird geprüft, ob dein Kind schulbereit ist und für das Schuljahr 2026/2027 eingeschult werden kann.";
     }
 
     const schoolYear = `${schoolStartYear}/${schoolStartYear + 1}`;
@@ -553,27 +554,33 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
         "Dein Kind wird in Nordrhein-Westfalen voraussichtlich im<br class=\"regular-mobile-result-break\" /> Schuljahr <span class=\"result-date-nowrap\">2026/2027</span><br class=\"regular-mobile-result-break\" /> eingeschult.";
     }
 
+    if (
+      result.hasConfirmedDate &&
+      normalizedSlug === "baden-wuerttemberg" &&
+      result.statusTone === "regular"
+    ) {
+      displayedHeadline =
+        "Dein Kind wird in Baden-Württemberg voraussichtlich im Schuljahr <span class=\"result-date-nowrap\">2026/2027</span> regulär eingeschult.";
+    }
+
     if (result.hasConfirmedDate && normalizedSlug === "baden-wuerttemberg") {
       dateDetails = `
-        <div class="state-result-grid" aria-label="Einschulungstermin ${stateName}">
-          <div class="state-result-card">
+        <div class="state-result-grid state-result-grid-priority" aria-label="Einschulungstermin ${stateName}">
+          <div class="state-result-card state-result-card-wide">
+            <span>Einschulung schulabhängig</span>
+            <strong>Samstag, 12.09.2026</strong>
+          </div>
+          <div class="state-result-card state-result-card-wide">
             <span>Erster Schultag</span>
-            <strong>Mo, 14.09.2026</strong>
-          </div>
-          <div class="state-result-card">
-            <span>Mögliche Einschulung</span>
-            <strong>Sa, 12.09.2026</strong>
-          </div>
-          <div class="state-result-card">
-            <span>Terminstatus</span>
-            <strong>schulabhängig</strong>
+            <strong>Montag, 14.09.2026</strong>
           </div>
         </div>
         <p class="state-calculator-note">
           Für ${stateName} enden die Sommerferien 2026 offiziell am 12. September.
           Daraus ergibt sich voraussichtlich Montag, der 14. September 2026,
-          als erster Schultag. Eine mögliche Einschulung kann bereits am Samstag
-          davor stattfinden; der konkrete Termin ist jedoch schulabhängig.
+          als allgemeiner erster Schultag. Eine Einschulung kann je nach Schule
+          bereits am Samstag davor stattfinden; der konkrete Termin ist
+          schulabhängig.
         </p>
       `;
     }

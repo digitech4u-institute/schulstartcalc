@@ -2,10 +2,10 @@
 import StateEnrollmentCalculator from "../components/StateEnrollmentCalculator.astro";
 
 const pageTitle =
-  "Einschulung Baden-Württemberg: Stichtag, Schuljahr und Regeln";
+  "Einschulung Baden-Württemberg 2026: Schulstart, Stichtag und Schuljahr";
 
 const pageDescription =
-  "Wann kommt mein Kind in Baden-Württemberg in die Schule? Erfahre alles zu Einschulungsstichtag, Stichtagsflexibilisierung und voraussichtlichem Schuljahr.";
+  "Wann kommt mein Kind in Baden-Württemberg in die Schule? Erfahre alles zu Schulstart, möglicher Einschulung, Stichtag 30. Juni, Stichtagsflexibilisierung und Schuljahr.";
 ---
 
 <html lang="de">
@@ -22,10 +22,26 @@ const pageDescription =
         "mainEntity": [
           {
             "@type": "Question",
-            "name": "Welcher Einschulungsstichtag gilt in Baden-Württemberg?",
+            "name": "Wann kommt mein Kind in Baden-Württemberg in die Schule?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "In Baden-Württemberg gilt grundsätzlich der 30. Juni als Einschulungsstichtag. Kinder, die bis zu diesem Datum sechs Jahre alt werden, werden zum entsprechenden Schuljahr schulpflichtig."
+              "text": "Das hängt vom Geburtsdatum deines Kindes ab. In Baden-Württemberg gilt der 30. Juni als Stichtag. Kinder, die bis zu diesem Datum sechs Jahre alt werden, sind in der Regel mit Beginn des neuen Schuljahres schulpflichtig."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Wann ist der erste Schultag in Baden-Württemberg 2026?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Die Sommerferien in Baden-Württemberg enden 2026 am 12. September. Daraus ergibt sich voraussichtlich Montag, der 14. September 2026, als allgemeiner erster Schultag nach den Sommerferien."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Wann ist die Einschulung in Baden-Württemberg 2026?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Die konkrete Einschulung legt die zuständige Grundschule fest. Als Orientierung kann in Baden-Württemberg 2026 Samstag, der 12. September 2026, relevant sein; der Termin ist jedoch schulabhängig."
             }
           },
           {
@@ -33,15 +49,23 @@ const pageDescription =
             "name": "Was bedeutet Stichtagsflexibilisierung in Baden-Württemberg?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Kinder, die nach dem Einschulungsstichtag geboren sind, können unter bestimmten Voraussetzungen von den Eltern an der Grundschule angemeldet werden und dadurch schulpflichtig werden."
+              "text": "Eltern können Kinder, die nach dem Stichtag geboren sind und bis zum 30. Juni des folgenden Kalenderjahres sechs Jahre alt werden, an der Grundschule anmelden; damit erhalten sie den Status eines schulpflichtigen Kindes. Die konkrete Einschulung sollte mit der zuständigen Grundschule abgestimmt werden."
             }
           },
           {
             "@type": "Question",
-            "name": "Ist das Ergebnis zur Einschulung in Baden-Württemberg verbindlich?",
+            "name": "Kann mein Kind in Baden-Württemberg früher eingeschult werden?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Nein. Der Einschulungsrechner und diese Informationsseite dienen der Orientierung. Verbindliche Informationen erhältst du bei der zuständigen Grundschule oder Schulbehörde in Baden-Württemberg."
+              "text": "Eine frühere Einschulung kann möglich sein, wenn das Kind nach dem Stichtag geboren ist und die Voraussetzungen für den Schulbesuch erfüllt. Voraussetzung ist die Schulbereitschaft des Kindes, die von der Schulleitung festgestellt wird. Die Entscheidung sollte immer mit der zuständigen Grundschule abgestimmt werden."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Welche Quelle ist für die Einschulung in Baden-Württemberg verbindlich?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Diese Seite dient der Orientierung. Verbindliche Informationen erhältst du bei der zuständigen Grundschule, der Schulbehörde oder beim Ministerium für Kultus, Jugend und Sport Baden-Württemberg."
             }
           }
         ]
@@ -59,13 +83,16 @@ const pageDescription =
         <h1>
           Einschulung in<br />
           Baden-Württemberg:<br />
-          Stichtag und Schuljahr
+          Schulstart, Stichtag und Schuljahr
         </h1>
 
         <p class="lead">
-          In Baden-Württemberg gilt für die Einschulung grundsätzlich der Stichtag
-          30. Juni. Kinder, die bis zu diesem Datum sechs Jahre alt werden, werden
-          zum entsprechenden Schuljahr schulpflichtig.
+          Wann kommt mein Kind in Baden-Württemberg in die Schule? Der
+          Einschulungsrechner zeigt dir anhand des Geburtsdatums das
+          voraussichtliche Schuljahr. In Baden-Württemberg gilt der Stichtag
+          30. Juni. Die Sommerferien enden 2026 am 12. September; daraus ergibt
+          sich voraussichtlich Montag, der 14. September 2026, als allgemeiner
+          erster Schultag.
         </p>
 
         <StateEnrollmentCalculator
@@ -78,45 +105,85 @@ const pageDescription =
         />
 
         <div class="quick-facts" aria-label="Kurzüberblick Einschulung Baden-Württemberg">
+          <div class="fact-card fact-card-date">
+            <span>Orientierungswert Einschulung</span>
+            <strong>Samstag, 12.09.2026</strong>
+          </div>
+
+          <div class="fact-card fact-card-date">
+            <span>Erster Schultag</span>
+            <strong>Montag, 14.09.2026</strong>
+          </div>
+
           <div class="fact-card">
             <span>Stichtag</span>
             <strong>30. Juni</strong>
           </div>
 
-          <div class="fact-card">
+          <div class="fact-card fact-card-no-wrap">
             <span>Sonderregel</span>
-            <strong>
-              Stichtags<span class="desktop-break">-<br /></span>flexibilisierung
-            </strong>
-          </div>
-
-          <div class="fact-card">
-            <span>Wichtig</span>
-            <strong>
-              Anmeldung über<br class="desktop-break" />
-              Grundschule
-            </strong>
+            <strong>Stichtagsflexibilisierung</strong>
           </div>
         </div>
 
-        <section>
-          <h2>Wann ist ein Kind in Baden-Württemberg schulpflichtig?</h2>
+        <section class="seo-explanation-box">
+          <h2>Wie funktioniert der Einschulungsrechner für Baden-Württemberg?</h2>
 
           <p>
-            Ein Kind wird in Baden-Württemberg regulär schulpflichtig, wenn es bis
-            zum 30. Juni des jeweiligen Kalenderjahres sechs Jahre alt wird. Die
-            Schulpflicht beginnt dann mit dem Start des neuen Schuljahres.
+            Der Einschulungsrechner prüft das Geburtsdatum deines Kindes und
+            vergleicht es mit den Einschulungsregeln in Baden-Württemberg.
+            Entscheidend sind vor allem der Stichtag 30. Juni und die Möglichkeit
+            der Stichtagsflexibilisierung.
+          </p>
+
+          <p>
+            Beispielhaft zeigt der Rechner: Wird ein Kind am 15. Juni 2020
+            geboren, wird es am 15. Juni 2026 sechs Jahre alt. Da dieses Datum
+            vor dem Stichtag 30. Juni liegt, ist das Kind in Baden-Württemberg
+            regulär schulpflichtig und voraussichtlich für das Schuljahr
+            2026/2027 vorgesehen.
+          </p>
+
+          <p>
+            Die wichtigsten Termine zum allgemeinen Schulstart und zur Einschulung
+            findest du im Terminblock oben. Der konkrete Einschulungstermin wird
+            von der zuständigen Grundschule festgelegt und kann organisatorisch
+            abweichen.
           </p>
         </section>
 
         <section>
-          <h2>Was bedeutet Stichtagsflexibilisierung?</h2>
+          <h2>Wann ist die Einschulung in Baden-Württemberg 2026?</h2>
 
           <p>
-            Wird ein Kind erst nach dem 30. Juni sechs Jahre alt, kann eine frühere
-            Einschulung unter bestimmten Voraussetzungen trotzdem möglich sein. In
-            Baden-Württemberg können Eltern die Schulpflicht durch die Anmeldung an
-            der zuständigen Grundschule auslösen.
+            Die konkrete Einschulung legt die zuständige Grundschule fest. Als
+            Orientierung kann in Baden-Württemberg 2026 Samstag, der 12. September
+            2026, relevant sein; der Termin ist jedoch schulabhängig. Der allgemeine
+            erste Schultag nach den Sommerferien ist voraussichtlich Montag, der
+            14. September 2026.
+          </p>
+        </section>
+
+        <section>
+          <h2>Welcher Stichtag gilt für die Einschulung in Baden-Württemberg?</h2>
+
+          <p>
+            In Baden-Württemberg gilt der 30. Juni als Stichtag für die
+            Einschulung. Kinder, die bis zu diesem Datum sechs Jahre alt werden,
+            sind in der Regel mit Beginn des neuen Schuljahres regulär
+            schulpflichtig.
+          </p>
+        </section>
+
+        <section>
+          <h2>Was bedeutet Stichtagsflexibilisierung in Baden-Württemberg?</h2>
+
+          <p>
+            Wird ein Kind erst nach dem 30. Juni sechs Jahre alt, greift in
+            Baden-Württemberg die Stichtagsflexibilisierung. Eltern können Kinder,
+            die nach dem Stichtag geboren sind und bis zum 30. Juni des folgenden
+            Kalenderjahres sechs Jahre alt werden, an der Grundschule anmelden;
+            damit erhalten sie den Status eines schulpflichtigen Kindes.
           </p>
         </section>
 
@@ -126,8 +193,9 @@ const pageDescription =
           <p>
             Eine frühere Einschulung kann möglich sein, wenn das Kind nach dem
             Stichtag geboren ist und die Voraussetzungen für den Schulbesuch erfüllt.
-            Die Entscheidung sollte immer mit der zuständigen Grundschule abgestimmt
-            werden.
+            Voraussetzung ist die Schulbereitschaft des Kindes, die von der
+            Schulleitung festgestellt wird. Die Entscheidung sollte immer mit der
+            zuständigen Grundschule abgestimmt werden.
           </p>
         </section>
 
@@ -135,9 +203,10 @@ const pageDescription =
           <h2>Beispiel: Geburtsdatum im Juni</h2>
 
           <p>
-            Wird ein Kind am 15. Juni 2020 geboren, wird es am 15. Juni 2026 sechs
-            Jahre alt. Da dieses Datum vor dem Stichtag 30. Juni liegt, wird das Kind
-            in Baden-Württemberg voraussichtlich im Schuljahr 2026/2027 eingeschult.
+            Beispielhaft zeigt der Rechner: Wird ein Kind am 15. Juni 2020
+            geboren, wird es am 15. Juni 2026 sechs Jahre alt. Da dieses Datum
+            vor dem Stichtag 30. Juni liegt, wird das Kind in Baden-Württemberg
+            voraussichtlich im Schuljahr 2026/2027 eingeschult.
           </p>
         </section>
 
@@ -146,28 +215,62 @@ const pageDescription =
 
           <div class="faq-list">
             <article class="faq-item">
-              <h3>Welcher Einschulungsstichtag gilt in Baden-Württemberg?</h3>
+              <h3>Wann kommt mein Kind in Baden-Württemberg in die Schule?</h3>
               <p>
-                In Baden-Württemberg gilt grundsätzlich der 30. Juni als Stichtag
-                für die Einschulung.
+                Das hängt vom Geburtsdatum deines Kindes ab. In Baden-Württemberg
+                gilt der 30. Juni als Stichtag. Kinder, die bis zu diesem Datum
+                sechs Jahre alt werden, sind in der Regel mit Beginn des neuen
+                Schuljahres schulpflichtig.
               </p>
             </article>
 
             <article class="faq-item">
-              <h3>Was bedeutet Stichtagsflexibilisierung?</h3>
+              <h3>Wann ist der erste Schultag in Baden-Württemberg 2026?</h3>
               <p>
-                Kinder, die nach dem Stichtag geboren sind, können unter bestimmten
-                Voraussetzungen durch Anmeldung an der zuständigen Grundschule
-                schulpflichtig werden.
+                Die Sommerferien in Baden-Württemberg enden 2026 am 12. September.
+                Daraus ergibt sich voraussichtlich Montag, der 14. September 2026,
+                als allgemeiner erster Schultag nach den Sommerferien.
               </p>
             </article>
 
             <article class="faq-item">
-              <h3>Ist das Ergebnis verbindlich?</h3>
+              <h3>Wann ist die Einschulung in Baden-Württemberg 2026?</h3>
               <p>
-                Nein. Der Rechner und diese Seite dienen der Orientierung.
-                Verbindliche Informationen erhältst du bei der zuständigen Schule
-                oder Schulbehörde in Baden-Württemberg.
+                Die konkrete Einschulung legt die zuständige Grundschule fest. Als
+                Orientierung kann in Baden-Württemberg 2026 Samstag, der
+                12. September 2026, relevant sein; der Termin ist jedoch
+                schulabhängig.
+              </p>
+            </article>
+
+            <article class="faq-item">
+              <h3>Was bedeutet Stichtagsflexibilisierung in Baden-Württemberg?</h3>
+              <p>
+                Eltern können Kinder, die nach dem Stichtag geboren sind und bis
+                zum 30. Juni des folgenden Kalenderjahres sechs Jahre alt werden,
+                an der Grundschule anmelden; damit erhalten sie den Status eines
+                schulpflichtigen Kindes. Die konkrete Einschulung sollte mit der
+                zuständigen Grundschule abgestimmt werden.
+              </p>
+            </article>
+
+            <article class="faq-item">
+              <h3>Kann mein Kind in Baden-Württemberg früher eingeschult werden?</h3>
+              <p>
+                Eine frühere Einschulung kann möglich sein, wenn das Kind nach dem
+                Stichtag geboren ist und die Voraussetzungen für den Schulbesuch
+                erfüllt. Voraussetzung ist die Schulbereitschaft des Kindes, die
+                von der Schulleitung festgestellt wird. Die Entscheidung sollte
+                immer mit der zuständigen Grundschule abgestimmt werden.
+              </p>
+            </article>
+
+            <article class="faq-item">
+              <h3>Welche Quelle ist für die Einschulung in Baden-Württemberg verbindlich?</h3>
+              <p>
+                Diese Seite dient der Orientierung. Verbindliche Informationen
+                erhältst du bei der zuständigen Grundschule, der Schulbehörde oder
+                beim Ministerium für Kultus, Jugend und Sport Baden-Württemberg.
               </p>
             </article>
           </div>
@@ -177,20 +280,55 @@ const pageDescription =
           <h2>Quelle und Hinweis</h2>
 
           <p>
-            Grundlage dieser Übersicht sind öffentlich zugängliche Informationen
-            zur Einschulung in Baden-Württemberg. Bitte prüfe verbindliche Details
-            immer bei der zuständigen Grundschule oder beim Ministerium für Kultus,
-            Jugend und Sport Baden-Württemberg.
+            Die folgenden offiziellen Quellen bilden die Grundlage dieser Übersicht
+            zur Einschulung in Baden-Württemberg:
           </p>
 
-          <a
-            class="source-link"
-            href="https://km.baden-wuerttemberg.de/de/schule/grundschule/einschulungsstichtag"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Kultusministerium Baden-Württemberg: Einschulungsstichtag
-          </a>
+          <ul class="source-list" aria-label="Offizielle Quellen zur Einschulung in Baden-Württemberg">
+            <li>
+              <span>Offizielle Quelle 1</span>
+              <a
+                class="source-link"
+                href="https://km.baden-wuerttemberg.de/de/schule/grundschule/einschulungsstichtag"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Ministerium für Kultus, Jugend und Sport Baden-Württemberg: Einschulungsstichtag
+              </a>
+            </li>
+
+            <li>
+              <span>Offizielle Quelle 2</span>
+              <a
+                class="source-link"
+                href="https://km.baden-wuerttemberg.de/de/service/ferien"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Ministerium für Kultus, Jugend und Sport Baden-Württemberg: Ferien
+              </a>
+            </li>
+
+            <li>
+              <span>Offizielle Quelle 3</span>
+              <a
+                class="source-link"
+                href="https://www.duernau-bc.de/index.php?cHash=59a2a777c307a03530245b56183b21d4&id=90&tx_hwservicebw_hwservicebwverfahrenfe%5Baction%5D=entity&tx_hwservicebw_hwservicebwverfahrenfe%5Bcontroller%5D=VerfahrenFrontend&tx_hwservicebw_hwservicebwverfahrenfe%5Bid%5D=1381&tx_hwservicebw_hwservicebwverfahrenfe%5BmandantenId%5D=1"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Service-BW: Vorzeitige Einschulung beantragen
+              </a>
+            </li>
+          </ul>
+
+          <p class="source-hint">
+            Hinweis: Die Stichtagsflexibilisierung in Baden-Württemberg betrifft
+            Kinder, die nach dem Stichtag geboren sind und bis zum 30. Juni des
+            folgenden Kalenderjahres sechs Jahre alt werden. Bitte prüfe
+            verbindliche Details immer bei der zuständigen Grundschule oder
+            Schulbehörde.
+          </p>
 
           <p class="stand">Stand der Informationen: Mai 2026</p>
         </section>
@@ -285,7 +423,7 @@ const pageDescription =
 
   .quick-facts {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 14px;
     margin-top: 30px;
   }
@@ -312,10 +450,24 @@ const pageDescription =
 
   .fact-card strong {
     color: #172033;
-    font-size: clamp(1.32rem, 1.85vw, 1.68rem);
+    font-size: clamp(1.22rem, 1.55vw, 1.46rem);
     font-weight: 950;
     line-height: 1.12;
     letter-spacing: -0.035em;
+  }
+
+  .fact-card-date {
+    border-color: rgba(129, 97, 38, 0.16);
+    background: rgba(245, 210, 138, 0.12);
+  }
+
+  .fact-card-date strong {
+    font-size: clamp(1.12rem, 1.36vw, 1.32rem);
+    white-space: normal;
+  }
+
+  .fact-card-no-wrap strong {
+    white-space: nowrap;
   }
 
   section {
@@ -351,7 +503,8 @@ const pageDescription =
   }
 
   .example-box,
-  .source-note {
+  .source-note,
+  .seo-explanation-box {
     padding: 24px;
     border: 1px solid rgba(129, 97, 38, 0.16);
     border-radius: 22px;
@@ -379,29 +532,59 @@ const pageDescription =
     line-height: 1.66;
   }
 
+  .source-list {
+    display: grid;
+    gap: 14px;
+    margin: 20px 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .source-list li {
+    display: grid;
+    gap: 5px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid rgba(129, 97, 38, 0.12);
+  }
+
+  .source-list li:last-child {
+    padding-bottom: 0;
+    border-bottom: 0;
+  }
+
+  .source-list li > span {
+    color: #816126;
+    font-size: 0.78rem;
+    font-weight: 950;
+    letter-spacing: 0.095em;
+    line-height: 1.16;
+    text-transform: uppercase;
+  }
+
   .source-link {
-    display: inline-flex;
-    width: fit-content;
-    margin-top: 18px;
-    padding: 12px 14px;
-    border: 1px solid rgba(129, 97, 38, 0.18);
-    border-radius: 16px;
-    background: rgba(255, 255, 255, 0.58);
     color: #172033;
-    font-size: 0.96rem;
+    font-size: 1rem;
     font-weight: 850;
-    line-height: 1.35;
-    text-decoration: none;
+    line-height: 1.42;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
   }
 
   .source-link:hover {
-    border-color: rgba(129, 97, 38, 0.32);
-    background: rgba(255, 255, 255, 0.82);
-    text-decoration: underline;
+    color: #816126;
+  }
+
+  .source-hint {
+    margin-top: 18px;
+    color: #465266;
+    font-size: 0.96rem;
+    font-weight: 500;
+    line-height: 1.58;
   }
 
   .stand {
-    display: inline-flex;
+    display: flex;
     width: fit-content;
     margin-top: 16px;
     padding: 8px 12px;
@@ -413,17 +596,9 @@ const pageDescription =
     line-height: 1.2;
   }
 
-  .desktop-break {
-    display: inline;
-  }
-
   @media (max-width: 720px) {
     .quick-facts {
       grid-template-columns: 1fr;
-    }
-
-    .desktop-break {
-      display: none;
     }
   }
 
@@ -467,6 +642,11 @@ const pageDescription =
       line-height: 1.14;
     }
 
+    .fact-card-date strong,
+    .fact-card-no-wrap strong {
+      white-space: normal;
+    }
+
     section {
       margin-top: 30px;
       padding-top: 28px;
@@ -488,13 +668,10 @@ const pageDescription =
     }
 
     .example-box,
-    .source-note {
+    .source-note,
+    .seo-explanation-box {
       padding: 20px;
       border-radius: 20px;
-    }
-
-    .source-link {
-      width: 100%;
     }
   }
 
