@@ -2,7 +2,7 @@
 
 ---
 const pageTitle =
-  "Einschulung: Stichtag, Schulstart und Vorbereitung einfach erklärt";
+  "Einschulungsrechner Deutschland 2026/2027 – Stichtag & Schuljahr berechnen";
 
 const pageDescription =
   "Alles rund um die Einschulung: Stichtag, Schulpflicht, Bundesländer, Schulanmeldung, Kann-Kind, Zurückstellung und Checkliste für den Schulstart.";
@@ -51,6 +51,14 @@ const pageDescription =
               "@type": "Answer",
               "text": "Nein. Der Einschulungsrechner dient der Orientierung. Verbindliche Informationen erhalten Eltern bei der zuständigen Grundschule, Schulbehörde oder dem jeweiligen Bundesland."
             }
+          },
+          {
+            "@type": "Question",
+            "name": "Ändert sich der Einschulungsstichtag in Brandenburg?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Brandenburg plant, den Einschulungsstichtag vom 30. September auf den 30. Juni zu verlegen. Diese Änderung ist im Koalitionsvertrag festgehalten, aber noch nicht in Kraft. Verbindliche Auskunft erteilt das Ministerium für Bildung, Jugend und Sport Brandenburg."
+            }
           }
         ]
       }
@@ -65,16 +73,19 @@ const pageDescription =
         <p class="guide-kicker">Ratgeber</p>
 
         <h1>
-          Einschulung:<br />
-          <span class="headline-question">Wann kommt mein Kind in die Schule?</span>
+          <span class="headline-question">Wann kommt mein Kind in die Schule?</span><br />
+          Einschulungsrechner für alle 16 Bundesländer
         </h1>
 
         <p class="lead">
-          Die Einschulung ist für Familien ein großer Schritt. Gleichzeitig sind
-          Stichtage, Schulpflicht, Bundesländer-Regeln, Kann-Kind, Zurückstellung
-          und Schulanmeldung oft schwer zu überblicken. Diese Seite gibt dir eine
-          klare Orientierung — vom ersten Rechenergebnis bis zu den nächsten
-          Schritten vor dem Schulstart.
+          Die Einschulung ist für Familien ein großer Schritt. In Deutschland gilt:
+          Ein Kind wird schulpflichtig, wenn es bis zum Einschulungsstichtag seines
+          Bundeslands sechs Jahre alt wird. Die Stichtage unterscheiden sich je
+          nach Bundesland — sie reichen vom 30. Juni bis zum 1. August.
+          Gleichzeitig sind Bundesländer-Regeln, Kann-Kind, Zurückstellung und
+          Schulanmeldung oft schwer zu überblicken. Diese Seite gibt dir eine klare
+          Orientierung — vom ersten Rechenergebnis bis zu den nächsten Schritten
+          vor dem Schulstart.
         </p>
 
         <div class="journey-box" aria-label="Schulstart-Journey">
@@ -180,6 +191,38 @@ const pageDescription =
             <a href="/einschulung-schleswig-holstein/">Schleswig-Holstein</a>
             <a href="/einschulung-thueringen/">Thüringen</a>
           </div>
+
+          <div class="state-rule-notes" aria-label="Wichtige Hinweise zu ausgewählten Bundesländern">
+            <article>
+              <span>Berlin</span>
+              <strong>Stichtag: 30. September</strong>
+              <p>
+                Besonderheit: Kann-Kind: 1. Oktober bis 31. März auf Antrag (kein Sprachförderbedarf)
+              </p>
+            </article>
+
+            <article>
+              <span>Brandenburg</span>
+              <strong>Stichtag: 30. September</strong>
+              <p>
+                Besonderheit: Kann-Kind: 1. Oktober bis 31. Dezember auf Antrag
+              </p>
+            </article>
+
+            <article>
+              <span>Hamburg</span>
+              <strong>Stichtag: 30. Juni</strong>
+              <p>
+                Besonderheit: Schulpflicht für Kinder, die bis zum 30. Juni sechs Jahre alt werden
+              </p>
+            </article>
+          </div>
+
+          <p class="state-rule-hint">
+            Hinweis: In Brandenburg ist politisch eine Verlegung des Stichtags auf
+            den 30. Juni geplant. Solange diese Änderung nicht gesetzlich umgesetzt
+            ist, bleibt für die Orientierung der aktuell geltende Stichtag relevant.
+          </p>
         </section>
 
         <section>
@@ -302,6 +345,16 @@ const pageDescription =
                 Nein. Der Rechner und diese Seite dienen der Orientierung.
                 Verbindliche Informationen erhältst du bei der zuständigen Schule,
                 Schulbehörde oder beim jeweiligen Bundesland.
+              </p>
+            </article>
+
+            <article class="faq-item">
+              <h3>Ändert sich der Einschulungsstichtag in Brandenburg?</h3>
+              <p>
+                Brandenburg plant, den Einschulungsstichtag vom 30. September auf
+                den 30. Juni zu verlegen. Diese Änderung ist im Koalitionsvertrag
+                festgehalten, aber noch nicht in Kraft. Verbindliche Auskunft
+                erteilt das Ministerium für Bildung, Jugend und Sport Brandenburg.
               </p>
             </article>
           </div>
@@ -547,6 +600,57 @@ const pageDescription =
     text-decoration: underline;
   }
 
+  .state-rule-notes {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+    margin-top: 22px;
+  }
+
+  .state-rule-notes article {
+    padding: 18px;
+    border: 1px solid rgba(129, 97, 38, 0.14);
+    border-radius: 18px;
+    background: rgba(245, 210, 138, 0.12);
+  }
+
+  .state-rule-notes span {
+    display: block;
+    color: #816126;
+    font-size: 0.78rem;
+    font-weight: 950;
+    letter-spacing: 0.095em;
+    line-height: 1.16;
+    text-transform: uppercase;
+  }
+
+  .state-rule-notes strong {
+    display: block;
+    margin-top: 8px;
+    color: #172033;
+    font-size: 1.08rem;
+    font-weight: 950;
+    line-height: 1.16;
+    letter-spacing: -0.025em;
+  }
+
+  .state-rule-notes p {
+    margin-top: 10px;
+    color: #465266;
+    font-size: 0.96rem;
+    line-height: 1.58;
+  }
+
+  .state-rule-hint {
+    margin-top: 16px;
+    padding: 14px 16px;
+    border-radius: 16px;
+    background: rgba(70, 82, 102, 0.06);
+    color: #5b6576;
+    font-size: 0.94rem;
+    line-height: 1.56;
+  }
+
   .next-steps {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -596,7 +700,8 @@ const pageDescription =
     }
 
     .journey-box,
-    .next-steps {
+    .next-steps,
+    .state-rule-notes {
       grid-template-columns: 1fr;
     }
 

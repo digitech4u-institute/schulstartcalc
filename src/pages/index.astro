@@ -1,9 +1,9 @@
 ---
 const pageTitle =
-  "Einschulungsrechner Deutschland: Wann kommt mein Kind in die Schule?";
+  "Einschulungsrechner Deutschland 2026/2027 – Stichtag & Schuljahr berechnen";
 
 const pageDescription =
-  "Berechne mit Geburtsdatum und Bundesland das voraussichtliche Einschulungsjahr deines Kindes. Inklusive Stichtag, Schuljahr und Orientierung je Bundesland.";
+  "Berechne das voraussichtliche Schuljahr deines Kindes nach Bundesland. Einschulungsrechner für Deutschland mit Stichtag, Schulpflicht, Kann-Kind-Regeln und Bundesländer-Links.";
 
   const faqSchema = {
 	"@context": "https://schema.org",
@@ -72,6 +72,14 @@ const pageDescription =
 		  "@type": "Answer",
 		  "text": "Nein. Der Rechner dient der Orientierung. Verbindliche Auskünfte erhältst du bei der zuständigen Schule, beim Schulamt oder bei der Bildungsbehörde deines Bundeslands."
 		}
+	  },
+	  {
+		"@type": "Question",
+		"name": "Ändert sich der Einschulungsstichtag in Brandenburg?",
+		"acceptedAnswer": {
+		  "@type": "Answer",
+		  "text": "Brandenburg plant, den Einschulungsstichtag vom 30. September auf den 30. Juni zu verlegen. Diese Änderung ist im Koalitionsvertrag festgehalten, aber noch nicht in Kraft. Verbindliche Auskunft erteilt das Ministerium für Bildung, Jugend und Sport Brandenburg."
+		}
 	  }
 	]
   };
@@ -117,12 +125,18 @@ const webApplicationSchema = {
       <section class="hero">
         <p class="eyebrow">Einschulungsrechner Deutschland 🇩🇪</p>
 
-        <h1>Wann kommt mein Kind in die Schule?</h1>
+        <h1>
+          Wann kommt mein Kind in die Schule?<br />
+          Einschulungsrechner für alle 16 Bundesländer
+        </h1>
 
         <p class="lead">
           Gib Geburtsdatum und Bundesland ein – du erhältst sofort eine verständliche
           Orientierung zum voraussichtlichen Schuljahr, zum Stichtag und zu möglichen
-          Grenzfällen.
+          Grenzfällen. In Deutschland gilt: Ein Kind wird schulpflichtig, wenn es
+          bis zum Einschulungsstichtag seines Bundeslands sechs Jahre alt wird. Die
+          Stichtage unterscheiden sich je nach Bundesland — sie reichen vom 30. Juni
+          bis zum 1. August.
         </p>
 
         <div class="calculator-card">
@@ -347,12 +361,12 @@ const webApplicationSchema = {
 				  <tr>
 					<td><a class="state-table-link" href="/einschulung-berlin/">Berlin</a></td>
 					<td>30. September</td>
-					<td>Regulärer Stichtag</td>
+					<td>Kann-Kind: 1. Oktober bis 31. März auf Antrag (kein Sprachförderbedarf)</td>
 				  </tr>
 				  <tr>
 					<td><a class="state-table-link" href="/einschulung-brandenburg/">Brandenburg</a></td>
-					<td>30. September</td>
-					<td>Regulärer Stichtag</td>
+					<td>30. September *)</td>
+					<td>Kann-Kind: 1. Oktober bis 31. Dezember auf Antrag · Änderung des Stichtags auf 30. Juni geplant, aber noch nicht aktiv</td>
 				  </tr>
 				  <tr>
 					<td><a class="state-table-link" href="/einschulung-bremen/">Bremen</a></td>
@@ -361,8 +375,8 @@ const webApplicationSchema = {
 				  </tr>
 				  <tr>
 					<td><a class="state-table-link" href="/einschulung-hamburg/">Hamburg</a></td>
-					<td>1. Juli</td>
-					<td>Regulärer Stichtag</td>
+					<td>30. Juni</td>
+					<td>Kein Einschulungskorridor — Stichtag ist hart</td>
 				  </tr>
 				  <tr>
             <td><a class="state-table-link" href="/einschulung-hessen/">Hessen</a></td>
@@ -417,6 +431,12 @@ const webApplicationSchema = {
 				</tbody>
 			  </table>
 			</div>
+
+			<p class="state-table-hint">
+			  *) Stand Mai 2026: Brandenburg plant eine Verlegung des Stichtags
+			  auf den 30. Juni. Bis zur gesetzlichen Umsetzung gilt der
+			  30. September.
+			</p>
 		  </div>
 		  <div class="content-block">
 			<p class="content-kicker">Begriffe einfach erklärt</p>
@@ -564,6 +584,16 @@ const webApplicationSchema = {
 				  deines Bundeslands.
 				</p>
 			  </article>
+
+			  <article class="faq-item">
+				<h3>Ändert sich der Einschulungsstichtag in Brandenburg?</h3>
+				<p>
+				  Brandenburg plant, den Einschulungsstichtag vom 30. September auf
+				  den 30. Juni zu verlegen. Diese Änderung ist im Koalitionsvertrag
+				  festgehalten, aber noch nicht in Kraft. Verbindliche Auskunft
+				  erteilt das Ministerium für Bildung, Jugend und Sport Brandenburg.
+				</p>
+			  </article>
 			</div>
 		  </div>
 
@@ -646,13 +676,23 @@ const webApplicationSchema = {
         berlin: {
           name: "Berlin",
           cutoff: "09-30",
-          type: "standard",
+          type: "berlin_optional",
+          specialWindow: {
+            from: "10-01",
+            to: "03-31",
+            label: "Kann-Kind-Regelung",
+          },
           label: "Stichtag 30. September",
         },
         brandenburg: {
           name: "Brandenburg",
           cutoff: "09-30",
-          type: "standard",
+          type: "brandenburg_optional",
+          specialWindow: {
+            from: "10-01",
+            to: "12-31",
+            label: "Kann-Kind-Regelung",
+          },
           label: "Stichtag 30. September",
         },
         bremen: {
@@ -668,9 +708,9 @@ const webApplicationSchema = {
         },
         hamburg: {
           name: "Hamburg",
-          cutoff: "07-01",
+          cutoff: "06-30",
           type: "standard",
-          label: "Stichtag 1. Juli",
+          label: "Stichtag 30. Juni",
         },
         hessen: {
           name: "Hessen",
@@ -833,7 +873,7 @@ const webApplicationSchema = {
             state: stateRule.name,
             cutoff: formatDate(cutoffDate),
             schoolYear: `${nextEnrollmentYear}/${nextEnrollmentYear + 1}`,
-            statusLabel: "Voraussichtlich Folgejahr",
+            statusLabel: "Regulär schulpflichtig",
           },
         };
       }
@@ -883,6 +923,38 @@ const webApplicationSchema = {
               cutoff: formatDate(cutoffDate),
               schoolYear: `${enrollmentYear}/${enrollmentYear + 1}`,
               statusLabel: "Flexibler Einschulungszeitraum",
+            },
+          };
+        }
+
+        if (stateRule.type === "berlin_optional") {
+          return {
+            status: "optional",
+            title: `Dein Kind ist in Berlin ein Kann-Kind.`,
+            shortText: `In Berlin kann für dieses Geburtsdatum eine vorzeitige Einschulung auf Antrag geprüft werden.`,
+            whyText: `Kinder, die zwischen dem 1. Oktober und dem 31. März des folgenden Kalenderjahres sechs Jahre alt werden, können in Berlin auf Antrag vorzeitig eingeschult werden, wenn kein Sprachförderbedarf besteht. Dein Kind wird am ${formatDate(sixthBirthday)} sechs Jahre alt.`,
+            nextStep: `Sprich frühzeitig mit der zuständigen Grundschule, wenn du eine vorzeitige Einschulung beantragen möchtest.`,
+            meta: {
+              state: stateRule.name,
+              cutoff: formatDate(cutoffDate),
+              schoolYear: `${enrollmentYear}/${enrollmentYear + 1}`,
+              statusLabel: "Kann-Kind",
+            },
+          };
+        }
+
+        if (stateRule.type === "brandenburg_optional") {
+          return {
+            status: "optional",
+            title: `Dein Kind ist in Brandenburg ein Kann-Kind.`,
+            shortText: `In Brandenburg kann für dieses Geburtsdatum eine vorzeitige Einschulung auf Antrag geprüft werden.`,
+            whyText: `Kinder, die zwischen dem 1. Oktober und dem 31. Dezember sechs Jahre alt werden, können in Brandenburg auf Antrag der Eltern vorzeitig eingeschult werden. Dein Kind wird am ${formatDate(sixthBirthday)} sechs Jahre alt.`,
+            nextStep: `Sprich frühzeitig mit der zuständigen Grundschule, wenn du eine vorzeitige Einschulung beantragen möchtest.`,
+            meta: {
+              state: stateRule.name,
+              cutoff: formatDate(cutoffDate),
+              schoolYear: `${enrollmentYear}/${enrollmentYear + 1}`,
+              statusLabel: "Kann-Kind",
             },
           };
         }
@@ -1849,6 +1921,16 @@ select {
 
 .state-table tr:last-child td {
   border-bottom: 0;
+}
+
+.state-table-hint {
+  margin-top: 16px;
+  padding: 14px 16px;
+  border-radius: 16px;
+  background: rgba(70, 82, 102, 0.06);
+  color: #5b6576 !important;
+  font-size: 0.94rem !important;
+  line-height: 1.56 !important;
 }
   
 	@media (max-width: 820px) {
