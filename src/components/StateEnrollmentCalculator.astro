@@ -279,9 +279,9 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
     const bySeptember = month < 9 || (month === 9 && day <= 30);
 
     if (afterJune && bySeptember) {
-      statusLabel = "Schulpflicht durch Anmeldung möglich";
+      statusLabel = "Einschulung durch Anmeldung möglich";
       statusTone = "optional";
-      resultHeadline = "Dein Kind liegt im erweiterten Einschulungs&shy;zeitraum.";
+      resultHeadline = `Dein Kind liegt für das Schuljahr ${sixthBirthdayYear}/${sixthBirthdayYear + 1} im erweiterten Einschulungs&shy;zeitraum.`;
       explanation =
         "Dein Kind wird nach dem 30. Juni, aber bis zum 30. September sechs Jahre alt. In Sachsen kann es durch Anmeldung der Eltern ebenfalls als schulpflichtig gelten.";
       nextStepTitle = "Wichtig für dich";
@@ -632,6 +632,58 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
     };
   }
 
+  function calculateHamburgEnrollment(birthdateValue) {
+    const birthdate = new Date(`${birthdateValue}T12:00:00`);
+    const birthYear = birthdate.getFullYear();
+    const sixthBirthdayYear = birthYear + 6;
+    const month = birthdate.getMonth() + 1;
+    const day = birthdate.getDate();
+
+    let schoolStartYear = sixthBirthdayYear;
+    let statusLabel = "Regulär schulpflichtig";
+    let statusTone = "regular";
+    let nextStepTitle = "Nächster sinnvoller Schritt";
+    let nextStepText =
+      "Informiere dich frühzeitig bei der zuständigen Grundschule über Anmeldung, Unterlagen und konkrete Termine.";
+
+    const afterJune = month > 6 || (month === 6 && day > 30);
+
+    if (afterJune) {
+      statusLabel = "Vorzeitige Einschulung auf Antrag möglich";
+      statusTone = "optional";
+      nextStepTitle = "Wichtig für dich";
+      nextStepText =
+        "Sprich frühzeitig mit der zuständigen Grundschule, wenn du eine vorzeitige Einschulung für dieses Schuljahr prüfen lassen möchtest.";
+    }
+
+    const schoolYear = `${schoolStartYear}/${schoolStartYear + 1}`;
+    const cutoffYear = schoolStartYear;
+    const hasConfirmedDate = schoolYear === "2026/2027";
+
+    let resultHeadline =
+      `Dein Kind wird in Hamburg voraussichtlich im Schuljahr ${schoolYear} regulär eingeschult.`;
+    let explanation =
+      `Dein Kind wird in Hamburg regulär schulpflichtig, weil es bis zum 30. Juni ${cutoffYear} sechs Jahre alt wird und damit für das Schuljahr ${schoolYear} schulpflichtig ist.`;
+
+    if (afterJune) {
+      resultHeadline =
+        `Dein Kind ist in Hamburg nicht automatisch regulär schulpflichtig. Eine Einschulung im Schuljahr ${schoolYear} kann auf Antrag geprüft werden.`;
+      explanation =
+        `Dein Kind wird nach dem 30. Juni ${cutoffYear} sechs Jahre alt. Deshalb ist es in Hamburg für das Schuljahr ${schoolYear} nicht automatisch regulär schulpflichtig. Eine vorzeitige Einschulung kann auf Antrag der Sorgeberechtigten geprüft werden.`;
+    }
+
+    return {
+      schoolYear,
+      statusLabel,
+      statusTone,
+      resultHeadline,
+      explanation,
+      nextStepTitle,
+      nextStepText,
+      hasConfirmedDate,
+    };
+  }
+
   function renderSachsenResult(birthdateValue) {
     if (!resultBox || !birthdateValue) return;
 
@@ -659,6 +711,10 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
 
     if (normalizedSlug === "berlin") {
       result = calculateBerlinEnrollment(birthdateValue);
+    }
+
+    if (normalizedSlug === "hamburg") {
+      result = calculateHamburgEnrollment(birthdateValue);
     }
 
     let dateDetails = `
@@ -844,6 +900,28 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
           Schulanfängerinnen und Schulanfänger ist voraussichtlich Montag,
           der 31. August 2026. Den konkreten Ablauf legt die zuständige
           Grundschule fest.
+        </p>
+      `;
+    }
+
+    if (result.hasConfirmedDate && normalizedSlug === "hamburg") {
+      dateDetails = `
+        <div class="state-result-grid state-result-grid-priority" aria-label="Einschulungstermin ${stateName}">
+          <div class="state-result-card state-result-card-wide">
+            <span>Schulstart</span>
+            <strong>Donnerstag, 20.08.2026</strong>
+          </div>
+          <div class="state-result-card state-result-card-wide">
+            <span>Einschulung</span>
+            <strong>17.-23. Aug. 2026 (schulabhängig)</strong>
+          </div>
+        </div>
+        <p class="state-calculator-note">
+          Für ${stateName} enden die Sommerferien 2026 am 19. August.
+          Der erste Schultag nach den Sommerferien ist Donnerstag, der
+          20. August 2026. Die Einschulungsfeier der ersten Klassen wird von
+          der jeweiligen Grundschule individuell festgelegt — in der Regel in
+          der ersten Schulwoche.
         </p>
       `;
     }
