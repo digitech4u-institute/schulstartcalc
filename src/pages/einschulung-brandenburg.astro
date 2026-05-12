@@ -1,11 +1,11 @@
-
-
 ---
+import StateEnrollmentCalculator from "../components/StateEnrollmentCalculator.astro";
+
 const pageTitle =
-  "Einschulung Brandenburg: Stichtag, Schuljahr und Regeln";
+  "Einschulung Brandenburg: Schulstart, Stichtag und Schuljahr";
 
 const pageDescription =
-  "Wann kommt mein Kind in Brandenburg in die Schule? Erfahre alles zu Einschulungsstichtag, vorzeitiger Einschulung, Zurückstellung und voraussichtlichem Schuljahr.";
+  "Wann kommt mein Kind in Brandenburg in die Schule? Erfahre alles zu Schulstart 2026, Einschulungsstichtag, Kann-Kind-Regel, Zurückstellung und voraussichtlichem Schuljahr.";
 ---
 
 <html lang="de">
@@ -25,7 +25,15 @@ const pageDescription =
             "name": "Welcher Einschulungsstichtag gilt in Brandenburg?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "In Brandenburg gilt grundsätzlich der 30. September als Einschulungsstichtag. Kinder, die bis zu diesem Datum das sechste Lebensjahr vollenden, werden am 1. August desselben Kalenderjahres schulpflichtig."
+              "text": "In Brandenburg gilt derzeit der 30. September als Einschulungsstichtag. Kinder, die bis zu diesem Datum das sechste Lebensjahr vollenden, werden am 1. August desselben Kalenderjahres schulpflichtig."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Wann ist die Einschulung in Brandenburg 2026?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Der erste Schultag im Schuljahr 2026/2027 ist in Brandenburg Montag, der 24. August 2026. Die Einschulungsfeiern werden in der Regel am Samstag vor dem ersten Schultag durchgeführt, also voraussichtlich am Samstag, dem 22. August 2026. Den konkreten Ablauf legt die zuständige Grundschule fest."
             }
           },
           {
@@ -33,7 +41,31 @@ const pageDescription =
             "name": "Kann mein Kind in Brandenburg früher eingeschult werden?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Kinder, die zwischen dem 1. Oktober und dem 31. Dezember sechs Jahre alt werden, können auf Antrag der Eltern vorzeitig aufgenommen werden. In begründeten Ausnahmefällen ist auch für jüngere Kinder eine Aufnahme möglich."
+              "text": "Kinder, die zwischen dem 1. Oktober und dem 31. Dezember sechs Jahre alt werden, können auf Antrag der Eltern vorzeitig aufgenommen werden. Darüber hinaus kann in begründeten Ausnahmefällen auch eine vorzeitige Aufnahme für Kinder geprüft werden, die erst nach dem 31. Dezember — aber noch vor dem 1. August des Folgejahres — das sechste Lebensjahr vollenden."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Was ist ein Kann-Kind in Brandenburg?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Als Kann-Kind werden Kinder bezeichnet, die nach dem regulären Stichtag sechs Jahre alt werden und nicht automatisch schulpflichtig sind. In Brandenburg betrifft das vor allem Kinder, die zwischen dem 1. Oktober und dem 31. Dezember sechs Jahre alt werden. Eine vorzeitige Einschulung kann auf Antrag der Eltern geprüft werden."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Kann mein Kind in Brandenburg zurückgestellt werden?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Schulpflichtige Kinder können in Brandenburg im Ausnahmefall auf Antrag der Eltern für ein Schuljahr zurückgestellt werden, wenn zu erwarten ist, dass sie noch nicht mit Erfolg am Unterricht teilnehmen können. Die Entscheidung trifft die Schulleitung nach schulärztlicher Untersuchung und Beratung durch die Schule."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Ändert sich der Einschulungsstichtag in Brandenburg?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Im Koalitionsvertrag Brandenburgs 2024–2029 ist vorgesehen, den Einschulungsstichtag künftig auf den 30. Juni zu verlegen. Stand Mai 2026 ist diese Änderung noch nicht gesetzlich umgesetzt. Bis dahin gilt weiterhin der 30. September. Verbindliche Auskunft erteilt das Ministerium für Bildung, Jugend und Sport Brandenburg."
             }
           },
           {
@@ -41,7 +73,7 @@ const pageDescription =
             "name": "Ist das Ergebnis zur Einschulung in Brandenburg verbindlich?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Nein. Der Einschulungsrechner und diese Informationsseite dienen der Orientierung. Verbindliche Informationen erhältst du bei der zuständigen Grundschule oder Schulbehörde in Brandenburg."
+              "text": "Nein. Der Einschulungsrechner und diese Informationsseite dienen der Orientierung. Verbindliche Informationen erhältst du bei der zuständigen Grundschule oder beim Ministerium für Bildung, Jugend und Sport Brandenburg."
             }
           }
         ]
@@ -58,31 +90,72 @@ const pageDescription =
 
         <h1>
           Einschulung in Brandenburg:<br />
-          Stichtag und Schuljahr
+          Schulstart, Stichtag und Schuljahr
         </h1>
 
         <p class="lead">
-          In Brandenburg gilt für die Einschulung grundsätzlich der Stichtag
-          30. September. Kinder, die bis zu diesem Datum sechs Jahre alt werden,
-          werden am 1. August desselben Kalenderjahres schulpflichtig.
+          Wann kommt mein Kind in Brandenburg in die Schule? Der Einschulungsrechner
+          zeigt dir anhand des Geburtsdatums das voraussichtliche Schuljahr. In
+          Brandenburg gilt derzeit der Stichtag 30. September. Für das Schuljahr
+          2026/2027 ist der erste Schultag Montag, der 24. August 2026; die
+          Einschulungsfeier findet in der Regel am Samstag davor statt — für
+          2026 also voraussichtlich am 22. August.
         </p>
 
-        <div class="quick-facts" aria-label="Kurzüberblick Einschulung Brandenburg">
+        <StateEnrollmentCalculator
+          stateName="Brandenburg"
+          stateSlug="brandenburg"
+          calculatorKicker="Brandenburg-Rechner"
+          resultKicker="Brandenburg-Ergebnis"
+          headline="Einschulung in Brandenburg berechnen"
+          intro="Gib das Geburtsdatum deines Kindes ein. Brandenburg ist hier bereits vorausgewählt. Wenn du von der Startseite kommst, übernehmen wir das Geburtsdatum automatisch aus dem Link."
+        />
+
+        <div class="quick-facts quick-facts-master" aria-label="Kurzüberblick Einschulung Brandenburg">
+          <div class="fact-card fact-card-highlight">
+            <span>Nächste Einschulung</span>
+            <strong>Samstag, 22.08.2026</strong>
+          </div>
+
+          <div class="fact-card fact-card-highlight">
+            <span>Nächster Schulstart</span>
+            <strong>Montag, 24.08.2026</strong>
+          </div>
+
           <div class="fact-card">
             <span>Stichtag</span>
             <strong>30. September</strong>
           </div>
 
           <div class="fact-card">
-            <span>Schulpflicht</span>
-            <strong>ab 1. August</strong>
-          </div>
-
-          <div class="fact-card">
-            <span>Sonderfall</span>
-            <strong>Antrag möglich</strong>
+            <span>Sonderregel</span>
+            <strong>Kann-Kind auf Antrag</strong>
           </div>
         </div>
+
+        <section class="example-box">
+          <h2>Wie funktioniert der Einschulungsrechner für Brandenburg?</h2>
+
+          <p>
+            Der Einschulungsrechner prüft das Geburtsdatum deines Kindes und
+            vergleicht es mit den Einschulungsregeln in Brandenburg. Entscheidend
+            ist der Stichtag 30. September. Wird dein Kind bis zu diesem
+            Datum sechs Jahre alt, ist es in Brandenburg regulär schulpflichtig.
+          </p>
+
+          <p>
+            Beispiel: Wird ein Kind am 15. September 2020 geboren, wird es am
+            15. September 2026 sechs Jahre alt. Da dieses Datum vor dem Stichtag
+            30. September liegt, ist das Kind voraussichtlich für das Schuljahr
+            2026/2027 regulär schulpflichtig.
+          </p>
+
+          <p>
+            Wird ein Kind dagegen zwischen dem 1. Oktober und dem 31. Dezember
+            sechs Jahre alt, ist es nicht automatisch regulär schulpflichtig. Eine
+            vorzeitige Einschulung kann auf Antrag der Eltern geprüft werden.
+          </p>
+        </section>
 
         <section>
           <h2>Wann ist ein Kind in Brandenburg schulpflichtig?</h2>
@@ -99,10 +172,32 @@ const pageDescription =
 
           <p>
             Kinder, die zwischen dem 1. Oktober und dem 31. Dezember sechs Jahre
-            alt werden, können auf Antrag der Eltern vorzeitig in die Schule
-            aufgenommen werden. In begründeten Ausnahmefällen kann auch für Kinder,
-            die nach dem 31. Dezember, aber vor dem 1. August des folgenden Jahres
-            sechs Jahre alt werden, eine Aufnahme möglich sein.
+            alt werden, können auf Antrag der Eltern vorzeitig aufgenommen werden.
+            Diese Kinder werden häufig als Kann-Kinder bezeichnet.
+          </p>
+
+          <p>
+            Darüber hinaus kann in begründeten Ausnahmefällen auch eine vorzeitige
+            Aufnahme für Kinder geprüft werden, die erst nach dem 31. Dezember —
+            aber noch vor dem 1. August des Folgejahres — das sechste Lebensjahr
+            vollenden.
+          </p>
+        </section>
+
+        <section>
+          <h2>Wie läuft die Aufnahme in Brandenburg ab?</h2>
+
+          <p>
+            Die Anmeldung erfolgt bei der zuständigen Grundschule. Für das Schuljahr
+            2026/2027 musste die Anmeldung nach Angaben des MBJS bis zum 27. Februar
+            2026 erfolgen. Die Frist für das Schuljahr 2027/2028 wird vom MBJS
+            rechtzeitig bekanntgegeben. Im Anschluss finden unter anderem die
+            schulärztliche Untersuchung und das Schulaufnahmegespräch statt.
+          </p>
+
+          <p>
+            Über die Aufnahme entscheidet die Schulleitung. Die Entscheidung wird
+            den Eltern in der Regel schriftlich mitgeteilt.
           </p>
         </section>
 
@@ -119,26 +214,15 @@ const pageDescription =
         </section>
 
         <section class="example-box">
-          <h2>Beispiel: Geburtsdatum im September</h2>
+          <h2>Hinweis zur geplanten Stichtagsänderung</h2>
 
           <p>
-            Wird ein Kind am 15. September 2020 geboren, vollendet es am
-            15. September 2026 das sechste Lebensjahr. Da dieses Datum vor dem
-            Stichtag 30. September liegt, wird das Kind in Brandenburg
-            voraussichtlich im Schuljahr 2026/2027 eingeschult.
+            Im Koalitionsvertrag Brandenburgs 2024–2029 ist vorgesehen, den
+            Einschulungsstichtag künftig auf den 30. Juni zu verlegen. Stand Mai
+            2026 ist diese Änderung noch nicht gesetzlich umgesetzt. Bis dahin gilt
+            weiterhin der 30. September. Diese Seite wird angepasst, sobald eine
+            gesetzliche Änderung verbindlich in Kraft ist.
           </p>
-        </section>
-
-        <section>
-          <h2>Einschulung Brandenburg berechnen</h2>
-
-          <p>
-            Am einfachsten prüfst du das voraussichtliche Schuljahr mit dem
-            Einschulungsrechner. Gib dort das Geburtsdatum deines Kindes ein und
-            wähle als Bundesland Brandenburg aus.
-          </p>
-
-          <a class="cta-link" href="/">Jetzt Einschulung berechnen</a>
         </section>
 
         <section>
@@ -148,17 +232,51 @@ const pageDescription =
             <article class="faq-item">
               <h3>Welcher Einschulungsstichtag gilt in Brandenburg?</h3>
               <p>
-                In Brandenburg gilt grundsätzlich der 30. September als Stichtag
-                für die Einschulung.
+                In Brandenburg gilt der 30. September als Stichtag. Kinder, die
+                bis zu diesem Datum sechs Jahre alt werden, werden am 1. August
+                desselben Jahres schulpflichtig.
               </p>
             </article>
 
             <article class="faq-item">
-              <h3>Wann beginnt die Schulpflicht in Brandenburg?</h3>
+              <h3>Wann ist die Einschulung in Brandenburg 2026?</h3>
               <p>
-                Die Schulpflicht beginnt in Brandenburg am 1. August desselben
-                Kalenderjahres, wenn das Kind bis zum 30. September sechs Jahre
-                alt wird.
+                Der erste Schultag im Schuljahr 2026/2027 ist Montag, der
+                24. August 2026. Die Einschulungsfeiern werden in der Regel am
+                Samstag vor dem ersten Schultag durchgeführt, also voraussichtlich
+                am 22. August 2026.
+              </p>
+            </article>
+
+            <article class="faq-item">
+              <h3>Kann mein Kind vorzeitig eingeschult werden?</h3>
+              <p>
+                Ja. Kinder, die zwischen dem 1. Oktober und dem 31. Dezember sechs
+                Jahre alt werden, können auf Antrag der Eltern vorzeitig aufgenommen
+                werden. Darüber hinaus kann in begründeten Ausnahmefällen auch eine
+                vorzeitige Aufnahme für Kinder geprüft werden, die erst nach dem
+                31. Dezember — aber noch vor dem 1. August des Folgejahres — das
+                sechste Lebensjahr vollenden.
+              </p>
+            </article>
+
+            <article class="faq-item">
+              <h3>Was ist ein Kann-Kind in Brandenburg?</h3>
+              <p>
+                Als Kann-Kind werden Kinder bezeichnet, die nach dem regulären
+                Stichtag sechs Jahre alt werden und nicht automatisch schulpflichtig
+                sind. In Brandenburg betrifft das vor allem Kinder mit Geburtstag
+                zwischen dem 1. Oktober und dem 31. Dezember.
+              </p>
+            </article>
+
+            <article class="faq-item">
+              <h3>Ändert sich der Einschulungsstichtag in Brandenburg?</h3>
+              <p>
+                Im Koalitionsvertrag Brandenburgs 2024–2029 ist vorgesehen, den
+                Stichtag künftig auf den 30. Juni zu verlegen. Stand Mai 2026 ist
+                diese Änderung noch nicht gesetzlich umgesetzt. Bis dahin gilt
+                weiterhin der 30. September.
               </p>
             </article>
 
@@ -166,8 +284,9 @@ const pageDescription =
               <h3>Ist das Ergebnis verbindlich?</h3>
               <p>
                 Nein. Der Rechner und diese Seite dienen der Orientierung.
-                Verbindliche Informationen erhältst du bei der zuständigen Schule
-                oder Schulbehörde in Brandenburg.
+                Verbindliche Informationen erhältst du bei der zuständigen Schule,
+                der Schulbehörde oder beim Ministerium für Bildung, Jugend und Sport
+                Brandenburg.
               </p>
             </article>
           </div>
@@ -177,20 +296,53 @@ const pageDescription =
           <h2>Quelle und Hinweis</h2>
 
           <p>
-            Grundlage dieser Übersicht sind öffentlich zugängliche Informationen
-            zur Einschulung in Brandenburg. Bitte prüfe verbindliche Details immer
-            bei der zuständigen Grundschule oder beim Ministerium für Bildung,
-            Jugend und Sport des Landes Brandenburg.
+            Die folgenden offiziellen Quellen bilden die Grundlage dieser Übersicht
+            zur Einschulung in Brandenburg:
           </p>
 
-          <a
-            class="source-link"
-            href="https://mbjs.brandenburg.de/bildung/allgemeinbildende-schulen/grundschule/vor-der-einschulung.html"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            MBJS Brandenburg: Vor der Einschulung
-          </a>
+          <div class="source-list" aria-label="Offizielle Quellen zur Einschulung in Brandenburg">
+            <div class="source-item">
+              <p class="source-kicker">Offizielle Quelle 1</p>
+              <a
+                class="source-link"
+                href="https://mbjs.brandenburg.de/bildung/weitere-themen/anmeldung-an-schulen.html"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                MBJS Brandenburg: Anmeldung an Schulen
+              </a>
+            </div>
+
+            <div class="source-item">
+              <p class="source-kicker">Offizielle Quelle 2</p>
+              <a
+                class="source-link"
+                href="https://mbjs.brandenburg.de/bildung/allgemeinbildende-schulen/grundschule/vor-der-einschulung.html"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                MBJS Brandenburg: Vor der Einschulung
+              </a>
+            </div>
+
+            <div class="source-item">
+              <p class="source-kicker">Offizielle Quelle 3</p>
+              <a
+                class="source-link"
+                href="https://www.brandenburg.de/media/bb1.a.3780.de/191024_Koalitionsvertrag_Endfassung.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Koalitionsvertrag Brandenburg 2024–2029: geplanter Stichtag 30. Juni
+              </a>
+            </div>
+          </div>
+
+          <p>
+            Bitte prüfe verbindliche Details immer bei der zuständigen Grundschule,
+            der Schulbehörde oder beim Ministerium für Bildung, Jugend und Sport
+            Brandenburg.
+          </p>
 
           <p class="stand">Stand der Informationen: Mai 2026</p>
         </section>
@@ -284,9 +436,17 @@ const pageDescription =
 
   .quick-facts {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 14px;
     margin-top: 30px;
+  }
+
+  .quick-facts-master {
+    margin-top: 34px;
+  }
+
+  :global(body.has-brandenburg-calculator-result) .quick-facts-master .fact-card-highlight {
+    display: none;
   }
 
   .fact-card {
@@ -298,6 +458,11 @@ const pageDescription =
     border: 1px solid rgba(42, 35, 21, 0.1);
     border-radius: 22px;
     background: rgba(255, 255, 255, 0.78);
+  }
+
+  .fact-card-highlight {
+    border-color: rgba(129, 97, 38, 0.18);
+    background: rgba(245, 210, 138, 0.13);
   }
 
   .fact-card span {
@@ -356,24 +521,6 @@ const pageDescription =
     background: rgba(245, 210, 138, 0.12);
   }
 
-  .cta-link {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 20px;
-    min-height: 54px;
-    padding: 0 22px;
-    border-radius: 16px;
-    background: #172033;
-    color: #fff;
-    font-weight: 850;
-    text-decoration: none;
-  }
-
-  .cta-link:hover {
-    background: #2a3550;
-  }
-
   .faq-list {
     display: grid;
     gap: 12px;
@@ -394,25 +541,48 @@ const pageDescription =
     line-height: 1.65;
   }
 
+  .source-list {
+    display: grid;
+    gap: 22px;
+    margin-top: 28px;
+  }
+
+  .source-item {
+    display: grid;
+    gap: 8px;
+    padding-bottom: 22px;
+    border-bottom: 1px solid rgba(129, 97, 38, 0.14);
+  }
+
+  .source-item:last-child {
+    padding-bottom: 0;
+    border-bottom: 0;
+  }
+
+  .source-kicker {
+    margin: 0;
+    color: #816126;
+    font-size: 0.92rem;
+    font-weight: 950;
+    letter-spacing: 0.095em;
+    line-height: 1.18;
+    text-transform: uppercase;
+  }
+
   .source-link {
-    display: inline-flex;
-    width: fit-content;
-    margin-top: 18px;
-    padding: 12px 14px;
-    border: 1px solid rgba(129, 97, 38, 0.18);
-    border-radius: 16px;
-    background: rgba(255, 255, 255, 0.58);
+    display: inline;
     color: #172033;
-    font-size: 0.96rem;
-    font-weight: 850;
-    line-height: 1.35;
-    text-decoration: none;
+    font-size: clamp(1.12rem, 1.7vw, 1.36rem);
+    font-weight: 950;
+    line-height: 1.28;
+    letter-spacing: -0.035em;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 5px;
   }
 
   .source-link:hover {
-    border-color: rgba(129, 97, 38, 0.32);
-    background: rgba(255, 255, 255, 0.82);
-    text-decoration: underline;
+    color: #816126;
   }
 
   .stand {
@@ -500,9 +670,9 @@ const pageDescription =
       border-radius: 20px;
     }
 
-    .cta-link,
     .source-link {
-      width: 100%;
+      font-size: 1.08rem;
+      line-height: 1.32;
     }
   }
 

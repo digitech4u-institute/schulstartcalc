@@ -258,6 +258,28 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
     }
   }
 
+  function hasCalculatedSchoolYearAlreadyStarted(result) {
+    if (!result?.schoolYear) return false;
+
+    const startYear = Number(result.schoolYear.split("/")[0]);
+    if (!Number.isFinite(startYear)) return false;
+
+    const schoolYearStart = new Date(startYear, 7, 1, 0, 0, 0);
+    const today = new Date();
+
+    return today >= schoolYearStart;
+  }
+
+  function updatePageResultState(result) {
+    if (!result || !document?.body) return;
+
+    document.body.classList.add("has-state-calculator-result");
+    document.body.classList.add(`has-${normalizedSlug}-calculator-result`);
+    document.body.dataset.calculatorStateSlug = normalizedSlug;
+    document.body.dataset.calculatorSchoolYear = result.schoolYear;
+    document.body.dataset.calculatorHasConfirmedDate = result.hasConfirmedDate ? "true" : "false";
+  }
+
   function calculateSachsenEnrollment(birthdateValue) {
     const birthdate = new Date(`${birthdateValue}T12:00:00`);
     const birthYear = birthdate.getFullYear();
@@ -684,6 +706,74 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
     };
   }
 
+  function calculateBrandenburgEnrollment(birthdateValue) {
+    const birthdate = new Date(`${birthdateValue}T12:00:00`);
+    const birthYear = birthdate.getFullYear();
+    const sixthBirthdayYear = birthYear + 6;
+    const month = birthdate.getMonth() + 1;
+
+    let schoolStartYear = sixthBirthdayYear;
+    let statusLabel = "Regulär schulpflichtig";
+    let statusTone = "regular";
+    let nextStepTitle = "Nächster sinnvoller Schritt";
+    let nextStepText =
+      "Informiere dich frühzeitig bei der zuständigen Grundschule über Anmeldung, Unterlagen, schulärztliche Untersuchung und konkrete Termine.";
+
+    const octoberToDecember = month >= 10;
+    const januaryToJuly = month <= 7;
+
+    if (octoberToDecember) {
+      statusLabel = "Kann-Kind auf Antrag";
+      statusTone = "optional";
+      nextStepTitle = "Wichtig für dich";
+      nextStepText =
+        "Sprich frühzeitig mit der zuständigen Grundschule, wenn du eine vorzeitige Einschulung für dieses Schuljahr prüfen lassen möchtest.";
+    }
+
+    if (januaryToJuly) {
+      schoolStartYear = sixthBirthdayYear - 1;
+      statusLabel = "Aufnahme im Ausnahmefall möglich";
+      statusTone = "optional";
+      nextStepTitle = "Wichtig für dich";
+      nextStepText =
+        "Für Kinder, die erst nach dem 31. Dezember, aber noch vor dem 1. August des Folgejahres sechs Jahre alt werden, kann in begründeten Ausnahmefällen eine vorzeitige Aufnahme geprüft werden.";
+    }
+
+    const schoolYear = `${schoolStartYear}/${schoolStartYear + 1}`;
+    const cutoffYear = schoolStartYear;
+    const hasConfirmedDate = schoolYear === "2026/2027";
+
+    let resultHeadline =
+      `Dein Kind wird in Brandenburg voraussichtlich im Schuljahr ${schoolYear} regulär eingeschult.`;
+    let explanation =
+      `Dein Kind wird in Brandenburg regulär schulpflichtig, weil es bis zum 30. September ${cutoffYear} sechs Jahre alt wird und damit ab dem 1. August ${cutoffYear} schulpflichtig ist.`;
+
+    if (octoberToDecember) {
+      resultHeadline =
+        `Dein Kind ist in Brandenburg ein Kann-Kind. Eine Einschulung im Schuljahr ${schoolYear} kann auf Antrag geprüft werden.`;
+      explanation =
+        `Dein Kind wird nach dem 30. September ${cutoffYear}, aber bis zum 31. Dezember ${cutoffYear} sechs Jahre alt. In Brandenburg kann eine vorzeitige Einschulung für das Schuljahr ${schoolYear} auf Antrag der Eltern geprüft werden.`;
+    }
+
+    if (januaryToJuly) {
+      resultHeadline =
+        `Dein Kind kann in Brandenburg nur in begründeten Ausnahmefällen im Schuljahr ${schoolYear} aufgenommen werden.`;
+      explanation =
+        `Dein Kind wird erst nach dem 31. Dezember ${cutoffYear} und vor dem 1. August ${cutoffYear + 1} sechs Jahre alt. In Brandenburg kann eine Aufnahme in diesem Schuljahr nur in begründeten Ausnahmefällen geprüft werden.`;
+    }
+
+    return {
+      schoolYear,
+      statusLabel,
+      statusTone,
+      resultHeadline,
+      explanation,
+      nextStepTitle,
+      nextStepText,
+      hasConfirmedDate,
+    };
+  }
+
   function renderSachsenResult(birthdateValue) {
     if (!resultBox || !birthdateValue) return;
 
@@ -715,6 +805,10 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
 
     if (normalizedSlug === "hamburg") {
       result = calculateHamburgEnrollment(birthdateValue);
+    }
+
+    if (normalizedSlug === "brandenburg") {
+      result = calculateBrandenburgEnrollment(birthdateValue);
     }
 
     let dateDetails = `
@@ -926,6 +1020,28 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
       `;
     }
 
+    if (result.hasConfirmedDate && normalizedSlug === "brandenburg") {
+      dateDetails = `
+        <div class="state-result-grid state-result-grid-priority" aria-label="Einschulungstermin ${stateName}">
+          <div class="state-result-card state-result-card-wide">
+            <span>Nächste Einschulung</span>
+            <strong>Samstag, 22.08.2026</strong>
+          </div>
+          <div class="state-result-card state-result-card-wide">
+            <span>Nächster Schulstart</span>
+            <strong>Montag, 24.08.2026</strong>
+          </div>
+        </div>
+        <p class="state-calculator-note">
+          Für ${stateName} ist der erste Schultag im Schuljahr 2026/2027
+          Montag, der 24. August 2026. Die Einschulungsfeiern werden in der
+          Regel am Samstag vor dem ersten Schultag durchgeführt, also
+          voraussichtlich am Samstag, dem 22. August 2026. Den konkreten Ablauf
+          legt die zuständige Grundschule fest.
+        </p>
+      `;
+    }
+
     if (result.hasConfirmedDate && normalizedSlug === "nordrhein-westfalen") {
       dateDetails = `
         <div class="state-result-grid state-result-grid-priority" aria-label="Einschulungstermin ${stateName}">
@@ -948,6 +1064,43 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
       `;
     }
 
+    const schoolYearAlreadyStarted = hasCalculatedSchoolYearAlreadyStarted(result);
+
+    if (schoolYearAlreadyStarted) {
+      displayedHeadline = `Das berechnete Schuljahr <span class="result-date-nowrap">${result.schoolYear}</span> hat bereits begonnen.`;
+      dateDetails = `
+        <p class="state-calculator-note">
+          Das berechnete Schuljahr ${result.schoolYear} hat bereits begonnen.
+          Konkrete Einschulungstermine werden hier nicht mehr angezeigt, weil
+          die reguläre Einschulung für dieses Schuljahr bereits zeitlich
+          eingeordnet ist.
+        </p>
+      `;
+    }
+
+    const displayedStatusTone = schoolYearAlreadyStarted ? "following" : result.statusTone;
+    const displayedStatusLabel = schoolYearAlreadyStarted
+      ? "Schuljahr bereits begonnen"
+      : result.statusLabel;
+    const displayedExplanation = schoolYearAlreadyStarted
+      ? `Das berechnete Schuljahr ${result.schoolYear} liegt bereits in der Vergangenheit beziehungsweise hat bereits begonnen. Für verbindliche nächste Schritte ist jetzt die zuständige Grundschule maßgeblich.`
+      : result.explanation;
+
+    const schoolYearStartedWarning = schoolYearAlreadyStarted
+      ? `
+        <div class="state-result-warning-box">
+          <strong>Wichtiger Hinweis</strong>
+          <p>
+            Das Ergebnis zeigt keine reguläre Einschulungsempfehlung mehr,
+            sondern dient nur noch der zeitlichen Einordnung. Bitte wende dich
+            direkt an die zuständige Grundschule.
+          </p>
+        </div>
+      `
+      : "";
+
+    updatePageResultState(result);
+
     resultBox.hidden = false;
     resultBox.innerHTML = `
       <div class="state-result-header">
@@ -957,21 +1110,23 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
 
       ${dateDetails}
 
+      ${schoolYearStartedWarning}
+
       <div class="state-result-top-grid">
         <div class="state-result-summary">
           <span>Voraussichtliches Schuljahr</span>
           <strong>${result.schoolYear}</strong>
         </div>
 
-        <div class="state-result-status state-result-status-${result.statusTone}">
+        <div class="state-result-status state-result-status-${displayedStatusTone}">
           <span>Status</span>
-          <strong>${result.statusLabel}</strong>
+          <strong>${displayedStatusLabel}</strong>
         </div>
       </div>
 
       <div class="state-result-explanation-box">
         <strong>Was bedeutet das?</strong>
-        <p>${result.explanation}</p>
+        <p>${displayedExplanation}</p>
       </div>
 
       <div class="state-result-next-step">
@@ -1387,14 +1542,21 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
     letter-spacing: -0.04em;
   }
 
-  :global(.state-result-explanation-box) {
+  :global(.state-result-explanation-box),
+  :global(.state-result-warning-box) {
     padding: 18px 20px;
     border: 1px solid rgba(42, 35, 21, 0.08);
     border-radius: 18px;
     background: rgba(255, 255, 255, 0.72);
   }
 
-  :global(.state-result-explanation-box strong) {
+  :global(.state-result-warning-box) {
+    border-color: rgba(129, 97, 38, 0.24);
+    background: rgba(245, 210, 138, 0.16);
+  }
+
+  :global(.state-result-explanation-box strong),
+  :global(.state-result-warning-box strong) {
     display: block;
     color: #172033;
     font-size: clamp(1.18rem, 1.45vw, 1.34rem);
@@ -1403,7 +1565,8 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
     letter-spacing: -0.03em;
   }
 
-  :global(.state-result-explanation-box p) {
+  :global(.state-result-explanation-box p),
+  :global(.state-result-warning-box p) {
     margin-top: 12px;
     color: #293246;
     font-size: clamp(1rem, 1.2vw, 1.08rem);
@@ -1580,12 +1743,14 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
       line-height: 1.14;
     }
 
-    :global(.state-result-explanation-box strong) {
+    :global(.state-result-explanation-box strong),
+    :global(.state-result-warning-box strong) {
       font-size: 1.16rem;
       line-height: 1.14;
     }
 
-    :global(.state-result-explanation-box p) {
+    :global(.state-result-explanation-box p),
+    :global(.state-result-warning-box p) {
       font-size: 0.98rem;
       line-height: 1.58;
     }
@@ -1596,6 +1761,7 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
     }
 
     :global(.state-result-explanation-box),
+    :global(.state-result-warning-box),
     :global(.state-result-next-step) {
       padding: 16px;
       border-radius: 16px;
