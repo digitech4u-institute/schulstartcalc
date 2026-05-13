@@ -810,6 +810,55 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
     };
   }
 
+  function calculateSchleswigHolsteinEnrollment(birthdateValue) {
+    const birthdate = new Date(`${birthdateValue}T12:00:00`);
+    const birthYear = birthdate.getFullYear();
+    const sixthBirthdayYear = birthYear + 6;
+    const month = birthdate.getMonth() + 1;
+    const day = birthdate.getDate();
+
+    let schoolStartYear = sixthBirthdayYear;
+    const projectedSchoolYear = `${schoolStartYear}/${schoolStartYear + 1}`;
+    const cutoffYear = schoolStartYear;
+    let statusLabel = "Regulär schulpflichtig";
+    let statusTone = "regular";
+    let resultHeadline =
+      `Dein Kind wird in Schleswig-Holstein voraussichtlich im Schuljahr ${projectedSchoolYear} regulär eingeschult.`;
+    let explanation =
+      `Dein Kind wird in Schleswig-Holstein regulär schulpflichtig, weil es bis zum 30. Juni ${cutoffYear} sechs Jahre alt wird und damit für das Schuljahr ${projectedSchoolYear} schulpflichtig ist.`;
+    let nextStepTitle = "Nächster sinnvoller Schritt";
+    let nextStepText =
+      "Informiere dich frühzeitig bei der zuständigen Grundschule über Anmeldung, Einschulungsgespräch, Schuleingangsuntersuchung und konkrete Termine.";
+
+    const afterJune = month > 6 || (month === 6 && day > 30);
+
+    if (afterJune) {
+      statusLabel = "Kann-Kind";
+      statusTone = "optional";
+      resultHeadline =
+        `Dein Kind ist in Schleswig-Holstein ein Kann-Kind. Eine Einschulung im Schuljahr ${projectedSchoolYear} kann auf Antrag geprüft werden.`;
+      explanation =
+        `Dein Kind wird nach dem Stichtag 30. Juni ${cutoffYear} sechs Jahre alt und ist deshalb nicht automatisch schulpflichtig. Eltern können bei der zuständigen Schule einen Antrag auf vorzeitige Einschulung stellen. Die Schule prüft dann, ob eine frühere Aufnahme möglich ist.`;
+      nextStepTitle = "Wichtig für dich";
+      nextStepText =
+        "Sprich die zuständige Grundschule direkt an, wenn du eine vorzeitige Einschulung für dein Kind prüfen möchtest.";
+    }
+
+    const schoolYear = `${schoolStartYear}/${schoolStartYear + 1}`;
+    const hasConfirmedDate = schoolYear === "2026/2027";
+
+    return {
+      schoolYear,
+      statusLabel,
+      statusTone,
+      resultHeadline,
+      explanation,
+      nextStepTitle,
+      nextStepText,
+      hasConfirmedDate,
+    };
+  }
+
   function renderSachsenResult(birthdateValue) {
     if (!resultBox || !birthdateValue) return;
 
@@ -849,6 +898,10 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
 
     if (normalizedSlug === "rheinland-pfalz") {
       result = calculateRheinlandPfalzEnrollment(birthdateValue);
+    }
+
+    if (normalizedSlug === "schleswig-holstein") {
+      result = calculateSchleswigHolsteinEnrollment(birthdateValue);
     }
 
     let dateDetails = `
@@ -1099,6 +1152,28 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
       `;
     }
 
+    if (result.hasConfirmedDate && normalizedSlug === "schleswig-holstein") {
+      dateDetails = `
+        <div class="state-result-grid state-result-grid-priority" aria-label="Einschulungstermin ${stateName}">
+          <div class="state-result-card state-result-card-wide">
+            <span>Nächste Einschulung</span>
+            <strong>Mittwoch, 19. August 2026</strong>
+          </div>
+          <div class="state-result-card state-result-card-wide">
+            <span>Erster Schultag</span>
+            <strong>Montag, 17. August 2026</strong>
+          </div>
+        </div>
+        <p class="state-calculator-note">
+          Für ${stateName} endet die Sommerferienzeit 2026 am Samstag,
+          15. August 2026. Der erste reguläre Schultag ist damit Montag,
+          17. August 2026. Die Einschulung an Grundschulen findet nach dem
+          Erlass zu Einschulungsterminen am dritten Schultag nach den Ferien
+          statt – also voraussichtlich Mittwoch, 19. August 2026.
+        </p>
+      `;
+    }
+
     if (result.hasConfirmedDate && normalizedSlug === "nordrhein-westfalen") {
       dateDetails = `
         <div class="state-result-grid state-result-grid-priority" aria-label="Einschulungstermin ${stateName}">
@@ -1145,7 +1220,9 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
 
     const displayedSchoolYearLabel =
       !schoolYearAlreadyStarted &&
-      (normalizedSlug === "sachsen" || normalizedSlug === "rheinland-pfalz") &&
+      (normalizedSlug === "sachsen" ||
+        normalizedSlug === "rheinland-pfalz" ||
+        normalizedSlug === "schleswig-holstein") &&
       result.statusTone === "optional"
         ? "Mögliches Schuljahr"
         : "Voraussichtliches Schuljahr";
