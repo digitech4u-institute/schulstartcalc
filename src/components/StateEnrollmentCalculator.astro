@@ -298,29 +298,16 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
       "Informiere dich frühzeitig bei der zuständigen Grundschule über Anmeldung, Unterlagen und konkrete Termine.";
 
     const afterJune = month > 6 || (month === 6 && day > 30);
-    const bySeptember = month < 9 || (month === 9 && day <= 30);
 
-    if (afterJune && bySeptember) {
-      statusLabel = "Einschulung durch Anmeldung möglich";
+    if (afterJune) {
+      statusLabel = "Kann-Kind";
       statusTone = "optional";
-      resultHeadline = `Dein Kind liegt für das Schuljahr ${sixthBirthdayYear}/${sixthBirthdayYear + 1} im erweiterten Einschulungs&shy;zeitraum.`;
+      resultHeadline = `Dein Kind ist in Sachsen im Schuljahr ${sixthBirthdayYear}/${sixthBirthdayYear + 1} ein Kann-Kind.`;
       explanation =
-        "Dein Kind wird nach dem 30. Juni, aber bis zum 30. September sechs Jahre alt. In Sachsen kann es durch Anmeldung der Eltern ebenfalls als schulpflichtig gelten.";
+        "Dein Kind gilt in Sachsen als sogenanntes Kann-Kind: Es wird nach dem Stichtag 30. Juni sechs Jahre alt und ist deshalb nicht automatisch schulpflichtig. Eltern können eine vorzeitige Einschulung beantragen – die Schule prüft dann, ob das Kind den erforderlichen Entwicklungsstand für den Schulbesuch besitzt.";
       nextStepTitle = "Wichtig für dich";
       nextStepText =
-        "Sprich rechtzeitig mit der zuständigen Grundschule, wenn du eine Einschulung in diesem Schuljahr prüfen oder anmelden möchtest.";
-    }
-
-    if (month > 9 || (month === 9 && day > 30)) {
-      schoolStartYear = sixthBirthdayYear + 1;
-      statusLabel = "Regulär schulpflichtig";
-      statusTone = "regular";
-      resultHeadline = "";
-      explanation =
-        "Dein Kind wird nach dem sächsischen Stichtag sechs Jahre alt. Deshalb ist es voraussichtlich im angezeigten Schuljahr regulär schulpflichtig.";
-      nextStepTitle = "Nächster sinnvoller Schritt";
-      nextStepText =
-        "Prüfe die konkreten Anmeldefristen und Termine, sobald das relevante Schuljahr von Sachsen veröffentlicht wurde.";
+        "Sprich die zuständige Grundschule direkt an, wenn du eine vorzeitige Einschulung für dein Kind prüfen möchtest.";
     }
 
     const schoolYear = `${schoolStartYear}/${schoolStartYear + 1}`;
@@ -821,23 +808,20 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
 
     if (result.hasConfirmedDate && normalizedSlug === "sachsen") {
       dateDetails = `
-        <div class="state-result-grid" aria-label="Einschulungstermin ${stateName}">
-          <div class="state-result-card">
-            <span>Schuleinführung</span>
+        <div class="state-result-grid state-result-grid-priority" aria-label="Einschulungstermin ${stateName}">
+          <div class="state-result-card state-result-card-wide">
+            <span>Nächste Einschulung</span>
             <strong>Sa, 15.08.2026</strong>
           </div>
-          <div class="state-result-card">
-            <span>Erster Schultag</span>
+          <div class="state-result-card state-result-card-wide">
+            <span>Nächster Schulstart</span>
             <strong>Mo, 17.08.2026</strong>
-          </div>
-          <div class="state-result-card">
-            <span>Terminstatus</span>
-            <strong>offiziell veröffentlicht</strong>
           </div>
         </div>
         <p class="state-calculator-note">
           Für ${stateName} ist die Schuleinführung 2026 offiziell veröffentlicht.
-          Einzelne organisatorische Details können je nach Schule abweichen.
+          Der erste Schultag ist Montag, der 17. August 2026. Einzelne
+          organisatorische Details können je nach Schule abweichen.
         </p>
       `;
     }
@@ -1086,6 +1070,11 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
       ? `Das berechnete Schuljahr ${result.schoolYear} liegt bereits in der Vergangenheit beziehungsweise hat bereits begonnen. Für verbindliche nächste Schritte ist jetzt die zuständige Grundschule maßgeblich.`
       : result.explanation;
 
+    const displayedSchoolYearLabel =
+      !schoolYearAlreadyStarted && normalizedSlug === "sachsen" && result.statusTone === "optional"
+        ? "Mögliches Schuljahr"
+        : "Voraussichtliches Schuljahr";
+
     const schoolYearStartedWarning = schoolYearAlreadyStarted
       ? `
         <div class="state-result-warning-box">
@@ -1114,7 +1103,7 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
 
       <div class="state-result-top-grid">
         <div class="state-result-summary">
-          <span>Voraussichtliches Schuljahr</span>
+          <span>${displayedSchoolYearLabel}</span>
           <strong>${result.schoolYear}</strong>
         </div>
 
