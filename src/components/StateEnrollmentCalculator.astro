@@ -761,6 +761,55 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
     };
   }
 
+  function calculateRheinlandPfalzEnrollment(birthdateValue) {
+    const birthdate = new Date(`${birthdateValue}T12:00:00`);
+    const birthYear = birthdate.getFullYear();
+    const sixthBirthdayYear = birthYear + 6;
+    const month = birthdate.getMonth() + 1;
+    const day = birthdate.getDate();
+
+    let schoolStartYear = sixthBirthdayYear;
+    const projectedSchoolYear = `${schoolStartYear}/${schoolStartYear + 1}`;
+    const cutoffYear = schoolStartYear;
+    let statusLabel = "Regulär schulpflichtig";
+    let statusTone = "regular";
+    let resultHeadline =
+      `Dein Kind wird in Rheinland-Pfalz voraussichtlich im Schuljahr ${projectedSchoolYear} regulär eingeschult.`;
+    let explanation =
+      `Dein Kind wird in Rheinland-Pfalz regulär schulpflichtig, weil es bis zum 31. August ${cutoffYear} sechs Jahre alt ist und damit für das Schuljahr ${projectedSchoolYear} schulpflichtig wird.`;
+    let nextStepTitle = "Nächster sinnvoller Schritt";
+    let nextStepText =
+      "Informiere dich frühzeitig bei der zuständigen Grundschule über Anmeldung, Unterlagen und konkrete Termine.";
+
+    const afterAugust = month > 8 || (month === 8 && day > 31);
+
+    if (afterAugust) {
+      statusLabel = "Kann-Kind";
+      statusTone = "optional";
+      resultHeadline =
+        `Dein Kind ist in Rheinland-Pfalz ein Kann-Kind. Eine Einschulung im Schuljahr ${projectedSchoolYear} kann auf Antrag geprüft werden.`;
+      explanation =
+        `Dein Kind wird nach dem Stichtag 31. August ${cutoffYear} sechs Jahre alt und ist deshalb nicht automatisch schulpflichtig. Eltern können eine vorzeitige Einschulung beantragen, wenn aufgrund der Entwicklung zu erwarten ist, dass das Kind erfolgreich am Unterricht teilnehmen kann.`;
+      nextStepTitle = "Wichtig für dich";
+      nextStepText =
+        "Sprich die zuständige Grundschule direkt an, wenn du eine vorzeitige Einschulung für dein Kind prüfen möchtest.";
+    }
+
+    const schoolYear = `${schoolStartYear}/${schoolStartYear + 1}`;
+    const hasConfirmedDate = schoolYear === "2026/2027";
+
+    return {
+      schoolYear,
+      statusLabel,
+      statusTone,
+      resultHeadline,
+      explanation,
+      nextStepTitle,
+      nextStepText,
+      hasConfirmedDate,
+    };
+  }
+
   function renderSachsenResult(birthdateValue) {
     if (!resultBox || !birthdateValue) return;
 
@@ -796,6 +845,10 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
 
     if (normalizedSlug === "brandenburg") {
       result = calculateBrandenburgEnrollment(birthdateValue);
+    }
+
+    if (normalizedSlug === "rheinland-pfalz") {
+      result = calculateRheinlandPfalzEnrollment(birthdateValue);
     }
 
     let dateDetails = `
@@ -1026,6 +1079,26 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
       `;
     }
 
+    if (result.hasConfirmedDate && normalizedSlug === "rheinland-pfalz") {
+      dateDetails = `
+        <div class="state-result-grid state-result-grid-priority" aria-label="Einschulungstermin ${stateName}">
+          <div class="state-result-card state-result-card-wide">
+            <span>Nächste Einschulung</span>
+            <strong>Termin durch Schule</strong>
+          </div>
+          <div class="state-result-card state-result-card-wide">
+            <span>Erster Schultag</span>
+            <strong>Montag, 10. August 2026</strong>
+          </div>
+        </div>
+        <p class="state-calculator-note">
+          Für ${stateName} beginnt der Unterricht nach den Sommerferien 2026
+          voraussichtlich am Montag, 10. August 2026. Den konkreten Einschulungstermin
+          für Erstklässler legt die zuständige Grundschule fest.
+        </p>
+      `;
+    }
+
     if (result.hasConfirmedDate && normalizedSlug === "nordrhein-westfalen") {
       dateDetails = `
         <div class="state-result-grid state-result-grid-priority" aria-label="Einschulungstermin ${stateName}">
@@ -1071,7 +1144,9 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
       : result.explanation;
 
     const displayedSchoolYearLabel =
-      !schoolYearAlreadyStarted && normalizedSlug === "sachsen" && result.statusTone === "optional"
+      !schoolYearAlreadyStarted &&
+      (normalizedSlug === "sachsen" || normalizedSlug === "rheinland-pfalz") &&
+      result.statusTone === "optional"
         ? "Mögliches Schuljahr"
         : "Voraussichtliches Schuljahr";
 
