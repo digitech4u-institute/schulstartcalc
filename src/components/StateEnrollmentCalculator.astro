@@ -1026,6 +1026,84 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
     };
   }
 
+  function calculateSaarlandEnrollment(birthdateValue) {
+    const birthdate = new Date(`${birthdateValue}T12:00:00`);
+    const birthYear = birthdate.getFullYear();
+    const sixthBirthdayYear = birthYear + 6;
+    const month = birthdate.getMonth() + 1;
+    const day = birthdate.getDate();
+
+    let schoolStartYear = sixthBirthdayYear;
+    let statusLabel = "Regulär schulpflichtig";
+    let statusTone = "regular";
+    let nextStepTitle = "Nächster sinnvoller Schritt";
+    let nextStepText =
+      "Informiere dich frühzeitig bei der zuständigen Grundschule über Anmeldung, schul- oder amtsärztliche Untersuchung und konkrete Termine.";
+
+    const afterJune = month > 6 || (month === 6 && day > 30);
+    const januaryToDecember = month >= 1 && month <= 12;
+
+    if (afterJune) {
+      statusLabel = "Kann-Kind";
+      statusTone = "optional";
+      nextStepTitle = "Wichtig für dich";
+      nextStepText =
+        "Sprich die zuständige Grundschule direkt an, wenn du eine vorzeitige Einschulung für dein Kind prüfen möchtest.";
+    }
+
+    if (!afterJune && januaryToDecember) {
+      const previousSchoolStartYear = sixthBirthdayYear - 1;
+      const today = new Date();
+      const currentYear = today.getFullYear();
+      const currentSchoolStartYear = today >= new Date(currentYear, 7, 1, 0, 0, 0)
+        ? currentYear
+        : currentYear - 1;
+      const previousSchoolYearIsFuture = previousSchoolStartYear > currentSchoolStartYear;
+
+      if (previousSchoolYearIsFuture) {
+        schoolStartYear = previousSchoolStartYear;
+        statusLabel = "Kann-Kind";
+        statusTone = "optional";
+        nextStepTitle = "Wichtig für dich";
+        nextStepText =
+          "Sprich die zuständige Grundschule direkt an, wenn du eine sehr frühe Einschulung für dein Kind prüfen möchtest. In diesem Fall können zusätzliche Einschätzungen erforderlich sein.";
+      }
+    }
+
+    const schoolYear = `${schoolStartYear}/${schoolStartYear + 1}`;
+    const cutoffYear = schoolStartYear;
+    const hasConfirmedDate = schoolYear === "2026/2027";
+    let resultHeadline =
+      `Dein Kind wird im Saarland voraussichtlich im Schuljahr ${schoolYear} regulär eingeschult.`;
+    let explanation =
+      `Dein Kind wird im Saarland regulär schulpflichtig, weil es bis zum 30. Juni ${cutoffYear} sechs Jahre alt wird und damit mit Beginn des Schuljahres ${schoolYear} schulpflichtig ist.`;
+
+    if (statusTone === "optional" && schoolStartYear === sixthBirthdayYear) {
+      resultHeadline =
+        `Dein Kind ist im Saarland ein Kann-Kind. Eine Einschulung im Schuljahr ${schoolYear} kann auf Antrag geprüft werden.`;
+      explanation =
+        `Dein Kind vollendet das sechste Lebensjahr nach dem Stichtag 30. Juni ${cutoffYear} und ist deshalb nicht automatisch schulpflichtig. Eine vorzeitige Einschulung im Schuljahr ${schoolYear} kann auf Antrag der Erziehungsberechtigten geprüft werden.`;
+    }
+
+    if (statusTone === "optional" && schoolStartYear < sixthBirthdayYear) {
+      resultHeadline =
+        `Dein Kind kann im Saarland nur auf Antrag sehr früh im Schuljahr ${schoolYear} aufgenommen werden.`;
+      explanation =
+        `Dein Kind vollendet das sechste Lebensjahr erst im Kalenderjahr nach Beginn des Schuljahres ${schoolYear}. Im Saarland kann eine vorzeitige Aufnahme zu Anfang des Schuljahres auf Antrag geprüft werden; die Entscheidung trifft die Schulleitung auf Grundlage der vorgesehenen ärztlichen Untersuchung und Beratung.`;
+    }
+
+    return {
+      schoolYear,
+      statusLabel,
+      statusTone,
+      resultHeadline,
+      explanation,
+      nextStepTitle,
+      nextStepText,
+      hasConfirmedDate,
+    };
+  }
+
   function renderSachsenResult(birthdateValue) {
     if (!resultBox || !birthdateValue) return;
 
@@ -1081,6 +1159,10 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
 
     if (normalizedSlug === "mecklenburg-vorpommern") {
       result = calculateMecklenburgVorpommernEnrollment(birthdateValue);
+    }
+
+    if (normalizedSlug === "saarland") {
+      result = calculateSaarlandEnrollment(birthdateValue);
     }
 
     let dateDetails = `
@@ -1417,6 +1499,28 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
       `;
     }
 
+    if (result.hasConfirmedDate && normalizedSlug === "saarland") {
+      dateDetails = `
+        <div class="state-result-grid state-result-grid-priority" aria-label="Einschulungstermin ${stateName}">
+          <div class="state-result-card state-result-card-wide">
+            <span>Nächste Einschulung</span>
+            <strong>Montag, 10. August 2026</strong>
+          </div>
+          <div class="state-result-card state-result-card-wide">
+            <span>Erster Schultag</span>
+            <strong>Montag, 10. August 2026</strong>
+          </div>
+        </div>
+        <p class="state-calculator-note">
+          Für ${stateName} enden die Sommerferien 2026 am Freitag,
+          7. August 2026. Die Einschulung der Erstklässler fällt voraussichtlich
+          auf Montag, 10. August 2026 – den ersten regulären Schultag nach den
+          Sommerferien. Einzelne organisatorische Details können je nach Schule
+          abweichen.
+        </p>
+      `;
+    }
+
     if (result.hasConfirmedDate && normalizedSlug === "nordrhein-westfalen") {
       dateDetails = `
         <div class="state-result-grid state-result-grid-priority" aria-label="Einschulungstermin ${stateName}">
@@ -1482,7 +1586,7 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
       ? "Wichtig für dich"
       : result.nextStepTitle;
     const displayedNextStepText = schoolYearIsActive
-      ? normalizedSlug === "mecklenburg-vorpommern"
+      ? normalizedSlug === "mecklenburg-vorpommern" || normalizedSlug === "saarland"
         ? "Wende dich bei aktuellen Fragen direkt an die zuständige Grundschule."
         : result.nextStepText
       : schoolYearIsCompleted
@@ -1496,7 +1600,8 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
         normalizedSlug === "schleswig-holstein" ||
         normalizedSlug === "thueringen" ||
         normalizedSlug === "sachsen-anhalt" ||
-        normalizedSlug === "mecklenburg-vorpommern") &&
+        normalizedSlug === "mecklenburg-vorpommern" ||
+        normalizedSlug === "saarland") &&
       result.statusTone === "optional"
         ? "Mögliches Schuljahr"
         : "Voraussichtliches Schuljahr";
