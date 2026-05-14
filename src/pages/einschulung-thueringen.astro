@@ -24,7 +24,7 @@ const faqSchema = {
       name: "Wann ist die Einschulung in Thüringen 2026?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Für das Schuljahr 2026/2027 endet die Sommerferienzeit in Thüringen am Freitag, 14. August 2026. Der erste reguläre Schultag ist damit Montag, 17. August 2026. Den konkreten Einschulungstermin für Erstklässler legt die zuständige Grundschule fest.",
+        text: "Für das Schuljahr 2026/2027 endet die Sommerferienzeit in Thüringen am Freitag, 14. August 2026. Der erste reguläre Schultag und die voraussichtliche Einschulung der Erstklässler fallen damit auf Montag, 17. August 2026. Einzelne organisatorische Details können je nach Schule abweichen.",
       },
     },
     {
@@ -89,9 +89,8 @@ const faqSchema = {
           Wann kommt mein Kind in Thüringen in die Schule? Der Einschulungsrechner
           zeigt dir anhand des Geburtsdatums das voraussichtliche Schuljahr. In
           Thüringen gilt der Stichtag 1. August. Für das Schuljahr 2026/2027
-          beginnt der Unterricht nach den Sommerferien voraussichtlich am Montag,
-          17. August 2026 – den konkreten Einschulungstermin für Erstklässler
-          legt die zuständige Grundschule fest.
+          fallen die Einschulung der Erstklässler und der erste Schultag
+          voraussichtlich auf Montag, 17. August 2026.
         </p>
 
         <StateEnrollmentCalculator
@@ -106,7 +105,7 @@ const faqSchema = {
         <div class="quick-facts quick-facts-master" aria-label="Kurzüberblick Einschulung Thüringen">
           <div class="fact-card fact-card-highlight">
             <span>Nächste Einschulung</span>
-            <strong>Termin durch Schule</strong>
+            <strong>Montag, 17. August 2026</strong>
           </div>
 
           <div class="fact-card fact-card-highlight">
@@ -136,9 +135,10 @@ const faqSchema = {
           </p>
 
           <p>
-            Beispiel: Wird ein Kind am 15. Juli 2020 geboren, ist es am
-            1. August 2026 sechs Jahre alt. Damit ist das Kind voraussichtlich
-            für das Schuljahr 2026/2027 regulär schulpflichtig.
+            Beispiel: Wird ein Kind am 15. Juli 2020 geboren, wird es am
+            15. Juli 2026 sechs Jahre alt. Da dieses Datum vor dem Stichtag
+            1. August liegt, ist das Kind voraussichtlich für das Schuljahr
+            2026/2027 regulär schulpflichtig.
           </p>
 
           <p>
@@ -154,8 +154,16 @@ const faqSchema = {
 
           <p>
             In Thüringen gilt der 1. August als maßgeblicher Stichtag für die
-            Schulpflicht. Kinder, die bis zu diesem Datum sechs Jahre alt sind,
-            werden mit Beginn des Schuljahres schulpflichtig.
+            Schulpflicht. Kinder, die spätestens an diesem Tag sechs Jahre alt
+            sind, werden mit Beginn des Schuljahres schulpflichtig.
+          </p>
+
+          <p>
+            Entscheidend ist also nicht nur das Geburtsjahr, sondern ob der
+            sechste Geburtstag bis einschließlich 1. August erreicht ist. Liegt
+            der Geburtstag nach dem Stichtag, besteht keine automatische
+            Schulpflicht für dieses Schuljahr; eine vorzeitige Einschulung kann
+            aber als Kann-Kind auf Antrag geprüft werden.
           </p>
         </section>
 
@@ -212,9 +220,10 @@ const faqSchema = {
               <h3>Wann ist die Einschulung in Thüringen 2026?</h3>
               <p>
                 Für das Schuljahr 2026/2027 endet die Sommerferienzeit in Thüringen
-                am Freitag, 14. August 2026. Der erste reguläre Schultag ist damit
-                Montag, 17. August 2026. Den konkreten Einschulungstermin für
-                Erstklässler legt die zuständige Grundschule fest.
+                am Freitag, 14. August 2026. Der erste reguläre Schultag und die
+                voraussichtliche Einschulung der Erstklässler fallen damit auf
+                Montag, 17. August 2026. Einzelne organisatorische Details können
+                je nach Schule abweichen.
               </p>
             </article>
 
@@ -273,11 +282,11 @@ const faqSchema = {
               <p class="source-kicker">Offizielle Quelle 1</p>
               <a
                 class="source-link"
-                href="https://landesrecht.thueringen.de/bsth/document/jlr-SchulGTH2003V34P18"
+                href="https://bildung.thueringen.de/fileadmin/ministerium/publikationen/thueringer_schulgesetz.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Thüringer Schulgesetz: § 18 Beginn der Vollzeitschulpflicht
+                Thüringer Ministerium für Bildung: Thüringer Schulgesetz
               </a>
             </div>
 
@@ -285,7 +294,7 @@ const faqSchema = {
               <p class="source-kicker">Offizielle Quelle 2</p>
               <a
                 class="source-link"
-                href="https://bildung.thueringen.de/schule/ferien"
+                href="https://bildung.thueringen.de/schule/schulwesen/ferien"
                 target="_blank"
                 rel="noopener noreferrer"
               >
