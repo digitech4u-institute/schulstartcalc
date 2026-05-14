@@ -258,16 +258,36 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
     }
   }
 
-  function hasCalculatedSchoolYearAlreadyStarted(result) {
-    if (!result?.schoolYear) return false;
+  function getCalculatedSchoolYearTimeState(result) {
+    if (!result?.schoolYear) {
+      return {
+        hasStarted: false,
+        isActive: false,
+        isCompleted: false,
+      };
+    }
 
     const startYear = Number(result.schoolYear.split("/")[0]);
-    if (!Number.isFinite(startYear)) return false;
+    if (!Number.isFinite(startYear)) {
+      return {
+        hasStarted: false,
+        isActive: false,
+        isCompleted: false,
+      };
+    }
 
     const schoolYearStart = new Date(startYear, 7, 1, 0, 0, 0);
+    const schoolYearEnd = new Date(startYear + 1, 7, 1, 0, 0, 0);
     const today = new Date();
 
-    return today >= schoolYearStart;
+    const isCompleted = today >= schoolYearEnd;
+    const isActive = today >= schoolYearStart && today < schoolYearEnd;
+
+    return {
+      hasStarted: isActive || isCompleted,
+      isActive,
+      isCompleted,
+    };
   }
 
   function updatePageResultState(result) {
@@ -859,6 +879,55 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
     };
   }
 
+  function calculateThueringenEnrollment(birthdateValue) {
+    const birthdate = new Date(`${birthdateValue}T12:00:00`);
+    const birthYear = birthdate.getFullYear();
+    const sixthBirthdayYear = birthYear + 6;
+    const month = birthdate.getMonth() + 1;
+    const day = birthdate.getDate();
+
+    let schoolStartYear = sixthBirthdayYear;
+    const projectedSchoolYear = `${schoolStartYear}/${schoolStartYear + 1}`;
+    const cutoffYear = schoolStartYear;
+    let statusLabel = "Regulär schulpflichtig";
+    let statusTone = "regular";
+    let resultHeadline =
+      `Dein Kind wird in Thüringen voraussichtlich im Schuljahr ${projectedSchoolYear} regulär eingeschult.`;
+    let explanation =
+      `Dein Kind wird in Thüringen regulär schulpflichtig, weil es bis zum 1. August ${cutoffYear} sechs Jahre alt ist und damit für das Schuljahr ${projectedSchoolYear} schulpflichtig wird.`;
+    let nextStepTitle = "Nächster sinnvoller Schritt";
+    let nextStepText =
+      "Informiere dich frühzeitig bei der zuständigen Grundschule über Anmeldung, schulärztliche Untersuchung und konkrete Termine.";
+
+    const afterAugustFirst = month > 8 || (month === 8 && day > 1);
+
+    if (afterAugustFirst) {
+      statusLabel = "Kann-Kind";
+      statusTone = "optional";
+      resultHeadline =
+        `Dein Kind ist in Thüringen ein Kann-Kind. Eine Einschulung im Schuljahr ${projectedSchoolYear} kann auf Antrag geprüft werden.`;
+      explanation =
+        `Dein Kind ist am 1. August ${cutoffYear} noch nicht sechs Jahre alt und deshalb nicht automatisch schulpflichtig. Eine vorzeitige Einschulung im Schuljahr ${projectedSchoolYear} kann auf Antrag der Eltern geprüft werden, wenn dein Kind am 30. Juni mindestens fünf Jahre alt ist. Die Entscheidung trifft die Schulleitung im Benehmen mit dem Schularzt.`;
+      nextStepTitle = "Wichtig für dich";
+      nextStepText =
+        "Sprich die zuständige Grundschule direkt an, wenn du eine vorzeitige Einschulung für dein Kind prüfen möchtest.";
+    }
+
+    const schoolYear = `${schoolStartYear}/${schoolStartYear + 1}`;
+    const hasConfirmedDate = schoolYear === "2026/2027";
+
+    return {
+      schoolYear,
+      statusLabel,
+      statusTone,
+      resultHeadline,
+      explanation,
+      nextStepTitle,
+      nextStepText,
+      hasConfirmedDate,
+    };
+  }
+
   function renderSachsenResult(birthdateValue) {
     if (!resultBox || !birthdateValue) return;
 
@@ -902,6 +971,10 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
 
     if (normalizedSlug === "schleswig-holstein") {
       result = calculateSchleswigHolsteinEnrollment(birthdateValue);
+    }
+
+    if (normalizedSlug === "thueringen") {
+      result = calculateThueringenEnrollment(birthdateValue);
     }
 
     let dateDetails = `
@@ -1174,6 +1247,27 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
       `;
     }
 
+    if (result.hasConfirmedDate && normalizedSlug === "thueringen") {
+      dateDetails = `
+        <div class="state-result-grid state-result-grid-priority" aria-label="Einschulungstermin ${stateName}">
+          <div class="state-result-card state-result-card-wide">
+            <span>Nächste Einschulung</span>
+            <strong>Montag, 17. August 2026</strong>
+          </div>
+          <div class="state-result-card state-result-card-wide">
+            <span>Erster Schultag</span>
+            <strong>Montag, 17. August 2026</strong>
+          </div>
+        </div>
+        <p class="state-calculator-note">
+          Für ${stateName} endet die Sommerferienzeit 2026 am Freitag,
+          14. August 2026. Der erste reguläre Schultag und die voraussichtliche
+          Einschulung der Erstklässler fallen damit auf Montag, 17. August 2026.
+          Einzelne organisatorische Details können je nach Schule abweichen.
+        </p>
+      `;
+    }
+
     if (result.hasConfirmedDate && normalizedSlug === "nordrhein-westfalen") {
       dateDetails = `
         <div class="state-result-grid state-result-grid-priority" aria-label="Einschulungstermin ${stateName}">
@@ -1196,45 +1290,72 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
       `;
     }
 
-    const schoolYearAlreadyStarted = hasCalculatedSchoolYearAlreadyStarted(result);
+    const schoolYearTimeState = getCalculatedSchoolYearTimeState(result);
+    const schoolYearAlreadyStarted = schoolYearTimeState.hasStarted;
+    const schoolYearIsActive = schoolYearTimeState.isActive;
+    const schoolYearIsCompleted = schoolYearTimeState.isCompleted;
 
-    if (schoolYearAlreadyStarted) {
+    if (schoolYearIsActive) {
       displayedHeadline = `Das berechnete Schuljahr <span class="result-date-nowrap">${result.schoolYear}</span> hat bereits begonnen.`;
       dateDetails = `
         <p class="state-calculator-note">
-          Das berechnete Schuljahr ${result.schoolYear} hat bereits begonnen.
           Konkrete Einschulungstermine werden hier nicht mehr angezeigt, weil
-          die reguläre Einschulung für dieses Schuljahr bereits zeitlich
-          eingeordnet ist.
+          die reguläre Einschulung für dieses Schuljahr zeitlich bereits
+          eingeordnet ist. Für verbindliche Auskünfte ist die zuständige
+          Grundschule maßgeblich.
+        </p>
+      `;
+    }
+
+    if (schoolYearIsCompleted) {
+      displayedHeadline = `Das berechnete Schuljahr <span class="result-date-nowrap">${result.schoolYear}</span> ist bereits abgeschlossen.`;
+      dateDetails = `
+        <p class="state-calculator-note">
+          Für dieses Schuljahr werden keine Einschulungstermine mehr angezeigt.
+          Wenn du Fragen zur Einschulung deines Kindes hast, wende dich direkt
+          an die zuständige Grundschule.
         </p>
       `;
     }
 
     const displayedStatusTone = schoolYearAlreadyStarted ? "following" : result.statusTone;
-    const displayedStatusLabel = schoolYearAlreadyStarted
-      ? "Schuljahr bereits begonnen"
-      : result.statusLabel;
-    const displayedExplanation = schoolYearAlreadyStarted
-      ? `Das berechnete Schuljahr ${result.schoolYear} liegt bereits in der Vergangenheit beziehungsweise hat bereits begonnen. Für verbindliche nächste Schritte ist jetzt die zuständige Grundschule maßgeblich.`
-      : result.explanation;
+    const displayedStatusLabel = schoolYearIsActive
+      ? "Schuljahr hat bereits begonnen"
+      : schoolYearIsCompleted
+        ? "Schuljahr ist bereits abgeschlossen"
+        : result.statusLabel;
+    const displayedExplanation = schoolYearIsActive
+      ? `Dein Kind wäre in ${stateName} voraussichtlich im Schuljahr ${result.schoolYear} eingeschult worden – dieses Schuljahr hat jedoch bereits begonnen. Für konkrete Fragen zur Einschulung ist die zuständige Grundschule maßgeblich.`
+      : schoolYearIsCompleted
+        ? `Dein Kind wäre in ${stateName} voraussichtlich im Schuljahr ${result.schoolYear} eingeschult worden. Da dieses Schuljahr bereits abgeschlossen ist, dient das Ergebnis nur noch der Einordnung.`
+        : result.explanation;
+    const displayedNextStepTitle = schoolYearAlreadyStarted
+      ? "Wichtig für dich"
+      : result.nextStepTitle;
+    const displayedNextStepText = schoolYearIsActive
+      ? "Informiere dich frühzeitig bei der zuständigen Grundschule über Anmeldung, schulärztliche Untersuchung und konkrete Termine."
+      : schoolYearIsCompleted
+        ? "Wende dich bei Fragen direkt an die zuständige Grundschule oder Schulbehörde."
+        : result.nextStepText;
 
     const displayedSchoolYearLabel =
       !schoolYearAlreadyStarted &&
       (normalizedSlug === "sachsen" ||
         normalizedSlug === "rheinland-pfalz" ||
-        normalizedSlug === "schleswig-holstein") &&
+        normalizedSlug === "schleswig-holstein" ||
+        normalizedSlug === "thueringen") &&
       result.statusTone === "optional"
         ? "Mögliches Schuljahr"
         : "Voraussichtliches Schuljahr";
 
-    const schoolYearStartedWarning = schoolYearAlreadyStarted
+    const schoolYearStartedWarning = schoolYearIsActive
       ? `
         <div class="state-result-warning-box">
           <strong>Wichtiger Hinweis</strong>
           <p>
-            Das Ergebnis zeigt keine reguläre Einschulungsempfehlung mehr,
+            Das Ergebnis ist keine neue Einschulungsempfehlung mehr,
             sondern dient nur noch der zeitlichen Einordnung. Bitte wende dich
-            direkt an die zuständige Grundschule.
+            bei aktuellen Fragen direkt an die zuständige Grundschule.
           </p>
         </div>
       `
@@ -1271,8 +1392,8 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
       </div>
 
       <div class="state-result-next-step">
-        <span>${result.nextStepTitle}</span>
-        <p>${result.nextStepText}</p>
+        <span>${displayedNextStepTitle}</span>
+        <p>${displayedNextStepText}</p>
       </div>
 
       <p class="state-calculator-note state-calculator-note-muted">
