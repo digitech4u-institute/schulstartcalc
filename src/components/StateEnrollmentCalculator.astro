@@ -977,6 +977,55 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
     };
   }
 
+  function calculateMecklenburgVorpommernEnrollment(birthdateValue) {
+    const birthdate = new Date(`${birthdateValue}T12:00:00`);
+    const birthYear = birthdate.getFullYear();
+    const sixthBirthdayYear = birthYear + 6;
+    const month = birthdate.getMonth() + 1;
+    const day = birthdate.getDate();
+
+    let schoolStartYear = sixthBirthdayYear;
+    const projectedSchoolYear = `${schoolStartYear}/${schoolStartYear + 1}`;
+    const cutoffYear = schoolStartYear;
+    let statusLabel = "Regulär schulpflichtig";
+    let statusTone = "regular";
+    let resultHeadline =
+      `Dein Kind wird in Mecklenburg-Vorpommern voraussichtlich im Schuljahr ${projectedSchoolYear} regulär eingeschult.`;
+    let explanation =
+      `Dein Kind wird in Mecklenburg-Vorpommern regulär schulpflichtig, weil es bis zum 30. Juni ${cutoffYear} sechs Jahre alt wird und damit ab dem 1. August ${cutoffYear} schulpflichtig ist.`;
+    let nextStepTitle = "Nächster sinnvoller Schritt";
+    let nextStepText =
+      "Informiere dich frühzeitig bei der zuständigen Grundschule über Anmeldung, schulärztliche Untersuchung und konkrete Termine.";
+
+    const afterJune = month > 6 || (month === 6 && day > 30);
+
+    if (afterJune) {
+      statusLabel = "Kann-Kind";
+      statusTone = "optional";
+      resultHeadline =
+        `Dein Kind ist in Mecklenburg-Vorpommern ein Kann-Kind. Eine Einschulung im Schuljahr ${projectedSchoolYear} kann auf Antrag geprüft werden.`;
+      explanation =
+        `Dein Kind wird nach dem Stichtag 30. Juni ${cutoffYear} sechs Jahre alt und ist deshalb nicht automatisch schulpflichtig. Kinder, die bis zum 30. Juni des darauffolgenden Jahres sechs Jahre alt werden, können auf Antrag der Erziehungsberechtigten vorzeitig eingeschult werden, wenn sie für den Schulbesuch hinreichend entwickelt sind.`;
+      nextStepTitle = "Wichtig für dich";
+      nextStepText =
+        "Sprich die zuständige Grundschule direkt an, wenn du eine vorzeitige Einschulung für dein Kind prüfen möchtest.";
+    }
+
+    const schoolYear = `${schoolStartYear}/${schoolStartYear + 1}`;
+    const hasConfirmedDate = schoolYear === "2026/2027";
+
+    return {
+      schoolYear,
+      statusLabel,
+      statusTone,
+      resultHeadline,
+      explanation,
+      nextStepTitle,
+      nextStepText,
+      hasConfirmedDate,
+    };
+  }
+
   function renderSachsenResult(birthdateValue) {
     if (!resultBox || !birthdateValue) return;
 
@@ -1028,6 +1077,10 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
 
     if (normalizedSlug === "sachsen-anhalt") {
       result = calculateSachsenAnhaltEnrollment(birthdateValue);
+    }
+
+    if (normalizedSlug === "mecklenburg-vorpommern") {
+      result = calculateMecklenburgVorpommernEnrollment(birthdateValue);
     }
 
     let dateDetails = `
@@ -1343,6 +1396,27 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
       `;
     }
 
+    if (result.hasConfirmedDate && normalizedSlug === "mecklenburg-vorpommern") {
+      dateDetails = `
+        <div class="state-result-grid state-result-grid-priority" aria-label="Einschulungstermin ${stateName}">
+          <div class="state-result-card state-result-card-wide">
+            <span>Nächste Einschulung</span>
+            <strong>Samstag, 22. August 2026</strong>
+          </div>
+          <div class="state-result-card state-result-card-wide">
+            <span>Erster Schultag</span>
+            <strong>Montag, 24. August 2026</strong>
+          </div>
+        </div>
+        <p class="state-calculator-note">
+          Die Sommerferien in ${stateName} enden im Schuljahr 2026/2027 am
+          Samstag, 22. August 2026. Die Einschulung findet voraussichtlich
+          ebenfalls an diesem Tag statt; der erste reguläre Schultag ist Montag,
+          24. August 2026.
+        </p>
+      `;
+    }
+
     if (result.hasConfirmedDate && normalizedSlug === "nordrhein-westfalen") {
       dateDetails = `
         <div class="state-result-grid state-result-grid-priority" aria-label="Einschulungstermin ${stateName}">
@@ -1408,7 +1482,9 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
       ? "Wichtig für dich"
       : result.nextStepTitle;
     const displayedNextStepText = schoolYearIsActive
-      ? result.nextStepText
+      ? normalizedSlug === "mecklenburg-vorpommern"
+        ? "Wende dich bei aktuellen Fragen direkt an die zuständige Grundschule."
+        : result.nextStepText
       : schoolYearIsCompleted
         ? "Wende dich bei Fragen direkt an die zuständige Grundschule oder Schulbehörde."
         : result.nextStepText;
@@ -1419,7 +1495,8 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
         normalizedSlug === "rheinland-pfalz" ||
         normalizedSlug === "schleswig-holstein" ||
         normalizedSlug === "thueringen" ||
-        normalizedSlug === "sachsen-anhalt") &&
+        normalizedSlug === "sachsen-anhalt" ||
+        normalizedSlug === "mecklenburg-vorpommern") &&
       result.statusTone === "optional"
         ? "Mögliches Schuljahr"
         : "Voraussichtliches Schuljahr";

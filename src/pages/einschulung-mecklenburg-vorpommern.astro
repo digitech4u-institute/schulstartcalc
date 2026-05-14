@@ -1,11 +1,66 @@
-
-
 ---
+import StateEnrollmentCalculator from "../components/StateEnrollmentCalculator.astro";
+
 const pageTitle =
-  "Einschulung Mecklenburg-Vorpommern: Stichtag und Schuljahr";
+  "Einschulung Mecklenburg-Vorpommern 2026: Schulstart, Stichtag und Schuljahr";
 
 const pageDescription =
-  "Wann kommt mein Kind in Mecklenburg-Vorpommern in die Schule? Erfahre alles zu Einschulungsstichtag, vorzeitiger Einschulung, Zurückstellung und voraussichtlichem Schuljahr.";
+  "Wann kommt mein Kind in Mecklenburg-Vorpommern in die Schule? Alle Informationen zu Stichtag 30. Juni, Schulanmeldung, Kann-Kind-Regelung, Zurückstellung und Einschulung 2026.";
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: [
+    {
+      "@type": "Question",
+      name: "Welcher Einschulungsstichtag gilt in Mecklenburg-Vorpommern?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "In Mecklenburg-Vorpommern gilt grundsätzlich der 30. Juni als Einschulungsstichtag. Kinder, die bis zu diesem Datum sechs Jahre alt werden, werden mit dem 1. August desselben Jahres schulpflichtig.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Wann ist die Einschulung in Mecklenburg-Vorpommern 2026?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Die Sommerferien in Mecklenburg-Vorpommern enden im Schuljahr 2026/2027 am Samstag, 22. August 2026. Die Einschulung findet voraussichtlich ebenfalls an diesem Tag statt; der erste reguläre Schultag ist Montag, 24. August 2026.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Was bedeutet Kann-Kind in Mecklenburg-Vorpommern?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Als Kann-Kind gilt in Mecklenburg-Vorpommern ein Kind, das nach dem regulären Stichtag 30. Juni sechs Jahre alt wird und deshalb nicht automatisch schulpflichtig ist. Kinder, die bis zum 30. Juni des darauffolgenden Jahres sechs Jahre alt werden, können auf Antrag der Erziehungsberechtigten vorzeitig eingeschult werden, wenn sie für den Schulbesuch hinreichend entwickelt sind.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Wann findet die Schulanmeldung in Mecklenburg-Vorpommern statt?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Die Schulanmeldung erfolgt in Mecklenburg-Vorpommern bei der zuständigen Grundschule. Die konkreten Termine, benötigten Unterlagen und weiteren Schritte gibt die Schule oder der Schulträger bekannt. Zum Einschulungsverfahren gehört in der Regel auch die schulärztliche Untersuchung.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Kann die Einschulung in Mecklenburg-Vorpommern zurückgestellt werden?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Eine Zurückstellung ist in Mecklenburg-Vorpommern auf Antrag der Erziehungsberechtigten nur aus erheblichen gesundheitlichen Gründen möglich, wenn ein erfolgreicher Schulbesuch noch nicht zu erwarten ist. Die Entscheidung trifft die Schulleitung im Einvernehmen mit dem Schularzt.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Ist das Ergebnis zur Einschulung in Mecklenburg-Vorpommern verbindlich?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Nein. Der Einschulungsrechner und diese Informationsseite dienen der Orientierung. Verbindliche Informationen erhältst du bei der zuständigen Grundschule oder Schulbehörde in Mecklenburg-Vorpommern.",
+      },
+    },
+  ],
+};
 ---
 
 <html lang="de">
@@ -15,129 +70,138 @@ const pageDescription =
     <title>{pageTitle}</title>
     <meta name="description" content={pageDescription} />
     <link rel="canonical" href="https://www.einschulungsrechner.de/einschulung-mecklenburg-vorpommern/" />
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "FAQPage",
-        "mainEntity": [
-          {
-            "@type": "Question",
-            "name": "Welcher Einschulungsstichtag gilt in Mecklenburg-Vorpommern?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "In Mecklenburg-Vorpommern gilt grundsätzlich der 30. Juni als Einschulungsstichtag. Kinder, die bis zu diesem Datum sechs Jahre alt werden, werden mit dem 1. August desselben Jahres schulpflichtig."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Kann mein Kind in Mecklenburg-Vorpommern früher eingeschult werden?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Kinder, die bis zum 30. Juni des darauffolgenden Jahres sechs Jahre alt werden, können auf Antrag der Erziehungsberechtigten vorzeitig eingeschult werden, wenn sie für den Schulbesuch hinreichend entwickelt sind."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Ist das Ergebnis zur Einschulung in Mecklenburg-Vorpommern verbindlich?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Nein. Der Einschulungsrechner und diese Informationsseite dienen der Orientierung. Verbindliche Informationen erhältst du bei der zuständigen Grundschule oder Schulbehörde in Mecklenburg-Vorpommern."
-            }
-          }
-        ]
-      }
-    </script>
+    <script type="application/ld+json" set:html={JSON.stringify(faqSchema)}></script>
   </head>
 
   <body>
     <main class="state-page">
-      <a class="back-link" href="/">← Zum Einschulungsrechner</a>
+      <a class="back-link" href="/">← Zur Startseite</a>
 
       <article class="state-card">
         <p class="state-kicker">Mecklenburg-Vorpommern</p>
 
         <h1>
           Einschulung in<br />
-          Mecklenburg-<br class="desktop-title-break" />Vorpommern:<br />
-          Stichtag und Schuljahr
+          Mecklenburg-Vorpommern:<br />
+          Schulstart, Stichtag und Schuljahr
         </h1>
 
         <p class="lead">
-          In Mecklenburg-Vorpommern gilt für die Einschulung grundsätzlich der
-          Stichtag 30. Juni. Kinder, die bis zu diesem Datum sechs Jahre alt
-          werden, werden mit dem 1. August desselben Jahres schulpflichtig.
+          Wann kommt mein Kind in Mecklenburg-Vorpommern in die Schule? Der Einschulungsrechner
+          zeigt dir anhand des Geburtsdatums das voraussichtliche Schuljahr. In
+          Mecklenburg-Vorpommern gilt der Stichtag 30. Juni. Für das Schuljahr
+          2026/2027 fällt die Einschulung voraussichtlich auf Samstag,
+          22. August 2026 – der erste Schultag ist Montag, 24. August 2026.
         </p>
 
-        <div class="quick-facts" aria-label="Kurzüberblick Einschulung Mecklenburg-Vorpommern">
+        <StateEnrollmentCalculator
+          stateName="Mecklenburg-Vorpommern"
+          stateSlug="mecklenburg-vorpommern"
+          calculatorKicker="Mecklenburg-Vorpommern-Rechner"
+          resultKicker="Mecklenburg-Vorpommern-Ergebnis"
+          headline="Einschulung in Mecklenburg-Vorpommern berechnen"
+          intro="Gib das Geburtsdatum deines Kindes ein. Mecklenburg-Vorpommern ist hier bereits vorausgewählt. Wenn du von der Startseite kommst, übernehmen wir das Geburtsdatum automatisch aus dem Link."
+        />
+
+        <div class="quick-facts quick-facts-master" aria-label="Kurzüberblick Einschulung Mecklenburg-Vorpommern">
+          <div class="fact-card fact-card-highlight">
+            <span>Nächste Einschulung</span>
+            <strong>Samstag, 22. August 2026</strong>
+          </div>
+
+          <div class="fact-card fact-card-highlight">
+            <span>Erster Schultag</span>
+            <strong>Montag, 24. August 2026</strong>
+          </div>
+
           <div class="fact-card">
             <span>Stichtag</span>
             <strong>30. Juni</strong>
           </div>
 
           <div class="fact-card">
-            <span>Schulpflicht</span>
-            <strong>ab 1. August</strong>
-          </div>
-
-          <div class="fact-card">
-            <span>Sonderfall</span>
-            <strong>Antrag möglich</strong>
+            <span>Sonderregel</span>
+            <strong>Kann-Kind auf Antrag</strong>
           </div>
         </div>
+
+        <section class="example-box">
+          <h2>Wie funktioniert der Einschulungsrechner für Mecklenburg-Vorpommern?</h2>
+
+          <p>
+            Der Einschulungsrechner prüft das Geburtsdatum deines Kindes und
+            vergleicht es mit den Einschulungsregeln in Mecklenburg-Vorpommern.
+            Entscheidend ist der Stichtag 30. Juni. Wird dein Kind bis zu diesem
+            Datum sechs Jahre alt, ist es in Mecklenburg-Vorpommern regulär
+            schulpflichtig.
+          </p>
+
+          <p>
+            Beispiel: Wird ein Kind am 15. Juni 2020 geboren, wird es am
+            15. Juni 2026 sechs Jahre alt. Da dieses Datum vor dem Stichtag
+            30. Juni liegt, ist das Kind voraussichtlich für das Schuljahr
+            2026/2027 regulär schulpflichtig.
+          </p>
+
+          <p>
+            Wird ein Kind dagegen erst nach dem 30. Juni sechs Jahre alt, ist es
+            nicht automatisch regulär schulpflichtig. Eine vorzeitige Einschulung
+            kann auf Antrag der Erziehungsberechtigten geprüft werden.
+          </p>
+        </section>
 
         <section>
           <h2>Wann ist ein Kind in Mecklenburg-Vorpommern schulpflichtig?</h2>
 
           <p>
-            Ein Kind wird in Mecklenburg-Vorpommern regulär schulpflichtig, wenn
-            es spätestens am 30. Juni eines Jahres sechs Jahre alt wird. Die
-            Schulpflicht beginnt dann mit dem 1. August desselben Jahres.
+            In Mecklenburg-Vorpommern gilt der 30. Juni als maßgeblicher Stichtag
+            für die Schulpflicht. Kinder, die spätestens an diesem Tag sechs Jahre
+            alt sind, werden mit dem 1. August desselben Jahres schulpflichtig.
+          </p>
+
+          <p>
+            Entscheidend ist also, ob der sechste Geburtstag bis einschließlich
+            30. Juni erreicht ist. Liegt der Geburtstag nach dem Stichtag, besteht
+            keine automatische Schulpflicht für dieses Schuljahr; eine vorzeitige
+            Einschulung kann aber als Kann-Kind auf Antrag geprüft werden.
           </p>
         </section>
 
         <section>
-          <h2>Kann mein Kind früher eingeschult werden?</h2>
+          <h2>Kann mein Kind in Mecklenburg-Vorpommern früher eingeschult werden?</h2>
 
           <p>
-            Eine vorzeitige Einschulung kann auf Antrag der Erziehungsberechtigten
-            möglich sein. Das betrifft Kinder, die bis zum 30. Juni des
-            darauffolgenden Jahres sechs Jahre alt werden und für den Schulbesuch
-            körperlich, geistig und verhaltensmäßig hinreichend entwickelt sind.
+            Kinder, die bis zum 30. Juni des darauffolgenden Jahres sechs Jahre alt
+            werden, können auf Antrag der Erziehungsberechtigten mit Beginn des
+            Schuljahres vorzeitig eingeschult werden. Voraussetzung ist, dass das
+            Kind für den Schulbesuch körperlich, geistig und verhaltensmäßig
+            hinreichend entwickelt ist.
           </p>
         </section>
 
         <section>
-          <h2>Kann mein Kind zurückgestellt werden?</h2>
+          <h2>Wie läuft die Schulanmeldung in Mecklenburg-Vorpommern ab?</h2>
 
           <p>
-            Eine Zurückstellung kann auf Antrag der Erziehungsberechtigten aus
-            erheblichen gesundheitlichen Gründen möglich sein, wenn ein erfolgreicher
-            Schulbesuch noch nicht zu erwarten ist. Die Entscheidung trifft die
-            zuständige Schulleitung unter Einbeziehung fachlicher Einschätzungen.
-          </p>
-        </section>
-
-        <section class="example-box">
-          <h2>Beispiel: Geburtsdatum im Juni</h2>
-
-          <p>
-            Wird ein Kind am 15. Juni 2020 geboren, wird es am 15. Juni 2026
-            sechs Jahre alt. Da dieses Datum vor dem Stichtag 30. Juni liegt,
-            wird das Kind in Mecklenburg-Vorpommern voraussichtlich im Schuljahr
-            2026/2027 eingeschult.
+            Die Schulanmeldung erfolgt in Mecklenburg-Vorpommern bei der zuständigen
+            Grundschule. Die konkreten Termine, benötigten Unterlagen und weiteren
+            Schritte gibt die Schule oder der Schulträger bekannt. Zum
+            Einschulungsverfahren gehört in der Regel auch die schulärztliche
+            Untersuchung.
           </p>
         </section>
 
         <section>
-          <h2>Einschulung Mecklenburg-Vorpommern berechnen</h2>
+          <h2>Mein Kind ist noch nicht schulreif – was muss ich in Mecklenburg-Vorpommern tun?</h2>
 
           <p>
-            Am einfachsten prüfst du das voraussichtliche Schuljahr mit dem
-            Einschulungsrechner. Gib dort das Geburtsdatum deines Kindes ein und
-            wähle als Bundesland Mecklenburg-Vorpommern aus.
+            Eine Zurückstellung kann in Mecklenburg-Vorpommern auf Antrag der
+            Erziehungsberechtigten nur aus erheblichen gesundheitlichen Gründen
+            erfolgen, wenn ein erfolgreicher Schulbesuch noch nicht zu erwarten ist.
+            Die Entscheidung trifft die Schulleitung im Einvernehmen mit dem
+            Schularzt. Verbindliche Auskunft erhältst du bei der zuständigen
+            Grundschule oder Schulbehörde.
           </p>
-
-          <a class="cta-link" href="/">Jetzt Einschulung berechnen</a>
         </section>
 
         <section>
@@ -148,48 +212,116 @@ const pageDescription =
               <h3>Welcher Einschulungsstichtag gilt in Mecklenburg-Vorpommern?</h3>
               <p>
                 In Mecklenburg-Vorpommern gilt grundsätzlich der 30. Juni als
-                Stichtag für die Einschulung.
+                Einschulungsstichtag. Kinder, die bis zu diesem Datum sechs Jahre
+                alt werden, werden mit dem 1. August desselben Jahres schulpflichtig.
               </p>
             </article>
 
             <article class="faq-item">
-              <h3>Wann beginnt die Schulpflicht?</h3>
+              <h3>Wann ist die Einschulung in Mecklenburg-Vorpommern 2026?</h3>
               <p>
-                Für Kinder, die bis zum 30. Juni sechs Jahre alt werden, beginnt
-                die Schulpflicht in Mecklenburg-Vorpommern mit dem 1. August
-                desselben Jahres.
+                Die Sommerferien in Mecklenburg-Vorpommern enden im Schuljahr
+                2026/2027 am Samstag, 22. August 2026. Die Einschulung findet
+                voraussichtlich ebenfalls an diesem Tag statt; der erste reguläre
+                Schultag ist Montag, 24. August 2026.
               </p>
             </article>
 
             <article class="faq-item">
-              <h3>Ist das Ergebnis verbindlich?</h3>
+              <h3>Was bedeutet Kann-Kind in Mecklenburg-Vorpommern?</h3>
               <p>
-                Nein. Der Rechner und diese Seite dienen der Orientierung.
-                Verbindliche Informationen erhältst du bei der zuständigen Schule
-                oder Schulbehörde in Mecklenburg-Vorpommern.
+                Als Kann-Kind gilt in Mecklenburg-Vorpommern ein Kind, das nach dem
+                regulären Stichtag 30. Juni sechs Jahre alt wird und deshalb nicht
+                automatisch schulpflichtig ist. Kinder, die bis zum 30. Juni des
+                darauffolgenden Jahres sechs Jahre alt werden, können auf Antrag der
+                Erziehungsberechtigten vorzeitig eingeschult werden, wenn sie für
+                den Schulbesuch hinreichend entwickelt sind.
+              </p>
+            </article>
+
+            <article class="faq-item">
+              <h3>Wann findet die Schulanmeldung in Mecklenburg-Vorpommern statt?</h3>
+              <p>
+                Die Schulanmeldung erfolgt in Mecklenburg-Vorpommern bei der
+                zuständigen Grundschule. Die konkreten Termine, benötigten Unterlagen
+                und weiteren Schritte gibt die Schule oder der Schulträger bekannt.
+                Zum Einschulungsverfahren gehört in der Regel auch die schulärztliche
+                Untersuchung.
+              </p>
+            </article>
+
+            <article class="faq-item">
+              <h3>Kann die Einschulung in Mecklenburg-Vorpommern zurückgestellt werden?</h3>
+              <p>
+                Eine Zurückstellung ist in Mecklenburg-Vorpommern auf Antrag der
+                Erziehungsberechtigten nur aus erheblichen gesundheitlichen Gründen
+                möglich, wenn ein erfolgreicher Schulbesuch noch nicht zu erwarten
+                ist. Die Entscheidung trifft die Schulleitung im Einvernehmen mit
+                dem Schularzt.
+              </p>
+            </article>
+
+            <article class="faq-item">
+              <h3>Ist das Ergebnis zur Einschulung in Mecklenburg-Vorpommern verbindlich?</h3>
+              <p>
+                Nein. Der Einschulungsrechner und diese Informationsseite dienen
+                der Orientierung. Verbindliche Informationen erhältst du bei der
+                zuständigen Grundschule oder Schulbehörde in Mecklenburg-Vorpommern.
               </p>
             </article>
           </div>
         </section>
 
         <section class="source-note">
-          <h2>Quelle und Hinweis</h2>
+          <h2>Quellen und Hinweise</h2>
 
           <p>
-            Grundlage dieser Übersicht sind öffentlich zugängliche Informationen
-            zur Einschulung in Mecklenburg-Vorpommern. Bitte prüfe verbindliche
-            Details immer bei der zuständigen Grundschule oder beim Land
-            Mecklenburg-Vorpommern.
+            Die folgenden offiziellen Quellen bilden die Grundlage dieser Übersicht
+            zur Einschulung in Mecklenburg-Vorpommern:
           </p>
 
-          <a
-            class="source-link"
-            href="https://www.regierung-mv.de/Landesregierung/bm/Schule/Unterricht/Einschulung/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Regierungsportal Mecklenburg-Vorpommern: Einschulung
-          </a>
+          <div class="source-list" aria-label="Offizielle Quellen zur Einschulung in Mecklenburg-Vorpommern">
+            <div class="source-item">
+              <p class="source-kicker">Offizielle Quelle 1</p>
+              <a
+                class="source-link"
+                href="https://www.regierung-mv.de/Landesregierung/bm/Schule/Unterricht/Einschulung/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Regierungsportal Mecklenburg-Vorpommern: Einschulung
+              </a>
+            </div>
+
+            <div class="source-item">
+              <p class="source-kicker">Offizielle Quelle 2</p>
+              <a
+                class="source-link"
+                href="https://www.landesrecht-mv.de/bsmv/document/jlr-SchulGMV2010V29P43"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Landesrecht Mecklenburg-Vorpommern: § 43 Beginn der Schulpflicht
+              </a>
+            </div>
+
+            <div class="source-item">
+              <p class="source-kicker">Offizielle Quelle 3</p>
+              <a
+                class="source-link"
+                href="https://www.kmk.org/fileadmin/Dateien/pdf/Ferienkalender/FER2025_26.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Kultusministerkonferenz: Ferientermine Schuljahr 2025/2026
+              </a>
+            </div>
+          </div>
+
+          <p>
+            Hinweis: Bitte prüfe verbindliche Details immer bei der zuständigen
+            Grundschule, der Schulbehörde oder beim Land Mecklenburg-Vorpommern.
+          </p>
 
           <p class="stand">Stand der Informationen: Mai 2026</p>
         </section>
@@ -256,10 +388,10 @@ const pageDescription =
   .state-kicker {
     margin: 0 0 14px;
     color: #816126;
-    font-size: 0.88rem;
-    font-weight: 850;
-    letter-spacing: 0.09em;
-    line-height: 1.25;
+    font-size: clamp(0.9rem, 1vw, 1rem);
+    font-weight: 900;
+    letter-spacing: 0.095em;
+    line-height: 1.2;
     text-transform: uppercase;
   }
 
@@ -269,23 +401,32 @@ const pageDescription =
     color: #172033;
     font-size: clamp(2.25rem, 5vw, 4.05rem);
     font-weight: 950;
-    line-height: 1.01;
-    letter-spacing: -0.06em;
+    line-height: 1.02;
+    letter-spacing: -0.055em;
   }
 
   .lead {
     max-width: 760px;
     margin: 24px 0 0;
     color: #465266;
-    font-size: clamp(1.08rem, 1.7vw, 1.22rem);
-    line-height: 1.65;
+    font-size: clamp(1.08rem, 1.55vw, 1.2rem);
+    font-weight: 500;
+    line-height: 1.64;
   }
 
   .quick-facts {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 14px;
     margin-top: 30px;
+  }
+
+  .quick-facts-master {
+    margin-top: 34px;
+  }
+
+  :global(body.has-mecklenburg-vorpommern-calculator-result) .quick-facts-master .fact-card-highlight {
+    display: none;
   }
 
   .fact-card {
@@ -299,25 +440,26 @@ const pageDescription =
     background: rgba(255, 255, 255, 0.78);
   }
 
+  .fact-card-highlight {
+    border-color: rgba(129, 97, 38, 0.18);
+    background: rgba(245, 210, 138, 0.1);
+  }
+
   .fact-card span {
     color: #816126;
-    font-size: clamp(1.02rem, 1.35vw, 1.22rem);
+    font-size: clamp(0.92rem, 1.1vw, 1.04rem);
     font-weight: 950;
-    letter-spacing: 0.11em;
-    line-height: 1.12;
+    letter-spacing: 0.095em;
+    line-height: 1.16;
     text-transform: uppercase;
   }
 
   .fact-card strong {
     color: #172033;
-    font-size: clamp(1.34rem, 2vw, 1.72rem);
+    font-size: clamp(1.32rem, 1.85vw, 1.68rem);
     font-weight: 950;
     line-height: 1.12;
-    letter-spacing: -0.03em;
-  }
-
-  .desktop-title-break {
-    display: none;
+    letter-spacing: -0.035em;
   }
 
   section {
@@ -329,26 +471,27 @@ const pageDescription =
   h2 {
     margin: 0;
     color: #172033;
-    font-size: clamp(1.65rem, 2.6vw, 2.25rem);
-    font-weight: 900;
-    line-height: 1.08;
-    letter-spacing: -0.05em;
+    font-size: clamp(1.58rem, 2.35vw, 2.12rem);
+    font-weight: 950;
+    line-height: 1.1;
+    letter-spacing: -0.045em;
   }
 
   h3 {
     margin: 0;
     color: #172033;
-    font-size: 1.06rem;
+    font-size: clamp(1.06rem, 1.25vw, 1.18rem);
     font-weight: 900;
-    line-height: 1.25;
-    letter-spacing: -0.02em;
+    line-height: 1.24;
+    letter-spacing: -0.025em;
   }
 
   p {
     margin: 14px 0 0;
     color: #465266;
-    font-size: 1.03rem;
-    line-height: 1.7;
+    font-size: clamp(1rem, 1.2vw, 1.08rem);
+    font-weight: 500;
+    line-height: 1.68;
   }
 
   .example-box,
@@ -357,24 +500,6 @@ const pageDescription =
     border: 1px solid rgba(129, 97, 38, 0.16);
     border-radius: 22px;
     background: rgba(245, 210, 138, 0.12);
-  }
-
-  .cta-link {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 20px;
-    min-height: 54px;
-    padding: 0 22px;
-    border-radius: 16px;
-    background: #172033;
-    color: #fff;
-    font-weight: 850;
-    text-decoration: none;
-  }
-
-  .cta-link:hover {
-    background: #2a3550;
   }
 
   .faq-list {
@@ -393,29 +518,53 @@ const pageDescription =
   .faq-item p {
     margin-top: 12px;
     color: #465266;
-    font-size: clamp(1.08rem, 1.7vw, 1.22rem);
-    line-height: 1.65;
+    font-size: clamp(1rem, 1.2vw, 1.08rem);
+    font-weight: 500;
+    line-height: 1.66;
+  }
+
+  .source-list {
+    display: grid;
+    gap: 22px;
+    margin-top: 28px;
+  }
+
+  .source-item {
+    display: grid;
+    gap: 8px;
+    padding-bottom: 22px;
+    border-bottom: 1px solid rgba(129, 97, 38, 0.14);
+  }
+
+  .source-item:last-child {
+    padding-bottom: 0;
+    border-bottom: 0;
+  }
+
+  .source-kicker {
+    margin: 0;
+    color: #816126;
+    font-size: 0.78rem;
+    font-weight: 950;
+    letter-spacing: 0.095em;
+    line-height: 1.16;
+    text-transform: uppercase;
   }
 
   .source-link {
-    display: inline-flex;
-    width: fit-content;
-    margin-top: 18px;
-    padding: 12px 14px;
-    border: 1px solid rgba(129, 97, 38, 0.18);
-    border-radius: 16px;
-    background: rgba(255, 255, 255, 0.58);
+    display: inline;
     color: #172033;
-    font-size: 0.96rem;
+    font-size: 1rem;
     font-weight: 850;
-    line-height: 1.35;
-    text-decoration: none;
+    line-height: 1.42;
+    letter-spacing: 0;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
   }
 
   .source-link:hover {
-    border-color: rgba(129, 97, 38, 0.32);
-    background: rgba(255, 255, 255, 0.82);
-    text-decoration: underline;
+    color: #816126;
   }
 
   .stand {
@@ -462,10 +611,6 @@ const pageDescription =
       line-height: 1.55;
     }
 
-    .desktop-title-break {
-      display: inline;
-    }
-
     .fact-card {
       min-height: 102px;
       padding: 18px 22px;
@@ -487,17 +632,17 @@ const pageDescription =
     }
 
     h2 {
-      font-size: 1.55rem;
-      line-height: 1.12;
+      font-size: 1.62rem;
+      line-height: 1.1;
     }
 
     p {
-      font-size: 0.96rem;
+      font-size: 1rem;
       line-height: 1.62;
     }
 
     .faq-item p {
-      font-size: 1.02rem;
+      font-size: 1rem;
       line-height: 1.62;
     }
 
@@ -507,9 +652,10 @@ const pageDescription =
       border-radius: 20px;
     }
 
-    .cta-link,
     .source-link {
-      width: 100%;
+      width: auto;
+      font-size: 1rem;
+      line-height: 1.42;
     }
   }
 
