@@ -928,6 +928,55 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
     };
   }
 
+  function calculateSachsenAnhaltEnrollment(birthdateValue) {
+    const birthdate = new Date(`${birthdateValue}T12:00:00`);
+    const birthYear = birthdate.getFullYear();
+    const sixthBirthdayYear = birthYear + 6;
+    const month = birthdate.getMonth() + 1;
+    const day = birthdate.getDate();
+
+    let schoolStartYear = sixthBirthdayYear;
+    const projectedSchoolYear = `${schoolStartYear}/${schoolStartYear + 1}`;
+    const cutoffYear = schoolStartYear;
+    let statusLabel = "Regulär schulpflichtig";
+    let statusTone = "regular";
+    let resultHeadline =
+      `Dein Kind wird in Sachsen-Anhalt voraussichtlich im Schuljahr ${projectedSchoolYear} regulär eingeschult.`;
+    let explanation =
+      `Dein Kind wird in Sachsen-Anhalt regulär schulpflichtig, weil es bis zum 30. Juni ${cutoffYear} sechs Jahre alt wird und damit für das Schuljahr ${projectedSchoolYear} schulpflichtig ist.`;
+    let nextStepTitle = "Nächster sinnvoller Schritt";
+    let nextStepText =
+      "Informiere dich frühzeitig bei der zuständigen Grundschule über Anmeldung, amtsärztliche Untersuchung und konkrete Termine.";
+
+    const afterJune = month > 6 || (month === 6 && day > 30);
+
+    if (afterJune) {
+      statusLabel = "Kann-Kind";
+      statusTone = "optional";
+      resultHeadline =
+        `Dein Kind ist in Sachsen-Anhalt ein Kann-Kind. Eine Einschulung im Schuljahr ${projectedSchoolYear} kann auf Antrag geprüft werden.`;
+      explanation =
+        `Dein Kind wird nach dem Stichtag 30. Juni ${cutoffYear} sechs Jahre alt und ist deshalb nicht automatisch schulpflichtig. Eine vorzeitige Einschulung kann auf Antrag der Erziehungsberechtigten geprüft werden, wenn dein Kind die erforderlichen körperlichen und geistigen Voraussetzungen besitzt und sozial ausreichend entwickelt ist.`;
+      nextStepTitle = "Wichtig für dich";
+      nextStepText =
+        "Sprich die zuständige Grundschule direkt an, wenn du eine vorzeitige Einschulung für dein Kind prüfen möchtest.";
+    }
+
+    const schoolYear = `${schoolStartYear}/${schoolStartYear + 1}`;
+    const hasConfirmedDate = schoolYear === "2026/2027";
+
+    return {
+      schoolYear,
+      statusLabel,
+      statusTone,
+      resultHeadline,
+      explanation,
+      nextStepTitle,
+      nextStepText,
+      hasConfirmedDate,
+    };
+  }
+
   function renderSachsenResult(birthdateValue) {
     if (!resultBox || !birthdateValue) return;
 
@@ -975,6 +1024,10 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
 
     if (normalizedSlug === "thueringen") {
       result = calculateThueringenEnrollment(birthdateValue);
+    }
+
+    if (normalizedSlug === "sachsen-anhalt") {
+      result = calculateSachsenAnhaltEnrollment(birthdateValue);
     }
 
     let dateDetails = `
@@ -1268,6 +1321,28 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
       `;
     }
 
+    if (result.hasConfirmedDate && normalizedSlug === "sachsen-anhalt") {
+      dateDetails = `
+        <div class="state-result-grid state-result-grid-priority" aria-label="Einschulungstermin ${stateName}">
+          <div class="state-result-card state-result-card-wide">
+            <span>Nächste Einschulung</span>
+            <strong>Samstag, 15. August 2026</strong>
+          </div>
+          <div class="state-result-card state-result-card-wide">
+            <span>Erster Schultag</span>
+            <strong>Montag, 17. August 2026</strong>
+          </div>
+        </div>
+        <p class="state-calculator-note">
+          Für ${stateName} enden die Sommerferien 2026 am Freitag,
+          14. August 2026. Die Einschulung der Erstklässler fällt voraussichtlich
+          auf Samstag, 15. August 2026, der erste reguläre Schultag auf Montag,
+          17. August 2026. Einzelne organisatorische Details können je nach Schule
+          abweichen.
+        </p>
+      `;
+    }
+
     if (result.hasConfirmedDate && normalizedSlug === "nordrhein-westfalen") {
       dateDetails = `
         <div class="state-result-grid state-result-grid-priority" aria-label="Einschulungstermin ${stateName}">
@@ -1333,7 +1408,7 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
       ? "Wichtig für dich"
       : result.nextStepTitle;
     const displayedNextStepText = schoolYearIsActive
-      ? "Informiere dich frühzeitig bei der zuständigen Grundschule über Anmeldung, schulärztliche Untersuchung und konkrete Termine."
+      ? result.nextStepText
       : schoolYearIsCompleted
         ? "Wende dich bei Fragen direkt an die zuständige Grundschule oder Schulbehörde."
         : result.nextStepText;
@@ -1343,7 +1418,8 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
       (normalizedSlug === "sachsen" ||
         normalizedSlug === "rheinland-pfalz" ||
         normalizedSlug === "schleswig-holstein" ||
-        normalizedSlug === "thueringen") &&
+        normalizedSlug === "thueringen" ||
+        normalizedSlug === "sachsen-anhalt") &&
       result.statusTone === "optional"
         ? "Mögliches Schuljahr"
         : "Voraussichtliches Schuljahr";
