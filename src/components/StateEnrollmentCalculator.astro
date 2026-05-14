@@ -1104,6 +1104,76 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
     };
   }
 
+  function calculateBremenEnrollment(birthdateValue) {
+    const birthdate = new Date(`${birthdateValue}T12:00:00`);
+    const birthYear = birthdate.getFullYear();
+    const sixthBirthdayYear = birthYear + 6;
+    const month = birthdate.getMonth() + 1;
+    const day = birthdate.getDate();
+
+    let schoolStartYear = sixthBirthdayYear;
+    let statusLabel = "Regulär schulpflichtig";
+    let statusTone = "regular";
+    let nextStepTitle = "Nächster sinnvoller Schritt";
+    let nextStepText =
+      "Informiere dich frühzeitig bei der zuständigen Grundschule über Anmeldung, schulische und gesundheitliche Einschätzungen sowie konkrete Termine.";
+
+    const afterJune = month > 6 || (month === 6 && day > 30);
+    const inKarenzzeit = afterJune && month <= 12;
+    const inJanuaryEarlyAdmission = month === 1;
+
+    if (inKarenzzeit) {
+      statusLabel = "Karenzzeitkind";
+      statusTone = "optional";
+      nextStepTitle = "Wichtig für dich";
+      nextStepText =
+        "Sprich die zuständige Grundschule direkt an. Die Anmeldung eines Karenzzeitkindes ist verbindlich; bei Geburtstagen ab Oktober kann zusätzlich eine Antragsprüfung erforderlich sein.";
+    }
+
+    if (inJanuaryEarlyAdmission) {
+      schoolStartYear = sixthBirthdayYear - 1;
+      statusLabel = "Vorzeitige Einschulung auf Antrag";
+      statusTone = "optional";
+      nextStepTitle = "Wichtig für dich";
+      nextStepText =
+        "Sprich die zuständige Grundschule direkt an, wenn du eine vorzeitige Einschulung für dein Kind prüfen möchtest. Maßgeblich sind unter anderem Schulreife und schulärztliche Einschätzung.";
+    }
+
+    const schoolYear = `${schoolStartYear}/${schoolStartYear + 1}`;
+    const cutoffYear = schoolStartYear;
+    const hasConfirmedDate = schoolYear === "2026/2027";
+
+    let resultHeadline =
+      `Dein Kind wird in Bremen voraussichtlich im Schuljahr ${schoolYear} regulär eingeschult.`;
+    let explanation =
+      `Dein Kind wird in Bremen regulär schulpflichtig, weil es bis zum 30. Juni ${cutoffYear} sechs Jahre alt wird und damit zum 1. August ${cutoffYear} schulpflichtig ist.`;
+
+    if (statusLabel === "Karenzzeitkind") {
+      resultHeadline =
+        `Dein Kind ist in Bremen ein Karenzzeitkind. Eine Einschulung im Schuljahr ${schoolYear} ist innerhalb der Anmeldefrist möglich.`;
+      explanation =
+        `Dein Kind wird nach dem Stichtag 30. Juni ${cutoffYear}, aber bis zum 31. Dezember ${cutoffYear} sechs Jahre alt. Damit gilt es in Bremen als Karenzzeitkind. Die Anmeldung innerhalb der Anmeldefrist ist verbindlich; die zuständige Grundschule klärt die konkrete Einordnung.`;
+    }
+
+    if (statusLabel === "Vorzeitige Einschulung auf Antrag") {
+      resultHeadline =
+        `Dein Kind kann in Bremen nur auf Antrag vorzeitig im Schuljahr ${schoolYear} eingeschult werden.`;
+      explanation =
+        `Dein Kind vollendet das sechste Lebensjahr im Januar ${schoolStartYear + 1}. Für Kinder, die bis zum 31. Januar des Folgejahres sechs Jahre alt werden, kann in Bremen eine vorzeitige Aufnahme auf Antrag geprüft werden. Maßgeblich sind unter anderem Schulreife und schulärztliche Einschätzung.`;
+    }
+
+    return {
+      schoolYear,
+      statusLabel,
+      statusTone,
+      resultHeadline,
+      explanation,
+      nextStepTitle,
+      nextStepText,
+      hasConfirmedDate,
+    };
+  }
+
   function renderSachsenResult(birthdateValue) {
     if (!resultBox || !birthdateValue) return;
 
@@ -1163,6 +1233,10 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
 
     if (normalizedSlug === "saarland") {
       result = calculateSaarlandEnrollment(birthdateValue);
+    }
+
+    if (normalizedSlug === "bremen") {
+      result = calculateBremenEnrollment(birthdateValue);
     }
 
     let dateDetails = `
@@ -1521,6 +1595,27 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
       `;
     }
 
+    if (result.hasConfirmedDate && normalizedSlug === "bremen") {
+      dateDetails = `
+        <div class="state-result-grid state-result-grid-priority" aria-label="Einschulungstermin ${stateName}">
+          <div class="state-result-card state-result-card-wide">
+            <span>Erster Schultag</span>
+            <strong>Donnerstag, 13. August 2026</strong>
+          </div>
+          <div class="state-result-card state-result-card-wide">
+            <span>Einschulungsfeier</span>
+            <strong>Samstag, 15. August 2026</strong>
+          </div>
+        </div>
+        <p class="state-calculator-note">
+          Für ${stateName} enden die Sommerferien 2026 am Mittwoch,
+          12. August 2026. Der erste reguläre Schultag ist Donnerstag,
+          13. August 2026. Die Einschulungsfeier für Erstklässler ist offiziell
+          für Samstag, 15. August 2026 festgelegt.
+        </p>
+      `;
+    }
+
     if (result.hasConfirmedDate && normalizedSlug === "nordrhein-westfalen") {
       dateDetails = `
         <div class="state-result-grid state-result-grid-priority" aria-label="Einschulungstermin ${stateName}">
@@ -1586,7 +1681,7 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
       ? "Wichtig für dich"
       : result.nextStepTitle;
     const displayedNextStepText = schoolYearIsActive
-      ? normalizedSlug === "mecklenburg-vorpommern" || normalizedSlug === "saarland"
+      ? normalizedSlug === "mecklenburg-vorpommern" || normalizedSlug === "saarland" || normalizedSlug === "bremen"
         ? "Wende dich bei aktuellen Fragen direkt an die zuständige Grundschule."
         : result.nextStepText
       : schoolYearIsCompleted
@@ -1601,7 +1696,8 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
         normalizedSlug === "thueringen" ||
         normalizedSlug === "sachsen-anhalt" ||
         normalizedSlug === "mecklenburg-vorpommern" ||
-        normalizedSlug === "saarland") &&
+        normalizedSlug === "saarland" ||
+        normalizedSlug === "bremen") &&
       result.statusTone === "optional"
         ? "Mögliches Schuljahr"
         : "Voraussichtliches Schuljahr";
