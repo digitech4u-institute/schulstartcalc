@@ -21,18 +21,10 @@ const faqSchema = {
     },
     {
       "@type": "Question",
-      name: "Wann findet die Schulanmeldung in Sachsen statt?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Die Schulanmeldung findet in Sachsen in der Regel im Zeitraum vom 1. August bis zum 15. September im Jahr vor der Einschulung statt. Ort und Zeit geben die Städte und Gemeinden im Mai bekannt.",
-      },
-    },
-    {
-      "@type": "Question",
       name: "Wann ist die Einschulung in Sachsen 2026?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Für Sachsen ist die Schuleinführung im Schuljahr 2026/2027 offiziell für Samstag, den 15. August 2026, genannt. Der erste Schultag ist Montag, der 17. August 2026. Einzelne organisatorische Details können je nach Schule abweichen.",
+        text: "Für Sachsen ist die Schuleinführung im Schuljahr 2026/2027 offiziell für Samstag, 15. August 2026, genannt. Der erste Schultag ist Montag, 17. August 2026. Einzelne organisatorische Details können je nach Schule abweichen.",
       },
     },
     {
@@ -41,6 +33,14 @@ const faqSchema = {
       acceptedAnswer: {
         "@type": "Answer",
         text: "Als Kann-Kind gilt in Sachsen ein Kind, das nach dem regulären Stichtag 30. Juni sechs Jahre alt wird und deshalb nicht automatisch schulpflichtig ist. Eine frühere Einschulung kann auf Antrag der Eltern geprüft werden, wenn das Kind den erforderlichen Entwicklungsstand für den Schulbesuch besitzt.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Wann findet die Schulanmeldung in Sachsen statt?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Die Schulanmeldung findet in Sachsen in der Regel im Zeitraum vom 1. August bis zum 15. September im Jahr vor der Einschulung statt. Ort und Zeit geben die Städte und Gemeinden im Mai bekannt.",
       },
     },
     {
@@ -89,8 +89,8 @@ const faqSchema = {
           Wann kommt mein Kind in Sachsen in die Schule? Der Einschulungsrechner
           zeigt dir anhand des Geburtsdatums das voraussichtliche Schuljahr.
           In Sachsen gilt der Stichtag 30. Juni. Für das Schuljahr 2026/2027
-          ist die Schuleinführung für Samstag, den 15. August 2026 vorgesehen –
-          der erste Schultag ist Montag, der 17. August 2026.
+          ist die Schuleinführung für Samstag, 15. August 2026 vorgesehen –
+          der erste Schultag ist Montag, 17. August 2026.
         </p>
 
         <StateEnrollmentCalculator
@@ -105,12 +105,12 @@ const faqSchema = {
         <div class="quick-facts quick-facts-master" aria-label="Kurzüberblick Einschulung Sachsen">
           <div class="fact-card fact-card-highlight">
             <span>Nächste Einschulung</span>
-            <strong>Samstag, 15.08.2026</strong>
+            <strong>Samstag, 15. August 2026</strong>
           </div>
 
           <div class="fact-card fact-card-highlight">
             <span>Erster Schultag</span>
-            <strong>Montag, 17.08.2026</strong>
+            <strong>Montag, 17. August 2026</strong>
           </div>
 
           <div class="fact-card">
@@ -216,8 +216,19 @@ const faqSchema = {
             <article class="faq-item">
               <h3>Welcher Einschulungsstichtag gilt in Sachsen?</h3>
               <p>
-                In Sachsen gilt grundsätzlich der 30. Juni als Stichtag für die
-                Einschulung.
+                In Sachsen gilt grundsätzlich der 30. Juni als Einschulungsstichtag.
+                Kinder, die bis zu diesem Datum sechs Jahre alt werden, werden mit
+                Beginn des Schuljahres schulpflichtig.
+              </p>
+            </article>
+
+            <article class="faq-item">
+              <h3>Wann ist die Einschulung in Sachsen 2026?</h3>
+              <p>
+                Für Sachsen ist die Schuleinführung im Schuljahr 2026/2027 offiziell
+                für Samstag, 15. August 2026, genannt. Der erste Schultag ist Montag,
+                17. August 2026. Einzelne organisatorische Details können je nach
+                Schule abweichen.
               </p>
             </article>
 
@@ -242,32 +253,21 @@ const faqSchema = {
             </article>
 
             <article class="faq-item">
-              <h3>Wann ist die Einschulung in Sachsen 2026?</h3>
-              <p>
-                Für Sachsen ist die Schuleinführung im Schuljahr 2026/2027
-                offiziell für Samstag, den 15. August 2026, genannt. Der erste
-                Schultag ist Montag, der 17. August 2026. Einzelne organisatorische
-                Details können je nach Schule abweichen.
-              </p>
-            </article>
-
-
-            <article class="faq-item">
               <h3>Kann die Einschulung in Sachsen zurückgestellt werden?</h3>
               <p>
-                Eine Zurückstellung ist im Ausnahmefall möglich, wenn das Kind bei
-                Beginn der Schulpflicht geistig oder körperlich nicht genügend
+                Eine Zurückstellung ist in Sachsen im Ausnahmefall möglich, wenn ein
+                Kind bei Beginn der Schulpflicht geistig oder körperlich nicht genügend
                 entwickelt ist, um mit Erfolg am Unterricht teilzunehmen. Die
                 Entscheidung trifft die Schulleitung.
               </p>
             </article>
 
             <article class="faq-item">
-              <h3>Ist das Ergebnis verbindlich?</h3>
+              <h3>Ist das Ergebnis zur Einschulung in Sachsen verbindlich?</h3>
               <p>
-                Nein. Der Rechner und diese Seite dienen der Orientierung.
-                Verbindliche Informationen erhältst du bei der zuständigen Schule
-                oder Schulbehörde in Sachsen.
+                Nein. Der Einschulungsrechner und diese Informationsseite dienen der
+                Orientierung. Verbindliche Informationen erhältst du bei der zuständigen
+                Grundschule oder Schulbehörde in Sachsen.
               </p>
             </article>
           </div>
@@ -425,6 +425,10 @@ const faqSchema = {
 
   .quick-facts-master {
     margin-top: 34px;
+  }
+
+  :global(body.has-sachsen-calculator-result) .quick-facts-master .fact-card-highlight {
+    display: none;
   }
 
   .fact-card {
