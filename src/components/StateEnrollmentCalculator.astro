@@ -564,20 +564,20 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
     let resultHeadline =
       `Dein Kind wird in Hessen voraussichtlich im Schuljahr ${projectedSchoolYear} regulär eingeschult.`;
     let explanation =
-      `Dein Kind wird in Hessen regulär schulpflichtig, weil es bis zum 30. Juni ${cutoffYear} das sechste Lebensjahr vollendet und damit zum 1. August ${cutoffYear} schulpflichtig wird.`;
+      `Dein Kind wird in Hessen regulär schulpflichtig, weil es bis zum 30. Juni ${cutoffYear} sechs Jahre alt wird und damit ab dem 1. August ${cutoffYear} schulpflichtig ist.`;
     let nextStepTitle = "Nächster sinnvoller Schritt";
     let nextStepText =
       "Informiere dich frühzeitig bei der zuständigen Grundschule über Anmeldung, Unterlagen, Sprachstandsfeststellung und konkrete Termine.";
 
-    const afterOfficialCutoff = month > 7 || (month === 7 && day > 1);
+    const afterJune = month > 6 || (month === 6 && day > 30);
 
-    if (afterOfficialCutoff) {
+    if (afterJune) {
       statusLabel = "Kann-Kind";
       statusTone = "optional";
       resultHeadline =
         `Dein Kind ist in Hessen ein Kann-Kind. Eine Einschulung im Schuljahr ${projectedSchoolYear} kann auf Antrag geprüft werden.`;
       explanation =
-        `Dein Kind vollendet das sechste Lebensjahr nach dem hessischen Stichtag. Eine vorzeitige Einschulung für das Schuljahr ${projectedSchoolYear} kann auf schriftlichen Antrag der Eltern von der Schulleitung geprüft werden. Bei Kindern, die erst nach dem 31. Dezember das sechste Lebensjahr vollenden, kann zusätzlich eine schulpsychologische Überprüfung angeordnet werden.`;
+        `Dein Kind wird nach dem hessischen Stichtag 30. Juni ${cutoffYear} sechs Jahre alt und ist deshalb nicht automatisch regulär schulpflichtig. Eine vorzeitige Einschulung für das Schuljahr ${projectedSchoolYear} kann auf Antrag der Eltern von der Schulleitung geprüft werden. Wenn dein Kind erst nach dem 31. Dezember ${cutoffYear} sechs Jahre alt wird, kann zusätzlich eine schulpsychologische Überprüfung angeordnet werden.`;
       nextStepTitle = "Wichtig für dich";
       nextStepText =
         "Sprich frühzeitig mit der zuständigen Grundschule. Dort erfährst du, wie der Antrag gestellt wird und welche Einschätzungen für die Entscheidung berücksichtigt werden.";
@@ -1384,19 +1384,19 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
       dateDetails = `
         <div class="state-result-grid state-result-grid-priority" aria-label="Einschulungstermin ${stateName}">
           <div class="state-result-card state-result-card-wide">
-            <span>Erster Schultag</span>
-            <strong>Montag, 10.08.2026</strong>
+            <span>Nächste Einschulung</span>
+            <strong>Dienstag, 11. August 2026</strong>
           </div>
           <div class="state-result-card state-result-card-wide">
-            <span>Einschulung</span>
-            <strong>Montag, 10.08.2026</strong>
+            <span>Erster Schultag</span>
+            <strong>Montag, 10. August 2026</strong>
           </div>
         </div>
         <p class="state-calculator-note">
-          Für ${stateName} enden die Sommerferien 2026 am 7. August.
-          Daraus ergibt sich voraussichtlich Montag, der 10. August 2026,
-          als allgemeiner erster Schultag und Orientierung für die Einschulung.
-          Den konkreten Einschulungstermin legt die zuständige Grundschule fest.
+          Der erste Schultag nach den Sommerferien ist in ${stateName} Montag,
+          10. August 2026. Die Einschulung der Erstklässlerinnen und Erstklässler
+          liegt meist am Dienstag danach, also voraussichtlich am 11. August 2026.
+          Der genaue Termin wird von der zuständigen Grundschule festgelegt.
         </p>
       `;
     }

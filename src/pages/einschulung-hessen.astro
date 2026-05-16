@@ -5,7 +5,62 @@ const pageTitle =
   "Einschulung Hessen 2026: Schulstart, Stichtag und Schuljahr";
 
 const pageDescription =
-  "Wann kommt mein Kind in Hessen in die Schule? Erfahre alles zu Schulstart, Einschulung, Stichtag 30. Juni, Schulpflicht ab 1. August und Schuljahr.";
+  "Wann kommt mein Kind in Hessen in die Schule? Erfahre alles zu Schulstart, Einschulung, Stichtag 30. Juni, vorzeitiger Einschulung und Schuljahr.";
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: [
+    {
+      "@type": "Question",
+      name: "Welcher Einschulungsstichtag gilt in Hessen?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "In Hessen gilt der 30. Juni als Stichtag für die Einschulung. Kinder, die bis zu diesem Datum sechs Jahre alt werden, sind ab dem 1. August desselben Jahres regulär schulpflichtig. Kinder, die nach dem 30. Juni sechs Jahre alt werden, können auf Antrag der Eltern vorzeitig eingeschult werden.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Wann ist die Einschulung in Hessen 2026?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Der erste Schultag nach den Sommerferien ist in Hessen Montag, 10. August 2026. Die Einschulung der Erstklässlerinnen und Erstklässler liegt meist am Dienstag danach, also voraussichtlich am 11. August 2026. Der genaue Termin wird von der zuständigen Grundschule festgelegt.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Was bedeutet Kann-Kind in Hessen?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Als Kann-Kind gilt in Hessen ein Kind, das nach dem 30. Juni sechs Jahre alt wird und daher nicht automatisch regulär schulpflichtig ist. Eine vorzeitige Einschulung kann auf Antrag der Eltern geprüft werden. Die Entscheidung trifft die Schulleiterin oder der Schulleiter unter Berücksichtigung des schulärztlichen Gutachtens.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Kann mein Kind in Hessen früher eingeschult werden?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Kinder, die nach dem 30. Juni sechs Jahre alt werden, können auf Antrag der Eltern vorzeitig eingeschult werden. Die Entscheidung trifft die Schulleitung in der Regel auf Grundlage eines schulärztlichen Gutachtens und nach Rücksprache mit der Kindertagesstätte. Wenn ein Kind erst nach dem 31. Dezember sechs Jahre alt wird, kann zusätzlich eine schulpsychologische Überprüfung angeordnet werden.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Wie läuft die Schulanmeldung in Hessen ab?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Die Anmeldung erfolgt in Hessen meist im März oder April des Jahres vor der Einschulung. Die zuständige Grundschule lädt die Eltern schriftlich ein und informiert über Termin, Unterlagen und Ablauf. Bei der Anmeldung können auch die deutschen Sprachkenntnisse des Kindes festgestellt werden.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Ist das Ergebnis zur Einschulung in Hessen verbindlich?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Nein. Der Einschulungsrechner und diese Informationsseite dienen der Orientierung. Verbindliche Informationen erhältst du bei der zuständigen Grundschule, dem Staatlichen Schulamt oder dem Hessischen Ministerium für Kultus, Bildung und Chancen.",
+      },
+    },
+  ],
+};
 ---
 
 <html lang="de">
@@ -15,62 +70,7 @@ const pageDescription =
     <title>{pageTitle}</title>
     <meta name="description" content={pageDescription} />
     <link rel="canonical" href="https://www.einschulungsrechner.de/einschulung-hessen/" />
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "FAQPage",
-        "mainEntity": [
-          {
-            "@type": "Question",
-            "name": "Wann kommt mein Kind in Hessen in die Schule?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Das hängt vom Geburtsdatum deines Kindes ab. In Hessen gilt der 30. Juni als Stichtag. Kinder, die bis zu diesem Datum das sechste Lebensjahr vollenden, werden zum 1. August desselben Kalenderjahres schulpflichtig. Nach offizieller Formulierung betrifft das Kinder, die bis einschließlich 1. Juli geboren sind."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Wann ist der erste Schultag in Hessen 2026?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Die Sommerferien in Hessen enden 2026 am 7. August. Daraus ergibt sich voraussichtlich Montag, der 10. August 2026, als allgemeiner erster Schultag nach den Sommerferien."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Wann ist die Einschulung in Hessen 2026?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Der konkrete Einschulungstermin in Hessen wird von der zuständigen Grundschule bekanntgegeben. Als Orientierung gilt für 2026 Montag, der 10. August 2026, weil an diesem Tag voraussichtlich der allgemeine erste Schultag nach den Sommerferien ist."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Kann mein Kind in Hessen früher eingeschult werden?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Kinder, die nach dem 30. Juni das sechste Lebensjahr vollenden, können auf Antrag der Eltern vorzeitig eingeschult werden. Der schriftliche Antrag wird bei der zuständigen Grundschule gestellt; die Entscheidung trifft die Schulleitung. Bei Kindern, die erst nach dem 31. Dezember das sechste Lebensjahr vollenden, kann zusätzlich eine schulpsychologische Überprüfung angeordnet werden."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Wann muss ich mein Kind in Hessen an der Grundschule anmelden?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Die Anmeldung erfolgt in Hessen in der Regel im März oder April des Jahres, das dem Beginn der Schulpflicht vorausgeht. Die zuständige Grundschule lädt die Eltern schriftlich ein und informiert über Termin, Unterlagen und Ablauf. Eltern sollten daher die Post der Schule im Herbst oder Winter des Vorjahres beachten."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Welche Quelle ist für die Einschulung in Hessen verbindlich?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Diese Seite dient der Orientierung. Verbindliche Informationen erhältst du bei der zuständigen Grundschule, dem Staatlichen Schulamt oder beim Hessischen Ministerium für Kultus, Bildung und Chancen."
-            }
-          }
-        ]
-      }
-    </script>
+    <script type="application/ld+json" set:html={JSON.stringify(faqSchema)}></script>
   </head>
 
   <body>
@@ -88,9 +88,9 @@ const pageDescription =
         <p class="lead">
           Wann kommt mein Kind in Hessen in die Schule? Der Einschulungsrechner
           zeigt dir anhand des Geburtsdatums das voraussichtliche Schuljahr. In
-          Hessen gilt der Stichtag 30. Juni. Die Sommerferien enden 2026 am
-          7. August; daraus ergibt sich voraussichtlich Montag, der 10. August
-          2026, als allgemeiner erster Schultag.
+          Hessen gilt der Stichtag 30. Juni. Für das Schuljahr 2026/2027 ist die
+          Einschulung voraussichtlich für Dienstag, 11. August 2026 vorgesehen –
+          der erste Schultag ist Montag, 10. August 2026.
         </p>
 
         <StateEnrollmentCalculator
@@ -102,15 +102,15 @@ const pageDescription =
           intro="Gib das Geburtsdatum deines Kindes ein. Hessen ist hier bereits vorausgewählt. Wenn du von der Startseite kommst, übernehmen wir das Geburtsdatum automatisch aus dem Link."
         />
 
-        <div class="quick-facts" aria-label="Kurzüberblick Einschulung Hessen">
-          <div class="fact-card fact-card-date">
-            <span>Erster Schultag</span>
-            <strong>Montag, 10.08.2026</strong>
+        <div class="quick-facts quick-facts-master" aria-label="Kurzüberblick Einschulung Hessen">
+          <div class="fact-card fact-card-highlight">
+            <span>Nächste Einschulung</span>
+            <strong>Dienstag, 11. August 2026</strong>
           </div>
 
-          <div class="fact-card fact-card-date">
-            <span>Einschulung</span>
-            <strong>Montag, 10.08.2026</strong>
+          <div class="fact-card fact-card-highlight">
+            <span>Erster Schultag</span>
+            <strong>Montag, 10. August 2026</strong>
           </div>
 
           <div class="fact-card">
@@ -119,8 +119,8 @@ const pageDescription =
           </div>
 
           <div class="fact-card">
-            <span>Schulpflicht</span>
-            <strong>ab 1. August</strong>
+            <span>Sonderregel</span>
+            <strong>Kann-Kind auf Antrag</strong>
           </div>
         </div>
 
@@ -128,10 +128,10 @@ const pageDescription =
           <h2>Wie funktioniert der Einschulungsrechner für Hessen?</h2>
 
           <p>
-            Der Einschulungsrechner prüft das Geburtsdatum deines Kindes und
-            vergleicht es mit den Einschulungsregeln in Hessen. Entscheidend sind
-            vor allem der Stichtag 30. Juni und der Beginn der Schulpflicht am
-            1. August desselben Kalenderjahres.
+            Der Einschulungsrechner prüft das Geburtsdatum deines Kindes und gleicht
+            es mit den Regeln zur Einschulung in Hessen ab. Entscheidend sind vor
+            allem der Stichtag 30. Juni und der Beginn der Schulpflicht am 1. August
+            desselben Jahres.
           </p>
 
           <p>
@@ -153,50 +153,44 @@ const pageDescription =
           <h2>Wann ist die Einschulung in Hessen 2026?</h2>
 
           <p>
-            Der konkrete Einschulungstermin in Hessen wird von der zuständigen
-            Grundschule bekanntgegeben. Als Orientierung gilt für 2026 Montag,
-            der 10. August 2026, weil an diesem Tag voraussichtlich der allgemeine
-            erste Schultag nach den Sommerferien ist.
+            Der erste Schultag nach den Sommerferien ist in Hessen Montag,
+            10. August 2026. Die Einschulung der Erstklässlerinnen und Erstklässler
+            liegt meist am Dienstag danach, also voraussichtlich am 11. August 2026.
+            Der genaue Termin wird von der zuständigen Grundschule festgelegt.
           </p>
         </section>
 
         <section>
-          <h2>Welcher Stichtag gilt für die Einschulung in Hessen?</h2>
+          <h2>Welcher Einschulungsstichtag gilt in Hessen?</h2>
 
           <p>
             In Hessen gilt der 30. Juni als Stichtag für die Einschulung. Kinder,
-            die bis zu diesem Datum das sechste Lebensjahr vollenden, werden zum
-            1. August desselben Kalenderjahres regulär schulpflichtig. Nach
-            offizieller Formulierung betrifft das Kinder, die bis einschließlich
-            1. Juli geboren sind.
+            die bis zu diesem Datum sechs Jahre alt werden, sind ab dem 1. August
+            desselben Jahres regulär schulpflichtig.
           </p>
         </section>
 
         <section>
-          <h2>Kann mein Kind früher eingeschult werden?</h2>
+          <h2>Kann mein Kind in Hessen früher eingeschult werden?</h2>
 
           <p>
-            Kinder, die nach dem 30. Juni das sechste Lebensjahr vollenden, können
-            auf Antrag der Eltern vorzeitig eingeschult werden. Der schriftliche
-            Antrag wird bei der zuständigen Grundschule gestellt. Die Entscheidung
-            trifft die Schulleitung mit Hilfe eines schulärztlichen Gutachtens und
-            nach Absprache mit dem pädagogischen Fachpersonal der Kindertagesstätte.
-            Bei Kindern, die erst nach dem 31. Dezember das sechste Lebensjahr
-            vollenden, kann zusätzlich eine schulpsychologische Überprüfung
-            angeordnet werden.
+            Kinder, die nach dem 30. Juni sechs Jahre alt werden, können auf Antrag
+            der Eltern vorzeitig eingeschult werden. Die Entscheidung trifft die
+            Schulleitung in der Regel auf Grundlage eines schulärztlichen Gutachtens
+            und nach Rücksprache mit der Kindertagesstätte. Wenn ein Kind erst nach
+            dem 31. Dezember sechs Jahre alt wird, kann zusätzlich eine
+            schulpsychologische Überprüfung angeordnet werden.
           </p>
         </section>
 
         <section>
-          <h2>Wann muss ich mein Kind in Hessen anmelden?</h2>
+          <h2>Wie läuft die Schulanmeldung in Hessen ab?</h2>
 
           <p>
-            Die Anmeldung erfolgt in Hessen in der Regel im März oder April des
-            Jahres, das dem Beginn der Schulpflicht vorausgeht. Die zuständige
-            Grundschule lädt die Eltern schriftlich ein und informiert über Termin,
-            Unterlagen und Ablauf. Eltern sollten daher die Post der Schule im
-            Herbst oder Winter des Vorjahres beachten. Bei der Anmeldung können
-            auch die deutschen Sprachkenntnisse des Kindes festgestellt werden.
+            Die Anmeldung erfolgt in Hessen meist im März oder April des Jahres vor
+            der Einschulung. Die zuständige Grundschule lädt die Eltern schriftlich
+            ein und informiert über Termin, Unterlagen und Ablauf. Bei der Anmeldung
+            können auch die deutschen Sprachkenntnisse des Kindes festgestellt werden.
           </p>
         </section>
 
@@ -216,81 +210,84 @@ const pageDescription =
 
           <div class="faq-list">
             <article class="faq-item">
-              <h3>Wann kommt mein Kind in Hessen in die Schule?</h3>
+              <h3>Welcher Einschulungsstichtag gilt in Hessen?</h3>
               <p>
-                Das hängt vom Geburtsdatum deines Kindes ab. In Hessen gilt der
-                30. Juni als Stichtag. Kinder, die bis zu diesem Datum das sechste
-                Lebensjahr vollenden, werden zum 1. August desselben Kalenderjahres
-                schulpflichtig. Nach offizieller Formulierung betrifft das Kinder,
-                die bis einschließlich 1. Juli geboren sind.
-              </p>
-            </article>
-
-            <article class="faq-item">
-              <h3>Wann ist der erste Schultag in Hessen 2026?</h3>
-              <p>
-                Die Sommerferien in Hessen enden 2026 am 7. August. Daraus ergibt
-                sich voraussichtlich Montag, der 10. August 2026, als allgemeiner
-                erster Schultag nach den Sommerferien.
+                In Hessen gilt der 30. Juni als Stichtag für die Einschulung. Kinder,
+                die bis zu diesem Datum sechs Jahre alt werden, sind ab dem 1. August
+                desselben Jahres regulär schulpflichtig. Kinder, die nach dem 30. Juni
+                sechs Jahre alt werden, können auf Antrag der Eltern vorzeitig
+                eingeschult werden.
               </p>
             </article>
 
             <article class="faq-item">
               <h3>Wann ist die Einschulung in Hessen 2026?</h3>
               <p>
-                Der konkrete Einschulungstermin in Hessen wird von der zuständigen
-                Grundschule bekanntgegeben. Als Orientierung gilt für 2026 Montag,
-                der 10. August 2026, weil an diesem Tag voraussichtlich der
-                allgemeine erste Schultag nach den Sommerferien ist.
+                Der erste Schultag nach den Sommerferien ist in Hessen Montag,
+                10. August 2026. Die Einschulung der Erstklässlerinnen und
+                Erstklässler liegt meist am Dienstag danach, also voraussichtlich am
+                11. August 2026. Der genaue Termin wird von der zuständigen
+                Grundschule festgelegt.
+              </p>
+            </article>
+
+            <article class="faq-item">
+              <h3>Was bedeutet Kann-Kind in Hessen?</h3>
+              <p>
+                Als Kann-Kind gilt in Hessen ein Kind, das nach dem 30. Juni sechs
+                Jahre alt wird und daher nicht automatisch regulär schulpflichtig ist.
+                Eine vorzeitige Einschulung kann auf Antrag der Eltern geprüft werden.
+                Die Entscheidung trifft die Schulleiterin oder der Schulleiter unter
+                Berücksichtigung des schulärztlichen Gutachtens.
               </p>
             </article>
 
             <article class="faq-item">
               <h3>Kann mein Kind in Hessen früher eingeschult werden?</h3>
               <p>
-                Kinder, die nach dem 30. Juni das sechste Lebensjahr vollenden,
-                können auf Antrag der Eltern vorzeitig eingeschult werden. Der
-                schriftliche Antrag wird bei der zuständigen Grundschule gestellt;
-                die Entscheidung trifft die Schulleitung. Bei Kindern, die erst
-                nach dem 31. Dezember das sechste Lebensjahr vollenden, kann
-                zusätzlich eine schulpsychologische Überprüfung angeordnet werden.
+                Kinder, die nach dem 30. Juni sechs Jahre alt werden, können auf
+                Antrag der Eltern vorzeitig eingeschult werden. Die Entscheidung trifft
+                die Schulleitung in der Regel auf Grundlage eines schulärztlichen
+                Gutachtens und nach Rücksprache mit der Kindertagesstätte. Wenn ein
+                Kind erst nach dem 31. Dezember sechs Jahre alt wird, kann zusätzlich
+                eine schulpsychologische Überprüfung angeordnet werden.
               </p>
             </article>
 
             <article class="faq-item">
-              <h3>Wann muss ich mein Kind in Hessen an der Grundschule anmelden?</h3>
+              <h3>Wie läuft die Schulanmeldung in Hessen ab?</h3>
               <p>
-                Die Anmeldung erfolgt in Hessen in der Regel im März oder April des
-                Jahres, das dem Beginn der Schulpflicht vorausgeht. Die zuständige
-                Grundschule lädt die Eltern schriftlich ein und informiert über
-                Termin, Unterlagen und Ablauf. Eltern sollten daher die Post der
-                Schule im Herbst oder Winter des Vorjahres beachten.
+                Die Anmeldung erfolgt in Hessen meist im März oder April des Jahres
+                vor der Einschulung. Die zuständige Grundschule lädt die Eltern
+                schriftlich ein und informiert über Termin, Unterlagen und Ablauf.
+                Bei der Anmeldung können auch die deutschen Sprachkenntnisse des Kindes
+                festgestellt werden.
               </p>
             </article>
 
             <article class="faq-item">
-              <h3>Welche Quelle ist für die Einschulung in Hessen verbindlich?</h3>
+              <h3>Ist das Ergebnis zur Einschulung in Hessen verbindlich?</h3>
               <p>
-                Diese Seite dient der Orientierung. Verbindliche Informationen
-                erhältst du bei der zuständigen Grundschule, dem Staatlichen
-                Schulamt oder beim Hessischen Ministerium für Kultus, Bildung und
-                Chancen.
+                Nein. Der Einschulungsrechner und diese Informationsseite dienen der
+                Orientierung. Verbindliche Informationen erhältst du bei der zuständigen
+                Grundschule, dem Staatlichen Schulamt oder dem Hessischen Ministerium
+                für Kultus, Bildung und Chancen.
               </p>
             </article>
           </div>
         </section>
 
         <section class="source-note">
-          <h2>Quelle und Hinweis</h2>
+          <h2>Quellen und Hinweise</h2>
 
           <p>
             Die folgenden offiziellen Quellen bilden die Grundlage dieser Übersicht
             zur Einschulung in Hessen:
           </p>
 
-          <ul class="source-list" aria-label="Offizielle Quellen zur Einschulung in Hessen">
-            <li>
-              <span>Offizielle Quelle 1</span>
+          <div class="source-list" aria-label="Offizielle Quellen zur Einschulung in Hessen">
+            <div class="source-item">
+              <p class="source-kicker">Offizielle Quelle 1</p>
               <a
                 class="source-link"
                 href="https://kultus.hessen.de/schulsystem/schulformen-und-bildungsgaenge/grundschule/grundschule"
@@ -299,10 +296,10 @@ const pageDescription =
               >
                 Hessisches Ministerium für Kultus, Bildung und Chancen: Einschulung
               </a>
-            </li>
+            </div>
 
-            <li>
-              <span>Offizielle Quelle 2</span>
+            <div class="source-item">
+              <p class="source-kicker">Offizielle Quelle 2</p>
               <a
                 class="source-link"
                 href="https://kultus.hessen.de/schulsystem/ferien/ferientermine"
@@ -311,15 +308,25 @@ const pageDescription =
               >
                 Hessisches Ministerium für Kultus, Bildung und Chancen: Ferientermine
               </a>
-            </li>
-          </ul>
+            </div>
 
-          <p class="source-hint">
-            Hinweis: In Hessen beginnt die Schulpflicht für Kinder, die bis zum
-            30. Juni das sechste Lebensjahr vollenden, am 1. August desselben
-            Kalenderjahres. Nach offizieller Formulierung betrifft das Kinder, die
-            bis einschließlich 1. Juli geboren sind. Bitte prüfe verbindliche
-            Details immer bei der zuständigen Grundschule oder Schulbehörde.
+            <div class="source-item">
+              <p class="source-kicker">Offizielle Quelle 3</p>
+              <a
+                class="source-link"
+                href="https://www.rv.hessenrecht.hessen.de/bshe/document/jlr-SchulGHE2017pP58"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Hessisches Schulgesetz: § 58 – Beginn der Vollzeitschulpflicht
+              </a>
+            </div>
+          </div>
+
+          <p>
+            Hinweis: Bitte prüfe verbindliche Details immer bei der zuständigen
+            Grundschule, dem Staatlichen Schulamt oder beim Hessischen Ministerium
+            für Kultus, Bildung und Chancen.
           </p>
 
           <p class="stand">Stand der Informationen: Mai 2026</p>
@@ -420,6 +427,14 @@ const pageDescription =
     margin-top: 30px;
   }
 
+  .quick-facts-master {
+    margin-top: 34px;
+  }
+
+  :global(body.has-hessen-calculator-result) .quick-facts-master .fact-card-highlight {
+    display: none;
+  }
+
   .fact-card {
     display: grid;
     align-content: center;
@@ -442,20 +457,15 @@ const pageDescription =
 
   .fact-card strong {
     color: #172033;
-    font-size: clamp(1.22rem, 1.55vw, 1.46rem);
+    font-size: clamp(1.32rem, 1.85vw, 1.68rem);
     font-weight: 950;
     line-height: 1.12;
     letter-spacing: -0.035em;
   }
 
-  .fact-card-date {
-    border-color: rgba(129, 97, 38, 0.16);
-    background: rgba(245, 210, 138, 0.12);
-  }
-
-  .fact-card-date strong {
-    font-size: clamp(1.12rem, 1.36vw, 1.32rem);
-    white-space: normal;
+  .fact-card-highlight {
+    border-color: rgba(129, 97, 38, 0.18);
+    background: rgba(245, 210, 138, 0.1);
   }
 
   section {
@@ -522,25 +532,24 @@ const pageDescription =
 
   .source-list {
     display: grid;
-    gap: 14px;
-    margin: 20px 0 0;
-    padding: 0;
-    list-style: none;
+    gap: 22px;
+    margin-top: 28px;
   }
 
-  .source-list li {
+  .source-item {
     display: grid;
-    gap: 5px;
-    padding-bottom: 14px;
-    border-bottom: 1px solid rgba(129, 97, 38, 0.12);
+    gap: 8px;
+    padding-bottom: 22px;
+    border-bottom: 1px solid rgba(129, 97, 38, 0.14);
   }
 
-  .source-list li:last-child {
+  .source-item:last-child {
     padding-bottom: 0;
     border-bottom: 0;
   }
 
-  .source-list li > span {
+  .source-kicker {
+    margin: 0;
     color: #816126;
     font-size: 0.78rem;
     font-weight: 950;
@@ -550,10 +559,12 @@ const pageDescription =
   }
 
   .source-link {
+    display: inline;
     color: #172033;
     font-size: 1rem;
     font-weight: 850;
     line-height: 1.42;
+    letter-spacing: 0;
     text-decoration: underline;
     text-decoration-thickness: 1px;
     text-underline-offset: 3px;
@@ -563,16 +574,8 @@ const pageDescription =
     color: #816126;
   }
 
-  .source-hint {
-    margin-top: 18px;
-    color: #465266;
-    font-size: 0.96rem;
-    font-weight: 500;
-    line-height: 1.58;
-  }
-
   .stand {
-    display: flex;
+    display: inline-flex;
     width: fit-content;
     margin-top: 16px;
     padding: 8px 12px;
@@ -630,10 +633,6 @@ const pageDescription =
       line-height: 1.14;
     }
 
-    .fact-card-date strong {
-      white-space: normal;
-    }
-
     section {
       margin-top: 30px;
       padding-top: 28px;
@@ -659,6 +658,12 @@ const pageDescription =
     .seo-explanation-box {
       padding: 20px;
       border-radius: 20px;
+    }
+
+    .source-link {
+      width: auto;
+      font-size: 1rem;
+      line-height: 1.42;
     }
   }
 
