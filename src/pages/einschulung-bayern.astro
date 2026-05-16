@@ -5,7 +5,62 @@ const pageTitle =
   "Einschulung Bayern 2026: Schulstart, Stichtag und Einschulungskorridor";
 
 const pageDescription =
-  "Wann ist die Einschulung in Bayern? Erfahre alles zu Schulstart, erstem Schultag, Einschulungstermin, Stichtag 30. September und Einschulungskorridor.";
+  "Wann kommt mein Kind in Bayern in die Schule? Erfahre alles zu Schulstart, erstem Schultag, Einschulungstermin, Stichtag 30. September und Einschulungskorridor.";
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: [
+    {
+      "@type": "Question",
+      name: "Welcher Einschulungsstichtag gilt in Bayern?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "In Bayern gilt der 30. September als Einschulungsstichtag. Wird ein Kind bis zu diesem Datum sechs Jahre alt, ist es in der Regel mit Beginn des neuen Schuljahres schulpflichtig.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Wann ist die Einschulung in Bayern 2026?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Für Schulanfängerinnen und Schulanfänger nennt das Bayerische Kultusministerium Mittwoch, 16. September 2026. Der allgemeine erste Schultag nach den Sommerferien ist voraussichtlich Dienstag, 15. September 2026. Die konkrete Organisation kann je nach Grundschule abweichen.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Was bedeutet der Einschulungskorridor in Bayern?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Der Einschulungskorridor betrifft Kinder, die zwischen dem 1. Juli und dem 30. September sechs Jahre alt werden. Für diese Kinder ist die Einschulung grundsätzlich vorgesehen. Eltern können den Schulbeginn nach Beratung und Empfehlung durch die Schule unter bestimmten Voraussetzungen um ein Jahr verschieben.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Kann mein Kind in Bayern früher eingeschult werden?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Kinder, die erst nach dem 30. September sechs Jahre alt werden, können unter bestimmten Voraussetzungen vorzeitig eingeschult werden. Den Antrag stellst du bei der Schulanmeldung an der zuständigen Grundschule; über die Aufnahme entscheidet die Schule nach Einschätzung des Entwicklungsstands deines Kindes.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Wie läuft die Schulanmeldung in Bayern ab?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Die Anmeldung erfolgt an der zuständigen Grundschule, die dich über Termine, Unterlagen und mögliche Beratungstermine informiert. Wenn du eine vorzeitige Einschulung wünschst, stellst du den Antrag spätestens bei der Schulanmeldung; verbindliche Fristen erfährst du direkt bei der Schule.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Ist das Ergebnis zur Einschulung in Bayern verbindlich?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Nein. Der Einschulungsrechner und diese Informationsseite dienen der Orientierung. Verbindliche Informationen erhältst du bei der zuständigen Grundschule, der Schulbehörde oder beim Bayerischen Staatsministerium für Unterricht und Kultus.",
+      },
+    },
+  ],
+};
 ---
 
 <html lang="de">
@@ -15,62 +70,7 @@ const pageDescription =
     <title>{pageTitle}</title>
     <meta name="description" content={pageDescription} />
     <link rel="canonical" href="https://www.einschulungsrechner.de/einschulung-bayern/" />
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "FAQPage",
-        "mainEntity": [
-          {
-            "@type": "Question",
-            "name": "Wann kommt mein Kind in Bayern in die Schule?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Das hängt vom Geburtsdatum deines Kindes ab. In Bayern gilt der 30. September als Stichtag. Wird dein Kind bis zu diesem Datum sechs Jahre alt, ist es in der Regel mit Beginn des neuen Schuljahres schulpflichtig. Der Einschulungsrechner zeigt dir das voraussichtliche Schuljahr."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Was passiert, wenn mein Kind im August geboren ist?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Kinder, die in Bayern zwischen dem 1. Juli und dem 30. September sechs Jahre alt werden, liegen im Einschulungskorridor. Die Einschulung ist grundsätzlich vorgesehen; Eltern können den Schulbeginn unter bestimmten Voraussetzungen aber um ein Jahr verschieben."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Kann ich den Schulstart in Bayern verschieben?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Im Einschulungskorridor kann der Beginn der Schulpflicht unter bestimmten Voraussetzungen um ein Jahr verschoben werden. Das betrifft Kinder, die zwischen dem 1. Juli und dem 30. September sechs Jahre alt werden. Verbindliche Informationen erhältst du bei der zuständigen Grundschule."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Wann muss ich mein Kind in Bayern an der Grundschule anmelden?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Die Anmeldung erfolgt an der zuständigen Grundschule. Ein Antrag auf vorzeitige Einschulung ist spätestens bei der Schulanmeldung an der zuständigen Grundschule zu stellen. Verbindliche Fristen und Unterlagen erfährst du direkt bei der Schule."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Ist der 16. September 2026 für jede Grundschule verbindlich?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Das Bayerische Kultusministerium nennt für Schulanfängerinnen und Schulanfänger den 16. September 2026. Die konkrete Organisation der Einschulung kann je nach Grundschule abweichen."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Welche Quelle ist für die Einschulung in Bayern verbindlich?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Diese Seite dient der Orientierung. Verbindliche Informationen erhältst du bei der zuständigen Grundschule, der Schulbehörde oder beim Bayerischen Staatsministerium für Unterricht und Kultus."
-            }
-          }
-        ]
-      }
-    </script>
+    <script type="application/ld+json" set:html={JSON.stringify(faqSchema)}></script>
   </head>
 
   <body>
@@ -87,11 +87,10 @@ const pageDescription =
 
         <p class="lead">
           Wann kommt mein Kind in Bayern in die Schule? Der Einschulungsrechner
-          zeigt dir anhand des Geburtsdatums das voraussichtliche Schuljahr.
-          Für Schulanfängerinnen und Schulanfänger nennt das Bayerische
-          Kultusministerium den 16. September 2026. Der allgemeine Schulstart nach
-          den Sommerferien ist voraussichtlich am 15. September 2026. Für die
-          Schulpflicht gilt der Stichtag 30. September.
+          zeigt dir anhand des Geburtsdatums das voraussichtliche Schuljahr. In
+          Bayern gilt der Stichtag 30. September. Für das Schuljahr 2026/2027 ist
+          die Einschulung für Mittwoch, 16. September 2026 vorgesehen – der erste
+          Schultag ist Dienstag, 15. September 2026.
         </p>
 
         <StateEnrollmentCalculator
@@ -103,15 +102,15 @@ const pageDescription =
           intro="Gib das Geburtsdatum deines Kindes ein. Bayern ist hier bereits vorausgewählt. Wenn du von der Startseite kommst, übernehmen wir das Geburtsdatum automatisch aus dem Link."
         />
 
-        <div class="quick-facts" aria-label="Kurzüberblick Einschulung Bayern">
-          <div class="fact-card fact-card-date">
+        <div class="quick-facts quick-facts-master" aria-label="Kurzüberblick Einschulung Bayern">
+          <div class="fact-card fact-card-highlight">
             <span>Nächste Einschulung</span>
-            <strong>Mittwoch, 16.09.2026</strong>
+            <strong>Mittwoch, 16. September 2026</strong>
           </div>
 
-          <div class="fact-card fact-card-date">
+          <div class="fact-card fact-card-highlight">
             <span>Erster Schultag</span>
-            <strong>Dienstag, 15.09.2026</strong>
+            <strong>Dienstag, 15. September 2026</strong>
           </div>
 
           <div class="fact-card">
@@ -119,7 +118,7 @@ const pageDescription =
             <strong>30. September</strong>
           </div>
 
-          <div class="fact-card fact-card-no-wrap">
+          <div class="fact-card">
             <span>Sonderregel</span>
             <strong>Einschulungskorridor</strong>
           </div>
@@ -156,15 +155,15 @@ const pageDescription =
           <p>
             Die nächste Einschulung in Bayern für Schulanfängerinnen und
             Schulanfänger ist nach aktueller Darstellung des Bayerischen
-            Kultusministeriums am 16. September 2026. Der allgemeine Schulstart
-            nach den Sommerferien ist voraussichtlich Dienstag, der 15. September
-            2026. Die konkrete Einschulungsfeier kann je nach Grundschule
-            organisatorisch abweichen.
+            Kultusministeriums Mittwoch, 16. September 2026. Der allgemeine
+            erste Schultag nach den Sommerferien ist voraussichtlich Dienstag,
+            15. September 2026. Die konkrete Organisation der Einschulung kann
+            je nach Grundschule abweichen.
           </p>
         </section>
 
         <section>
-          <h2>Welcher Stichtag gilt für die Einschulung in Bayern?</h2>
+          <h2>Welcher Einschulungsstichtag gilt in Bayern?</h2>
 
           <p>
             In Bayern gilt der 30. September als Stichtag für die Einschulung.
@@ -185,15 +184,26 @@ const pageDescription =
         </section>
 
         <section>
-          <h2>Kann mein Kind früher eingeschult werden?</h2>
+          <h2>Kann mein Kind in Bayern früher eingeschult werden?</h2>
 
           <p>
-            Kinder, die erst nach dem 30. September sechs Jahre alt werden, können
-            unter bestimmten Voraussetzungen vorzeitig eingeschult werden. Die
-            Entscheidung hängt vom Entwicklungsstand des Kindes und der Einschätzung
-            der zuständigen Schule ab. Ein Antrag auf vorzeitige Einschulung ist
-            spätestens bei der Schulanmeldung an der zuständigen Grundschule zu
-            stellen.
+            Kinder, die erst nach dem 30. September sechs Jahre alt werden,
+            können unter bestimmten Voraussetzungen vorzeitig eingeschult
+            werden. Den Antrag stellst du bei der Schulanmeldung an der
+            zuständigen Grundschule; über die Aufnahme entscheidet die Schule
+            nach Einschätzung des Entwicklungsstands deines Kindes.
+          </p>
+        </section>
+
+        <section>
+          <h2>Wie läuft die Schulanmeldung in Bayern ab?</h2>
+
+          <p>
+            Die Anmeldung erfolgt an der zuständigen Grundschule, die dich über
+            Termine, Unterlagen und mögliche Beratungstermine informiert. Wenn
+            du eine vorzeitige Einschulung wünschst, stellst du den Antrag
+            spätestens bei der Schulanmeldung; verbindliche Fristen erfährst du
+            direkt bei der Schule.
           </p>
         </section>
 
@@ -213,79 +223,81 @@ const pageDescription =
 
           <div class="faq-list">
             <article class="faq-item">
-              <h3>Wann kommt mein Kind in Bayern in die Schule?</h3>
+              <h3>Welcher Einschulungsstichtag gilt in Bayern?</h3>
               <p>
-                Das hängt vom Geburtsdatum deines Kindes ab. In Bayern gilt der
-                30. September als Stichtag. Wird dein Kind bis zu diesem Datum
-                sechs Jahre alt, ist es in der Regel mit Beginn des neuen
-                Schuljahres schulpflichtig. Der Einschulungsrechner zeigt dir das
-                voraussichtliche Schuljahr.
+                In Bayern gilt der 30. September als Einschulungsstichtag. Wird ein
+                Kind bis zu diesem Datum sechs Jahre alt, ist es in der Regel mit
+                Beginn des neuen Schuljahres schulpflichtig.
               </p>
             </article>
 
             <article class="faq-item">
-              <h3>Was passiert, wenn mein Kind im August geboren ist?</h3>
+              <h3>Wann ist die Einschulung in Bayern 2026?</h3>
               <p>
-                Kinder, die in Bayern zwischen dem 1. Juli und dem 30. September
-                sechs Jahre alt werden, liegen im Einschulungskorridor. Die
-                Einschulung ist grundsätzlich vorgesehen; Eltern können den
-                Schulbeginn unter bestimmten Voraussetzungen aber um ein Jahr
-                verschieben.
+                Für Schulanfängerinnen und Schulanfänger nennt das Bayerische
+                Kultusministerium Mittwoch, 16. September 2026. Der allgemeine
+                erste Schultag nach den Sommerferien ist voraussichtlich Dienstag,
+                15. September 2026. Die konkrete Organisation kann je nach
+                Grundschule abweichen.
               </p>
             </article>
 
             <article class="faq-item">
-              <h3>Kann ich den Schulstart in Bayern verschieben?</h3>
+              <h3>Was bedeutet der Einschulungskorridor in Bayern?</h3>
               <p>
-                Im Einschulungskorridor kann der Beginn der Schulpflicht unter
-                bestimmten Voraussetzungen um ein Jahr verschoben werden. Das
-                betrifft Kinder, die zwischen dem 1. Juli und dem 30. September
-                sechs Jahre alt werden. Verbindliche Informationen erhältst du bei
-                der zuständigen Grundschule.
+                Der Einschulungskorridor betrifft Kinder, die zwischen dem 1. Juli
+                und dem 30. September sechs Jahre alt werden. Für diese Kinder ist
+                die Einschulung grundsätzlich vorgesehen. Eltern können den
+                Schulbeginn nach Beratung und Empfehlung durch die Schule unter
+                bestimmten Voraussetzungen um ein Jahr verschieben.
               </p>
             </article>
 
             <article class="faq-item">
-              <h3>Wann muss ich mein Kind in Bayern an der Grundschule anmelden?</h3>
+              <h3>Kann mein Kind in Bayern früher eingeschult werden?</h3>
               <p>
-                Die Anmeldung erfolgt an der zuständigen Grundschule. Ein Antrag
-                auf vorzeitige Einschulung ist spätestens bei der Schulanmeldung
-                an der zuständigen Grundschule zu stellen. Verbindliche Fristen
-                und Unterlagen erfährst du direkt bei der Schule.
+                Kinder, die erst nach dem 30. September sechs Jahre alt werden,
+                können unter bestimmten Voraussetzungen vorzeitig eingeschult
+                werden. Den Antrag stellst du bei der Schulanmeldung an der
+                zuständigen Grundschule; über die Aufnahme entscheidet die Schule
+                nach Einschätzung des Entwicklungsstands deines Kindes.
               </p>
             </article>
 
             <article class="faq-item">
-              <h3>Ist der 16. September 2026 für jede Grundschule verbindlich?</h3>
+              <h3>Wie läuft die Schulanmeldung in Bayern ab?</h3>
               <p>
-                Das Bayerische Kultusministerium nennt für Schulanfängerinnen und
-                Schulanfänger den 16. September 2026. Die konkrete Organisation
-                der Einschulung kann je nach Grundschule abweichen.
+                Die Anmeldung erfolgt an der zuständigen Grundschule, die dich über
+                Termine, Unterlagen und mögliche Beratungstermine informiert. Wenn
+                du eine vorzeitige Einschulung wünschst, stellst du den Antrag
+                spätestens bei der Schulanmeldung; verbindliche Fristen erfährst du
+                direkt bei der Schule.
               </p>
             </article>
 
             <article class="faq-item">
-              <h3>Welche Quelle ist für die Einschulung in Bayern verbindlich?</h3>
+              <h3>Ist das Ergebnis zur Einschulung in Bayern verbindlich?</h3>
               <p>
-                Diese Seite dient der Orientierung. Verbindliche Informationen
-                erhältst du bei der zuständigen Grundschule, der Schulbehörde oder
-                beim Bayerischen Staatsministerium für Unterricht und Kultus.
+                Nein. Der Einschulungsrechner und diese Informationsseite dienen der
+                Orientierung. Verbindliche Informationen erhältst du bei der zuständigen
+                Grundschule, der Schulbehörde oder beim Bayerischen Staatsministerium
+                für Unterricht und Kultus.
               </p>
             </article>
           </div>
         </section>
 
         <section class="source-note">
-          <h2>Quelle und Hinweis</h2>
+          <h2>Quellen und Hinweise</h2>
 
           <p>
             Die folgenden offiziellen Quellen bilden die Grundlage dieser Übersicht
             zur Einschulung in Bayern:
           </p>
 
-          <ul class="source-list" aria-label="Offizielle Quellen zur Einschulung in Bayern">
-            <li>
-              <span>Offizielle Quelle 1</span>
+          <div class="source-list" aria-label="Offizielle Quellen zur Einschulung in Bayern">
+            <div class="source-item">
+              <p class="source-kicker">Offizielle Quelle 1</p>
               <a
                 class="source-link"
                 href="https://www.km.bayern.de/lernen/schularten/grundschule/einschulung-und-schulwegsicherheit"
@@ -294,10 +306,10 @@ const pageDescription =
               >
                 Bayerisches Staatsministerium für Unterricht und Kultus: Einschulung und Schulwegsicherheit
               </a>
-            </li>
+            </div>
 
-            <li>
-              <span>Offizielle Quelle 2</span>
+            <div class="source-item">
+              <p class="source-kicker">Offizielle Quelle 2</p>
               <a
                 class="source-link"
                 href="https://www.km.bayern.de/ministerium/termine/ferientermine.html"
@@ -306,10 +318,10 @@ const pageDescription =
               >
                 Bayerisches Staatsministerium für Unterricht und Kultus: Ferien und Feiertage
               </a>
-            </li>
+            </div>
 
-            <li>
-              <span>Offizielle Quelle 3</span>
+            <div class="source-item">
+              <p class="source-kicker">Offizielle Quelle 3</p>
               <a
                 class="source-link"
                 href="https://www.bayernportal.de/dokumente/leistung/13885875650"
@@ -318,12 +330,13 @@ const pageDescription =
               >
                 BayernPortal: Grundschule, Anmeldung und Schulpflicht
               </a>
-            </li>
-          </ul>
+            </div>
+          </div>
 
-          <p class="source-hint">
-            Bitte prüfe verbindliche Details immer bei der zuständigen Grundschule
-            oder Schulbehörde.
+          <p>
+            Hinweis: Bitte prüfe verbindliche Details immer bei der zuständigen
+            Grundschule, der Schulbehörde oder beim Bayerischen Staatsministerium
+            für Unterricht und Kultus.
           </p>
 
           <p class="stand">Stand der Informationen: Mai 2026</p>
@@ -424,6 +437,14 @@ const pageDescription =
     margin-top: 30px;
   }
 
+  .quick-facts-master {
+    margin-top: 34px;
+  }
+
+  :global(body.has-bayern-calculator-result) .quick-facts-master .fact-card-highlight {
+    display: none;
+  }
+
   .fact-card {
     display: grid;
     align-content: center;
@@ -446,24 +467,15 @@ const pageDescription =
 
   .fact-card strong {
     color: #172033;
-    font-size: clamp(1.22rem, 1.55vw, 1.46rem);
+    font-size: clamp(1.32rem, 1.85vw, 1.68rem);
     font-weight: 950;
     line-height: 1.12;
     letter-spacing: -0.035em;
   }
 
-  .fact-card-date {
-    border-color: rgba(129, 97, 38, 0.16);
-    background: rgba(245, 210, 138, 0.12);
-  }
-
-  .fact-card-date strong {
-    font-size: clamp(1.22rem, 1.65vw, 1.56rem);
-    white-space: nowrap;
-  }
-
-  .fact-card-no-wrap strong {
-    white-space: nowrap;
+  .fact-card-highlight {
+    border-color: rgba(129, 97, 38, 0.18);
+    background: rgba(245, 210, 138, 0.1);
   }
 
   section {
@@ -530,25 +542,24 @@ const pageDescription =
 
   .source-list {
     display: grid;
-    gap: 14px;
-    margin: 20px 0 0;
-    padding: 0;
-    list-style: none;
+    gap: 22px;
+    margin-top: 28px;
   }
 
-  .source-list li {
+  .source-item {
     display: grid;
-    gap: 5px;
-    padding-bottom: 14px;
-    border-bottom: 1px solid rgba(129, 97, 38, 0.12);
+    gap: 8px;
+    padding-bottom: 22px;
+    border-bottom: 1px solid rgba(129, 97, 38, 0.14);
   }
 
-  .source-list li:last-child {
+  .source-item:last-child {
     padding-bottom: 0;
     border-bottom: 0;
   }
 
-  .source-list li > span {
+  .source-kicker {
+    margin: 0;
     color: #816126;
     font-size: 0.78rem;
     font-weight: 950;
@@ -558,10 +569,12 @@ const pageDescription =
   }
 
   .source-link {
+    display: inline;
     color: #172033;
     font-size: 1rem;
     font-weight: 850;
     line-height: 1.42;
+    letter-spacing: 0;
     text-decoration: underline;
     text-decoration-thickness: 1px;
     text-underline-offset: 3px;
@@ -571,16 +584,9 @@ const pageDescription =
     color: #816126;
   }
 
-  .source-hint {
-    margin-top: 18px;
-    color: #465266;
-    font-size: 0.96rem;
-    font-weight: 500;
-    line-height: 1.58;
-  }
 
   .stand {
-    display: flex;
+    display: inline-flex;
     width: fit-content;
     margin-top: 16px;
     padding: 8px 12px;
@@ -646,14 +652,6 @@ const pageDescription =
       line-height: 1.14;
     }
 
-    .fact-card-date strong {
-      white-space: normal;
-    }
-
-    .fact-card-no-wrap strong {
-      white-space: normal;
-    }
-
     section {
       margin-top: 30px;
       padding-top: 28px;
@@ -681,6 +679,11 @@ const pageDescription =
       border-radius: 20px;
     }
 
+    .source-link {
+      width: auto;
+      font-size: 1rem;
+      line-height: 1.42;
+    }
   }
 
   @media (max-width: 390px) {
