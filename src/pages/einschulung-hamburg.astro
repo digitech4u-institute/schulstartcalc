@@ -6,6 +6,61 @@ const pageTitle =
 
 const pageDescription =
   "Wann kommt mein Kind in Hamburg in die Schule? Erfahre alles zu Einschulungsstichtag, Schulpflicht, vorzeitiger Einschulung und voraussichtlichem Schuljahr.";
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: [
+    {
+      "@type": "Question",
+      name: "Welcher Einschulungsstichtag gilt in Hamburg?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "In Hamburg werden Kinder am 1. August schulpflichtig, wenn sie vor dem 1. Juli desselben Kalenderjahres das sechste Lebensjahr vollendet haben. Praktisch betrifft das Kinder, die bis einschließlich 30. Juni sechs Jahre alt werden. Hamburg hat keinen Einschulungskorridor; eine vorzeitige Einschulung kann auf Antrag geprüft werden.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Wann ist die Einschulung in Hamburg 2026?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Der erste Schultag nach den Sommerferien ist in Hamburg Donnerstag, 20. August 2026. Die Einschulungsfeier der ersten Klassen legt die jeweilige Grundschule individuell fest. Häufig starten Erstklässlerinnen und Erstklässler am Montag oder Dienstag nach dem ersten Schultag. Verbindliche Informationen erhältst du bei der zuständigen Grundschule.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Was bedeutet Kann-Kind in Hamburg?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Als Kann-Kind werden Kinder bezeichnet, die nach dem regulären Stichtag sechs Jahre alt werden und nicht automatisch schulpflichtig sind. In Hamburg betrifft das Kinder, die nach dem 30. Juni sechs Jahre alt werden. Eine vorzeitige Einschulung kann auf Antrag der Sorgeberechtigten geprüft werden.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Kann mein Kind in Hamburg früher eingeschult werden?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Kinder, die nach dem 30. Juni sechs Jahre alt werden, sind in Hamburg nicht automatisch regulär schulpflichtig. Eine vorzeitige Einschulung kann auf Antrag der Sorgeberechtigten geprüft werden. Die Schule berücksichtigt dabei, ob das Kind geistig, seelisch, körperlich und sprachlich ausreichend entwickelt ist.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Was passiert, wenn mein Kind in Hamburg noch nicht schulfähig ist?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Wenn Zweifel an der Schulfähigkeit bestehen, solltest du frühzeitig Kontakt mit der zuständigen Grundschule aufnehmen. Die Schule prüft den Entwicklungsstand und informiert über das weitere Verfahren. Verbindliche Auskunft erhältst du bei der zuständigen Grundschule oder beim Schulinformationszentrum Hamburg.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Ist das Ergebnis zur Einschulung in Hamburg verbindlich?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Nein. Der Einschulungsrechner und diese Informationsseite dienen der Orientierung. Verbindlich sind die Auskünfte der zuständigen Grundschule, der Schulbehörde oder des Schulinformationszentrums Hamburg – insbesondere bei Fragen zur Schulanmeldung, vorzeitigen Einschulung oder individuellen Entscheidungen.",
+      },
+    },
+  ],
+};
 ---
 
 <html lang="de">
@@ -15,67 +70,12 @@ const pageDescription =
     <title>{pageTitle}</title>
     <meta name="description" content={pageDescription} />
     <link rel="canonical" href="https://www.einschulungsrechner.de/einschulung-hamburg/" />
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "FAQPage",
-        "mainEntity": [
-          {
-            "@type": "Question",
-            "name": "Welcher Einschulungsstichtag gilt in Hamburg?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "In Hamburg werden Kinder am 1. August schulpflichtig, wenn sie vor dem 1. Juli desselben Kalenderjahres das sechste Lebensjahr vollendet haben. Praktisch betrifft das Kinder, die bis einschließlich 30. Juni sechs Jahre alt werden. Hamburg hat keinen Einschulungskorridor; eine vorzeitige Einschulung kann auf Antrag geprüft werden."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Wann ist die Einschulung in Hamburg 2026?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Die Sommerferien in Hamburg enden am 19. August 2026. Der erste Schultag nach den Sommerferien ist Donnerstag, der 20. August 2026. Die Einschulungsfeier der ersten Klassen wird von der jeweiligen Grundschule individuell festgelegt — in der Regel in der ersten Schulwoche (17.–23. August 2026)."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Kann mein Kind in Hamburg früher eingeschult werden?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Kinder, die nach dem 30. Juni sechs Jahre alt werden, sind in Hamburg nicht automatisch regulär schulpflichtig. Eine vorzeitige Einschulung kann auf Antrag der Sorgeberechtigten geprüft werden. Diese Kinder werden auch als Kann-Kinder bezeichnet."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Was ist ein Kann-Kind in Hamburg?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Als Kann-Kind werden Kinder bezeichnet, die nach dem regulären Stichtag sechs Jahre alt werden und nicht automatisch schulpflichtig sind. In Hamburg betrifft das Kinder, die nach dem 30. Juni sechs Jahre alt werden. Eine vorzeitige Einschulung kann auf Antrag der Sorgeberechtigten geprüft werden."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Was passiert, wenn mein Kind in Hamburg noch nicht schulfähig ist?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Wenn Zweifel an der Schulfähigkeit bestehen, sollte frühzeitig Kontakt mit der zuständigen Grundschule aufgenommen werden. Die Schule prüft den Entwicklungsstand und informiert über das weitere Verfahren. Verbindliche Auskunft erhältst du bei der zuständigen Grundschule oder beim Schulinformationszentrum Hamburg."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Ist das Ergebnis zur Einschulung in Hamburg verbindlich?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Nein. Der Einschulungsrechner und diese Informationsseite dienen der Orientierung. Verbindliche Informationen erhältst du bei der zuständigen Grundschule oder beim Schulinformationszentrum Hamburg."
-            }
-          }
-        ]
-      }
-    </script>
+    <script type="application/ld+json" set:html={JSON.stringify(faqSchema)}></script>
   </head>
 
   <body>
     <main class="state-page">
-      <a class="back-link" href="/">← Zum Einschulungsrechner</a>
+      <a class="back-link" href="/">← Zur Startseite</a>
 
       <article class="state-card">
         <p class="state-kicker">Hamburg</p>
@@ -88,10 +88,9 @@ const pageDescription =
         <p class="lead">
           Wann kommt mein Kind in Hamburg in die Schule? Der Einschulungsrechner
           zeigt dir anhand des Geburtsdatums das voraussichtliche Schuljahr. In
-          Hamburg gilt der Stichtag 30. Juni. Die Sommerferien enden 2026 am
-          19. August. Der erste Schultag nach den Sommerferien ist Donnerstag,
-          der 20. August 2026. Die Einschulungsfeier der ersten Klassen wird
-          von der jeweiligen Grundschule individuell festgelegt.
+          Hamburg gilt der Stichtag 30. Juni. Für das Schuljahr 2026/2027 wird die
+          Einschulung von der jeweiligen Grundschule festgelegt – der erste Schultag
+          ist Donnerstag, 20. August 2026.
         </p>
 
         <StateEnrollmentCalculator
@@ -105,13 +104,13 @@ const pageDescription =
 
         <div class="quick-facts quick-facts-master" aria-label="Kurzüberblick Einschulung Hamburg">
           <div class="fact-card fact-card-highlight">
-            <span>Erster Schultag</span>
-            <strong>Donnerstag, 20.08.2026</strong>
+            <span>Nächste Einschulung</span>
+            <strong>24.–26. August 2026 (schulabhängig)</strong>
           </div>
 
           <div class="fact-card fact-card-highlight">
-            <span>Kann-Kind-Option</span>
-            <strong>Antrag möglich</strong>
+            <span>Erster Schultag</span>
+            <strong>Donnerstag, 20. August 2026</strong>
           </div>
 
           <div class="fact-card">
@@ -121,7 +120,7 @@ const pageDescription =
 
           <div class="fact-card">
             <span>Sonderregel</span>
-            <strong>Vorzeitige Einschulung</strong>
+            <strong>Kann-Kind auf Antrag</strong>
           </div>
         </div>
 
@@ -150,7 +149,7 @@ const pageDescription =
         </section>
 
         <section>
-          <h2>Wann ist ein Kind in Hamburg schulpflichtig?</h2>
+          <h2>Welcher Einschulungsstichtag gilt in Hamburg?</h2>
 
           <p>
             Ein Kind wird in Hamburg regulär schulpflichtig, wenn es vor dem
@@ -161,7 +160,7 @@ const pageDescription =
         </section>
 
         <section>
-          <h2>Kann mein Kind früher eingeschult werden?</h2>
+          <h2>Kann mein Kind in Hamburg früher eingeschult werden?</h2>
 
           <p>
             Hamburg hat keinen Einschulungskorridor wie Bayern. Kinder, die nach
@@ -211,34 +210,26 @@ const pageDescription =
               <p>
                 In Hamburg werden Kinder am 1. August schulpflichtig, wenn sie vor
                 dem 1. Juli desselben Kalenderjahres das sechste Lebensjahr
-                vollendet haben. Praktisch betrifft das Kinder, die bis zum
-                30. Juni sechs Jahre alt werden.
+                vollendet haben. Praktisch betrifft das Kinder, die bis einschließlich
+                30. Juni sechs Jahre alt werden. Hamburg hat keinen Einschulungskorridor;
+                eine vorzeitige Einschulung kann auf Antrag geprüft werden.
               </p>
             </article>
 
             <article class="faq-item">
               <h3>Wann ist die Einschulung in Hamburg 2026?</h3>
               <p>
-                Die Sommerferien in Hamburg enden am 19. August 2026. Der erste
-                Schultag nach den Sommerferien ist Donnerstag, der 20. August 2026.
-                Die Einschulungsfeier der ersten Klassen wird von der jeweiligen
-                Grundschule individuell festgelegt — in der Regel in der ersten
-                Schulwoche (17.–23. August 2026).
+                Der erste Schultag nach den Sommerferien ist in Hamburg Donnerstag,
+                20. August 2026. Die Einschulungsfeier der ersten Klassen legt die
+                jeweilige Grundschule individuell fest. Häufig starten
+                Erstklässlerinnen und Erstklässler am Montag oder Dienstag nach dem
+                ersten Schultag. Verbindliche Informationen erhältst du bei der
+                zuständigen Grundschule.
               </p>
             </article>
 
             <article class="faq-item">
-              <h3>Kann mein Kind vorzeitig eingeschult werden?</h3>
-              <p>
-                Ja. Hamburg hat keinen Einschulungskorridor, aber Kinder, die nach
-                dem 30. Juni sechs Jahre alt werden, können auf Antrag der
-                Sorgeberechtigten vorzeitig eingeschult werden. Diese Kinder werden
-                auch als Kann-Kinder bezeichnet.
-              </p>
-            </article>
-
-            <article class="faq-item">
-              <h3>Was ist ein Kann-Kind in Hamburg?</h3>
+              <h3>Was bedeutet Kann-Kind in Hamburg?</h3>
               <p>
                 Als Kann-Kind werden Kinder bezeichnet, die nach dem regulären
                 Stichtag sechs Jahre alt werden und nicht automatisch schulpflichtig
@@ -249,27 +240,42 @@ const pageDescription =
             </article>
 
             <article class="faq-item">
-              <h3>Was passiert, wenn mein Kind noch nicht schulfähig ist?</h3>
+              <h3>Kann mein Kind in Hamburg früher eingeschult werden?</h3>
               <p>
-                Wenn Zweifel an der Schulfähigkeit bestehen, solltest du frühzeitig
-                Kontakt mit der zuständigen Grundschule aufnehmen. Die Schule prüft
-                den Entwicklungsstand und informiert über das weitere Verfahren.
+                Kinder, die nach dem 30. Juni sechs Jahre alt werden, sind in
+                Hamburg nicht automatisch regulär schulpflichtig. Eine vorzeitige
+                Einschulung kann auf Antrag der Sorgeberechtigten geprüft werden.
+                Die Schule berücksichtigt dabei, ob das Kind geistig, seelisch,
+                körperlich und sprachlich ausreichend entwickelt ist.
               </p>
             </article>
 
             <article class="faq-item">
-              <h3>Ist das Ergebnis verbindlich?</h3>
+              <h3>Was passiert, wenn mein Kind in Hamburg noch nicht schulfähig ist?</h3>
               <p>
-                Nein. Der Rechner und diese Seite dienen der Orientierung.
-                Verbindliche Informationen erhältst du bei der zuständigen Schule
+                Wenn Zweifel an der Schulfähigkeit bestehen, solltest du frühzeitig
+                Kontakt mit der zuständigen Grundschule aufnehmen. Die Schule prüft
+                den Entwicklungsstand und informiert über das weitere Verfahren.
+                Verbindliche Auskunft erhältst du bei der zuständigen Grundschule
                 oder beim Schulinformationszentrum Hamburg.
+              </p>
+            </article>
+
+            <article class="faq-item">
+              <h3>Ist das Ergebnis zur Einschulung in Hamburg verbindlich?</h3>
+              <p>
+                Nein. Der Einschulungsrechner und diese Informationsseite dienen der
+                Orientierung. Verbindlich sind die Auskünfte der zuständigen Grundschule,
+                der Schulbehörde oder des Schulinformationszentrums Hamburg – insbesondere
+                bei Fragen zur Schulanmeldung, vorzeitigen Einschulung oder individuellen
+                Entscheidungen.
               </p>
             </article>
           </div>
         </section>
 
         <section class="source-note">
-          <h2>Quelle und Hinweis</h2>
+          <h2>Quellen und Hinweise</h2>
 
           <p>
             Die folgenden offiziellen Quellen bilden die Grundlage dieser Übersicht
@@ -300,11 +306,23 @@ const pageDescription =
                 hamburg.de: Schulferien und Feiertage in Hamburg 2026
               </a>
             </div>
+
+            <div class="source-item">
+              <p class="source-kicker">Offizielle Quelle 3</p>
+              <a
+                class="source-link"
+                href="https://www.landesrecht-hamburg.de/bsha/document/jlr-SchulGHArahmen/part/X"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Hamburgisches Schulgesetz: § 38 – Beginn der Schulpflicht
+              </a>
+            </div>
           </div>
 
           <p>
-            Bitte prüfe verbindliche Details immer bei der zuständigen Grundschule
-            oder beim Schulinformationszentrum Hamburg.
+            Hinweis: Bitte prüfe verbindliche Details immer bei der zuständigen
+            Grundschule, der Schulbehörde oder beim Schulinformationszentrum Hamburg.
           </p>
 
           <p class="stand">Stand der Informationen: Mai 2026</p>
@@ -372,20 +390,10 @@ const pageDescription =
   .state-kicker {
     margin: 0 0 14px;
     color: #816126;
-    font-size: 0.88rem;
-    font-weight: 850;
-    letter-spacing: 0.09em;
-    line-height: 1.25;
-    text-transform: uppercase;
-  }
-
-  .section-kicker {
-    margin: 0 0 12px;
-    color: #816126;
-    font-size: 0.86rem;
-    font-weight: 950;
+    font-size: clamp(0.9rem, 1vw, 1rem);
+    font-weight: 900;
     letter-spacing: 0.095em;
-    line-height: 1.18;
+    line-height: 1.2;
     text-transform: uppercase;
   }
 
@@ -395,16 +403,17 @@ const pageDescription =
     color: #172033;
     font-size: clamp(2.25rem, 5vw, 4.05rem);
     font-weight: 950;
-    line-height: 1.01;
-    letter-spacing: -0.06em;
+    line-height: 1.02;
+    letter-spacing: -0.055em;
   }
 
   .lead {
     max-width: 760px;
     margin: 24px 0 0;
     color: #465266;
-    font-size: clamp(1.08rem, 1.7vw, 1.22rem);
-    line-height: 1.65;
+    font-size: clamp(1.08rem, 1.55vw, 1.2rem);
+    font-weight: 500;
+    line-height: 1.64;
   }
 
   .quick-facts {
@@ -416,6 +425,10 @@ const pageDescription =
 
   .quick-facts-master {
     margin-top: 34px;
+  }
+
+  :global(body.has-hamburg-calculator-result) .quick-facts-master .fact-card-highlight {
+    display: none;
   }
 
   .fact-card {
@@ -431,24 +444,24 @@ const pageDescription =
 
   .fact-card-highlight {
     border-color: rgba(129, 97, 38, 0.18);
-    background: rgba(245, 210, 138, 0.13);
+    background: rgba(245, 210, 138, 0.1);
   }
 
   .fact-card span {
     color: #816126;
-    font-size: clamp(1.02rem, 1.35vw, 1.22rem);
+    font-size: clamp(0.92rem, 1.1vw, 1.04rem);
     font-weight: 950;
-    letter-spacing: 0.11em;
-    line-height: 1.12;
+    letter-spacing: 0.095em;
+    line-height: 1.16;
     text-transform: uppercase;
   }
 
   .fact-card strong {
     color: #172033;
-    font-size: clamp(1.34rem, 2vw, 1.72rem);
+    font-size: clamp(1.32rem, 1.85vw, 1.68rem);
     font-weight: 950;
     line-height: 1.12;
-    letter-spacing: -0.03em;
+    letter-spacing: -0.035em;
   }
 
   section {
@@ -460,96 +473,36 @@ const pageDescription =
   h2 {
     margin: 0;
     color: #172033;
-    font-size: clamp(1.65rem, 2.6vw, 2.25rem);
-    font-weight: 900;
-    line-height: 1.08;
-    letter-spacing: -0.05em;
+    font-size: clamp(1.58rem, 2.35vw, 2.12rem);
+    font-weight: 950;
+    line-height: 1.1;
+    letter-spacing: -0.045em;
   }
 
   h3 {
     margin: 0;
     color: #172033;
-    font-size: 1.06rem;
+    font-size: clamp(1.06rem, 1.25vw, 1.18rem);
     font-weight: 900;
-    line-height: 1.25;
-    letter-spacing: -0.02em;
+    line-height: 1.24;
+    letter-spacing: -0.025em;
   }
 
   p {
     margin: 14px 0 0;
     color: #465266;
-    font-size: 1.03rem;
-    line-height: 1.7;
+    font-size: clamp(1rem, 1.2vw, 1.08rem);
+    font-weight: 500;
+    line-height: 1.68;
   }
 
   .example-box,
-  .source-note {
+  .source-note,
+  .seo-explanation-box {
     padding: 24px;
     border: 1px solid rgba(129, 97, 38, 0.16);
     border-radius: 22px;
     background: rgba(245, 210, 138, 0.12);
-  }
-
-  .date-highlight-box {
-    padding: 24px;
-    border: 1px solid rgba(129, 97, 38, 0.16);
-    border-radius: 22px;
-    background: rgba(245, 210, 138, 0.12);
-  }
-
-  .date-highlight-grid {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 14px;
-    margin-top: 22px;
-  }
-
-  .date-highlight-card {
-    display: grid;
-    align-content: center;
-    min-height: 104px;
-    padding: 18px 24px;
-    border: 1px solid rgba(129, 97, 38, 0.18);
-    border-radius: 18px;
-    background: rgba(255, 255, 255, 0.72);
-  }
-
-  .date-highlight-card span {
-    display: block;
-    color: #816126;
-    font-size: clamp(0.9rem, 1.1vw, 1.02rem);
-    font-weight: 950;
-    letter-spacing: 0.095em;
-    line-height: 1.16;
-    text-transform: uppercase;
-  }
-
-  .date-highlight-card strong {
-    display: block;
-    margin-top: 8px;
-    color: #172033;
-    font-size: clamp(1.22rem, 1.85vw, 1.54rem);
-    font-weight: 950;
-    line-height: 1.1;
-    letter-spacing: -0.04em;
-  }
-
-  .cta-link {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 20px;
-    min-height: 54px;
-    padding: 0 22px;
-    border-radius: 16px;
-    background: #172033;
-    color: #fff;
-    font-weight: 850;
-    text-decoration: none;
-  }
-
-  .cta-link:hover {
-    background: #2a3550;
   }
 
   .faq-list {
@@ -568,8 +521,9 @@ const pageDescription =
   .faq-item p {
     margin-top: 12px;
     color: #465266;
-    font-size: clamp(1.08rem, 1.7vw, 1.22rem);
-    line-height: 1.65;
+    font-size: clamp(1rem, 1.2vw, 1.08rem);
+    font-weight: 500;
+    line-height: 1.66;
   }
 
   .source-list {
@@ -593,23 +547,23 @@ const pageDescription =
   .source-kicker {
     margin: 0;
     color: #816126;
-    font-size: 0.92rem;
+    font-size: 0.78rem;
     font-weight: 950;
     letter-spacing: 0.095em;
-    line-height: 1.18;
+    line-height: 1.16;
     text-transform: uppercase;
   }
 
   .source-link {
     display: inline;
     color: #172033;
-    font-size: clamp(1.12rem, 1.7vw, 1.36rem);
-    font-weight: 950;
-    line-height: 1.28;
-    letter-spacing: -0.035em;
+    font-size: 1rem;
+    font-weight: 850;
+    line-height: 1.42;
+    letter-spacing: 0;
     text-decoration: underline;
     text-decoration-thickness: 1px;
-    text-underline-offset: 5px;
+    text-underline-offset: 3px;
   }
 
   .source-link:hover {
@@ -630,8 +584,7 @@ const pageDescription =
   }
 
   @media (max-width: 720px) {
-    .quick-facts,
-    .date-highlight-grid {
+    .quick-facts {
       grid-template-columns: 1fr;
     }
   }
@@ -697,18 +650,16 @@ const pageDescription =
     }
 
     .example-box,
-    .source-note {
+    .source-note,
+    .seo-explanation-box {
       padding: 20px;
       border-radius: 20px;
     }
 
-    .cta-link {
-      width: 100%;
-    }
-
     .source-link {
-      font-size: 1.08rem;
-      line-height: 1.32;
+      width: auto;
+      font-size: 1rem;
+      line-height: 1.42;
     }
   }
 
