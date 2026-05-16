@@ -463,22 +463,23 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
     let schoolStartYear = sixthBirthdayYear;
     let statusLabel = "Regulär schulpflichtig";
     let statusTone = "regular";
-    let resultHeadline = "Dein Kind wird voraussichtlich<br class=\"regular-mobile-result-break\" /> regulär eingeschult.";
+    let resultHeadline =
+      `Dein Kind wird in Nordrhein-Westfalen voraussichtlich im Schuljahr ${sixthBirthdayYear}/${sixthBirthdayYear + 1} regulär eingeschult.`;
     let explanation =
       "Dein Kind wird in Nordrhein-Westfalen regulär schulpflichtig, weil es bis einschließlich 30. September sechs Jahre alt wird und damit ab dem 1. August desselben Jahres schulpflichtig ist.";
     let nextStepTitle = "Nächster sinnvoller Schritt";
     let nextStepText =
       "Informiere dich frühzeitig bei der zuständigen Grundschule über Anmeldung, Unterlagen und konkrete Termine.";
 
-    const afterSeptember = month > 9 || (month === 9 && day >= 30);
+    const afterSeptember = month > 9 || (month === 9 && day > 30);
 
     if (afterSeptember) {
-      schoolStartYear = sixthBirthdayYear + 1;
-      statusLabel = "Regulär schulpflichtig";
-      statusTone = "regular";
-      resultHeadline = "";
+      statusLabel = "Kann-Kind auf Antrag";
+      statusTone = "optional";
+      resultHeadline =
+        `Dein Kind kann in Nordrhein-Westfalen auf Antrag vorzeitig im Schuljahr ${sixthBirthdayYear}/${sixthBirthdayYear + 1} eingeschult werden.`;
       explanation =
-        "Dein Kind wird nach dem nordrhein-westfälischen Einschulungsstichtag sechs Jahre alt. Deshalb ist es voraussichtlich im angezeigten Schuljahr regulär schulpflichtig. Eine frühere Einschulung kann auf Antrag der Eltern geprüft werden.";
+        `Dein Kind wird nach dem nordrhein-westfälischen Einschulungsstichtag 30. September ${sixthBirthdayYear} sechs Jahre alt. Eine vorzeitige Einschulung im Schuljahr ${sixthBirthdayYear}/${sixthBirthdayYear + 1} kann auf Antrag geprüft werden. Die Entscheidung trifft die Schulleitung nach Beratung mit den Eltern.`;
       nextStepTitle = "Nächster sinnvoller Schritt";
       nextStepText =
         "Sprich mit der zuständigen Grundschule, wenn du eine vorzeitige Einschulung prüfen möchtest.";
@@ -1303,9 +1304,13 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
         "Dein Kind wird in Bayern voraussichtlich am Mittwoch,<br class=\"result-mobile-date-break\" /> <span class=\"result-date-nowrap\">16. September 2026</span> eingeschult.";
     }
 
-    if (result.hasConfirmedDate && normalizedSlug === "nordrhein-westfalen") {
+    if (
+      result.hasConfirmedDate &&
+      normalizedSlug === "nordrhein-westfalen" &&
+      result.statusTone === "regular"
+    ) {
       displayedHeadline =
-        "Dein Kind wird in Nordrhein-Westfalen voraussichtlich im<br class=\"regular-mobile-result-break\" /> Schuljahr <span class=\"result-date-nowrap\">2026/2027</span><br class=\"regular-mobile-result-break\" /> eingeschult.";
+        "Dein Kind wird in Nordrhein-Westfalen voraussichtlich im Schuljahr <span class=\"result-date-nowrap\">2026/2027</span> regulär eingeschult.";
     }
 
     if (
@@ -1621,20 +1626,20 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
       dateDetails = `
         <div class="state-result-grid state-result-grid-priority" aria-label="Einschulungstermin ${stateName}">
           <div class="state-result-card state-result-card-wide">
-            <span>Erster Schultag</span>
-            <strong>Mittwoch, 02.09.2026</strong>
+            <span>Nächste Einschulung</span>
+            <strong>2.–3. September 2026 (schulabhängig)</strong>
           </div>
           <div class="state-result-card state-result-card-wide">
-            <span>Späteste Einschulung</span>
-            <strong>Donnerstag, 03.09.2026</strong>
+            <span>Erster Schultag</span>
+            <strong>Mittwoch, 2. September 2026</strong>
           </div>
         </div>
         <p class="state-calculator-note">
-          Für ${stateName} enden die Sommerferien 2026 am 1. September.
-          Daraus ergibt sich voraussichtlich Mittwoch, der 2. September 2026,
-          als allgemeiner erster Schultag. Die Einschulung findet spätestens am
-          zweiten Schultag nach den Sommerferien statt; der konkrete Termin ist
-          schulabhängig.
+          Der erste Schultag nach den Sommerferien ist in ${stateName}
+          voraussichtlich Mittwoch, 2. September 2026. Die Einschulung findet in
+          der Regel spätestens am zweiten Schultag nach den Sommerferien statt.
+          Für 2026 ergibt sich daraus voraussichtlich Donnerstag, 3. September 2026.
+          Verbindliche Informationen erhältst du bei der zuständigen Grundschule.
         </p>
       `;
     }
@@ -1692,6 +1697,7 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
     const displayedSchoolYearLabel =
       !schoolYearAlreadyStarted &&
       (normalizedSlug === "sachsen" ||
+        normalizedSlug === "nordrhein-westfalen" ||
         normalizedSlug === "rheinland-pfalz" ||
         normalizedSlug === "schleswig-holstein" ||
         normalizedSlug === "thueringen" ||

@@ -5,7 +5,62 @@ const pageTitle =
   "Einschulung NRW 2026: Schulstart, Stichtag und Schuljahr";
 
 const pageDescription =
-  "Wann kommt mein Kind in Nordrhein-Westfalen in die Schule? Erfahre alles zu Schulstart, erstem Schultag, Einschulung, Stichtag 30. September und Schulpflicht.";
+  "Wann kommt mein Kind in Nordrhein-Westfalen in die Schule? Erfahre alles zu Schulstart, Einschulung, Stichtag 30. September, vorzeitiger Einschulung und Schuljahr.";
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: [
+    {
+      "@type": "Question",
+      name: "Welcher Einschulungsstichtag gilt in Nordrhein-Westfalen?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "In Nordrhein-Westfalen gilt der 30. September als Stichtag für die Einschulung. Kinder, die bis einschließlich 30. September sechs Jahre alt werden, sind ab dem 1. August desselben Kalenderjahres regulär schulpflichtig.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Wann ist die Einschulung in Nordrhein-Westfalen 2026?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Der erste Schultag nach den Sommerferien ist in Nordrhein-Westfalen voraussichtlich am Mittwoch, 2. September 2026. Die Einschulung findet in der Regel spätestens am zweiten Schultag nach den Sommerferien statt. Für 2026 ergibt sich daraus voraussichtlich Donnerstag, 3. September 2026. Verbindliche Informationen erhältst du bei der zuständigen Grundschule.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Kann mein Kind in Nordrhein-Westfalen früher eingeschult werden?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Kinder, die nach dem 30. September sechs Jahre alt werden, können auf Antrag vorzeitig eingeschult werden. Die Entscheidung trifft die Schulleitung nach Beratung mit den Eltern.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Wie läuft die Schulanmeldung in Nordrhein-Westfalen ab?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Die Anmeldung erfolgt in Nordrhein-Westfalen bis spätestens 15. November des Jahres vor der Einschulung. Sie findet an der zuständigen oder gewählten Grundschule zu den vom Schulträger festgelegten Terminen statt.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Kann die Einschulung in Nordrhein-Westfalen zurückgestellt werden?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Wenn du Zweifel hast, ob dein Kind bereits schulfähig ist, solltest du frühzeitig Kontakt mit der zuständigen Grundschule aufnehmen. Die Schule informiert über das weitere Verfahren und bezieht bei Bedarf schulärztliche oder weitere fachliche Einschätzungen ein.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Ist das Ergebnis zur Einschulung in Nordrhein-Westfalen verbindlich?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Nein. Der Einschulungsrechner und diese Informationsseite dienen der Orientierung. Verbindliche Informationen erhältst du bei der zuständigen Grundschule, der Schulbehörde oder beim Ministerium für Schule und Bildung des Landes Nordrhein-Westfalen.",
+      },
+    },
+  ],
+};
 ---
 
 <html lang="de">
@@ -15,62 +70,7 @@ const pageDescription =
     <title>{pageTitle}</title>
     <meta name="description" content={pageDescription} />
     <link rel="canonical" href="https://www.einschulungsrechner.de/einschulung-nordrhein-westfalen/" />
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "FAQPage",
-        "mainEntity": [
-          {
-            "@type": "Question",
-            "name": "Wann kommt mein Kind in Nordrhein-Westfalen in die Schule?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Das hängt vom Geburtsdatum deines Kindes ab. In Nordrhein-Westfalen gilt der 30. September als Stichtag. Kinder, die bis einschließlich 30. September sechs Jahre alt werden, sind in Nordrhein-Westfalen ab dem 1. August desselben Kalenderjahres regulär schulpflichtig."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Wann ist der erste Schultag in Nordrhein-Westfalen 2026?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Der letzte Ferientag in Nordrhein-Westfalen ist 2026 Dienstag, der 1. September. Daraus ergibt sich voraussichtlich Mittwoch, der 2. September 2026, als allgemeiner erster Schultag nach den Sommerferien."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Wann ist die Einschulung in Nordrhein-Westfalen 2026?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "In Nordrhein-Westfalen erfolgt die Einschulung in der Regel spätestens am zweiten Schultag nach den Sommerferien. Für 2026 ergibt sich daraus voraussichtlich Donnerstag, der 3. September 2026; organisatorische Abweichungen einzelner Grundschulen sind möglich."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Kann mein Kind in Nordrhein-Westfalen früher eingeschult werden?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Kinder, die nach dem Stichtag sechs Jahre alt werden, können auf Antrag der Eltern vorzeitig eingeschult werden. Die Schulleitung entscheidet nach Beratung mit den Eltern über die Aufnahme."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Wann muss ich mein Kind in Nordrhein-Westfalen an der Grundschule anmelden?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Kinder, die im folgenden Jahr schulpflichtig werden, müssen in Nordrhein-Westfalen bis spätestens 15. November an einer Grundschule angemeldet werden. Die Anmeldung erfolgt an der zuständigen oder gewählten Grundschule zu den vom Schulträger festgelegten Terminen."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Welche Quelle ist für die Einschulung in Nordrhein-Westfalen verbindlich?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Diese Seite dient der Orientierung. Verbindliche Informationen erhältst du bei der zuständigen Grundschule, der Schulbehörde oder beim Ministerium für Schule und Bildung des Landes Nordrhein-Westfalen."
-            }
-          }
-        ]
-      }
-    </script>
+    <script type="application/ld+json" set:html={JSON.stringify(faqSchema)}></script>
   </head>
 
   <body>
@@ -88,11 +88,11 @@ const pageDescription =
 
         <p class="lead">
           Wann kommt mein Kind in Nordrhein-Westfalen in die Schule? Der
-          Einschulungsrechner zeigt dir anhand des Geburtsdatums das
-          voraussichtliche Schuljahr. In Nordrhein-Westfalen gilt der Stichtag
-          30. September. Der letzte Ferientag ist 2026 Dienstag, der
-          1. September. Daraus ergibt sich voraussichtlich Mittwoch, der
-          2. September 2026, als allgemeiner erster Schultag.
+          Einschulungsrechner zeigt dir anhand des Geburtsdatums das voraussichtliche
+          Schuljahr. In Nordrhein-Westfalen gilt der Stichtag 30. September. Für
+          das Schuljahr 2026/2027 liegt die Einschulung voraussichtlich zwischen
+          Mittwoch, 2. September und Donnerstag, 3. September 2026 – der erste
+          Schultag ist Mittwoch, 2. September 2026.
         </p>
 
         <StateEnrollmentCalculator
@@ -104,15 +104,15 @@ const pageDescription =
           intro="Gib das Geburtsdatum deines Kindes ein. Nordrhein-Westfalen ist hier bereits vorausgewählt. Wenn du von der Startseite kommst, übernehmen wir das Geburtsdatum automatisch aus dem Link."
         />
 
-        <div class="quick-facts" aria-label="Kurzüberblick Einschulung Nordrhein-Westfalen">
-          <div class="fact-card fact-card-date">
-            <span>Erster Schultag</span>
-            <strong>Mittwoch, 02.09.2026</strong>
+        <div class="quick-facts quick-facts-master" aria-label="Kurzüberblick Einschulung Nordrhein-Westfalen">
+          <div class="fact-card fact-card-highlight">
+            <span>Nächste Einschulung</span>
+            <strong>2.–3. September 2026 (schulabhängig)</strong>
           </div>
 
-          <div class="fact-card fact-card-date">
-            <span>Spätester Einschulungstermin</span>
-            <strong>Donnerstag, 03.09.2026</strong>
+          <div class="fact-card fact-card-highlight">
+            <span>Erster Schultag</span>
+            <strong>Mittwoch, 2. September 2026</strong>
           </div>
 
           <div class="fact-card">
@@ -121,8 +121,8 @@ const pageDescription =
           </div>
 
           <div class="fact-card">
-            <span>Schulpflicht</span>
-            <strong>ab 1. August</strong>
+            <span>Sonderregel</span>
+            <strong>Kann-Kind auf Antrag</strong>
           </div>
         </div>
 
@@ -130,10 +130,10 @@ const pageDescription =
           <h2>Wie funktioniert der Einschulungsrechner für Nordrhein-Westfalen?</h2>
 
           <p>
-            Der Einschulungsrechner prüft das Geburtsdatum deines Kindes und
-            vergleicht es mit den Einschulungsregeln in Nordrhein-Westfalen.
-            Entscheidend sind vor allem der Stichtag 30. September und der Beginn
-            der Schulpflicht am 1. August desselben Kalenderjahres.
+            Der Einschulungsrechner prüft das Geburtsdatum deines Kindes und gleicht
+            es mit den Regeln zur Einschulung in Nordrhein-Westfalen ab. Entscheidend
+            sind vor allem der Stichtag 30. September und der Beginn der Schulpflicht
+            am 1. August desselben Kalenderjahres.
           </p>
 
           <p>
@@ -146,8 +146,8 @@ const pageDescription =
 
           <p>
             Die wichtigsten Termine zum allgemeinen Schulstart und zur Einschulung
-            findest du im Terminblock oben. Der konkrete Einschulungstermin kann
-            je nach Grundschule organisatorisch abweichen.
+            findest du im Terminblock oben. Verbindliche Informationen zum konkreten
+            Einschulungstermin erhältst du bei der zuständigen Grundschule.
           </p>
         </section>
 
@@ -155,15 +155,16 @@ const pageDescription =
           <h2>Wann ist die Einschulung in Nordrhein-Westfalen 2026?</h2>
 
           <p>
-            In Nordrhein-Westfalen erfolgt die Einschulung in der Regel spätestens
-            am zweiten Schultag nach den Sommerferien. Für 2026 ergibt sich daraus
-            voraussichtlich Donnerstag, der 3. September 2026; organisatorische
-            Abweichungen einzelner Grundschulen sind möglich.
+            Der erste Schultag nach den Sommerferien ist in Nordrhein-Westfalen
+            voraussichtlich am Mittwoch, 2. September 2026. Die Einschulung findet
+            in der Regel spätestens am zweiten Schultag nach den Sommerferien statt.
+            Für 2026 ergibt sich daraus voraussichtlich Donnerstag, 3. September 2026.
+            Verbindliche Informationen erhältst du bei der zuständigen Grundschule.
           </p>
         </section>
 
         <section>
-          <h2>Welcher Stichtag gilt für die Einschulung in Nordrhein-Westfalen?</h2>
+          <h2>Welcher Einschulungsstichtag gilt in Nordrhein-Westfalen?</h2>
 
           <p>
             In Nordrhein-Westfalen gilt der 30. September als Stichtag für die
@@ -174,23 +175,33 @@ const pageDescription =
         </section>
 
         <section>
-          <h2>Kann mein Kind früher eingeschult werden?</h2>
+          <h2>Kann mein Kind in Nordrhein-Westfalen früher eingeschult werden?</h2>
 
           <p>
-            Kinder, die erst nach dem Stichtag sechs Jahre alt werden, können auf
-            Antrag der Eltern vorzeitig eingeschult werden. Die Schulleitung
-            entscheidet nach Beratung mit den Eltern über die Aufnahme des Kindes.
+            Kinder, die nach dem 30. September sechs Jahre alt werden, können auf
+            Antrag vorzeitig eingeschult werden. Die Entscheidung trifft die
+            Schulleitung nach Beratung mit den Eltern.
           </p>
         </section>
 
         <section>
-          <h2>Kann die Einschulung zurückgestellt werden?</h2>
+          <h2>Wie läuft die Schulanmeldung in Nordrhein-Westfalen ab?</h2>
 
           <p>
-            Ob ein schulpflichtiges Kind tatsächlich eingeschult wird oder ob im
-            Einzelfall eine andere Entscheidung getroffen wird, klärst du mit der
-            zuständigen Grundschule oder Schulbehörde. Der Rechner dient nur der
-            ersten Orientierung.
+            Die Anmeldung erfolgt in Nordrhein-Westfalen bis spätestens 15. November
+            des Jahres vor der Einschulung. Sie findet an der zuständigen oder
+            gewählten Grundschule zu den vom Schulträger festgelegten Terminen statt.
+          </p>
+        </section>
+
+        <section>
+          <h2>Mein Kind ist noch nicht schulreif – was muss ich in Nordrhein-Westfalen tun?</h2>
+
+          <p>
+            Wenn du Zweifel hast, ob dein Kind bereits schulfähig ist, solltest du
+            frühzeitig Kontakt mit der zuständigen Grundschule aufnehmen. Die Schule
+            informiert über das weitere Verfahren und bezieht bei Bedarf schulärztliche
+            oder weitere fachliche Einschätzungen ein.
           </p>
         </section>
 
@@ -199,9 +210,9 @@ const pageDescription =
 
           <p>
             Beispielhaft zeigt der Rechner: Wird ein Kind am 15. September 2020
-            geboren, wird es am 15. September 2026 sechs Jahre alt. Da dieses
-            Datum vor dem Stichtag 30. September liegt, wird das Kind in
-            Nordrhein-Westfalen voraussichtlich im Schuljahr 2026/2027 eingeschult.
+            geboren, wird es am 15. September 2026 sechs Jahre alt. Da dieses Datum
+            vor dem Stichtag 30. September liegt, wird das Kind in Nordrhein-Westfalen
+            voraussichtlich im Schuljahr 2026/2027 regulär eingeschult.
           </p>
         </section>
 
@@ -210,78 +221,79 @@ const pageDescription =
 
           <div class="faq-list">
             <article class="faq-item">
-              <h3>Wann kommt mein Kind in Nordrhein-Westfalen in die Schule?</h3>
+              <h3>Welcher Einschulungsstichtag gilt in Nordrhein-Westfalen?</h3>
               <p>
-                Das hängt vom Geburtsdatum deines Kindes ab. In Nordrhein-Westfalen
-                gilt der 30. September als Stichtag. Kinder, die bis einschließlich
-                30. September sechs Jahre alt werden, sind in Nordrhein-Westfalen ab
-                dem 1. August desselben Kalenderjahres regulär schulpflichtig.
-              </p>
-            </article>
-
-            <article class="faq-item">
-              <h3>Wann ist der erste Schultag in Nordrhein-Westfalen 2026?</h3>
-              <p>
-                Der letzte Ferientag in Nordrhein-Westfalen ist 2026 Dienstag, der
-                1. September. Daraus ergibt sich voraussichtlich Mittwoch, der
-                2. September 2026, als allgemeiner erster Schultag nach den
-                Sommerferien.
+                In Nordrhein-Westfalen gilt der 30. September als Stichtag für die
+                Einschulung. Kinder, die bis einschließlich 30. September sechs Jahre
+                alt werden, sind ab dem 1. August desselben Kalenderjahres regulär
+                schulpflichtig.
               </p>
             </article>
 
             <article class="faq-item">
               <h3>Wann ist die Einschulung in Nordrhein-Westfalen 2026?</h3>
               <p>
-                In Nordrhein-Westfalen erfolgt die Einschulung in der Regel
-                spätestens am zweiten Schultag nach den Sommerferien. Für 2026
-                ergibt sich daraus voraussichtlich Donnerstag, der 3. September
-                2026; organisatorische Abweichungen einzelner Grundschulen sind
-                möglich.
+                Der erste Schultag nach den Sommerferien ist in Nordrhein-Westfalen
+                voraussichtlich am Mittwoch, 2. September 2026. Die Einschulung findet
+                in der Regel spätestens am zweiten Schultag nach den Sommerferien statt.
+                Für 2026 ergibt sich daraus voraussichtlich Donnerstag, 3. September
+                2026. Verbindliche Informationen erhältst du bei der zuständigen
+                Grundschule.
               </p>
             </article>
 
             <article class="faq-item">
               <h3>Kann mein Kind in Nordrhein-Westfalen früher eingeschult werden?</h3>
               <p>
-                Kinder, die nach dem Stichtag sechs Jahre alt werden, können auf
-                Antrag der Eltern vorzeitig eingeschult werden. Die Schulleitung
-                entscheidet nach Beratung mit den Eltern über die Aufnahme.
+                Kinder, die nach dem 30. September sechs Jahre alt werden, können
+                auf Antrag vorzeitig eingeschult werden. Die Entscheidung trifft die
+                Schulleitung nach Beratung mit den Eltern.
               </p>
             </article>
 
             <article class="faq-item">
-              <h3>Wann muss ich mein Kind in Nordrhein-Westfalen an der Grundschule anmelden?</h3>
+              <h3>Wie läuft die Schulanmeldung in Nordrhein-Westfalen ab?</h3>
               <p>
-                Kinder, die im folgenden Jahr schulpflichtig werden, müssen in
-                Nordrhein-Westfalen bis spätestens 15. November an einer
-                Grundschule angemeldet werden. Die Anmeldung erfolgt an der
+                Die Anmeldung erfolgt in Nordrhein-Westfalen bis spätestens
+                15. November des Jahres vor der Einschulung. Sie findet an der
                 zuständigen oder gewählten Grundschule zu den vom Schulträger
-                festgelegten Terminen.
+                festgelegten Terminen statt.
               </p>
             </article>
 
             <article class="faq-item">
-              <h3>Welche Quelle ist für die Einschulung in Nordrhein-Westfalen verbindlich?</h3>
+              <h3>Kann die Einschulung in Nordrhein-Westfalen zurückgestellt werden?</h3>
               <p>
-                Diese Seite dient der Orientierung. Verbindliche Informationen
-                erhältst du bei der zuständigen Grundschule, der Schulbehörde oder
-                beim Ministerium für Schule und Bildung des Landes Nordrhein-Westfalen.
+                Wenn du Zweifel hast, ob dein Kind bereits schulfähig ist, solltest
+                du frühzeitig Kontakt mit der zuständigen Grundschule aufnehmen. Die
+                Schule informiert über das weitere Verfahren und bezieht bei Bedarf
+                schulärztliche oder weitere fachliche Einschätzungen ein.
+              </p>
+            </article>
+
+            <article class="faq-item">
+              <h3>Ist das Ergebnis zur Einschulung in Nordrhein-Westfalen verbindlich?</h3>
+              <p>
+                Nein. Der Einschulungsrechner und diese Informationsseite dienen der
+                Orientierung. Verbindliche Informationen erhältst du bei der zuständigen
+                Grundschule, der Schulbehörde oder beim Ministerium für Schule und
+                Bildung des Landes Nordrhein-Westfalen.
               </p>
             </article>
           </div>
         </section>
 
         <section class="source-note">
-          <h2>Quelle und Hinweis</h2>
+          <h2>Quellen und Hinweise</h2>
 
           <p>
             Die folgenden offiziellen Quellen bilden die Grundlage dieser Übersicht
             zur Einschulung in Nordrhein-Westfalen:
           </p>
 
-          <ul class="source-list" aria-label="Offizielle Quellen zur Einschulung in Nordrhein-Westfalen">
-            <li>
-              <span>Offizielle Quelle 1</span>
+          <div class="source-list" aria-label="Offizielle Quellen zur Einschulung in Nordrhein-Westfalen">
+            <div class="source-item">
+              <p class="source-kicker">Offizielle Quelle 1</p>
               <a
                 class="source-link"
                 href="https://www.schulministerium.nrw/wann-wird-mein-kind-schulpflichtig"
@@ -290,10 +302,10 @@ const pageDescription =
               >
                 Ministerium für Schule und Bildung NRW: Wann wird mein Kind schulpflichtig?
               </a>
-            </li>
+            </div>
 
-            <li>
-              <span>Offizielle Quelle 2</span>
+            <div class="source-item">
+              <p class="source-kicker">Offizielle Quelle 2</p>
               <a
                 class="source-link"
                 href="https://www.schulministerium.nrw/themen/schulsystem/schulformen/grundschule/anmeldung-zur-grundschule"
@@ -302,10 +314,10 @@ const pageDescription =
               >
                 Ministerium für Schule und Bildung NRW: Anmeldung zur Grundschule
               </a>
-            </li>
+            </div>
 
-            <li>
-              <span>Offizielle Quelle 3</span>
+            <div class="source-item">
+              <p class="source-kicker">Offizielle Quelle 3</p>
               <a
                 class="source-link"
                 href="https://www.schulministerium.nrw/service/ferienordnung-fuer-nordrhein-westfalen-fuer-die-schuljahre-bis-202930"
@@ -314,14 +326,13 @@ const pageDescription =
               >
                 Ministerium für Schule und Bildung NRW: Ferienordnung bis 2029/30
               </a>
-            </li>
-          </ul>
+            </div>
+          </div>
 
-          <p class="source-hint">
-            Hinweis: Die amtliche Stichtagslogik in Nordrhein-Westfalen knüpft daran
-            an, ob ein Kind bis zum Beginn des 30. September sechs Jahre alt wird.
-            Bitte prüfe verbindliche Details immer bei der zuständigen Grundschule
-            oder Schulbehörde.
+          <p>
+            Hinweis: Bitte prüfe verbindliche Details immer bei der zuständigen
+            Grundschule, der Schulbehörde oder beim Ministerium für Schule und
+            Bildung des Landes Nordrhein-Westfalen.
           </p>
 
           <p class="stand">Stand der Informationen: Mai 2026</p>
@@ -422,6 +433,14 @@ const pageDescription =
     margin-top: 30px;
   }
 
+  .quick-facts-master {
+    margin-top: 34px;
+  }
+
+  :global(body.has-nordrhein-westfalen-calculator-result) .quick-facts-master .fact-card-highlight {
+    display: none;
+  }
+
   .fact-card {
     display: grid;
     align-content: center;
@@ -444,20 +463,15 @@ const pageDescription =
 
   .fact-card strong {
     color: #172033;
-    font-size: clamp(1.22rem, 1.55vw, 1.46rem);
+    font-size: clamp(1.32rem, 1.85vw, 1.68rem);
     font-weight: 950;
     line-height: 1.12;
     letter-spacing: -0.035em;
   }
 
-  .fact-card-date {
-    border-color: rgba(129, 97, 38, 0.16);
-    background: rgba(245, 210, 138, 0.12);
-  }
-
-  .fact-card-date strong {
-    font-size: clamp(1.12rem, 1.36vw, 1.32rem);
-    white-space: normal;
+  .fact-card-highlight {
+    border-color: rgba(129, 97, 38, 0.18);
+    background: rgba(245, 210, 138, 0.1);
   }
 
   section {
@@ -524,25 +538,24 @@ const pageDescription =
 
   .source-list {
     display: grid;
-    gap: 14px;
-    margin: 20px 0 0;
-    padding: 0;
-    list-style: none;
+    gap: 22px;
+    margin-top: 28px;
   }
 
-  .source-list li {
+  .source-item {
     display: grid;
-    gap: 5px;
-    padding-bottom: 14px;
-    border-bottom: 1px solid rgba(129, 97, 38, 0.12);
+    gap: 8px;
+    padding-bottom: 22px;
+    border-bottom: 1px solid rgba(129, 97, 38, 0.14);
   }
 
-  .source-list li:last-child {
+  .source-item:last-child {
     padding-bottom: 0;
     border-bottom: 0;
   }
 
-  .source-list li > span {
+  .source-kicker {
+    margin: 0;
     color: #816126;
     font-size: 0.78rem;
     font-weight: 950;
@@ -552,10 +565,12 @@ const pageDescription =
   }
 
   .source-link {
+    display: inline;
     color: #172033;
     font-size: 1rem;
     font-weight: 850;
     line-height: 1.42;
+    letter-spacing: 0;
     text-decoration: underline;
     text-decoration-thickness: 1px;
     text-underline-offset: 3px;
@@ -563,14 +578,6 @@ const pageDescription =
 
   .source-link:hover {
     color: #816126;
-  }
-
-  .source-hint {
-    margin-top: 18px;
-    color: #465266;
-    font-size: 0.96rem;
-    font-weight: 500;
-    line-height: 1.58;
   }
 
   .stand {
@@ -657,6 +664,12 @@ const pageDescription =
     .seo-explanation-box {
       padding: 20px;
       border-radius: 20px;
+    }
+
+    .source-link {
+      width: auto;
+      font-size: 1rem;
+      line-height: 1.42;
     }
   }
 
