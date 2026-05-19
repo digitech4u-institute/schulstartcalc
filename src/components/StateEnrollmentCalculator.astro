@@ -1,5 +1,7 @@
 
 ---
+import { enrollmentRules } from "../data/enrollmentRules";
+import { enrollmentDatesBySchoolYear } from "../data/enrollmentDatesBySchoolYear";
 interface Props {
   stateName: string;
   stateSlug: string;
@@ -19,6 +21,35 @@ const {
 } = Astro.props;
 
 const normalizedSlug = stateSlug.toLowerCase();
+const currentSchoolYear = "2026/2027";
+const currentEnrollmentDates = enrollmentDatesBySchoolYear[currentSchoolYear];
+const currentStateRule = enrollmentRules[normalizedSlug];
+const currentStateDates = currentEnrollmentDates?.[normalizedSlug];
+const calculatorStateRule = currentStateRule
+  ? {
+      name: stateName,
+      cutoff: currentStateRule.cutoff,
+      type:
+        currentStateRule.type === "optional" ? "standard_with_optional" : currentStateRule.type,
+      specialWindow: currentStateRule.specialWindow,
+      label: `Stichtag ${currentStateRule.cutoffLabel}`,
+    }
+  : null;
+const calculatorEnrollmentDatesBySchoolYear = Object.fromEntries(
+  Object.entries(enrollmentDatesBySchoolYear).map(([schoolYear, datesByState]) => [
+    schoolYear,
+    datesByState?.[normalizedSlug]
+      ? {
+          enrollment: datesByState[normalizedSlug].enrollment,
+          enrollmentQualifier: datesByState[normalizedSlug].enrollmentQualifier,
+          firstSchoolDay: datesByState[normalizedSlug].firstSchoolDay,
+          note: datesByState[normalizedSlug].note,
+          hasConfirmedDate: datesByState[normalizedSlug].hasConfirmedDate,
+          sourceStatus: datesByState[normalizedSlug].sourceStatus,
+        }
+      : null,
+  ]),
+);
 const formId = `${normalizedSlug}CalculatorForm`;
 const dayInputId = `${normalizedSlug}CalcDay`;
 const monthInputId = `${normalizedSlug}CalcMonth`;
@@ -122,7 +153,17 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
   <div class="state-calculator-result" id={resultId} hidden></div>
 </section>
 
-<script define:vars={{ normalizedSlug, stateName, resultKicker }}>
+<script define:vars={{
+  normalizedSlug,
+  stateName,
+  resultKicker,
+  calculatorStateRule,
+  calculatorEnrollmentDatesBySchoolYear,
+  currentSchoolYear,
+}}>
+  const stateRuleFromData = calculatorStateRule;
+  const enrollmentDatesBySchoolYearFromData = calculatorEnrollmentDatesBySchoolYear;
+  const referenceSchoolYear = currentSchoolYear;
   const form = document.getElementById(`${normalizedSlug}CalculatorForm`);
   const birthDayInput = document.getElementById(`${normalizedSlug}CalcDay`);
   const birthMonthInput = document.getElementById(`${normalizedSlug}CalcMonth`);
@@ -256,6 +297,158 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
     if (numberValue >= 1 && numberValue <= maxValue) {
       input.value = pad2(numberValue);
     }
+  }
+
+  function parseDateParts(birthdateValue) {
+    const birthdate = new Date(`${birthdateValue}T12:00:00`);
+    const birthYear = birthdate.getFullYear();
+    const sixthBirthdayYear = birthYear + 6;
+    const month = birthdate.getMonth() + 1;
+    const day = birthdate.getDate();
+
+    return {
+      birthdate,
+      birthYear,
+      sixthBirthdayYear,
+      month,
+      day,
+    };
+  }
+
+  function createDateFromMMDD(year, mmdd) {
+    const [month, day] = mmdd.split("-").map(Number);
+    return new Date(year, month - 1, day, 12, 0, 0);
+  }
+
+  function formatDate(date) {
+    return new Intl.DateTimeFormat("de-DE", {
+      weekday: "long",
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+    }).format(date);
+  }
+
+  function isDateBetweenMMDD(month, day, from, to) {
+    const current = month * 100 + day;
+    const [fromMonth, fromDay] = from.split("-").map(Number);
+    const [toMonth, toDay] = to.split("-").map(Number);
+    const fromValue = fromMonth * 100 + fromDay;
+    const toValue = toMonth * 100 + toDay;
+
+    if (fromValue <= toValue) {
+      return current >= fromValue && current <= toValue;
+    }
+
+    return current >= fromValue || current <= toValue;
+  }
+
+  function buildGenericEnrollmentResult(birthdateValue, stateRule) {
+    if (!stateRule) return null;
+
+    const { sixthBirthdayYear, month, day } = parseDateParts(birthdateValue);
+    const cutoffDate = createDateFromMMDD(sixthBirthdayYear, stateRule.cutoff);
+    const sixthBirthdayDate = new Date(sixthBirthdayYear, month - 1, day, 12, 0, 0);
+    const isBeforeOrOnCutoff = sixthBirthdayDate <= cutoffDate;
+    let schoolStartYear = isBeforeOrOnCutoff ? sixthBirthdayYear : sixthBirthdayYear + 1;
+    let statusLabel = "Regulär schulpflichtig";
+    let statusTone = "regular";
+    let resultHeadline = `Dein Kind wird in ${stateRule.name} voraussichtlich im Schuljahr ${schoolStartYear}/${schoolStartYear + 1} regulär eingeschult.`;
+    let explanation = `Dein Kind wird in ${stateRule.name} regulär schulpflichtig, weil es bis zum ${stateRule.label.replace("Stichtag ", "")} ${schoolStartYear} sechs Jahre alt wird.`;
+    let nextStepTitle = "Nächster sinnvoller Schritt";
+    let nextStepText = "Informiere dich frühzeitig bei der zuständigen Grundschule über Anmeldung, Unterlagen und konkrete Termine.";
+
+    if (!isBeforeOrOnCutoff && stateRule.type === "standard_with_optional") {
+      statusLabel = "Regulär schulpflichtig";
+      statusTone = "regular";
+      explanation = `Dein Kind wird nach dem Stichtag in ${stateRule.name} sechs Jahre alt. Deshalb ist es voraussichtlich im Schuljahr ${schoolStartYear}/${schoolStartYear + 1} regulär schulpflichtig. Eine frühere Einschulung kann auf Antrag geprüft werden.`;
+      nextStepText = `Wenn du eine Einschulung schon im Schuljahr ${sixthBirthdayYear}/${sixthBirthdayYear + 1} prüfen möchtest, informiere dich frühzeitig bei der zuständigen Grundschule über Antrag, Voraussetzungen und Fristen.`;
+    }
+
+    if (stateRule.specialWindow && isDateBetweenMMDD(month, day, stateRule.specialWindow.from, stateRule.specialWindow.to)) {
+      if (stateRule.type === "corridor") {
+        statusLabel = "Einschulungskorridor";
+        statusTone = "optional";
+        schoolStartYear = sixthBirthdayYear;
+        resultHeadline = "Dein Kind liegt im Einschulungskorridor.";
+        explanation = `Dein Kind fällt in ${stateRule.name} in den Einschulungskorridor, weil es zwischen dem 1. Juli und dem 30. September sechs Jahre alt wird.`;
+        nextStepTitle = "Wichtig für dich";
+        nextStepText = "Prüfe die Fristen bei der zuständigen Grundschule. Unter bestimmten Voraussetzungen kann eine spätere Einschulung geklärt werden.";
+      }
+
+      if (stateRule.type === "karenzzeit") {
+        statusLabel = "Karenzzeitkind";
+        statusTone = "optional";
+        schoolStartYear = sixthBirthdayYear;
+        resultHeadline = `Dein Kind ist in ${stateRule.name} ein Karenzzeitkind.`;
+        explanation = `Dein Kind wird nach dem regulären Stichtag sechs Jahre alt und liegt in ${stateRule.name} innerhalb der Karenzzeit.`;
+        nextStepTitle = "Wichtig für dich";
+        nextStepText = "Sprich die zuständige Grundschule direkt an. Dort erfährst du, wie Anmeldung, Fristen und die konkrete Einordnung geregelt sind.";
+      }
+
+      if (stateRule.type === "flexible_window") {
+        statusLabel = "Flexibler Einschulungszeitraum";
+        statusTone = "optional";
+        schoolStartYear = sixthBirthdayYear;
+        resultHeadline = `Dein Kind liegt in ${stateRule.name} im flexiblen Einschulungszeitraum.`;
+        explanation = `In ${stateRule.name} ist dein Kind grundsätzlich schulpflichtig, es gibt aber eine besondere Flexibilisierung für Kinder, die zwischen dem 1. Juli und dem 30. September sechs Jahre alt werden.`;
+        nextStepTitle = "Wichtig für dich";
+        nextStepText = "Informiere dich bei der zuständigen Grundschule, ob eine Verschiebung des Einschulungstermins in Frage kommt.";
+      }
+
+      if (stateRule.type === "registration_window") {
+        statusLabel = "Anmeldung möglich";
+        statusTone = "optional";
+        schoolStartYear = sixthBirthdayYear;
+        resultHeadline = `Dein Kind liegt in ${stateRule.name} im erweiterten Anmeldezeitraum.`;
+        explanation = `In ${stateRule.name} gilt der 30. Juni als regulärer Stichtag. Kinder, die bis zum 30. September sechs Jahre alt werden, können durch Anmeldung der Eltern ebenfalls schulpflichtig werden.`;
+        nextStepTitle = "Wichtig für dich";
+        nextStepText = "Informiere dich bei der zuständigen Grundschule, ob und wie die Anmeldung für eine Einschulung in diesem Schuljahr möglich ist.";
+      }
+
+      if (stateRule.type === "berlin_optional") {
+        statusLabel = "Kann-Kind";
+        statusTone = "optional";
+        schoolStartYear = month <= 3 ? sixthBirthdayYear - 1 : sixthBirthdayYear;
+        resultHeadline = `Dein Kind ist in ${stateRule.name} ein Kann-Kind.`;
+        explanation = `Dein Kind liegt in ${stateRule.name} im Zeitraum der Kann-Kind-Regelung. Eine Einschulung im Schuljahr ${schoolStartYear}/${schoolStartYear + 1} kann auf Antrag der Erziehungsberechtigten geprüft werden.`;
+        nextStepTitle = "Wichtig für dich";
+        nextStepText = "Sprich frühzeitig mit der zuständigen Grundschule, wenn du eine vorzeitige Einschulung beantragen möchtest.";
+      }
+
+      if (stateRule.type === "brandenburg_optional") {
+        statusLabel = "Kann-Kind auf Antrag";
+        statusTone = "optional";
+        schoolStartYear = sixthBirthdayYear;
+        resultHeadline = `Dein Kind ist in ${stateRule.name} ein Kann-Kind.`;
+        explanation = `Dein Kind wird nach dem regulären Stichtag, aber bis zum 31. Dezember sechs Jahre alt. In ${stateRule.name} kann eine vorzeitige Einschulung für das Schuljahr ${schoolStartYear}/${schoolStartYear + 1} auf Antrag geprüft werden.`;
+        nextStepTitle = "Wichtig für dich";
+        nextStepText = "Sprich frühzeitig mit der zuständigen Grundschule, wenn du eine vorzeitige Einschulung für dieses Schuljahr prüfen lassen möchtest.";
+      }
+    }
+
+    if (stateRule.type === "brandenburg_optional" && month <= 7) {
+      schoolStartYear = sixthBirthdayYear - 1;
+      statusLabel = "Aufnahme im Ausnahmefall möglich";
+      statusTone = "optional";
+      resultHeadline = `Dein Kind kann in ${stateRule.name} nur in begründeten Ausnahmefällen im Schuljahr ${schoolStartYear}/${schoolStartYear + 1} aufgenommen werden.`;
+      explanation = `Dein Kind wird erst nach dem 31. Dezember und vor dem 1. August des Folgejahres sechs Jahre alt. In ${stateRule.name} kann eine Aufnahme in diesem Schuljahr nur in begründeten Ausnahmefällen geprüft werden.`;
+      nextStepTitle = "Wichtig für dich";
+      nextStepText = "Für diesen Sonderfall solltest du dich direkt an die zuständige Grundschule wenden.";
+    }
+
+    const schoolYear = `${schoolStartYear}/${schoolStartYear + 1}`;
+
+    return {
+      schoolYear,
+      statusLabel,
+      statusTone,
+      resultHeadline,
+      explanation,
+      nextStepTitle,
+      nextStepText,
+      hasConfirmedDate: Boolean(enrollmentDatesBySchoolYearFromData?.[schoolYear]),
+    };
   }
 
   function getCalculatedSchoolYearTimeState(result) {
@@ -432,7 +625,7 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
       resultHeadline =
         `Dein Kind fällt in Baden-Württemberg unter die Stichtagsflexibilisierung und kann im Schuljahr ${projectedSchoolYear} an der zuständigen Grundschule angemeldet werden.`;
       explanation =
-        `Dein Kind wird nach dem Stichtag 30. Juni ${cutoffYear} sechs Jahre alt und ist deshalb nicht automatisch regulär schulpflichtig. Über die Stichtagsflexibilisierung kannst du dein Kind an der zuständigen Grundschule anmelden; mit der Anmeldung wird es regulär schulpflichtig.`;
+        `Dein Kind wird nach dem Stichtag 30. Juni ${cutoffYear} sechs Jahre alt und ist deshalb nicht automatisch regulär schulpflichtig. Über die Stichtagsflexibilisierung kannst du dein Kind an der zuständigen Grundschule anmelden; mit der Anmeldung wird die Schulpflicht ausgelöst.`;
       nextStepTitle = "Wichtig für dich";
       nextStepText =
         `Melde dich frühzeitig bei der zuständigen Grundschule. Dort erfährst du, wie die Anmeldung im Rahmen der Stichtagsflexibilisierung abläuft und welche Einschätzungen für die Entscheidung berücksichtigt werden.`;
@@ -1178,66 +1371,68 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
   function renderSachsenResult(birthdateValue) {
     if (!resultBox || !birthdateValue) return;
 
-    let result = calculateSachsenEnrollment(birthdateValue);
+    let result = normalizedSlug === "sachsen"
+      ? buildGenericEnrollmentResult(birthdateValue, stateRuleFromData) || calculateSachsenEnrollment(birthdateValue)
+      : calculateSachsenEnrollment(birthdateValue);
 
     if (normalizedSlug === "bayern") {
-      result = calculateBayernEnrollment(birthdateValue);
+      result = buildGenericEnrollmentResult(birthdateValue, stateRuleFromData) || calculateBayernEnrollment(birthdateValue);
     }
 
     if (normalizedSlug === "baden-wuerttemberg") {
-      result = calculateBadenWuerttembergEnrollment(birthdateValue);
+      result = buildGenericEnrollmentResult(birthdateValue, stateRuleFromData) || calculateBadenWuerttembergEnrollment(birthdateValue);
     }
 
     if (normalizedSlug === "nordrhein-westfalen") {
-      result = calculateNordrheinWestfalenEnrollment(birthdateValue);
+      result = buildGenericEnrollmentResult(birthdateValue, stateRuleFromData) || calculateNordrheinWestfalenEnrollment(birthdateValue);
     }
 
     if (normalizedSlug === "niedersachsen") {
-      result = calculateNiedersachsenEnrollment(birthdateValue);
+      result = buildGenericEnrollmentResult(birthdateValue, stateRuleFromData) || calculateNiedersachsenEnrollment(birthdateValue);
     }
 
     if (normalizedSlug === "hessen") {
-      result = calculateHessenEnrollment(birthdateValue);
+      result = buildGenericEnrollmentResult(birthdateValue, stateRuleFromData) || calculateHessenEnrollment(birthdateValue);
     }
 
     if (normalizedSlug === "berlin") {
-      result = calculateBerlinEnrollment(birthdateValue);
+      result = buildGenericEnrollmentResult(birthdateValue, stateRuleFromData) || calculateBerlinEnrollment(birthdateValue);
     }
 
     if (normalizedSlug === "hamburg") {
-      result = calculateHamburgEnrollment(birthdateValue);
+      result = buildGenericEnrollmentResult(birthdateValue, stateRuleFromData) || calculateHamburgEnrollment(birthdateValue);
     }
 
     if (normalizedSlug === "brandenburg") {
-      result = calculateBrandenburgEnrollment(birthdateValue);
+      result = buildGenericEnrollmentResult(birthdateValue, stateRuleFromData) || calculateBrandenburgEnrollment(birthdateValue);
     }
 
     if (normalizedSlug === "rheinland-pfalz") {
-      result = calculateRheinlandPfalzEnrollment(birthdateValue);
+      result = buildGenericEnrollmentResult(birthdateValue, stateRuleFromData) || calculateRheinlandPfalzEnrollment(birthdateValue);
     }
 
     if (normalizedSlug === "schleswig-holstein") {
-      result = calculateSchleswigHolsteinEnrollment(birthdateValue);
+      result = buildGenericEnrollmentResult(birthdateValue, stateRuleFromData) || calculateSchleswigHolsteinEnrollment(birthdateValue);
     }
 
     if (normalizedSlug === "thueringen") {
-      result = calculateThueringenEnrollment(birthdateValue);
+      result = buildGenericEnrollmentResult(birthdateValue, stateRuleFromData) || calculateThueringenEnrollment(birthdateValue);
     }
 
     if (normalizedSlug === "sachsen-anhalt") {
-      result = calculateSachsenAnhaltEnrollment(birthdateValue);
+      result = buildGenericEnrollmentResult(birthdateValue, stateRuleFromData) || calculateSachsenAnhaltEnrollment(birthdateValue);
     }
 
     if (normalizedSlug === "mecklenburg-vorpommern") {
-      result = calculateMecklenburgVorpommernEnrollment(birthdateValue);
+      result = buildGenericEnrollmentResult(birthdateValue, stateRuleFromData) || calculateMecklenburgVorpommernEnrollment(birthdateValue);
     }
 
     if (normalizedSlug === "saarland") {
-      result = calculateSaarlandEnrollment(birthdateValue);
+      result = buildGenericEnrollmentResult(birthdateValue, stateRuleFromData) || calculateSaarlandEnrollment(birthdateValue);
     }
 
     if (normalizedSlug === "bremen") {
-      result = calculateBremenEnrollment(birthdateValue);
+      result = buildGenericEnrollmentResult(birthdateValue, stateRuleFromData) || calculateBremenEnrollment(birthdateValue);
     }
 
     let dateDetails = `
@@ -1253,17 +1448,17 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
         <div class="state-result-grid state-result-grid-priority" aria-label="Einschulungstermin ${stateName}">
           <div class="state-result-card state-result-card-wide">
             <span>Nächste Einschulung</span>
-            <strong>Sa, 15.08.2026</strong>
+            <strong>Samstag, 15. August 2026</strong>
           </div>
           <div class="state-result-card state-result-card-wide">
-            <span>Nächster Schulstart</span>
-            <strong>Mo, 17.08.2026</strong>
+            <span>Erster Schultag</span>
+            <strong>Montag, 17. August 2026</strong>
           </div>
         </div>
         <p class="state-calculator-note">
           Für ${stateName} ist die Schuleinführung 2026 offiziell veröffentlicht.
-          Der erste Schultag ist Montag, der 17. August 2026. Einzelne
-          organisatorische Details können je nach Schule abweichen.
+          Der erste Schultag ist Montag, 17. August 2026. Den konkreten Ablauf
+          legt die zuständige Grundschule fest.
         </p>
       `;
     }
@@ -1273,18 +1468,18 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
         <div class="state-result-grid state-result-grid-priority" aria-label="Einschulungstermin ${stateName}">
           <div class="state-result-card state-result-card-wide">
             <span>Nächste Einschulung</span>
-            <strong>Mittwoch, 16.09.2026</strong>
+            <strong>Mittwoch, 16. September 2026</strong>
           </div>
           <div class="state-result-card state-result-card-wide">
             <span>Erster Schultag</span>
-            <strong>Dienstag, 15.09.2026</strong>
+            <strong>Dienstag, 15. September 2026</strong>
           </div>
         </div>
         <p class="state-calculator-note">
           Für Schulanfängerinnen und Schulanfänger in ${stateName} nennt das Bayerische
           Kultusministerium den 16. September 2026. Der allgemeine erste Schultag
-          nach den Sommerferien ist voraussichtlich Dienstag, der 15. September 2026.
-          Der konkrete Einschulungstermin ist schulabhängig.
+          nach den Sommerferien ist voraussichtlich Dienstag, 15. September 2026.
+          Den konkreten Ablauf legt die zuständige Grundschule fest.
         </p>
       `;
     }
@@ -1355,9 +1550,9 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
         <p class="state-calculator-note">
           Der erste Schultag nach den Sommerferien ist in ${stateName} Montag,
           14. September 2026. Der genaue Einschulungstermin wird von der jeweiligen
-          Grundschule festgelegt. Als Orientierung wird voraussichtlich Samstag,
-          19. September 2026, genutzt. Verbindliche Informationen erhältst du bei
-          der zuständigen Grundschule.
+          Grundschule festgelegt. Als Orientierung gilt voraussichtlich Samstag,
+          19. September 2026. Verbindliche Informationen erhältst du bei der
+          zuständigen Grundschule.
         </p>
       `;
     }
@@ -1366,20 +1561,19 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
       dateDetails = `
         <div class="state-result-grid state-result-grid-priority" aria-label="Einschulungstermin ${stateName}">
           <div class="state-result-card state-result-card-wide">
-            <span>Erster Schultag</span>
-            <strong>Donnerstag, 13.08.2026</strong>
+            <span>Nächste Einschulung</span>
+            <strong>Samstag, 15. August 2026</strong>
           </div>
           <div class="state-result-card state-result-card-wide">
-            <span>Einschulung</span>
-            <strong>Samstag, 15.08.2026</strong>
+            <span>Erster Schultag</span>
+            <strong>Donnerstag, 13. August 2026</strong>
           </div>
         </div>
         <p class="state-calculator-note">
-          Für ${stateName} enden die Sommerferien 2026 am 12. August.
-          Daraus ergibt sich voraussichtlich Donnerstag, der 13. August 2026,
-          als allgemeiner erster Schultag. Die Einschulung erfolgt am Sonnabend
-          nach dem ersten Schultag, also voraussichtlich am 15. August 2026;
-          der konkrete Termin ist schulabhängig.
+          Der erste Schultag nach den Sommerferien ist voraussichtlich Donnerstag,
+          13. August 2026. Die Einschulung erfolgt am Sonnabend nach dem ersten
+          Schultag, also voraussichtlich Samstag, 15. August 2026. Den konkreten
+          Ablauf legt die zuständige Grundschule fest.
         </p>
       `;
     }
@@ -1400,8 +1594,8 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
         <p class="state-calculator-note">
           Der erste Schultag nach den Sommerferien ist in ${stateName} Montag,
           10. August 2026. Die Einschulung der Erstklässlerinnen und Erstklässler
-          liegt meist am Dienstag danach, also voraussichtlich am 11. August 2026.
-          Der genaue Termin wird von der zuständigen Grundschule festgelegt.
+          liegt meist am Dienstag danach, also voraussichtlich Dienstag,
+          11. August 2026. Den genauen Termin legt die zuständige Grundschule fest.
         </p>
       `;
     }
@@ -1410,19 +1604,19 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
       dateDetails = `
         <div class="state-result-grid state-result-grid-priority" aria-label="Einschulungstermin ${stateName}">
           <div class="state-result-card state-result-card-wide">
-            <span>Einschulungsfeier</span>
-            <strong>Samstag, 29.08.2026</strong>
+            <span>Nächste Einschulung</span>
+            <strong>Samstag, 29. August 2026</strong>
           </div>
           <div class="state-result-card state-result-card-wide">
             <span>Erster Schultag</span>
-            <strong>Montag, 31.08.2026</strong>
+            <strong>Montag, 31. August 2026</strong>
           </div>
         </div>
         <p class="state-calculator-note">
-          In ${stateName} findet die Einschulungsfeier 2026 in der Regel am
-          Samstag, dem 29. August 2026, statt. Der erste Schultag der neuen
+          In ${stateName} findet die Einschulung 2026 in der Regel am
+          Samstag, 29. August 2026, statt. Der erste Schultag der neuen
           Schulanfängerinnen und Schulanfänger ist voraussichtlich Montag,
-          der 31. August 2026. Den konkreten Ablauf legt die zuständige
+          31. August 2026. Den konkreten Ablauf legt die zuständige
           Grundschule fest.
         </p>
       `;
@@ -1441,12 +1635,11 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
           </div>
         </div>
         <p class="state-calculator-note">
-          Für ${stateName} enden die Sommerferien 2026 am 19. August.
-          Der erste Schultag nach den Sommerferien ist Donnerstag,
+          Für ${stateName} enden die Sommerferien 2026 am Mittwoch,
+          19. August 2026. Der erste Schultag nach den Sommerferien ist Donnerstag,
           20. August 2026. Die Einschulungsfeier der ersten Klassen legt die
-          jeweilige Grundschule individuell fest. Häufig starten
-          Erstklässlerinnen und Erstklässler am Montag oder Dienstag nach dem
-          ersten Schultag.
+          jeweilige Grundschule individuell fest. Häufig starten Erstklässlerinnen
+          und Erstklässler am Montag oder Dienstag nach dem ersten Schultag.
         </p>
       `;
     }
@@ -1456,18 +1649,18 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
         <div class="state-result-grid state-result-grid-priority" aria-label="Einschulungstermin ${stateName}">
           <div class="state-result-card state-result-card-wide">
             <span>Nächste Einschulung</span>
-            <strong>Samstag, 22.08.2026</strong>
+            <strong>Samstag, 22. August 2026</strong>
           </div>
           <div class="state-result-card state-result-card-wide">
-            <span>Nächster Schulstart</span>
-            <strong>Montag, 24.08.2026</strong>
+            <span>Erster Schultag</span>
+            <strong>Montag, 24. August 2026</strong>
           </div>
         </div>
         <p class="state-calculator-note">
           Für ${stateName} ist der erste Schultag im Schuljahr 2026/2027
-          Montag, der 24. August 2026. Die Einschulungsfeiern werden in der
+          Montag, 24. August 2026. Die Einschulungsfeiern werden in der
           Regel am Samstag vor dem ersten Schultag durchgeführt, also
-          voraussichtlich am Samstag, dem 22. August 2026. Den konkreten Ablauf
+          voraussichtlich Samstag, 22. August 2026. Den konkreten Ablauf
           legt die zuständige Grundschule fest.
         </p>
       `;
@@ -1478,7 +1671,7 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
         <div class="state-result-grid state-result-grid-priority" aria-label="Einschulungstermin ${stateName}">
           <div class="state-result-card state-result-card-wide">
             <span>Nächste Einschulung</span>
-            <strong>Termin durch Schule</strong>
+            <strong>Montag, 10. August 2026 (schulabhängig)</strong>
           </div>
           <div class="state-result-card state-result-card-wide">
             <span>Erster Schultag</span>
@@ -1487,8 +1680,9 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
         </div>
         <p class="state-calculator-note">
           Für ${stateName} beginnt der Unterricht nach den Sommerferien 2026
-          voraussichtlich am Montag, 10. August 2026. Den konkreten Einschulungstermin
-          für Erstklässler legt die zuständige Grundschule fest.
+          voraussichtlich Montag, 10. August 2026. Die Einschulung der
+          Erstklässlerinnen und Erstklässler liegt in der Regel zum Schuljahresbeginn;
+          den konkreten Termin legt die zuständige Grundschule fest.
         </p>
       `;
     }
@@ -1506,11 +1700,11 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
           </div>
         </div>
         <p class="state-calculator-note">
-          Für ${stateName} endet die Sommerferienzeit 2026 am Samstag,
-          15. August 2026. Der erste reguläre Schultag ist damit Montag,
-          17. August 2026. Die Einschulung an Grundschulen findet nach dem
-          Erlass zu Einschulungsterminen am dritten Schultag nach den Ferien
-          statt – also voraussichtlich Mittwoch, 19. August 2026.
+          Für ${stateName} enden die Sommerferien 2026 am Samstag,
+          15. August 2026. Der erste Schultag ist Montag, 17. August 2026.
+          Die Einschulung an Grundschulen findet nach dem Erlass zu
+          Einschulungsterminen am dritten Schultag nach den Ferien statt – also
+          voraussichtlich Mittwoch, 19. August 2026.
         </p>
       `;
     }
@@ -1528,10 +1722,10 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
           </div>
         </div>
         <p class="state-calculator-note">
-          Für ${stateName} endet die Sommerferienzeit 2026 am Freitag,
-          14. August 2026. Der erste reguläre Schultag und die voraussichtliche
-          Einschulung der Erstklässler fallen damit auf Montag, 17. August 2026.
-          Einzelne organisatorische Details können je nach Schule abweichen.
+          Für ${stateName} enden die Sommerferien 2026 am Freitag,
+          14. August 2026. Der erste Schultag und die voraussichtliche Einschulung
+          der Erstklässlerinnen und Erstklässler fallen damit auf Montag,
+          17. August 2026. Den konkreten Ablauf legt die zuständige Grundschule fest.
         </p>
       `;
     }
@@ -1550,10 +1744,10 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
         </div>
         <p class="state-calculator-note">
           Für ${stateName} enden die Sommerferien 2026 am Freitag,
-          14. August 2026. Die Einschulung der Erstklässler fällt voraussichtlich
-          auf Samstag, 15. August 2026, der erste reguläre Schultag auf Montag,
-          17. August 2026. Einzelne organisatorische Details können je nach Schule
-          abweichen.
+          14. August 2026. Die Einschulung der Erstklässlerinnen und Erstklässler
+          fällt voraussichtlich auf Samstag, 15. August 2026, der erste Schultag
+          auf Montag, 17. August 2026. Den konkreten Ablauf legt die zuständige
+          Grundschule fest.
         </p>
       `;
     }
@@ -1573,8 +1767,8 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
         <p class="state-calculator-note">
           Die Sommerferien in ${stateName} enden im Schuljahr 2026/2027 am
           Samstag, 22. August 2026. Die Einschulung findet voraussichtlich
-          ebenfalls an diesem Tag statt; der erste reguläre Schultag ist Montag,
-          24. August 2026.
+          ebenfalls an diesem Tag statt. Der erste Schultag ist Montag,
+          24. August 2026. Den konkreten Ablauf legt die zuständige Grundschule fest.
         </p>
       `;
     }
@@ -1593,10 +1787,10 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
         </div>
         <p class="state-calculator-note">
           Für ${stateName} enden die Sommerferien 2026 am Freitag,
-          7. August 2026. Die Einschulung der Erstklässler fällt voraussichtlich
-          auf Montag, 10. August 2026 – den ersten regulären Schultag nach den
-          Sommerferien. Einzelne organisatorische Details können je nach Schule
-          abweichen.
+          7. August 2026. Die Einschulung der Erstklässlerinnen und Erstklässler
+          fällt voraussichtlich auf Montag, 10. August 2026 – den ersten Schultag
+          nach den Sommerferien. Den konkreten Ablauf legt die zuständige
+          Grundschule fest.
         </p>
       `;
     }
@@ -1605,18 +1799,18 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
       dateDetails = `
         <div class="state-result-grid state-result-grid-priority" aria-label="Einschulungstermin ${stateName}">
           <div class="state-result-card state-result-card-wide">
-            <span>Erster Schultag</span>
-            <strong>Donnerstag, 13. August 2026</strong>
+            <span>Nächste Einschulung</span>
+            <strong>Samstag, 15. August 2026</strong>
           </div>
           <div class="state-result-card state-result-card-wide">
-            <span>Einschulungsfeier</span>
-            <strong>Samstag, 15. August 2026</strong>
+            <span>Erster Schultag</span>
+            <strong>Donnerstag, 13. August 2026</strong>
           </div>
         </div>
         <p class="state-calculator-note">
           Für ${stateName} enden die Sommerferien 2026 am Mittwoch,
-          12. August 2026. Der erste reguläre Schultag ist Donnerstag,
-          13. August 2026. Die Einschulungsfeier für Erstklässler ist offiziell
+          12. August 2026. Der erste Schultag ist Donnerstag, 13. August 2026.
+          Die Einschulungsfeier für Erstklässlerinnen und Erstklässler ist offiziell
           für Samstag, 15. August 2026 festgelegt.
         </p>
       `;
@@ -1639,7 +1833,7 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
           voraussichtlich Mittwoch, 2. September 2026. Die Einschulung findet in
           der Regel spätestens am zweiten Schultag nach den Sommerferien statt.
           Für 2026 ergibt sich daraus voraussichtlich Donnerstag, 3. September 2026.
-          Verbindliche Informationen erhältst du bei der zuständigen Grundschule.
+          Den konkreten Termin legt die zuständige Grundschule fest.
         </p>
       `;
     }
@@ -1649,50 +1843,31 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
     const schoolYearIsActive = schoolYearTimeState.isActive;
     const schoolYearIsCompleted = schoolYearTimeState.isCompleted;
 
-    if (schoolYearIsActive) {
-      displayedHeadline = `Das berechnete Schuljahr <span class="result-date-nowrap">${result.schoolYear}</span> hat bereits begonnen.`;
+    if (schoolYearAlreadyStarted) {
+      displayedHeadline = `Das berechnete Schuljahr <span class="result-date-nowrap">${result.schoolYear}</span> liegt bereits in der Vergangenheit.`;
       dateDetails = `
         <p class="state-calculator-note">
-          Konkrete Einschulungstermine werden hier nicht mehr angezeigt, weil
-          die reguläre Einschulung für dieses Schuljahr zeitlich bereits
-          eingeordnet ist. Für verbindliche Auskünfte ist die zuständige
-          Grundschule maßgeblich.
-        </p>
-      `;
-    }
-
-    if (schoolYearIsCompleted) {
-      displayedHeadline = `Das berechnete Schuljahr <span class="result-date-nowrap">${result.schoolYear}</span> ist bereits abgeschlossen.`;
-      dateDetails = `
-        <p class="state-calculator-note">
-          Für dieses Schuljahr werden keine Einschulungstermine mehr angezeigt.
-          Wenn du Fragen zur Einschulung deines Kindes hast, wende dich direkt
-          an die zuständige Grundschule.
+          Das berechnete Schuljahr ${result.schoolYear} liegt bereits in der
+          Vergangenheit. Das Ergebnis dient daher nur noch der zeitlichen
+          Einordnung. Für rückwirkende Fragen oder verbindliche Auskünfte ist
+          die zuständige Grundschule maßgeblich.
         </p>
       `;
     }
 
     const displayedStatusTone = schoolYearAlreadyStarted ? "following" : result.statusTone;
-    const displayedStatusLabel = schoolYearIsActive
-      ? "Schuljahr hat bereits begonnen"
-      : schoolYearIsCompleted
-        ? "Schuljahr ist bereits abgeschlossen"
-        : result.statusLabel;
-    const displayedExplanation = schoolYearIsActive
-      ? `Dein Kind wäre in ${stateName} voraussichtlich im Schuljahr ${result.schoolYear} eingeschult worden – dieses Schuljahr hat jedoch bereits begonnen. Für konkrete Fragen zur Einschulung ist die zuständige Grundschule maßgeblich.`
-      : schoolYearIsCompleted
-        ? `Dein Kind wäre in ${stateName} voraussichtlich im Schuljahr ${result.schoolYear} eingeschult worden. Da dieses Schuljahr bereits abgeschlossen ist, dient das Ergebnis nur noch der Einordnung.`
-        : result.explanation;
+    const displayedStatusLabel = schoolYearAlreadyStarted
+      ? "Vergangenes Schuljahr"
+      : result.statusLabel;
+    const displayedExplanation = schoolYearAlreadyStarted
+      ? `Das berechnete Schuljahr ${result.schoolYear} liegt bereits in der Vergangenheit. Das Ergebnis dient daher nur noch der zeitlichen Einordnung. Für rückwirkende Fragen oder verbindliche Auskünfte ist die zuständige Grundschule maßgeblich.`
+      : result.explanation;
     const displayedNextStepTitle = schoolYearAlreadyStarted
       ? "Wichtig für dich"
       : result.nextStepTitle;
-    const displayedNextStepText = schoolYearIsActive
-      ? normalizedSlug === "mecklenburg-vorpommern" || normalizedSlug === "saarland" || normalizedSlug === "bremen"
-        ? "Wende dich bei aktuellen Fragen direkt an die zuständige Grundschule."
-        : result.nextStepText
-      : schoolYearIsCompleted
-        ? "Wende dich bei Fragen direkt an die zuständige Grundschule oder Schulbehörde."
-        : result.nextStepText;
+    const displayedNextStepText = schoolYearAlreadyStarted
+      ? "Wende dich bei rückwirkenden Fragen, Nachweisen oder verbindlichen Auskünften direkt an die zuständige Grundschule."
+      : result.nextStepText;
 
     const displayedSchoolYearLabel =
       !schoolYearAlreadyStarted &&
@@ -1709,14 +1884,14 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
         ? "Mögliches Schuljahr"
         : "Voraussichtliches Schuljahr";
 
-    const schoolYearStartedWarning = schoolYearIsActive
+    const schoolYearStartedWarning = schoolYearAlreadyStarted
       ? `
         <div class="state-result-warning-box">
           <strong>Wichtiger Hinweis</strong>
           <p>
-            Das Ergebnis ist keine neue Einschulungsempfehlung mehr,
-            sondern dient nur noch der zeitlichen Einordnung. Bitte wende dich
-            bei aktuellen Fragen direkt an die zuständige Grundschule.
+            Das Ergebnis ist keine aktuelle Einschulungsempfehlung mehr, sondern
+            dient nur noch der zeitlichen Einordnung. Bitte wende dich bei
+            rückwirkenden Fragen direkt an die zuständige Grundschule.
           </p>
         </div>
       `

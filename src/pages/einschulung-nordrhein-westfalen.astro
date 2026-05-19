@@ -7,6 +7,22 @@ const pageTitle =
 const pageDescription =
   "Wann kommt mein Kind in Nordrhein-Westfalen in die Schule? Erfahre alles zu Schulstart, Einschulung, Stichtag 30. September, vorzeitiger Einschulung und Schuljahr.";
 
+const webPageSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  name: pageTitle,
+  description: pageDescription,
+  url: "https://www.einschulungsrechner.de/einschulung-nordrhein-westfalen/",
+  datePublished: "2025-10-01",
+  dateModified: "2026-05-17",
+  inLanguage: "de",
+  publisher: {
+    "@type": "Organization",
+    name: "Einschulungsrechner",
+    url: "https://www.einschulungsrechner.de/",
+  },
+};
+
 const faqSchema = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
@@ -71,6 +87,7 @@ const faqSchema = {
     <meta name="description" content={pageDescription} />
     <link rel="canonical" href="https://www.einschulungsrechner.de/einschulung-nordrhein-westfalen/" />
     <script type="application/ld+json" set:html={JSON.stringify(faqSchema)}></script>
+    <script type="application/ld+json" set:html={JSON.stringify(webPageSchema)}></script>
   </head>
 
   <body>
