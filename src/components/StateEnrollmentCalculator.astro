@@ -390,10 +390,10 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
         statusLabel = "Flexibler Einschulungszeitraum";
         statusTone = "optional";
         schoolStartYear = sixthBirthdayYear;
-        resultHeadline = `Dein Kind liegt in ${stateRule.name} im flexiblen Einschulungszeitraum.`;
-        explanation = `In ${stateRule.name} ist dein Kind grundsätzlich schulpflichtig, es gibt aber eine besondere Flexibilisierung für Kinder, die zwischen dem 1. Juli und dem 30. September sechs Jahre alt werden.`;
+        resultHeadline = `Dein Kind fällt in ${stateRule.name} in den flexiblen Einschulungszeitraum. Eine Einschulung zum Schuljahr ${schoolStartYear}/${schoolStartYear + 1} ist grundsätzlich möglich.`;
+        explanation = `In ${stateRule.name} gilt der 30. September als Stichtag. Da dein Kind zwischen dem 1. Juli und dem 30. September sechs Jahre alt wird, ist es grundsätzlich schulpflichtig; zugleich gibt es eine besondere Flexibilisierung.`;
         nextStepTitle = "Wichtig für dich";
-        nextStepText = "Informiere dich bei der zuständigen Grundschule, ob eine Verschiebung des Einschulungstermins in Frage kommt.";
+        nextStepText = "Informiere dich bei der zuständigen Grundschule, ob eine Verschiebung des Einschulungstermins in Frage kommt und welche Fristen dafür gelten.";
       }
 
       if (stateRule.type === "registration_window") {
