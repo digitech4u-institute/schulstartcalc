@@ -881,7 +881,7 @@ const webApplicationSchema = {
           if (birthMonth <= 7) {
             return {
               status: "brandenburg_exception",
-              title: `Dein Kind kann in Brandenburg nur in begründeten Ausnahmefällen im Schuljahr ${exceptionYear}/${exceptionYear + 1} aufgenommen werden.`,
+              title: `<span class="result-headline-muted">Dein Kind kann in ${stateRule.name} für das</span><span class="result-headline-accent">Schuljahr ${exceptionYear}/${exceptionYear + 1}</span><span class="result-headline-muted">nur im</span><span class="result-headline-accent">Ausnahmefall</span><span class="result-headline-muted">aufgenommen werden.</span>`,
               shortText: `Dein Kind wird erst nach dem 31. Dezember und vor dem 1. August des Folgejahres sechs Jahre alt. In Brandenburg kann eine Aufnahme in diesem Schuljahr nur in begründeten Ausnahmefällen geprüft werden.`,
               whyText: `Dein Kind wird erst nach dem 31. Dezember und vor dem 1. August des Folgejahres sechs Jahre alt. In Brandenburg kann eine Aufnahme in diesem Schuljahr nur in begründeten Ausnahmefällen geprüft werden.`,
               nextStep: `Für diesen Sonderfall solltest du dich direkt an die zuständige Grundschule wenden.`,
