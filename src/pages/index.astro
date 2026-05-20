@@ -332,16 +332,6 @@ const webApplicationSchema = {
 		  </p>
 		</div>
 
-		<div class="guide-teaser">
-		  <p class="content-kicker">Ratgeber</p>
-		  <h2>Einschulung einfach erklärt</h2>
-		  <p>
-			Du möchtest nicht nur das Schuljahr berechnen, sondern auch verstehen,
-			was Stichtag, Schulpflicht, Kann-Kind, Zurückstellung und Schulanmeldung
-			bedeuten? Unser Ratgeber führt dich Schritt für Schritt durch die wichtigsten Fragen.
-		  </p>
-		  <a class="guide-teaser-link" href="/einschulung/">Zum Einschulungs-Ratgeber</a>
-		</div>
 	  
 		<div class="content-grid">
 		  <article class="info-card">
@@ -366,6 +356,30 @@ const webApplicationSchema = {
 			  Du erhältst eine erste Orientierung zum voraussichtlichen Schuljahr,
 			  zum Stichtag, zum Status und zum nächsten sinnvollen Schritt.
 			</p>
+		  </article>
+		</div>
+
+		<div class="guide-teaser-grid" aria-label="Ratgeber und Checkliste zur Einschulung">
+		  <article class="guide-teaser">
+			<p class="content-kicker">Ratgeber</p>
+			<h3 class="guide-teaser-title">Einschulung<br />einfach erklärt</h3>
+			<p>
+			  Du möchtest nicht nur das Schuljahr berechnen, sondern auch verstehen,
+			  was Stichtag, Schulpflicht, Kann-Kind, Zurückstellung und Schulanmeldung
+			  bedeuten? Unser Ratgeber führt dich Schritt für Schritt durch die wichtigsten Fragen.
+			</p>
+			<a class="guide-teaser-link" href="/einschulung/">Zum Einschulungs-Ratgeber</a>
+		  </article>
+
+		  <article class="guide-teaser guide-teaser-primary">
+			<p class="content-kicker">Checkliste</p>
+			<h3 class="guide-teaser-title">Schulstart<br />Schritt-für-Schritt<br />vorbereiten</h3>
+			<p>
+			  Schulranzen, Schultüte, Anmeldung und erste Vorbereitung – die Checkliste
+			  hilft dir, an alles Wichtige rund um die Einschulung zu denken. Schritt
+			  für Schritt, damit nichts Wichtiges vergessen wird.
+			</p>
+			<a class="guide-teaser-link" href="/einschulung-checkliste/">Zur Einschulungs-Checkliste</a>
 		  </article>
 		</div>
 	  
@@ -438,6 +452,18 @@ const webApplicationSchema = {
 			  zuständigen Schule oder Schulbehörde.
 			</p>
 		  </div>
+
+		  <div class="content-block checklist-mini-block">
+			<p class="content-kicker">Nächster Schritt</p>
+			<h2>Was braucht dein Kind jetzt konkret?</h2>
+			<p>
+			  Wenn du das voraussichtliche Schuljahr kennst, beginnt die praktische
+			  Vorbereitung: Anmeldung, Schulranzen, Schultüte, Unterlagen und wichtige
+			  Termine. Die Checkliste hilft dir, Schritt für Schritt den Überblick zu behalten.
+			</p>
+			<a class="checklist-mini-link" href="/einschulung-checkliste/">Zur Einschulungs-Checkliste</a>
+		  </div>
+
 		  <div class="content-block">
 			<p class="content-kicker">Begriffe einfach erklärt</p>
 		  
@@ -1068,6 +1094,15 @@ const webApplicationSchema = {
       </a>
       `
       : "";
+    const checklistCta = !isPastSchoolYear && !isActiveSchoolYear
+      ? `
+      <a class="result-checklist-cta" href="/einschulung-checkliste/">
+        <span class="result-checklist-cta-title">Jetzt den Schulstart vorbereiten</span>
+        <span class="result-checklist-cta-text">Mit der Checkliste behältst du Anmeldung, Schulranzen, Schultüte und wichtige Fristen im Blick.</span>
+        <span class="result-checklist-cta-action">Zur Einschulungs-Checkliste →</span>
+      </a>
+      `
+      : "";
 
     resultBox.innerHTML = `
       <p class="result-kicker">Dein Ergebnis</p>
@@ -1113,6 +1148,8 @@ const webApplicationSchema = {
       </div>
 
       ${stateDetailLink}
+
+      ${checklistCta}
 
       <p class="result-note">
         ${resultNoteText}
@@ -1860,22 +1897,75 @@ select {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 50px;
-  padding: 0 18px;
-  border: 1px solid rgba(245, 210, 138, 0.28);
+  min-height: 52px;
+  padding: 0 20px;
+  border: 1px solid rgba(245, 210, 138, 0.95);
   border-radius: 16px;
-  background: rgba(245, 210, 138, 0.12);
-  color: #f5d28a;
-  font-size: 0.96rem;
-  font-weight: 850;
+  background: #f5d28a;
+  color: #172033;
+  font-size: 1rem;
+  font-weight: 950;
   line-height: 1.2;
   text-align: center;
   text-decoration: none;
+  box-shadow: 0 12px 28px rgba(245, 210, 138, 0.12);
 }
 
 .result-detail-link:hover {
-  background: rgba(245, 210, 138, 0.18);
-  border-color: rgba(245, 210, 138, 0.42);
+  background: #ffdf99;
+  border-color: #ffdf99;
+}
+
+.result-checklist-cta {
+  display: grid;
+  gap: 7px;
+  margin-top: 6px;
+  padding: 20px 22px;
+  border: 1px solid rgba(245, 210, 138, 0.95);
+  border-radius: 16px;
+  background: #f5d28a;
+  color: #172033;
+  text-align: center;
+  text-decoration: none;
+  box-shadow: 0 12px 28px rgba(245, 210, 138, 0.12);
+  transition:
+    background 180ms ease,
+    border-color 180ms ease,
+    transform 180ms ease;
+}
+
+.result-checklist-cta:hover {
+  background: #ffdf99;
+  border-color: #ffdf99;
+  transform: translateY(-1px);
+}
+
+.result-checklist-cta-title {
+  display: block;
+  color: #172033;
+  font-size: 1rem;
+  font-weight: 950;
+  letter-spacing: 0.065em;
+  line-height: 1.18;
+  text-transform: uppercase;
+}
+
+.result-checklist-cta-text {
+  display: block;
+  max-width: 520px;
+  margin: 0 auto;
+  color: rgba(23, 32, 51, 0.78);
+  font-size: 1rem;
+  font-weight: 650;
+  line-height: 1.42;
+}
+
+.result-checklist-cta-action {
+  display: block;
+  margin-top: 6px;
+  color: #172033;
+  font-size: 1.1rem;
+  font-weight: 950;
 }
 .content-section {
   max-width: 960px;
@@ -1891,20 +1981,52 @@ select {
   max-width: 760px;
 }
 
-.guide-teaser {
-  max-width: 780px;
+.guide-teaser-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: stretch;
+  gap: 16px;
   margin-top: 28px;
+}
+
+.guide-teaser {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
   padding: 24px;
   border: 1px solid rgba(129, 97, 38, 0.16);
   border-radius: 22px;
   background: rgba(245, 210, 138, 0.12);
+  text-align: center;
+}
+
+.guide-teaser-title {
+  margin: 0;
+  color: #172033;
+  font-size: clamp(1.72rem, 2.05vw, 1.95rem) !important;
+  font-weight: 900;
+  line-height: 1.08 !important;
+  letter-spacing: -0.045em !important;
+  text-wrap: balance;
+}
+
+.guide-teaser > p:not(.content-kicker) {
+  flex: 1;
+  max-width: 34rem;
+}
+
+.guide-teaser-primary {
+  background: rgba(38, 115, 77, 0.1);
+  border-color: rgba(38, 115, 77, 0.18);
 }
 
 .guide-teaser-link {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  margin-top: 18px;
+  align-self: center;
+  margin-top: 20px;
   min-height: 50px;
   padding: 0 20px;
   border-radius: 15px;
@@ -1987,6 +2109,33 @@ select {
   border: 1px solid rgba(129, 97, 38, 0.16);
   border-radius: 22px;
   background: rgba(245, 210, 138, 0.12);
+}
+
+.checklist-mini-block {
+  max-width: none;
+  padding: 24px;
+  border: 1px solid rgba(38, 115, 77, 0.16);
+  border-radius: 22px;
+  background: rgba(38, 115, 77, 0.08);
+}
+
+.checklist-mini-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 18px;
+  min-height: 50px;
+  padding: 0 20px;
+  border-radius: 15px;
+  background: #172033;
+  color: #fff;
+  font-weight: 850;
+  line-height: 1.2;
+  text-decoration: none;
+}
+
+.checklist-mini-link:hover {
+  background: #2a3550;
 }
 .table-wrap {
   position: relative;
@@ -2120,7 +2269,7 @@ select {
   line-height: 1.56 !important;
 }
   
-	@media (max-width: 820px) {
+@media (max-width: 820px) {
   .hero {
     padding-top: 32px;
   }
@@ -2135,6 +2284,10 @@ select {
 
   .content-section {
     padding: 24px;
+  }
+
+  .guide-teaser-grid {
+    grid-template-columns: 1fr;
   }
 
   .result-facts {
@@ -2394,13 +2547,15 @@ select {
     padding: 20px !important;
   }
 
-  .guide-teaser {
-    margin-top: 24px !important;
+  .guide-teaser,
+  .checklist-mini-block {
     padding: 20px !important;
     border-radius: 20px !important;
   }
 
-  .guide-teaser-link {
+  .guide-teaser-link,
+  .checklist-mini-link,
+  .result-checklist-cta {
     width: 100% !important;
   }
 }

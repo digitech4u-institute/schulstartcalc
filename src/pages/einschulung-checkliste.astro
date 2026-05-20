@@ -2,10 +2,65 @@
 
 ---
 const pageTitle =
-  "Einschulungs-Checkliste: Was Eltern vor dem Schulstart erledigen sollten";
+  "Einschulung Checkliste 2026 – Was braucht mein Kind zur Einschulung?";
 
 const pageDescription =
-  "Praktische Einschulungs-Checkliste für Eltern: Schulanmeldung, Unterlagen, Schulranzen, Schulweg, Vorbereitung und letzter Check vor dem ersten Schultag.";
+  "Was braucht mein Kind zur Einschulung? Checkliste für Schulranzen, Schultüte, Unterlagen und Schulanmeldung – Schritt für Schritt zum Schulstart 2026.";
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: [
+    {
+      "@type": "Question",
+      name: "Was gehört auf eine Einschulungs-Checkliste?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Auf eine Einschulungs-Checkliste gehören unter anderem Schulanmeldung, wichtige Unterlagen, schulärztliche Untersuchung, Schulranzen, Materialliste, Schulweg, Betreuung, Schultüte und die emotionale Vorbereitung des Kindes.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Was braucht mein Kind zur Einschulung?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Zur Einschulung braucht dein Kind einen Schulranzen, Schreibzeug wie Bleistift, Buntstifte und Füller, eine Federmappe, Hefte, einen Sportbeutel und geeignetes Sportzeug. Dazu kommen schulspezifische Unterlagen wie Impfnachweis, Anmeldeformular und weitere Vorgaben der Schule.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Was kommt in eine Schultüte?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "In eine Schultüte kommen klassisch Schreibzeug wie Buntstifte oder Füller, ein Kinderbuch, eine kleine Süßigkeit und etwas Persönliches wie ein kleines Spielzeug, ein Glücksbringer oder ein Foto. Die Schultüte ist ein Geschenk für den ersten Schultag.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Wann sollte man mit der Vorbereitung auf die Einschulung beginnen?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Viele organisatorische Punkte beginnen mehrere Monate vor dem Schulstart. Sinnvoll ist es, nach dem Einschulungsergebnis frühzeitig die zuständige Schule, Anmeldefristen und benötigte Unterlagen zu prüfen.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Welche Unterlagen braucht man für die Schulanmeldung?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Typische Unterlagen sind Geburtsurkunde oder Ausweisdokument des Kindes, Nachweis der Sorgeberechtigung, Meldebestätigung, Impf- oder Masernschutznachweis und gegebenenfalls weitere Unterlagen der zuständigen Schule. Die genauen Anforderungen unterscheiden sich je nach Bundesland und Schule.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Sind Einschulungs-Checklisten verbindlich?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Nein. Die Checkliste dient der Orientierung. Verbindliche Informationen zu Fristen, Unterlagen und Abläufen erhalten Eltern bei der zuständigen Grundschule oder Schulbehörde.",
+      },
+    },
+  ],
+};
 ---
 
 <html lang="de">
@@ -15,46 +70,7 @@ const pageDescription =
     <title>{pageTitle}</title>
     <meta name="description" content={pageDescription} />
     <link rel="canonical" href="https://www.einschulungsrechner.de/einschulung-checkliste/" />
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "FAQPage",
-        "mainEntity": [
-          {
-            "@type": "Question",
-            "name": "Was gehört auf eine Einschulungs-Checkliste?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Auf eine Einschulungs-Checkliste gehören unter anderem Schulanmeldung, wichtige Unterlagen, schulärztliche Untersuchung, Schulranzen, Materialliste, Schulweg, Betreuung, Schultüte und die emotionale Vorbereitung des Kindes."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Wann sollte man mit der Vorbereitung auf die Einschulung beginnen?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Viele organisatorische Punkte beginnen mehrere Monate vor dem Schulstart. Sinnvoll ist es, nach dem Einschulungsergebnis frühzeitig die zuständige Schule, Anmeldefristen und benötigte Unterlagen zu prüfen."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Welche Unterlagen braucht man für die Schulanmeldung?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Typische Unterlagen sind Geburtsurkunde oder Ausweisdokument des Kindes, Nachweis der Sorgeberechtigung, Meldebestätigung, Impf- oder Masernschutznachweis und gegebenenfalls weitere Unterlagen der zuständigen Schule. Die genauen Anforderungen unterscheiden sich je nach Bundesland und Schule."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Ist diese Checkliste verbindlich?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Nein. Die Checkliste dient der Orientierung. Verbindliche Informationen zu Fristen, Unterlagen und Abläufen erhalten Eltern bei der zuständigen Grundschule oder Schulbehörde."
-            }
-          }
-        ]
-      }
-    </script>
+    <script type="application/ld+json" set:html={JSON.stringify(faqSchema)}></script>
   </head>
 
   <body>
@@ -65,15 +81,16 @@ const pageDescription =
         <p class="guide-kicker">Checkliste</p>
 
         <h1>
-          Einschulungs-Checkliste:<br />
-          Alles für den Schulstart
+          Einschulung Checkliste:<br />
+          Was braucht mein Kind zum Schulstart?
         </h1>
 
         <p class="lead">
-          Wenn das voraussichtliche Schuljahr klar ist, beginnt für viele Eltern
-          die nächste Frage: Was muss ich jetzt konkret tun? Diese Checkliste
-          führt dich Schritt für Schritt durch Anmeldung, Unterlagen,
-          Ausstattung, Schulweg und Vorbereitung auf den ersten Schultag.
+          Schulranzen, Schultüte, Schulanmeldung, Unterlagen – rund um den
+          Schulstart gibt es viel zu bedenken. Diese Checkliste hilft dir,
+          nichts Wichtiges zu vergessen: von der Anmeldung an der Grundschule
+          bis zur ersten Schultasche. Schritt für Schritt, damit der Schulstart
+          2026 entspannt gelingt.
         </p>
 
         <div class="phase-grid" aria-label="Kurzüberblick Einschulungs-Checkliste">
@@ -239,6 +256,30 @@ const pageDescription =
               </p>
             </article>
           </div>
+
+          <div class="checklist-hint-box">
+            <p class="checklist-hint-kicker">Kauftipp</p>
+            <h3 class="checklist-hint-title">Worauf du beim Schulranzen achten solltest</h3>
+            <p>
+              Ein guter Schulranzen für Erstklässler erfüllt die Norm
+              <strong>DIN 58124</strong>: ergonomisch geformte Rückenplatte,
+              breit verstellbare Träger, Reflektoren rundum und ein Leergewicht
+              unter 1,2 kg. Verzichte auf schwere Metallverschlüsse –
+              Kinder der ersten Klasse müssen den Ranzen selbst öffnen können.
+            </p>
+          </div>
+
+          <div class="checklist-hint-box">
+            <p class="checklist-hint-kicker">Materialien</p>
+            <h3 class="checklist-hint-title">Welche Materialien Erstklässler wirklich brauchen</h3>
+            <p>
+              Viele Schulen geben eine <strong>Materialliste</strong> bei der
+              Anmeldung aus – frag dort nach, bevor du kaufst. Grundsätzlich
+              empfehlenswert für den Start: <strong>Dreikant-Bleistifte</strong>,
+              ein weicher Radierer ohne Hülle, dicke Buntstifte, eine stabile
+              Federmappe und ein Trinkfläschchen für den Schulrucksack.
+            </p>
+          </div>
         </section>
 
         <section>
@@ -257,6 +298,19 @@ const pageDescription =
             <label><input type="checkbox" /> Ablauf des ersten Tages besprechen</label>
             <label><input type="checkbox" /> Früh genug schlafen gehen</label>
           </div>
+
+          <div class="checklist-hint-box">
+            <p class="checklist-hint-kicker">Ideen &amp; Tipps</p>
+            <h3 class="checklist-hint-title">Was in eine gute Schultüte kommt</h3>
+            <p>
+              Klassisch und bewährt: <strong>Schreibzeug</strong> wie Buntstifte
+              mit dicken Minen oder ein Dreikant-Bleistift, ein
+              <strong>Kinderbuch</strong>, eine kleine Süßigkeit und etwas
+              Persönliches – zum Beispiel ein Mini-Spielzeug, eine Postkarte
+              oder ein Foto. Die Schultüte ist kein Pflichtprogramm, aber ein
+              starkes Ritual für den ersten Schultag.
+            </p>
+          </div>
         </section>
 
         <section class="highlight-section">
@@ -271,13 +325,12 @@ const pageDescription =
         </section>
 
         <section class="project-note">
-          <h2>Ein gemeinnütziges Orientierungsprojekt</h2>
+          <h2>Ein kostenloses Orientierungsangebot</h2>
 
           <p>
-            einschulungsrechner.de ist ein gemeinnützig getragenes Pilot- und
-            Forschungsprojekt von DigiTech4U. Ziel ist es, Eltern eine kostenlose,
-            verständliche und datensparsame Orientierung rund um Einschulung und
-            Schulstart zu bieten.
+            einschulungsrechner.de ist ein kostenloses Orientierungsangebot von
+            DigiTech4U für Eltern rund um Einschulung und Schulstart. Ziel ist es,
+            Eltern eine verständliche und datensparsame Orientierung zu bieten.
           </p>
         </section>
 
@@ -285,6 +338,27 @@ const pageDescription =
           <h2>Häufige Fragen zur Einschulungs-Checkliste</h2>
 
           <div class="faq-list">
+            <article class="faq-item">
+              <h3>Was braucht mein Kind zur Einschulung?</h3>
+              <p>
+                Zur Einschulung braucht dein Kind einen Schulranzen, Schreibzeug
+                wie Bleistift, Buntstifte und Füller, eine Federmappe, Hefte,
+                einen Sportbeutel und geeignetes Sportzeug. Dazu kommen
+                schulspezifische Unterlagen wie Impfnachweis, Anmeldeformular
+                und weitere Vorgaben der Schule.
+              </p>
+            </article>
+
+            <article class="faq-item">
+              <h3>Was kommt in eine Schultüte?</h3>
+              <p>
+                In eine Schultüte kommen klassisch Schreibzeug wie Buntstifte
+                oder Füller, ein Kinderbuch, eine kleine Süßigkeit und etwas
+                Persönliches wie ein kleines Spielzeug, ein Glücksbringer oder
+                ein Foto. Die Schultüte ist ein Geschenk für den ersten Schultag.
+              </p>
+            </article>
+
             <article class="faq-item">
               <h3>Wann sollte ich mit der Einschulungsvorbereitung beginnen?</h3>
               <p>
@@ -304,7 +378,7 @@ const pageDescription =
             </article>
 
             <article class="faq-item">
-              <h3>Ist diese Checkliste verbindlich?</h3>
+              <h3>Sind Einschulungs-Checklisten verbindlich?</h3>
               <p>
                 Nein. Sie dient der Orientierung. Verbindliche Informationen zu
                 Fristen, Unterlagen und Abläufen erhältst du bei der zuständigen
@@ -455,6 +529,42 @@ const pageDescription =
     border: 1px solid rgba(129, 97, 38, 0.16);
     border-radius: 22px;
     background: rgba(245, 210, 138, 0.12);
+  }
+
+  .checklist-hint-box {
+    display: grid;
+    gap: 10px;
+    margin: 28px 0 0;
+    padding: 20px 24px;
+    border: 1px solid rgba(42, 35, 21, 0.1);
+    border-radius: 14px;
+    background: #f5f2eb;
+  }
+
+  .checklist-hint-kicker {
+    margin: 0;
+    color: #816126;
+    font-size: 0.78rem;
+    font-weight: 850;
+    letter-spacing: 0.09em;
+    line-height: 1.2;
+    text-transform: uppercase;
+  }
+
+  .checklist-hint-title {
+    margin: 0;
+    color: #172033;
+    font-size: 1.15rem;
+    font-weight: 850;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+  }
+
+  .checklist-hint-box p:last-child {
+    margin: 0;
+    color: #3a3530;
+    font-size: 0.97rem;
+    line-height: 1.6;
   }
 
   h2 {
