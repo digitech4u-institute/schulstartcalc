@@ -1,19 +1,14 @@
 ---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
 const pageTitle = "Datenschutzerklärung";
 const pageDescription =
   "Datenschutzerklärung des Einschulungsrechners Deutschland.";
+const canonical = "https://www.einschulungsrechner.de/datenschutz/";
 ---
 
-<html lang="de">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{pageTitle}</title>
-    <meta name="description" content={pageDescription} />
-  </head>
-
-  <body>
-    <main class="legal-page">
+<BaseLayout title={pageTitle} description={pageDescription} canonical={canonical}>
+  <main class="legal-page">
       <a class="back-link" href="/">← Zurück zum Einschulungsrechner</a>
 
       <section class="legal-card">
@@ -69,20 +64,33 @@ const pageDescription =
           stabilen und nutzerfreundlichen Bereitstellung dieser Website.
         </p>
 
-        <h2>6. Cookies, Tracking und Analyse</h2>
+        <h2>6. Cookies, Consent Mode, Analyse und Werbung</h2>
 
         <p>
-          Diese Website verwendet derzeit keine Analyse-Cookies, kein Tracking und
-          keine Werbe- oder Marketingdienste.
+          Diese Website verwendet derzeit keine nicht notwendigen Cookies, keine
+          Webanalyse und keine personalisierten Werbe- oder Marketingdienste. Der
+          Google Consent Mode ist technisch vorbereitet und standardmäßig so
+          eingestellt, dass Analyse- und Werbespeicher abgelehnt sind. Ohne deine
+          ausdrückliche Einwilligung werden keine entsprechenden Analyse- oder
+          Werbedienste aktiviert.
         </p>
 
-        <h2>7. Externe Links</h2>
+        <p>
+          Ein Cookie-Banner bzw. Consent-Management-Dienst wird erst eingebunden,
+          wenn Dienste eingesetzt werden, die eine Einwilligung erfordern. In diesem
+          Fall kannst du deine Einwilligung über die Cookie-Einstellungen jederzeit
+          anpassen oder widerrufen. Diese Datenschutzerklärung wird dann entsprechend
+          ergänzt.
+        </p>
+
+        <h2>7. Externe Links und Partnerangebote</h2>
 
         <p>
-          Diese Website enthält Links zu externen Informationsquellen. Wenn du einen
-          externen Link anklickst, verlässt du diese Website. Für die Verarbeitung
-          personenbezogener Daten auf externen Websites sind die jeweiligen Anbieter
-          verantwortlich.
+          Diese Website enthält Links zu externen Informationsquellen. Künftig können
+          außerdem einzelne Links zu Partnerangeboten oder Werbepartnern ergänzt
+          werden. Wenn du einen externen Link anklickst, verlässt du diese Website.
+          Für die Verarbeitung personenbezogener Daten auf externen Websites sind die
+          jeweiligen Anbieter verantwortlich.
         </p>
 
         <h2>8. Speicherdauer</h2>
@@ -100,7 +108,8 @@ const pageDescription =
           Berichtigung, Löschung, Einschränkung der Verarbeitung,
           Datenübertragbarkeit sowie Widerspruch gegen bestimmte Verarbeitungen.
           Außerdem hast du das Recht, dich bei einer zuständigen Datenschutzaufsicht
-          zu beschweren.
+          zu beschweren. Zur Ausübung deiner Rechte wende dich bitte an:
+          <a href="mailto:info@digitech4u.org">info@digitech4u.org</a>.
         </p>
 
         <h2>10. Hinweis zur Verbindlichkeit des Rechners</h2>
@@ -117,9 +126,8 @@ const pageDescription =
           Stand: Mai 2026
         </p>
       </section>
-    </main>
-  </body>
-</html>
+  </main>
+</BaseLayout>
 
 <style>
   :root {

@@ -1,72 +1,79 @@
 ---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
 const pageTitle = "Impressum";
 const pageDescription =
   "Impressum und Anbieterkennzeichnung des Einschulungsrechners Deutschland.";
+const canonical = "https://www.einschulungsrechner.de/impressum/";
 ---
 
-<html lang="de">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{pageTitle}</title>
-    <meta name="description" content={pageDescription} />
-  </head>
+<BaseLayout title={pageTitle} description={pageDescription} canonical={canonical}>
+  <main class="legal-page">
+    <a class="back-link" href="/">← Zurück zum Einschulungsrechner</a>
 
-  <body>
-    <main class="legal-page">
-      <a class="back-link" href="/">← Zurück zum Einschulungsrechner</a>
+    <section class="legal-card">
+      <p class="legal-kicker">Rechtliches</p>
 
-      <section class="legal-card">
-        <p class="legal-kicker">Rechtliches</p>
+      <h1>Impressum</h1>
 
-        <h1>Impressum</h1>
+      <h2>Angaben gemäß § 5 ECG (E-Commerce-Gesetz Österreich)</h2>
 
-        <h2>Angaben gemäß § 5 DDG</h2>
+      <p>
+        DigiTech4U Institute<br />
+        M. Lanzend. Str. 6-8<br />
+        2333 Leopoldsdorf<br />
+        Österreich
+      </p>
 
-        <p>
-          DigiTech4U Institute<br />
-          M. Lanzend. Str. 6-8<br />
-          2333 Leopoldsdorf<br />
-          Österreich
-        </p>
+      <h2>Kontakt</h2>
 
-        <h2>Kontakt</h2>
+      <p>
+        E-Mail: <a href="mailto:info@digitech4u.org">info@digitech4u.org</a>
+      </p>
 
-        <p>
-          E-Mail: <a href="mailto:info@digitech4u.org">info@digitech4u.org</a>
-        </p>
+      <h2>Hinweis zur Zielgruppe</h2>
 
-        <h2>Verantwortlich für den Inhalt</h2>
+      <p>
+        Diese Website richtet sich an Nutzerinnen und Nutzer in Deutschland
+        und Österreich. Anbieterin ist eine österreichische Institution. Die
+        Inhalte dienen der allgemeinen Orientierung rund um Einschulung,
+        Schulpflicht und Schulstart in Deutschland und ersetzen keine
+        verbindliche Auskunft durch die zuständige Grundschule oder
+        Schulbehörde.
+      </p>
 
-        <p>
-          DigiTech4U Institute<br />
-          M. Lanzend. Str. 6-8<br />
-          2333 Leopoldsdorf<br />
-          Österreich
-        </p>
+      <h2>Verantwortlich für den Inhalt</h2>
 
-        <h2>Haftung für Inhalte</h2>
+      <p>
+        DigiTech4U Institute<br />
+        M. Lanzend. Str. 6-8<br />
+        2333 Leopoldsdorf<br />
+        Österreich
+      </p>
 
-        <p>
-          Die Inhalte dieser Website wurden mit größter Sorgfalt erstellt. Für die
-          Richtigkeit, Vollständigkeit und Aktualität der Inhalte kann jedoch keine
-          Gewähr übernommen werden. Der Einschulungsrechner dient der Orientierung
-          und ersetzt keine verbindliche Auskunft durch Schule, Schulamt oder
-          Bildungsbehörde.
-        </p>
+      <h2>Haftung für Inhalte</h2>
 
-        <h2>Haftung für Links</h2>
+      <p>
+        Die Inhalte dieser Website wurden mit größter Sorgfalt recherchiert und
+        erstellt. Dennoch können Einschulungstermine, Stichtage, Anmeldefristen
+        und schulrechtliche Regelungen je nach Bundesland, Kommune oder Schule
+        abweichen oder sich ändern. Der Einschulungsrechner und die begleitenden
+        Informationen dienen ausschließlich der unverbindlichen Orientierung.
+        Verbindliche Auskünfte erteilen immer die zuständige Grundschule, das
+        Schulamt oder die zuständige Schulbehörde.
+      </p>
 
-        <p>
-          Diese Website enthält Links zu externen Websites Dritter. Auf deren
-          Inhalte haben wir keinen Einfluss. Für diese fremden Inhalte übernehmen
-          wir keine Gewähr. Für die Inhalte der verlinkten Seiten ist stets der
-          jeweilige Anbieter oder Betreiber verantwortlich.
-        </p>
-      </section>
-    </main>
-  </body>
-</html>
+      <h2>Haftung für Links</h2>
+
+      <p>
+        Diese Website enthält Links zu externen Websites Dritter. Auf deren
+        Inhalte haben wir keinen Einfluss. Für diese fremden Inhalte übernehmen
+        wir keine Gewähr. Für die Inhalte der verlinkten Seiten ist stets der
+        jeweilige Anbieter oder Betreiber verantwortlich.
+      </p>
+    </section>
+  </main>
+</BaseLayout>
 
 <style>
   :root {

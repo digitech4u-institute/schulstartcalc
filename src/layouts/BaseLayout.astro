@@ -1,0 +1,127 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  canonical: string;
+  schema?: object | object[];
+}
+
+const { title, description, canonical, schema } = Astro.props;
+
+const CONSENTMANAGER_ID = import.meta.env.PUBLIC_CONSENTMANAGER_ID || "";
+const ADSENSE_ID = import.meta.env.PUBLIC_ADSENSE_ID || "";
+const schemaItems = schema ? (Array.isArray(schema) ? schema : [schema]) : [];
+const currentPath = new URL(canonical).pathname;
+---
+
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("consent", "default", {
+        ad_storage: "denied",
+        ad_user_data: "denied",
+        ad_personalization: "denied",
+        analytics_storage: "denied",
+        wait_for_update: 500,
+      });
+      gtag("set", "ads_data_redaction", true);
+      gtag("set", "url_passthrough", true);
+    </script>
+
+    {
+      CONSENTMANAGER_ID ? (
+        <script
+          type="text/javascript"
+          data-cmp-ab="1"
+          src={`https://cdn.consentmanager.net/delivery/autoblocking/${CONSENTMANAGER_ID}.js`}
+          data-cmp-host="b.delivery.consentmanager.net"
+          data-cmp-cdn="cdn.consentmanager.net"
+          data-cmp-codesrc="0"
+          is:inline
+        />
+      ) : null
+    }
+
+    {
+      ADSENSE_ID ? (
+        <script
+          async
+          src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_ID}`}
+          crossorigin="anonymous"
+          data-cookieconsent="marketing"
+          type="text/plain"
+        />
+      ) : null
+    }
+
+    {
+      schemaItems.map((schemaItem) => (
+        <script type="application/ld+json" set:html={JSON.stringify(schemaItem)} />
+      ))
+    }
+
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="de_DE" />
+    <meta property="og:site_name" content="Einschulungsrechner" />
+
+    <slot name="head" />
+  </head>
+
+  <body>
+    <slot />
+
+    <footer class="site-footer">
+      <nav aria-label="Rechtliches">
+        {currentPath !== "/impressum/" ? <a href="/impressum/">Impressum</a> : null}
+        {currentPath !== "/datenschutz/" ? <a href="/datenschutz/">Datenschutz</a> : null}
+        {CONSENTMANAGER_ID ? (
+          <a href="#" onclick="if (window.__cmp) window.__cmp('showScreen'); return false;">
+            Cookie-Einstellungen
+          </a>
+        ) : null}
+      </nav>
+    </footer>
+  </body>
+</html>
+
+<style>
+  .site-footer {
+    margin-top: 48px;
+    padding: 24px 20px;
+    border-top: 1px solid rgba(42, 35, 21, 0.08);
+    text-align: center;
+  }
+
+  .site-footer nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 18px 24px;
+  }
+
+  .site-footer a {
+    color: #816126;
+    font-size: 0.875rem;
+    font-weight: 800;
+    letter-spacing: 0.02em;
+    text-decoration: none;
+  }
+
+  .site-footer a:hover {
+    color: #172033;
+    text-decoration: underline;
+  }
+</style>
