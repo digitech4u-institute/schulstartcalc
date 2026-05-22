@@ -1,11 +1,15 @@
 
 
 ---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
 const pageTitle =
   "Einschulung Checkliste 2026 – Was braucht mein Kind zur Einschulung?";
 
 const pageDescription =
   "Was braucht mein Kind zur Einschulung? Checkliste für Schulranzen, Schultüte, Unterlagen und Schulanmeldung – Schritt für Schritt zum Schulstart 2026.";
+
+const canonical = "https://www.einschulungsrechner.de/einschulung-checkliste/";
 
 const faqSchema = {
   "@context": "https://schema.org",
@@ -63,18 +67,8 @@ const faqSchema = {
 };
 ---
 
-<html lang="de">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{pageTitle}</title>
-    <meta name="description" content={pageDescription} />
-    <link rel="canonical" href="https://www.einschulungsrechner.de/einschulung-checkliste/" />
-    <script type="application/ld+json" set:html={JSON.stringify(faqSchema)}></script>
-  </head>
-
-  <body>
-    <main class="guide-page">
+<BaseLayout title={pageTitle} description={pageDescription} canonical={canonical} schema={faqSchema}>
+  <main class="guide-page">
       <a class="back-link" href="/einschulung/">← Zurück zum Einschulungs-Ratgeber</a>
 
       <article class="guide-card">
@@ -388,9 +382,8 @@ const faqSchema = {
           </div>
         </section>
       </article>
-    </main>
-  </body>
-</html>
+  </main>
+</BaseLayout>
 
 <style>
   :root {

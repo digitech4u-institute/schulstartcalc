@@ -44,7 +44,7 @@ const currentPath = new URL(canonical).pathname;
           type="text/javascript"
           data-cmp-ab="1"
           src={`https://cdn.consentmanager.net/delivery/autoblocking/${CONSENTMANAGER_ID}.js`}
-          data-cmp-host="b.delivery.consentmanager.net"
+          data-cmp-host="c.delivery.consentmanager.net"
           data-cmp-cdn="cdn.consentmanager.net"
           data-cmp-codesrc="0"
           is:inline
@@ -88,12 +88,25 @@ const currentPath = new URL(canonical).pathname;
         {currentPath !== "/impressum/" ? <a href="/impressum/">Impressum</a> : null}
         {currentPath !== "/datenschutz/" ? <a href="/datenschutz/">Datenschutz</a> : null}
         {CONSENTMANAGER_ID ? (
-          <a href="#" onclick="if (window.__cmp) window.__cmp('showScreen'); return false;">
+          <button type="button" class="site-footer-button" data-consentmanager-settings>
             Cookie-Einstellungen
-          </a>
+          </button>
         ) : null}
       </nav>
     </footer>
+
+    <script>
+      document.addEventListener("click", (event) => {
+        const target = event.target instanceof Element
+          ? event.target.closest("[data-consentmanager-settings]")
+          : null;
+
+        if (!target) return;
+
+        event.preventDefault();
+        window.__cmp?.("showScreen");
+      });
+    </script>
   </body>
 </html>
 
@@ -112,15 +125,25 @@ const currentPath = new URL(canonical).pathname;
     gap: 18px 24px;
   }
 
-  .site-footer a {
+  .site-footer a,
+  .site-footer-button {
     color: #816126;
+    font: inherit;
     font-size: 0.875rem;
     font-weight: 800;
     letter-spacing: 0.02em;
     text-decoration: none;
   }
 
-  .site-footer a:hover {
+  .site-footer-button {
+    padding: 0;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+  }
+
+  .site-footer a:hover,
+  .site-footer-button:hover {
     color: #172033;
     text-decoration: underline;
   }

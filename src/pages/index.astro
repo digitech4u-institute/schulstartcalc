@@ -1,4 +1,5 @@
 ---
+import BaseLayout from "../layouts/BaseLayout.astro";
 import { germanStates } from "../data/states";
 import { enrollmentRules } from "../data/enrollmentRules";
 import { enrollmentDatesBySchoolYear } from "../data/enrollmentDatesBySchoolYear";
@@ -8,6 +9,8 @@ const pageTitle =
 
 const pageDescription =
   "Berechne das voraussichtliche Schuljahr deines Kindes nach Bundesland. Einschulungsrechner für Deutschland mit Stichtag, Schulpflicht, Kann-Kind-Regeln und Bundesländer-Links.";
+
+const canonical = "https://www.einschulungsrechner.de/";
 
 const currentSchoolYear = "2026/2027";
 const currentEnrollmentDates = enrollmentDatesBySchoolYear[currentSchoolYear];
@@ -175,19 +178,13 @@ const webApplicationSchema = {
 };
 ---
 
-<html lang="de">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{pageTitle}</title>
-    <meta name="description" content={pageDescription} />
-    <link rel="canonical" href="https://www.einschulungsrechner.de/" />
-	<script type="application/ld+json" set:html={JSON.stringify(faqSchema)}></script>
-	<script type="application/ld+json" set:html={JSON.stringify(webApplicationSchema)}></script>
-</head>
-
-  <body>
-    <main class="page">
+<BaseLayout
+  title={pageTitle}
+  description={pageDescription}
+  canonical={canonical}
+  schema={[faqSchema, webApplicationSchema]}
+>
+  <main class="page">
       <section class="hero">
         <p class="eyebrow">Einschulungsrechner Deutschland 🇩🇪</p>
 
@@ -685,11 +682,6 @@ const webApplicationSchema = {
 		</div>
 	  </section>
 
-	  <footer class="site-footer">
-		<a href="/impressum/">Impressum</a>
-		<span aria-hidden="true">·</span>
-		<a href="/datenschutz/">Datenschutz</a>
-	  </footer>
     </main>
 
     <script define:vars={{ calculatorStateRules, calculatorEnrollmentDatesBySchoolYear, currentSchoolYear }}>
@@ -1433,8 +1425,7 @@ const webApplicationSchema = {
 
       updateCalculateButtonState();
     </script>
-  </body>
-</html>
+</BaseLayout>
 
 <style is:global>
 	:root {
@@ -2761,27 +2752,6 @@ select {
   line-height: 1.2 !important;
 }
 
-.site-footer {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-  max-width: 1120px;
-  margin: 28px auto 0;
-  color: #6c7587;
-  font-size: 0.9rem;
-  font-weight: 700;
-}
-
-.site-footer a {
-  color: #465266;
-  text-decoration: none;
-}
-
-.site-footer a:hover {
-  color: #172033;
-  text-decoration: underline;
-}
 
 @media (max-width: 820px) {
   .terms-grid {
