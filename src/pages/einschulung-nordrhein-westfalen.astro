@@ -1,20 +1,27 @@
 ---
+import BaseLayout from "../layouts/BaseLayout.astro";
 import StateEnrollmentCalculator from "../components/StateEnrollmentCalculator.astro";
 
 const pageTitle =
   "Einschulung NRW 2026: Schulstart, Stichtag und Schuljahr";
 
 const pageDescription =
-  "Wann kommt mein Kind in Nordrhein-Westfalen in die Schule? Erfahre alles zu Schulstart, Einschulung, Stichtag 30. September, vorzeitiger Einschulung und Schuljahr.";
+  "Geburtsdatum eingeben und sofort sehen, ob dein Kind 2026 oder 2027 in NRW eingeschult wird. Mit Stichtag 30. September und Schulstart-Terminen.";
+
+const canonical = "https://www.einschulungsrechner.de/einschulung-nordrhein-westfalen/";
+
+const ADSENSE_ID = import.meta.env.PUBLIC_ADSENSE_ID || "";
+const NRW_CONTENT_AD_SLOT = import.meta.env.PUBLIC_ADSENSE_NRW_CONTENT_SLOT || "";
+const showContentAd = Boolean(ADSENSE_ID && NRW_CONTENT_AD_SLOT);
 
 const webPageSchema = {
   "@context": "https://schema.org",
   "@type": "WebPage",
   name: pageTitle,
   description: pageDescription,
-  url: "https://www.einschulungsrechner.de/einschulung-nordrhein-westfalen/",
+  url: canonical,
   datePublished: "2025-10-01",
-  dateModified: "2026-05-17",
+  dateModified: "2026-05-22",
   inLanguage: "de",
   publisher: {
     "@type": "Organization",
@@ -37,7 +44,7 @@ const faqSchema = {
     },
     {
       "@type": "Question",
-      name: "Wann ist die Einschulung in Nordrhein-Westfalen 2026?",
+      name: "Wann ist die Einschulung in NRW 2026?",
       acceptedAnswer: {
         "@type": "Answer",
         text: "Der erste Schultag nach den Sommerferien ist in Nordrhein-Westfalen voraussichtlich am Mittwoch, 2. September 2026. Die Einschulung findet in der Regel spätestens am zweiten Schultag nach den Sommerferien statt. Für 2026 ergibt sich daraus voraussichtlich Donnerstag, 3. September 2026. Verbindliche Informationen erhältst du bei der zuständigen Grundschule.",
@@ -48,7 +55,7 @@ const faqSchema = {
       name: "Kann mein Kind in Nordrhein-Westfalen früher eingeschult werden?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Kinder, die nach dem 30. September sechs Jahre alt werden, können auf Antrag vorzeitig eingeschult werden. Die Entscheidung trifft die Schulleitung nach Beratung mit den Eltern.",
+        text: "Kinder, die nach dem 30. September sechs Jahre alt werden, können auf Antrag vorzeitig eingeschult werden. Nimm dafür frühzeitig Kontakt mit der gewünschten Grundschule auf, idealerweise vor oder im Rahmen der Schulanmeldung bis spätestens 15. November des Vorjahres. Die Entscheidung trifft die Schulleitung nach Beratung mit den Eltern.",
       },
     },
     {
@@ -79,19 +86,13 @@ const faqSchema = {
 };
 ---
 
-<html lang="de">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{pageTitle}</title>
-    <meta name="description" content={pageDescription} />
-    <link rel="canonical" href="https://www.einschulungsrechner.de/einschulung-nordrhein-westfalen/" />
-    <script type="application/ld+json" set:html={JSON.stringify(faqSchema)}></script>
-    <script type="application/ld+json" set:html={JSON.stringify(webPageSchema)}></script>
-  </head>
-
-  <body>
-    <main class="state-page">
+<BaseLayout
+  title={pageTitle}
+  description={pageDescription}
+  canonical={canonical}
+  schema={[faqSchema, webPageSchema]}
+>
+  <main class="state-page">
       <a class="back-link" href="/">← Zur Startseite</a>
 
       <article class="state-card">
@@ -99,17 +100,21 @@ const faqSchema = {
 
         <h1>
           Einschulung in<br />
-          Nordrhein-Westfalen:<br />
-          Schulstart, Stichtag und Schuljahr
+          Nordrhein-Westfalen 2026:<br />
+          Wann kommt mein Kind in die Schule?
         </h1>
 
         <p class="lead">
-          Wann kommt mein Kind in Nordrhein-Westfalen in die Schule? Der
-          Einschulungsrechner zeigt dir anhand des Geburtsdatums das voraussichtliche
-          Schuljahr. In Nordrhein-Westfalen gilt der Stichtag 30. September. Für
-          das Schuljahr 2026/2027 liegt die Einschulung voraussichtlich zwischen
-          Mittwoch, 2. September und Donnerstag, 3. September 2026 – der erste
-          Schultag ist Mittwoch, 2. September 2026.
+          Wann kommt mein Kind in Nordrhein-Westfalen in die Schule? Gib das
+          Geburtsdatum ein und berechne das voraussichtliche Schuljahr. In
+          Nordrhein-Westfalen gilt der Stichtag 30. September. Für das Schuljahr
+          2026/2027 ist der erste Schultag Mittwoch, der 2. September 2026; die
+          Einschulung erfolgt schulabhängig spätestens am zweiten Schultag.
+        </p>
+
+        <p class="answer-box">
+          Kinder in Nordrhein-Westfalen, die bis zum 30. September 2026 sechs Jahre
+          alt werden, werden im Schuljahr 2026/2027 eingeschult.
         </p>
 
         <StateEnrollmentCalculator
@@ -143,6 +148,20 @@ const faqSchema = {
           </div>
         </div>
 
+        {showContentAd ? (
+          <aside class="ad-slot ad-slot-after-facts" aria-label="Anzeige">
+            <p class="ad-label">Anzeige</p>
+            <ins
+              class="adsbygoogle"
+              style="display:block"
+              data-ad-client={ADSENSE_ID}
+              data-ad-slot={NRW_CONTENT_AD_SLOT}
+              data-ad-format="auto"
+              data-full-width-responsive="true"
+            ></ins>
+          </aside>
+        ) : null}
+
         <section class="seo-explanation-box">
           <h2>Wie funktioniert der Einschulungsrechner für Nordrhein-Westfalen?</h2>
 
@@ -169,7 +188,7 @@ const faqSchema = {
         </section>
 
         <section>
-          <h2>Wann ist die Einschulung in Nordrhein-Westfalen 2026?</h2>
+          <h2>Wann ist die Einschulung in NRW 2026?</h2>
 
           <p>
             Der erste Schultag nach den Sommerferien ist in Nordrhein-Westfalen
@@ -196,8 +215,10 @@ const faqSchema = {
 
           <p>
             Kinder, die nach dem 30. September sechs Jahre alt werden, können auf
-            Antrag vorzeitig eingeschult werden. Die Entscheidung trifft die
-            Schulleitung nach Beratung mit den Eltern.
+            Antrag vorzeitig eingeschult werden. Nimm dafür frühzeitig Kontakt mit
+            der gewünschten Grundschule auf, idealerweise vor oder im Rahmen der
+            Schulanmeldung bis spätestens 15. November des Vorjahres. Die Entscheidung
+            trifft die Schulleitung nach Beratung mit den Eltern.
           </p>
         </section>
 
@@ -248,7 +269,7 @@ const faqSchema = {
             </article>
 
             <article class="faq-item">
-              <h3>Wann ist die Einschulung in Nordrhein-Westfalen 2026?</h3>
+              <h3>Wann ist die Einschulung in NRW 2026?</h3>
               <p>
                 Der erste Schultag nach den Sommerferien ist in Nordrhein-Westfalen
                 voraussichtlich am Mittwoch, 2. September 2026. Die Einschulung findet
@@ -263,8 +284,11 @@ const faqSchema = {
               <h3>Kann mein Kind in Nordrhein-Westfalen früher eingeschult werden?</h3>
               <p>
                 Kinder, die nach dem 30. September sechs Jahre alt werden, können
-                auf Antrag vorzeitig eingeschult werden. Die Entscheidung trifft die
-                Schulleitung nach Beratung mit den Eltern.
+                auf Antrag vorzeitig eingeschult werden. Nimm dafür frühzeitig
+                Kontakt mit der gewünschten Grundschule auf, idealerweise vor oder
+                im Rahmen der Schulanmeldung bis spätestens 15. November des
+                Vorjahres. Die Entscheidung trifft die Schulleitung nach Beratung
+                mit den Eltern.
               </p>
             </article>
 
@@ -355,9 +379,8 @@ const faqSchema = {
           <p class="stand">Stand der Informationen: Mai 2026</p>
         </section>
       </article>
-    </main>
-  </body>
-</html>
+  </main>
+</BaseLayout>
 
 <style>
   :root {
@@ -443,6 +466,19 @@ const faqSchema = {
     line-height: 1.64;
   }
 
+  .answer-box {
+    max-width: 760px;
+    margin: 20px 0 0;
+    padding: 18px 20px;
+    border: 1px solid rgba(129, 97, 38, 0.18);
+    border-radius: 18px;
+    background: rgba(245, 210, 138, 0.14);
+    color: #172033;
+    font-size: clamp(1.02rem, 1.35vw, 1.12rem);
+    font-weight: 800;
+    line-height: 1.5;
+  }
+
   .quick-facts {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -489,6 +525,23 @@ const faqSchema = {
   .fact-card-highlight {
     border-color: rgba(129, 97, 38, 0.18);
     background: rgba(245, 210, 138, 0.1);
+  }
+
+  .ad-slot {
+    margin: 30px 0 0;
+    padding: 14px 0;
+    border-top: 1px solid rgba(42, 35, 21, 0.08);
+    border-bottom: 1px solid rgba(42, 35, 21, 0.08);
+  }
+
+  .ad-label {
+    margin: 0 0 10px;
+    color: #8a7960;
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    line-height: 1.2;
+    text-transform: uppercase;
   }
 
   section {
@@ -639,6 +692,12 @@ const faqSchema = {
     .lead {
       font-size: 1.02rem;
       line-height: 1.55;
+    }
+
+    .answer-box {
+      padding: 16px 18px;
+      font-size: 1rem;
+      line-height: 1.5;
     }
 
     .fact-card {
