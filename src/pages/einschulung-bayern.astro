@@ -1,11 +1,36 @@
 ---
+import BaseLayout from "../layouts/BaseLayout.astro";
 import StateEnrollmentCalculator from "../components/StateEnrollmentCalculator.astro";
 
 const pageTitle =
-  "Einschulung Bayern 2026: Schulstart, Stichtag und Einschulungskorridor";
+  "Einschulung Bayern 2026: Termin, Stichtag & Rechner";
 
 const pageDescription =
-  "Wann kommt mein Kind in Bayern in die Schule? Erfahre alles zu Schulstart, erstem Schultag, Einschulungstermin, Stichtag 30. September und Einschulungskorridor.";
+  "Wann ist die Einschulung in Bayern 2026? Hier findest du Termin, Stichtag 30. September, Einschulungskorridor und den kostenlosen Einschulungsrechner.";
+
+const dateModified = "2026-05-26";
+
+const canonical = "https://www.einschulungsrechner.de/einschulung-bayern/";
+
+const ADSENSE_ID = import.meta.env.PUBLIC_ADSENSE_ID || "";
+const STATE_CONTENT_AD_SLOT = import.meta.env.PUBLIC_ADSENSE_STATE_CONTENT_SLOT || "";
+const showContentAd = Boolean(ADSENSE_ID && STATE_CONTENT_AD_SLOT);
+
+const webPageSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  name: pageTitle,
+  description: pageDescription,
+  url: canonical,
+  datePublished: "2025-10-01",
+  dateModified,
+  inLanguage: "de",
+  publisher: {
+    "@type": "Organization",
+    name: "Einschulungsrechner",
+    url: "https://www.einschulungsrechner.de/",
+  },
+};
 
 const faqSchema = {
   "@context": "https://schema.org",
@@ -25,6 +50,14 @@ const faqSchema = {
       acceptedAnswer: {
         "@type": "Answer",
         text: "Für Schulanfängerinnen und Schulanfänger nennt das Bayerische Kultusministerium Mittwoch, 16. September 2026. Der allgemeine erste Schultag nach den Sommerferien ist voraussichtlich Dienstag, 15. September 2026. Die konkrete Organisation kann je nach Grundschule abweichen.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Wann beginnt die Grundschule in Bayern 2026?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Der allgemeine erste Schultag nach den Sommerferien ist in Bayern im Schuljahr 2026/2027 voraussichtlich Dienstag, 15. September 2026. Die Einschulung für Schulanfängerinnen und Schulanfänger ist für Mittwoch, 16. September 2026 vorgesehen. Die konkrete Organisation kann je nach Grundschule abweichen.",
       },
     },
     {
@@ -63,34 +96,31 @@ const faqSchema = {
 };
 ---
 
-<html lang="de">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{pageTitle}</title>
-    <meta name="description" content={pageDescription} />
-    <link rel="canonical" href="https://www.einschulungsrechner.de/einschulung-bayern/" />
-    <script type="application/ld+json" set:html={JSON.stringify(faqSchema)}></script>
-  </head>
-
-  <body>
-    <main class="state-page">
+<BaseLayout title={pageTitle} description={pageDescription} canonical={canonical} schema={[faqSchema, webPageSchema]}>
+  <main class="state-page">
       <a class="back-link" href="/">← Zur Startseite</a>
 
       <article class="state-card">
         <p class="state-kicker">Bayern</p>
 
         <h1>
-          Einschulung in Bayern:<br />
-          Schulstart, Stichtag und Schuljahr
+          Einschulung Bayern 2026:<br />
+          Wann kommt mein Kind in die Schule?
         </h1>
 
         <p class="lead">
-          Wann kommt mein Kind in Bayern in die Schule? Der Einschulungsrechner
-          zeigt dir anhand des Geburtsdatums das voraussichtliche Schuljahr. In
-          Bayern gilt der Stichtag 30. September. Für das Schuljahr 2026/2027 ist
-          die Einschulung für Mittwoch, 16. September 2026 vorgesehen – der erste
-          Schultag ist Dienstag, 15. September 2026.
+          Wann kommt mein Kind in Bayern in die Schule? Gib das Geburtsdatum ein und
+          berechne das voraussichtliche Schuljahr. In Bayern gilt der Stichtag
+          30. September. Für das Schuljahr 2026/2027 ist die Einschulung für
+          Mittwoch, 16. September 2026 vorgesehen – der erste Schultag ist
+          Dienstag, 15. September 2026.
+        </p>
+
+        <p class="answer-box">
+          Kurzantwort: Die Einschulung in Bayern 2026 ist für Mittwoch,
+          16. September 2026 vorgesehen. Schulpflichtig werden Kinder, die bis zum
+          30. September 2026 sechs Jahre alt werden. Für Kinder mit Geburtstag zwischen
+          1. Juli und 30. September gilt der Einschulungskorridor.
         </p>
 
         <StateEnrollmentCalculator
@@ -104,13 +134,13 @@ const faqSchema = {
 
         <div class="quick-facts quick-facts-master" aria-label="Kurzüberblick Einschulung Bayern">
           <div class="fact-card fact-card-highlight">
-            <span>Nächste Einschulung</span>
-            <strong>Mittwoch, 16. September 2026</strong>
+            <span>Einschulung 2026</span>
+            <strong>Mittwoch,<br />16. September 2026</strong>
           </div>
 
           <div class="fact-card fact-card-highlight">
             <span>Erster Schultag</span>
-            <strong>Dienstag, 15. September 2026</strong>
+            <strong>Dienstag,<br />15. September 2026</strong>
           </div>
 
           <div class="fact-card">
@@ -123,6 +153,33 @@ const faqSchema = {
             <strong>Einschulungskorridor</strong>
           </div>
         </div>
+
+        {showContentAd ? (
+          <aside class="ad-slot ad-slot-after-facts" aria-label="Anzeige">
+            <p class="ad-label">Anzeige</p>
+            <ins
+              class="adsbygoogle"
+              style="display:block"
+              data-ad-client={ADSENSE_ID}
+              data-ad-slot={STATE_CONTENT_AD_SLOT}
+              data-ad-format="auto"
+              data-full-width-responsive="true"
+            ></ins>
+          </aside>
+        ) : null}
+
+        <section>
+          <h2>Wann ist die Einschulung in Bayern 2026?</h2>
+
+          <p>
+            Die nächste Einschulung in Bayern für Schulanfängerinnen und
+            Schulanfänger ist nach aktueller Darstellung des Bayerischen
+            Kultusministeriums Mittwoch, 16. September 2026. Der allgemeine
+            erste Schultag nach den Sommerferien ist voraussichtlich Dienstag,
+            15. September 2026. Die konkrete Organisation der Einschulung kann
+            je nach Grundschule abweichen.
+          </p>
+        </section>
 
         <section class="seo-explanation-box">
           <h2>Wie funktioniert der Einschulungsrechner für Bayern?</h2>
@@ -146,19 +203,6 @@ const faqSchema = {
             Die wichtigsten Termine zur Einschulung und zum allgemeinen Schulstart
             findest du im Terminblock oben. Der konkrete Ablauf kann je nach
             Grundschule organisatorisch abweichen.
-          </p>
-        </section>
-
-        <section>
-          <h2>Wann ist die Einschulung in Bayern 2026?</h2>
-
-          <p>
-            Die nächste Einschulung in Bayern für Schulanfängerinnen und
-            Schulanfänger ist nach aktueller Darstellung des Bayerischen
-            Kultusministeriums Mittwoch, 16. September 2026. Der allgemeine
-            erste Schultag nach den Sommerferien ist voraussichtlich Dienstag,
-            15. September 2026. Die konkrete Organisation der Einschulung kann
-            je nach Grundschule abweichen.
           </p>
         </section>
 
@@ -239,6 +283,17 @@ const faqSchema = {
                 erste Schultag nach den Sommerferien ist voraussichtlich Dienstag,
                 15. September 2026. Die konkrete Organisation kann je nach
                 Grundschule abweichen.
+              </p>
+            </article>
+
+            <article class="faq-item">
+              <h3>Wann beginnt die Grundschule in Bayern 2026?</h3>
+              <p>
+                Der allgemeine erste Schultag nach den Sommerferien ist in Bayern im
+                Schuljahr 2026/2027 voraussichtlich Dienstag, 15. September 2026.
+                Die Einschulung für Schulanfängerinnen und Schulanfänger ist für
+                Mittwoch, 16. September 2026 vorgesehen. Die konkrete Organisation
+                kann je nach Grundschule abweichen.
               </p>
             </article>
 
@@ -339,12 +394,11 @@ const faqSchema = {
             für Unterricht und Kultus.
           </p>
 
-          <p class="stand">Stand der Informationen: Mai 2026</p>
+          <p class="stand">Stand der Informationen:<span class="stand-date">Mai 2026</span></p>
         </section>
       </article>
-    </main>
-  </body>
-</html>
+  </main>
+</BaseLayout>
 
 <style>
   :root {
@@ -430,6 +484,19 @@ const faqSchema = {
     line-height: 1.64;
   }
 
+  .answer-box {
+    max-width: 760px;
+    margin: 20px 0 0;
+    padding: 18px 20px;
+    border: 1px solid rgba(129, 97, 38, 0.18);
+    border-radius: 18px;
+    background: rgba(245, 210, 138, 0.14);
+    color: #172033;
+    font-size: clamp(1.02rem, 1.35vw, 1.12rem);
+    font-weight: 800;
+    line-height: 1.5;
+  }
+
   .quick-facts {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -476,6 +543,23 @@ const faqSchema = {
   .fact-card-highlight {
     border-color: rgba(129, 97, 38, 0.18);
     background: rgba(245, 210, 138, 0.1);
+  }
+
+  .ad-slot {
+    margin: 30px 0 0;
+    padding: 14px 0;
+    border-top: 1px solid rgba(42, 35, 21, 0.08);
+    border-bottom: 1px solid rgba(42, 35, 21, 0.08);
+  }
+
+  .ad-label {
+    margin: 0 0 10px;
+    color: #8a7960;
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    line-height: 1.2;
+    text-transform: uppercase;
   }
 
   section {
@@ -587,6 +671,8 @@ const faqSchema = {
 
   .stand {
     display: inline-flex;
+    align-items: center;
+    gap: 0.25em;
     width: fit-content;
     margin-top: 16px;
     padding: 8px 12px;
@@ -596,6 +682,10 @@ const faqSchema = {
     font-size: 0.82rem;
     font-weight: 850;
     line-height: 1.2;
+  }
+
+  .stand-date {
+    display: inline;
   }
 
   .desktop-break {
@@ -635,6 +725,12 @@ const faqSchema = {
     .lead {
       font-size: 1.02rem;
       line-height: 1.55;
+    }
+
+    .answer-box {
+      padding: 16px 18px;
+      font-size: 1rem;
+      line-height: 1.5;
     }
 
     .fact-card {
@@ -684,13 +780,17 @@ const faqSchema = {
       font-size: 1rem;
       line-height: 1.42;
     }
-  }
 
-  @media (max-width: 390px) {
-    h1 {
-      font-size: clamp(1.58rem, 7vw, 1.95rem);
-      line-height: 1.07;
-      letter-spacing: -0.046em;
+    .stand {
+      align-items: flex-start;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .stand-date {
+      display: block;
     }
   }
+
+
 </style>
