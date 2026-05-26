@@ -286,6 +286,35 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
     }
   }
 
+  function hasBirthdateUrlParam() {
+    return new URLSearchParams(window.location.search).has("geburtsdatum");
+  }
+
+  function isPageReload() {
+    const navigationEntry = performance.getEntriesByType("navigation")?.[0];
+
+    if (navigationEntry?.type) {
+      return navigationEntry.type === "reload";
+    }
+
+    return performance.navigation?.type === 1;
+  }
+
+  function clearBirthdateFieldsAfterReload() {
+    if (!isPageReload() || hasBirthdateUrlParam()) return;
+
+    form?.reset();
+
+    if (birthDayInput) birthDayInput.value = "";
+    if (birthMonthInput) birthMonthInput.value = "";
+    if (birthYearInput) birthYearInput.value = "";
+
+    setDateError("");
+    updateCalculateButtonState();
+  }
+
+  window.addEventListener("pageshow", clearBirthdateFieldsAfterReload);
+
   function normalizeDateFieldOnBlur(input, maxValue) {
     if (!input) return;
 
@@ -1468,11 +1497,11 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
         <div class="state-result-grid state-result-grid-priority" aria-label="Einschulungstermin ${stateName}">
           <div class="state-result-card state-result-card-wide">
             <span>Nächste Einschulung</span>
-            <strong>Mittwoch, 16. September 2026</strong>
+            <strong>Mittwoch,<br />16. September 2026</strong>
           </div>
           <div class="state-result-card state-result-card-wide">
             <span>Erster Schultag</span>
-            <strong>Dienstag, 15. September 2026</strong>
+            <strong>Dienstag,<br />15. September 2026</strong>
           </div>
         </div>
         <p class="state-calculator-note">
@@ -1496,7 +1525,7 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
 
     if (result.hasConfirmedDate && normalizedSlug === "bayern") {
       displayedHeadline =
-        "Dein Kind wird in Bayern voraussichtlich am Mittwoch,<br class=\"result-mobile-date-break\" /> <span class=\"result-date-nowrap\">16. September 2026</span> eingeschult.";
+        "<span class=\"result-headline-label\">Die Einschulung deines Kindes findet in Bayern im Schuljahr <span class=\"result-date-nowrap\">2026/2027</span> voraussichtlich am</span><span class=\"result-headline-highlight\">Mittwoch,<br />16. September 2026</span><span class=\"result-headline-meta\">statt.</span>";
     }
 
     if (
@@ -1505,7 +1534,7 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
       result.statusTone === "regular"
     ) {
       displayedHeadline =
-        "Dein Kind wird in Nordrhein-Westfalen voraussichtlich im Schuljahr <span class=\"result-date-nowrap\">2026/2027</span> regulär eingeschult.";
+        "<span class=\"result-headline-label\">Dein Kind wird in NRW im Schuljahr <span class=\"result-date-nowrap\">2026/2027</span> am</span><span class=\"result-headline-highlight\">2. oder 3.<br />September 2026</span><span class=\"result-headline-meta\">eingeschult.</span>";
     }
 
     if (
@@ -1820,20 +1849,19 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
       dateDetails = `
         <div class="state-result-grid state-result-grid-priority" aria-label="Einschulungstermin ${stateName}">
           <div class="state-result-card state-result-card-wide">
-            <span>Nächste Einschulung</span>
-            <strong>2.–3. September 2026 (schulabhängig)</strong>
+            <span>Einschulung 2026</span>
+            <strong>schulabhängig am<br />2. oder 3. September 2026</strong>
           </div>
           <div class="state-result-card state-result-card-wide">
             <span>Erster Schultag</span>
-            <strong>Mittwoch, 2. September 2026</strong>
+            <strong>Mittwoch,<br />2. September 2026</strong>
           </div>
         </div>
         <p class="state-calculator-note">
           Der erste Schultag nach den Sommerferien ist in ${stateName}
-          voraussichtlich Mittwoch, 2. September 2026. Die Einschulung findet in
-          der Regel spätestens am zweiten Schultag nach den Sommerferien statt.
-          Für 2026 ergibt sich daraus voraussichtlich Donnerstag, 3. September 2026.
-          Den konkreten Termin legt die zuständige Grundschule fest.
+          Mittwoch, 2. September 2026. Die Einschulung findet schulabhängig am
+          2. oder spätestens am 3. September 2026 statt. Den konkreten Termin
+          legt die zuständige Grundschule fest.
         </p>
       `;
     }
@@ -1842,14 +1870,29 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
     const schoolYearAlreadyStarted = schoolYearTimeState.hasStarted;
     const schoolYearIsActive = schoolYearTimeState.isActive;
     const schoolYearIsCompleted = schoolYearTimeState.isCompleted;
+    const resultStatusLabel = schoolYearIsCompleted
+      ? "Vergangenes Schuljahr"
+      : schoolYearIsActive
+        ? "Aktuelles Schuljahr"
+        : result.statusLabel;
 
-    if (schoolYearAlreadyStarted) {
+    if (schoolYearIsCompleted) {
       displayedHeadline = `Das berechnete Schuljahr <span class="result-date-nowrap">${result.schoolYear}</span> liegt bereits in der Vergangenheit.`;
       dateDetails = `
         <p class="state-calculator-note">
           Das berechnete Schuljahr ${result.schoolYear} liegt bereits in der
           Vergangenheit. Das Ergebnis dient daher nur noch der zeitlichen
           Einordnung. Für rückwirkende Fragen oder verbindliche Auskünfte ist
+          die zuständige Grundschule maßgeblich.
+        </p>
+      `;
+    } else if (schoolYearIsActive) {
+      displayedHeadline = `Das berechnete Schuljahr <span class="result-date-nowrap">${result.schoolYear}</span> ist in ${stateName} das laufende Schuljahr.`;
+      dateDetails = `
+        <p class="state-calculator-note">
+          Das berechnete Schuljahr ${result.schoolYear} ist aktuell das laufende
+          Schuljahr. Die Einschulung hat in diesem Schuljahr in der Regel bereits
+          stattgefunden. Für aktuelle, rückwirkende oder verbindliche Fragen ist
           die zuständige Grundschule maßgeblich.
         </p>
       `;
@@ -1918,7 +1961,7 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
 
         <div class="state-result-status state-result-status-${displayedStatusTone}">
           <span>Status</span>
-          <strong>${displayedStatusLabel}</strong>
+          <strong>${resultStatusLabel}</strong>
         </div>
       </div>
 
@@ -2250,13 +2293,45 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
 
   :global(.state-result-header h2) {
     max-width: 760px;
-    font-size: clamp(1.72rem, 2.8vw, 2.48rem);
-    font-weight: 950;
-    line-height: 1.06;
-    letter-spacing: -0.05em;
+    font-size: clamp(1.46rem, 2.25vw, 2.05rem);
+    font-weight: 900;
+    line-height: 1.16;
+    letter-spacing: -0.035em;
     overflow-wrap: normal;
     word-break: normal;
     hyphens: manual;
+  }
+
+  :global(.result-headline-label),
+  :global(.result-headline-highlight),
+  :global(.result-headline-meta) {
+    display: block;
+  }
+
+  :global(.result-headline-label) {
+    margin-bottom: 10px;
+    color: #172033;
+    font-size: clamp(1.05rem, 1.55vw, 1.32rem);
+    font-weight: 850;
+    line-height: 1.22;
+    letter-spacing: -0.02em;
+  }
+
+  :global(.result-headline-highlight) {
+    color: #816126;
+    font-size: clamp(1.86rem, 3.8vw, 3rem);
+    font-weight: 950;
+    line-height: 1.06;
+    letter-spacing: -0.045em;
+  }
+
+  :global(.result-headline-meta) {
+    margin-top: 10px;
+    color: #465266;
+    font-size: clamp(1rem, 1.45vw, 1.18rem);
+    font-weight: 800;
+    line-height: 1.28;
+    letter-spacing: -0.018em;
   }
 
   :global(.mobile-result-break) {
@@ -2509,12 +2584,30 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
     }
 
     :global(.state-result-header h2) {
-      font-size: clamp(1.72rem, 7.45vw, 2.18rem);
-      line-height: 1.07;
-      letter-spacing: -0.048em;
+      font-size: clamp(1.28rem, 5.55vw, 1.58rem);
+      line-height: 1.22;
+      letter-spacing: -0.026em;
       overflow-wrap: normal;
       word-break: normal;
       hyphens: manual;
+    }
+
+    :global(.result-headline-label) {
+      margin-bottom: 8px;
+      font-size: 1rem;
+      line-height: 1.2;
+    }
+
+    :global(.result-headline-highlight) {
+      font-size: clamp(1.72rem, 8vw, 2.18rem);
+      line-height: 1.06;
+      letter-spacing: -0.04em;
+    }
+
+    :global(.result-headline-meta) {
+      margin-top: 8px;
+      font-size: 0.98rem;
+      line-height: 1.28;
     }
 
     :global(.result-mobile-date-break) {

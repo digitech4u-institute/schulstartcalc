@@ -3,16 +3,18 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import StateEnrollmentCalculator from "../components/StateEnrollmentCalculator.astro";
 
 const pageTitle =
-  "Einschulung NRW 2026: Schulstart, Stichtag und Schuljahr";
+  "Einschulung NRW 2026: Termin, Stichtag & Rechner";
 
 const pageDescription =
-  "Geburtsdatum eingeben und sofort sehen, ob dein Kind 2026 oder 2027 in NRW eingeschult wird. Mit Stichtag 30. September und Schulstart-Terminen.";
+  "Wann ist die Einschulung in NRW 2026? Hier findest du Termin, Stichtag 30. September, Schulpflicht-Regeln und den kostenlosen Einschulungsrechner.";
+
+const dateModified = "2026-05-26";
 
 const canonical = "https://www.einschulungsrechner.de/einschulung-nordrhein-westfalen/";
 
 const ADSENSE_ID = import.meta.env.PUBLIC_ADSENSE_ID || "";
-const NRW_CONTENT_AD_SLOT = import.meta.env.PUBLIC_ADSENSE_NRW_CONTENT_SLOT || "";
-const showContentAd = Boolean(ADSENSE_ID && NRW_CONTENT_AD_SLOT);
+const STATE_CONTENT_AD_SLOT = import.meta.env.PUBLIC_ADSENSE_STATE_CONTENT_SLOT || "";
+const showContentAd = Boolean(ADSENSE_ID && STATE_CONTENT_AD_SLOT);
 
 const webPageSchema = {
   "@context": "https://schema.org",
@@ -21,7 +23,7 @@ const webPageSchema = {
   description: pageDescription,
   url: canonical,
   datePublished: "2025-10-01",
-  dateModified: "2026-05-22",
+  dateModified,
   inLanguage: "de",
   publisher: {
     "@type": "Organization",
@@ -47,7 +49,15 @@ const faqSchema = {
       name: "Wann ist die Einschulung in NRW 2026?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Der erste Schultag nach den Sommerferien ist in Nordrhein-Westfalen voraussichtlich am Mittwoch, 2. September 2026. Die Einschulung findet in der Regel spätestens am zweiten Schultag nach den Sommerferien statt. Für 2026 ergibt sich daraus voraussichtlich Donnerstag, 3. September 2026. Verbindliche Informationen erhältst du bei der zuständigen Grundschule.",
+        text: "Der erste Schultag nach den Sommerferien ist in Nordrhein-Westfalen Mittwoch, 2. September 2026. Die Einschulung findet schulabhängig am 2. oder spätestens am 3. September 2026 statt. Verbindliche Informationen erhältst du bei der zuständigen Grundschule.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Wann beginnt die Grundschule in NRW 2026?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Der erste Schultag nach den Sommerferien ist in Nordrhein-Westfalen im Schuljahr 2026/2027 Mittwoch, 2. September 2026. Die Einschulung der Erstklässler findet schulabhängig spätestens am zweiten Schultag nach den Sommerferien statt.",
       },
     },
     {
@@ -99,22 +109,23 @@ const faqSchema = {
         <p class="state-kicker">Nordrhein-Westfalen</p>
 
         <h1>
-          Einschulung in<br />
-          Nordrhein-Westfalen 2026:<br />
+          Einschulung NRW 2026:<br />
           Wann kommt mein Kind in die Schule?
         </h1>
 
         <p class="lead">
-          Wann kommt mein Kind in Nordrhein-Westfalen in die Schule? Gib das
-          Geburtsdatum ein und berechne das voraussichtliche Schuljahr. In
-          Nordrhein-Westfalen gilt der Stichtag 30. September. Für das Schuljahr
-          2026/2027 ist der erste Schultag Mittwoch, der 2. September 2026; die
-          Einschulung erfolgt schulabhängig spätestens am zweiten Schultag.
+          Wann kommt mein Kind in NRW in die Schule? Gib das Geburtsdatum ein und
+          berechne das voraussichtliche Schuljahr für Nordrhein-Westfalen. In NRW gilt
+          der Stichtag 30. September. Für das Schuljahr 2026/2027 ist der erste
+          Schultag Mittwoch, 2. September 2026; die Einschulung erfolgt schulabhängig
+          spätestens am zweiten Schultag.
         </p>
 
         <p class="answer-box">
-          Kinder in Nordrhein-Westfalen, die bis zum 30. September 2026 sechs Jahre
-          alt werden, werden im Schuljahr 2026/2027 eingeschult.
+          Kurzantwort: Der erste Schultag in NRW ist Mittwoch, 2. September 2026.
+          Die Einschulung findet schulabhängig spätestens am zweiten Schultag statt.
+          Schulpflichtig werden Kinder, die bis zum 30. September 2026 sechs Jahre
+          alt werden.
         </p>
 
         <StateEnrollmentCalculator
@@ -128,13 +139,13 @@ const faqSchema = {
 
         <div class="quick-facts quick-facts-master" aria-label="Kurzüberblick Einschulung Nordrhein-Westfalen">
           <div class="fact-card fact-card-highlight">
-            <span>Nächste Einschulung</span>
-            <strong>2.–3. September 2026 (schulabhängig)</strong>
+            <span>Einschulung 2026</span>
+            <strong>schulabhängig am<br />2. oder 3. September 2026</strong>
           </div>
 
           <div class="fact-card fact-card-highlight">
             <span>Erster Schultag</span>
-            <strong>Mittwoch, 2. September 2026</strong>
+            <strong>Mittwoch,<br />2. September 2026</strong>
           </div>
 
           <div class="fact-card">
@@ -155,12 +166,22 @@ const faqSchema = {
               class="adsbygoogle"
               style="display:block"
               data-ad-client={ADSENSE_ID}
-              data-ad-slot={NRW_CONTENT_AD_SLOT}
+              data-ad-slot={STATE_CONTENT_AD_SLOT}
               data-ad-format="auto"
               data-full-width-responsive="true"
             ></ins>
           </aside>
         ) : null}
+
+        <section>
+          <h2>Wann ist die Einschulung in NRW 2026?</h2>
+          <p>
+            Der erste Schultag nach den Sommerferien ist in Nordrhein-Westfalen
+            Mittwoch, 2. September 2026. Die Einschulung findet schulabhängig am
+            2. oder spätestens am 3. September 2026 statt. Verbindliche Informationen
+            erhältst du bei der zuständigen Grundschule.
+          </p>
+        </section>
 
         <section class="seo-explanation-box">
           <h2>Wie funktioniert der Einschulungsrechner für Nordrhein-Westfalen?</h2>
@@ -173,9 +194,8 @@ const faqSchema = {
           </p>
 
           <p>
-            Beispielhaft zeigt der Rechner: Wird ein Kind am 15. September 2020
-            geboren, wird es am 15. September 2026 sechs Jahre alt. Da dieses
-            Datum vor dem Stichtag 30. September liegt, ist das Kind in
+            Beispiel: Wird ein Kind am 15. September 2020 geboren, wird es vor dem
+            Stichtag 30. September 2026 sechs Jahre alt. Damit ist es in
             Nordrhein-Westfalen regulär schulpflichtig und voraussichtlich für das
             Schuljahr 2026/2027 vorgesehen.
           </p>
@@ -188,18 +208,6 @@ const faqSchema = {
         </section>
 
         <section>
-          <h2>Wann ist die Einschulung in NRW 2026?</h2>
-
-          <p>
-            Der erste Schultag nach den Sommerferien ist in Nordrhein-Westfalen
-            voraussichtlich am Mittwoch, 2. September 2026. Die Einschulung findet
-            in der Regel spätestens am zweiten Schultag nach den Sommerferien statt.
-            Für 2026 ergibt sich daraus voraussichtlich Donnerstag, 3. September 2026.
-            Verbindliche Informationen erhältst du bei der zuständigen Grundschule.
-          </p>
-        </section>
-
-        <section>
           <h2>Welcher Einschulungsstichtag gilt in Nordrhein-Westfalen?</h2>
 
           <p>
@@ -207,6 +215,17 @@ const faqSchema = {
             Einschulung. Kinder, die bis einschließlich 30. September sechs Jahre
             alt werden, sind in Nordrhein-Westfalen ab dem 1. August desselben
             Kalenderjahres regulär schulpflichtig.
+          </p>
+        </section>
+
+        <section>
+          <h2>Einschulung NRW 2027: Kann ich das schon berechnen?</h2>
+
+          <p>
+            Ja. Du kannst den Einschulungsrechner auch für die Einschulung in NRW 2027
+            nutzen. Gib einfach das Geburtsdatum deines Kindes ein und wähle
+            Nordrhein-Westfalen aus. Der Rechner zeigt dir, welches Schuljahr
+            voraussichtlich relevant ist.
           </p>
         </section>
 
@@ -243,16 +262,6 @@ const faqSchema = {
           </p>
         </section>
 
-        <section class="example-box">
-          <h2>Beispiel: Geburtsdatum im September</h2>
-
-          <p>
-            Beispielhaft zeigt der Rechner: Wird ein Kind am 15. September 2020
-            geboren, wird es am 15. September 2026 sechs Jahre alt. Da dieses Datum
-            vor dem Stichtag 30. September liegt, wird das Kind in Nordrhein-Westfalen
-            voraussichtlich im Schuljahr 2026/2027 regulär eingeschult.
-          </p>
-        </section>
 
         <section>
           <h2>Häufige Fragen zur Einschulung in Nordrhein-Westfalen</h2>
@@ -272,11 +281,19 @@ const faqSchema = {
               <h3>Wann ist die Einschulung in NRW 2026?</h3>
               <p>
                 Der erste Schultag nach den Sommerferien ist in Nordrhein-Westfalen
-                voraussichtlich am Mittwoch, 2. September 2026. Die Einschulung findet
-                in der Regel spätestens am zweiten Schultag nach den Sommerferien statt.
-                Für 2026 ergibt sich daraus voraussichtlich Donnerstag, 3. September
-                2026. Verbindliche Informationen erhältst du bei der zuständigen
-                Grundschule.
+                Mittwoch, 2. September 2026. Die Einschulung findet schulabhängig am
+                2. oder spätestens am 3. September 2026 statt. Verbindliche
+                Informationen erhältst du bei der zuständigen Grundschule.
+              </p>
+            </article>
+
+            <article class="faq-item">
+              <h3>Wann beginnt die Grundschule in NRW 2026?</h3>
+              <p>
+                Der erste Schultag nach den Sommerferien ist in Nordrhein-Westfalen im
+                Schuljahr 2026/2027 Mittwoch, 2. September 2026. Die Einschulung der
+                Erstklässler findet schulabhängig spätestens am zweiten Schultag nach
+                den Sommerferien statt.
               </p>
             </article>
 
@@ -376,7 +393,7 @@ const faqSchema = {
             Bildung des Landes Nordrhein-Westfalen.
           </p>
 
-          <p class="stand">Stand der Informationen: Mai 2026</p>
+          <p class="stand">Stand der Informationen:<span class="stand-date">Mai 2026</span></p>
         </section>
       </article>
   </main>
@@ -652,6 +669,8 @@ const faqSchema = {
 
   .stand {
     display: inline-flex;
+    align-items: center;
+    gap: 0.25em;
     width: fit-content;
     margin-top: 16px;
     padding: 8px 12px;
@@ -661,6 +680,10 @@ const faqSchema = {
     font-size: 0.82rem;
     font-weight: 850;
     line-height: 1.2;
+  }
+
+  .stand-date {
+    display: inline;
   }
 
   @media (max-width: 720px) {
@@ -746,6 +769,16 @@ const faqSchema = {
       width: auto;
       font-size: 1rem;
       line-height: 1.42;
+    }
+
+    .stand {
+      align-items: flex-start;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .stand-date {
+      display: block;
     }
   }
 
