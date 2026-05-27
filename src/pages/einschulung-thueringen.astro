@@ -1,11 +1,35 @@
 ---
+import BaseLayout from "../layouts/BaseLayout.astro";
 import StateEnrollmentCalculator from "../components/StateEnrollmentCalculator.astro";
 
 const pageTitle =
-  "Einschulung Thüringen 2026: Schulstart, Stichtag und Schuljahr";
+  "Schuleinführung Thüringen 2026: Termin, Stichtag & Rechner";
 
 const pageDescription =
-  "Wann kommt mein Kind in Thüringen in die Schule? Alle Informationen zu Stichtag 1. August, Schulanmeldung, Kann-Kind-Regelung, Zurückstellung und Einschulung 2026.";
+  "Wann ist die Schuleinführung in Thüringen 2026? Hier findest du Termin, Stichtag 1. August, Kann-Kind-Regelung und den kostenlosen Einschulungsrechner.";
+
+const canonical = "https://www.einschulungsrechner.de/einschulung-thueringen/";
+const dateModified = "2026-05-27";
+
+const ADSENSE_ID = import.meta.env.PUBLIC_ADSENSE_ID || "";
+const STATE_CONTENT_AD_SLOT = import.meta.env.PUBLIC_ADSENSE_STATE_CONTENT_SLOT || "";
+const showContentAd = Boolean(ADSENSE_ID && STATE_CONTENT_AD_SLOT);
+
+const webPageSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  name: pageTitle,
+  description: pageDescription,
+  url: canonical,
+  datePublished: "2025-10-01",
+  dateModified,
+  inLanguage: "de",
+  publisher: {
+    "@type": "Organization",
+    name: "Einschulungsrechner",
+    url: "https://www.einschulungsrechner.de/",
+  },
+};
 
 const faqSchema = {
   "@context": "https://schema.org",
@@ -21,10 +45,18 @@ const faqSchema = {
     },
     {
       "@type": "Question",
-      name: "Wann ist die Einschulung in Thüringen 2026?",
+      name: "Wann ist die Schuleinführung in Thüringen 2026?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Für das Schuljahr 2026/2027 endet die Sommerferienzeit in Thüringen am Freitag, 14. August 2026. Der erste reguläre Schultag und die voraussichtliche Einschulung der Erstklässler fallen damit auf Montag, 17. August 2026. Einzelne organisatorische Details können je nach Schule abweichen.",
+        text: "Für das Schuljahr 2026/2027 enden die Sommerferien in Thüringen am Freitag, 14. August 2026. Die Schuleinführung ist voraussichtlich für Montag, 17. August 2026 vorgesehen. Dieser Tag ist zugleich der erste Schultag. Den konkreten Ablauf legt die zuständige Grundschule fest.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Wann beginnt die Grundschule in Thüringen 2026?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Der erste Schultag im Schuljahr 2026/2027 ist in Thüringen Montag, 17. August 2026. Die Schuleinführung ist voraussichtlich ebenfalls für Montag, 17. August 2026 vorgesehen. Den konkreten Ablauf legt die zuständige Grundschule fest.",
       },
     },
     {
@@ -63,34 +95,36 @@ const faqSchema = {
 };
 ---
 
-<html lang="de">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{pageTitle}</title>
-    <meta name="description" content={pageDescription} />
-    <link rel="canonical" href="https://www.einschulungsrechner.de/einschulung-thueringen/" />
-    <script type="application/ld+json" set:html={JSON.stringify(faqSchema)}></script>
-  </head>
-
-  <body>
-    <main class="state-page">
+<BaseLayout
+  title={pageTitle}
+  description={pageDescription}
+  canonical={canonical}
+  schema={[faqSchema, webPageSchema]}
+>
+  <main class="state-page">
       <a class="back-link" href="/">← Zur Startseite</a>
 
       <article class="state-card">
         <p class="state-kicker">Thüringen</p>
 
         <h1>
-          Einschulung in Thüringen:<br />
-          Schulstart, Stichtag und Schuljahr
+          Schuleinführung Thüringen 2026:<br />
+          Wann kommt mein Kind in die Schule?
         </h1>
 
         <p class="lead">
-          Wann kommt mein Kind in Thüringen in die Schule? Der Einschulungsrechner
-          zeigt dir anhand des Geburtsdatums das voraussichtliche Schuljahr. In
-          Thüringen gilt der Stichtag 1. August. Für das Schuljahr 2026/2027
-          fallen die Einschulung der Erstklässler und der erste Schultag
-          voraussichtlich auf Montag, 17. August 2026.
+          Wann kommt mein Kind in Thüringen in die Schule? Gib das Geburtsdatum ein
+          und berechne das voraussichtliche Schuljahr. In Thüringen gilt der
+          Stichtag 1. August. Für das Schuljahr 2026/2027 ist die Schuleinführung
+          voraussichtlich für Montag, 17. August 2026 vorgesehen – dieser Tag ist
+          zugleich der erste Schultag.
+        </p>
+
+        <p class="answer-box">
+          Kurzantwort: Die Schuleinführung in Thüringen 2026 ist voraussichtlich
+          für Montag, 17. August 2026 vorgesehen. Dieser Tag ist zugleich der erste
+          Schultag. Schulpflichtig werden Kinder, die bis zum 1. August 2026 sechs
+          Jahre alt sind.
         </p>
 
         <StateEnrollmentCalculator
@@ -104,13 +138,13 @@ const faqSchema = {
 
         <div class="quick-facts quick-facts-master" aria-label="Kurzüberblick Einschulung Thüringen">
           <div class="fact-card fact-card-highlight">
-            <span>Nächste Einschulung</span>
-            <strong>Montag, 17. August 2026</strong>
+            <span>Schuleinführung 2026</span>
+            <strong>Montag,<br />17. August 2026</strong>
           </div>
 
           <div class="fact-card fact-card-highlight">
             <span>Erster Schultag</span>
-            <strong>Montag, 17. August 2026</strong>
+            <strong>Montag,<br />17. August 2026</strong>
           </div>
 
           <div class="fact-card">
@@ -124,7 +158,32 @@ const faqSchema = {
           </div>
         </div>
 
-        <section class="example-box">
+        {showContentAd ? (
+          <aside class="ad-slot ad-slot-after-facts" aria-label="Anzeige">
+            <p class="ad-label">Anzeige</p>
+            <ins
+              class="adsbygoogle"
+              style="display:block"
+              data-ad-client={ADSENSE_ID}
+              data-ad-slot={STATE_CONTENT_AD_SLOT}
+              data-ad-format="auto"
+              data-full-width-responsive="true"
+            ></ins>
+          </aside>
+        ) : null}
+
+        <section>
+          <h2>Wann ist die Schuleinführung in Thüringen 2026?</h2>
+
+          <p>
+            Die Sommerferien in Thüringen enden 2026 am Freitag, 14. August 2026.
+            Die Schuleinführung ist voraussichtlich für Montag, 17. August 2026
+            vorgesehen. Dieser Tag ist zugleich der erste Schultag. Den konkreten
+            Ablauf legt die zuständige Grundschule fest.
+          </p>
+        </section>
+
+        <section class="seo-explanation-box">
           <h2>Wie funktioniert der Einschulungsrechner für Thüringen?</h2>
 
           <p>
@@ -132,20 +191,6 @@ const faqSchema = {
             vergleicht es mit den Einschulungsregeln in Thüringen. Entscheidend
             ist der Stichtag 1. August. Ist dein Kind am 1. August sechs Jahre
             alt, beginnt die Vollzeitschulpflicht am 1. August desselben Jahres.
-          </p>
-
-          <p>
-            Beispiel: Wird ein Kind am 15. Juli 2020 geboren, wird es am
-            15. Juli 2026 sechs Jahre alt. Da dieses Datum vor dem Stichtag
-            1. August liegt, ist das Kind voraussichtlich für das Schuljahr
-            2026/2027 regulär schulpflichtig.
-          </p>
-
-          <p>
-            Ist ein Kind am 1. August noch nicht sechs Jahre alt, ist es nicht
-            automatisch regulär schulpflichtig. Eine vorzeitige Einschulung kann
-            auf Antrag der Eltern geprüft werden, wenn das Kind am 30. Juni
-            mindestens fünf Jahre alt ist.
           </p>
         </section>
 
@@ -217,13 +262,22 @@ const faqSchema = {
             </article>
 
             <article class="faq-item">
-              <h3>Wann ist die Einschulung in Thüringen 2026?</h3>
+              <h3>Wann ist die Schuleinführung in Thüringen 2026?</h3>
               <p>
-                Für das Schuljahr 2026/2027 endet die Sommerferienzeit in Thüringen
-                am Freitag, 14. August 2026. Der erste reguläre Schultag und die
-                voraussichtliche Einschulung der Erstklässler fallen damit auf
-                Montag, 17. August 2026. Einzelne organisatorische Details können
-                je nach Schule abweichen.
+                Für das Schuljahr 2026/2027 enden die Sommerferien in Thüringen
+                am Freitag, 14. August 2026. Die Schuleinführung ist voraussichtlich
+                für Montag, 17. August 2026 vorgesehen. Dieser Tag ist zugleich der
+                erste Schultag. Den konkreten Ablauf legt die zuständige Grundschule fest.
+              </p>
+            </article>
+
+            <article class="faq-item">
+              <h3>Wann beginnt die Grundschule in Thüringen 2026?</h3>
+              <p>
+                Der erste Schultag im Schuljahr 2026/2027 ist in Thüringen Montag,
+                17. August 2026. Die Schuleinführung ist voraussichtlich ebenfalls
+                für Montag, 17. August 2026 vorgesehen. Den konkreten Ablauf legt
+                die zuständige Grundschule fest.
               </p>
             </article>
 
@@ -321,14 +375,13 @@ const faqSchema = {
             Bildung, Wissenschaft und Kultur.
           </p>
 
-          <p class="stand">Stand der Informationen: Mai 2026</p>
+          <p class="stand">Stand der Informationen:<span class="stand-date">Mai 2026</span></p>
         </section>
       </article>
-    </main>
-  </body>
-</html>
+  </main>
+</BaseLayout>
 
-<style>
+<style is:global>
   :root {
     font-family:
       system-ui,
@@ -412,6 +465,19 @@ const faqSchema = {
     line-height: 1.64;
   }
 
+  .answer-box {
+    max-width: 760px;
+    margin: 20px 0 0;
+    padding: 18px 20px;
+    border: 1px solid rgba(129, 97, 38, 0.18);
+    border-radius: 18px;
+    background: rgba(245, 210, 138, 0.14);
+    color: #172033;
+    font-size: clamp(1.02rem, 1.35vw, 1.12rem);
+    font-weight: 800;
+    line-height: 1.5;
+  }
+
   .quick-facts {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -423,7 +489,7 @@ const faqSchema = {
     margin-top: 34px;
   }
 
-  :global(body.has-thueringen-calculator-result) .quick-facts-master .fact-card-highlight {
+  body.has-thueringen-calculator-result .quick-facts-master .fact-card-highlight {
     display: none;
   }
 
@@ -460,6 +526,23 @@ const faqSchema = {
     letter-spacing: -0.035em;
   }
 
+  .ad-slot {
+    margin: 30px 0 0;
+    padding: 14px 0;
+    border-top: 1px solid rgba(42, 35, 21, 0.08);
+    border-bottom: 1px solid rgba(42, 35, 21, 0.08);
+  }
+
+  .ad-label {
+    margin: 0 0 10px;
+    color: #8a7960;
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    line-height: 1.2;
+    text-transform: uppercase;
+  }
+
   section {
     margin-top: 38px;
     padding-top: 34px;
@@ -493,7 +576,8 @@ const faqSchema = {
   }
 
   .example-box,
-  .source-note {
+  .source-note,
+  .seo-explanation-box {
     padding: 24px;
     border: 1px solid rgba(129, 97, 38, 0.16);
     border-radius: 22px;
@@ -567,6 +651,8 @@ const faqSchema = {
 
   .stand {
     display: inline-flex;
+    align-items: center;
+    gap: 0.25em;
     width: fit-content;
     margin-top: 16px;
     padding: 8px 12px;
@@ -576,6 +662,10 @@ const faqSchema = {
     font-size: 0.82rem;
     font-weight: 850;
     line-height: 1.2;
+  }
+
+  .stand-date {
+    display: inline;
   }
 
   @media (max-width: 720px) {
@@ -607,6 +697,12 @@ const faqSchema = {
     .lead {
       font-size: 1.02rem;
       line-height: 1.55;
+    }
+
+    .answer-box {
+      padding: 16px 18px;
+      font-size: 1rem;
+      line-height: 1.5;
     }
 
     .fact-card {
@@ -645,7 +741,8 @@ const faqSchema = {
     }
 
     .example-box,
-    .source-note {
+    .source-note,
+    .seo-explanation-box {
       padding: 20px;
       border-radius: 20px;
     }
@@ -654,6 +751,16 @@ const faqSchema = {
       width: auto;
       font-size: 1rem;
       line-height: 1.42;
+    }
+
+    .stand {
+      align-items: flex-start;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .stand-date {
+      display: block;
     }
   }
 

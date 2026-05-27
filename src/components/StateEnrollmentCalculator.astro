@@ -449,7 +449,7 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
         statusLabel = "Kann-Kind auf Antrag";
         statusTone = "optional";
         schoolStartYear = sixthBirthdayYear;
-        resultHeadline = `Dein Kind ist in ${stateRule.name} ein Kann-Kind.`;
+        resultHeadline = `Dein Kind ist in ${stateRule.name} ein Kann-Kind für das Schuljahr ${schoolStartYear}/${schoolStartYear + 1}.`;
         explanation = `Dein Kind wird nach dem regulären Stichtag, aber bis zum 31. Dezember sechs Jahre alt. In ${stateRule.name} kann eine vorzeitige Einschulung für das Schuljahr ${schoolStartYear}/${schoolStartYear + 1} auf Antrag geprüft werden.`;
         nextStepTitle = "Wichtig für dich";
         nextStepText = "Sprich frühzeitig mit der zuständigen Grundschule, wenn du eine vorzeitige Einschulung für dieses Schuljahr prüfen lassen möchtest.";
@@ -591,7 +591,8 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
     if (inCorridor) {
       statusLabel = "Einschulungskorridor";
       statusTone = "optional";
-      resultHeadline = "Dein Kind liegt im Einschulungs&shy;korridor.";
+      resultHeadline =
+        `Dein Kind liegt in Bayern im Einschulungskorridor für das Schuljahr ${schoolStartYear}/${schoolStartYear + 1}.`;
       explanation =
         "Dein Kind wird zwischen dem 1. Juli und dem 30. September sechs Jahre alt. In Bayern ist die Einschulung grundsätzlich vorgesehen; Eltern können den Schulstart unter bestimmten Voraussetzungen aber um ein Jahr verschieben.";
       nextStepTitle = "Wichtig für dich";
@@ -980,7 +981,7 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
 
     if (octoberToDecember) {
       resultHeadline =
-        `Dein Kind ist in Brandenburg ein Kann-Kind. Eine Einschulung im Schuljahr ${schoolYear} kann auf Antrag geprüft werden.`;
+        `Dein Kind ist in Brandenburg ein Kann-Kind für das Schuljahr ${schoolYear}.`;
       explanation =
         `Dein Kind wird nach dem 30. September ${cutoffYear}, aber bis zum 31. Dezember ${cutoffYear} sechs Jahre alt. In Brandenburg kann eine vorzeitige Einschulung für das Schuljahr ${schoolYear} auf Antrag der Eltern geprüft werden.`;
     }
@@ -1405,7 +1406,7 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
       : calculateSachsenEnrollment(birthdateValue);
 
     if (normalizedSlug === "bayern") {
-      result = buildGenericEnrollmentResult(birthdateValue, stateRuleFromData) || calculateBayernEnrollment(birthdateValue);
+      result = calculateBayernEnrollment(birthdateValue) || buildGenericEnrollmentResult(birthdateValue, stateRuleFromData);
     }
 
     if (normalizedSlug === "baden-wuerttemberg") {
@@ -1413,7 +1414,7 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
     }
 
     if (normalizedSlug === "nordrhein-westfalen") {
-      result = buildGenericEnrollmentResult(birthdateValue, stateRuleFromData) || calculateNordrheinWestfalenEnrollment(birthdateValue);
+      result = calculateNordrheinWestfalenEnrollment(birthdateValue) || buildGenericEnrollmentResult(birthdateValue, stateRuleFromData);
     }
 
     if (normalizedSlug === "niedersachsen") {
@@ -1445,11 +1446,11 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
     }
 
     if (normalizedSlug === "thueringen") {
-      result = buildGenericEnrollmentResult(birthdateValue, stateRuleFromData) || calculateThueringenEnrollment(birthdateValue);
+      result = calculateThueringenEnrollment(birthdateValue) || buildGenericEnrollmentResult(birthdateValue, stateRuleFromData);
     }
 
     if (normalizedSlug === "sachsen-anhalt") {
-      result = buildGenericEnrollmentResult(birthdateValue, stateRuleFromData) || calculateSachsenAnhaltEnrollment(birthdateValue);
+      result = calculateSachsenAnhaltEnrollment(birthdateValue) || buildGenericEnrollmentResult(birthdateValue, stateRuleFromData);
     }
 
     if (normalizedSlug === "mecklenburg-vorpommern") {
@@ -1523,7 +1524,11 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
       displayedHeadline = `Dein Kind wird in ${stateName} voraussichtlich im Schuljahr <span class="result-date-nowrap">${result.schoolYear}</span> eingeschult.`;
     }
 
-    if (result.hasConfirmedDate && normalizedSlug === "bayern") {
+    if (
+      result.hasConfirmedDate &&
+      normalizedSlug === "bayern" &&
+      result.statusTone === "regular"
+    ) {
       displayedHeadline =
         "<span class=\"result-headline-label\">Dein Kind wird in Bayern im Schuljahr <span class=\"result-date-nowrap\">2026/2027</span> am</span><span class=\"result-headline-highlight\">Mittwoch,<br />16. September 2026</span><span class=\"result-headline-meta\">eingeschult.</span>";
     }
@@ -1553,6 +1558,15 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
     ) {
       displayedHeadline =
         "<span class=\"result-headline-label\">Dein Kind wird in Sachsen-Anhalt im Schuljahr <span class=\"result-date-nowrap\">2026/2027</span> am</span><span class=\"result-headline-highlight\">Samstag,<br />15. August 2026</span><span class=\"result-headline-meta\">eingeschult.</span>";
+    }
+
+    if (
+      result.hasConfirmedDate &&
+      normalizedSlug === "thueringen" &&
+      result.statusTone === "regular"
+    ) {
+      displayedHeadline =
+        "<span class=\"result-headline-label\">Die Schuleinführung deines Kindes findet in Thüringen im Schuljahr <span class=\"result-date-nowrap\">2026/2027</span> am</span><span class=\"result-headline-highlight\">Montag,<br />17. August 2026</span><span class=\"result-headline-meta\">statt.</span>";
     }
 
     if (
@@ -1756,21 +1770,21 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
 
     if (result.hasConfirmedDate && normalizedSlug === "thueringen") {
       dateDetails = `
-        <div class="state-result-grid state-result-grid-priority" aria-label="Einschulungstermin ${stateName}">
+        <div class="state-result-grid state-result-grid-priority" aria-label="Schuleinführungstermin ${stateName}">
           <div class="state-result-card state-result-card-wide">
-            <span>Nächste Einschulung</span>
-            <strong>Montag, 17. August 2026</strong>
+            <span>Schuleinführung 2026</span>
+            <strong>Montag,<br />17. August 2026</strong>
           </div>
           <div class="state-result-card state-result-card-wide">
             <span>Erster Schultag</span>
-            <strong>Montag, 17. August 2026</strong>
+            <strong>Montag,<br />17. August 2026</strong>
           </div>
         </div>
         <p class="state-calculator-note">
           Für ${stateName} enden die Sommerferien 2026 am Freitag,
-          14. August 2026. Der erste Schultag und die voraussichtliche Einschulung
-          der Erstklässlerinnen und Erstklässler fallen damit auf Montag,
-          17. August 2026. Den konkreten Ablauf legt die zuständige Grundschule fest.
+          14. August 2026. Die Schuleinführung ist voraussichtlich am Montag,
+          17. August 2026. Dieser Tag ist zugleich der erste Schultag.
+          Den konkreten Ablauf legt die zuständige Grundschule fest.
         </p>
       `;
     }
