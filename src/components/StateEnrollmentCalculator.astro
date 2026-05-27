@@ -1539,6 +1539,15 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
 
     if (
       result.hasConfirmedDate &&
+      normalizedSlug === "brandenburg" &&
+      result.statusTone === "regular"
+    ) {
+      displayedHeadline =
+        "<span class=\"result-headline-label\">Dein Kind wird in Brandenburg im Schuljahr <span class=\"result-date-nowrap\">2026/2027</span> am</span><span class=\"result-headline-highlight\">Samstag,<br />22. August 2026</span><span class=\"result-headline-meta\">eingeschult.</span>";
+    }
+
+    if (
+      result.hasConfirmedDate &&
       normalizedSlug === "baden-wuerttemberg" &&
       result.statusTone === "regular"
     ) {
@@ -1677,20 +1686,18 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
       dateDetails = `
         <div class="state-result-grid state-result-grid-priority" aria-label="Einschulungstermin ${stateName}">
           <div class="state-result-card state-result-card-wide">
-            <span>Nächste Einschulung</span>
-            <strong>Samstag, 22. August 2026</strong>
+            <span>Einschulung 2026</span>
+            <strong>Samstag,<br />22. August 2026</strong>
           </div>
           <div class="state-result-card state-result-card-wide">
             <span>Erster Schultag</span>
-            <strong>Montag, 24. August 2026</strong>
+            <strong>Montag,<br />24. August 2026</strong>
           </div>
         </div>
         <p class="state-calculator-note">
-          Für ${stateName} ist der erste Schultag im Schuljahr 2026/2027
-          Montag, 24. August 2026. Die Einschulungsfeiern werden in der
-          Regel am Samstag vor dem ersten Schultag durchgeführt, also
-          voraussichtlich Samstag, 22. August 2026. Den konkreten Ablauf
-          legt die zuständige Grundschule fest.
+          Die Einschulungsfeier ist in ${stateName} voraussichtlich am Samstag,
+          22. August 2026. Der erste Schultag ist Montag, 24. August 2026.
+          Den konkreten Ablauf legt die zuständige Grundschule fest.
         </p>
       `;
     }
@@ -1878,24 +1885,10 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
 
     if (schoolYearIsCompleted) {
       displayedHeadline = `Das berechnete Schuljahr <span class="result-date-nowrap">${result.schoolYear}</span> liegt bereits in der Vergangenheit.`;
-      dateDetails = `
-        <p class="state-calculator-note">
-          Das berechnete Schuljahr ${result.schoolYear} liegt bereits in der
-          Vergangenheit. Das Ergebnis dient daher nur noch der zeitlichen
-          Einordnung. Für rückwirkende Fragen oder verbindliche Auskünfte ist
-          die zuständige Grundschule maßgeblich.
-        </p>
-      `;
+      dateDetails = "";
     } else if (schoolYearIsActive) {
       displayedHeadline = `Das berechnete Schuljahr <span class="result-date-nowrap">${result.schoolYear}</span> ist in ${stateName} das laufende Schuljahr.`;
-      dateDetails = `
-        <p class="state-calculator-note">
-          Das berechnete Schuljahr ${result.schoolYear} ist aktuell das laufende
-          Schuljahr. Die Einschulung hat in diesem Schuljahr in der Regel bereits
-          stattgefunden. Für aktuelle, rückwirkende oder verbindliche Fragen ist
-          die zuständige Grundschule maßgeblich.
-        </p>
-      `;
+      dateDetails = "";
     }
 
     const displayedStatusTone = schoolYearAlreadyStarted ? "following" : result.statusTone;
@@ -1903,13 +1896,17 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
       ? "Vergangenes Schuljahr"
       : result.statusLabel;
     const displayedExplanation = schoolYearAlreadyStarted
-      ? `Das berechnete Schuljahr ${result.schoolYear} liegt bereits in der Vergangenheit. Das Ergebnis dient daher nur noch der zeitlichen Einordnung. Für rückwirkende Fragen oder verbindliche Auskünfte ist die zuständige Grundschule maßgeblich.`
+      ? schoolYearIsCompleted
+        ? `Das Ergebnis dient nur noch der zeitlichen Einordnung. Für rückwirkende Fragen, Nachweise oder verbindliche Auskünfte ist die zuständige Grundschule maßgeblich.`
+        : `Das Ergebnis bezieht sich auf das laufende Schuljahr. Wenn dein Kind bereits schulpflichtig ist oder Fragen zur laufenden Einschulung bestehen, ist die zuständige Grundschule maßgeblich.`
       : result.explanation;
     const displayedNextStepTitle = schoolYearAlreadyStarted
       ? "Wichtig für dich"
       : result.nextStepTitle;
     const displayedNextStepText = schoolYearAlreadyStarted
-      ? "Wende dich bei rückwirkenden Fragen, Nachweisen oder verbindlichen Auskünften direkt an die zuständige Grundschule."
+      ? schoolYearIsCompleted
+        ? "Wende dich bei rückwirkenden Fragen, Nachweisen oder verbindlichen Auskünften direkt an die zuständige Grundschule."
+        : "Wende dich bei Fragen zur laufenden Einschulung, Anmeldung oder weiteren Schritten direkt an die zuständige Grundschule."
       : result.nextStepText;
 
     const displayedSchoolYearLabel =
@@ -1932,27 +1929,23 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
         <div class="state-result-warning-box">
           <strong>Wichtiger Hinweis</strong>
           <p>
-            Das Ergebnis ist keine aktuelle Einschulungsempfehlung mehr, sondern
-            dient nur noch der zeitlichen Einordnung. Bitte wende dich bei
-            rückwirkenden Fragen direkt an die zuständige Grundschule.
+            Der Rechner dient der Orientierung. Verbindliche Informationen zur
+            aktuellen oder zurückliegenden Einschulung erhältst du bei der
+            zuständigen Grundschule oder Schulbehörde.
           </p>
         </div>
       `
       : "";
 
-    updatePageResultState(result);
+    const primaryResultType =
+      result.hasConfirmedDate &&
+      result.statusTone === "regular" &&
+      !schoolYearIsActive &&
+      !schoolYearIsCompleted
+        ? "date-first"
+        : "status-first";
 
-    resultBox.hidden = false;
-    resultBox.innerHTML = `
-      <div class="state-result-header">
-        <p class="result-kicker-light">${resultKicker}</p>
-        <h2>${displayedHeadline}</h2>
-      </div>
-
-      ${dateDetails}
-
-      ${schoolYearStartedWarning}
-
+    const summaryDetails = `
       <div class="state-result-top-grid">
         <div class="state-result-summary">
           <span>${displayedSchoolYearLabel}</span>
@@ -1964,11 +1957,29 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
           <strong>${resultStatusLabel}</strong>
         </div>
       </div>
+    `;
+
+    const orderedResultDetails = primaryResultType === "date-first"
+      ? `${dateDetails}${summaryDetails}`
+      : `${summaryDetails}${dateDetails}`;
+
+    updatePageResultState(result);
+
+    resultBox.hidden = false;
+    resultBox.innerHTML = `
+      <div class="state-result-header">
+        <p class="result-kicker-light">${resultKicker}</p>
+        <h2>${displayedHeadline}</h2>
+      </div>
+
+     ${orderedResultDetails}
 
       <div class="state-result-explanation-box">
         <strong>Was bedeutet das?</strong>
         <p>${displayedExplanation}</p>
       </div>
+
+      ${schoolYearStartedWarning}
 
       <div class="state-result-next-step">
         <span>${displayedNextStepTitle}</span>
