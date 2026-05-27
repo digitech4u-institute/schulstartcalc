@@ -743,7 +743,22 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
     let nextStepText =
       "Informiere dich frühzeitig bei der zuständigen Grundschule über Anmeldung, Unterlagen, Sprachstandsfeststellung und konkrete Termine.";
 
+    const inFlexibleWindow =
+      (month > 6 || (month === 6 && day > 30)) &&
+      (month < 10 || (month === 9 && day <= 30));
     const afterOctoberFirst = month > 10 || (month === 10 && day > 1);
+
+    if (inFlexibleWindow) {
+      statusLabel = "Flexibilisierung";
+      statusTone = "optional";
+      resultHeadline =
+        `Dein Kind ist in Niedersachsen grundsätzlich schulpflichtig und fällt in die Flexibilisierung für das Schuljahr ${projectedSchoolYear}.`;
+      explanation =
+        `Dein Kind wird zwischen dem 1. Juli und dem 30. September ${cutoffYear} sechs Jahre alt. Es ist damit grundsätzlich schulpflichtig. In Niedersachsen können Eltern den Schulbesuch in diesem Zeitraum jedoch durch schriftliche Erklärung gegenüber der Schule um ein Jahr hinausschieben.`;
+      nextStepTitle = "Wichtig für dich";
+      nextStepText =
+        "Prüfe die Frist bei der zuständigen Grundschule. Die Erklärung zur Verschiebung soll in der Regel bis zum 1. Mai abgegeben werden.";
+    }
 
     if (afterOctoberFirst) {
       schoolStartYear = sixthBirthdayYear + 1;
@@ -1418,7 +1433,7 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
     }
 
     if (normalizedSlug === "niedersachsen") {
-      result = buildGenericEnrollmentResult(birthdateValue, stateRuleFromData) || calculateNiedersachsenEnrollment(birthdateValue);
+      result = calculateNiedersachsenEnrollment(birthdateValue) || buildGenericEnrollmentResult(birthdateValue, stateRuleFromData);
     }
 
     if (normalizedSlug === "hessen") {
@@ -1584,7 +1599,7 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
       result.statusTone === "regular"
     ) {
       displayedHeadline =
-        "Dein Kind wird in Niedersachsen voraussichtlich im Schuljahr <span class=\"result-date-nowrap\">2026/2027</span> regulär eingeschult.";
+        "<span class=\"result-headline-label\">Dein Kind wird in Niedersachsen im Schuljahr <span class=\"result-date-nowrap\">2026/2027</span> am</span><span class=\"result-headline-highlight\">Samstag,<br />15. August 2026</span><span class=\"result-headline-meta\">eingeschult.</span>";
     }
 
     if (
@@ -1622,19 +1637,20 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
       dateDetails = `
         <div class="state-result-grid state-result-grid-priority" aria-label="Einschulungstermin ${stateName}">
           <div class="state-result-card state-result-card-wide">
-            <span>Nächste Einschulung</span>
-            <strong>Samstag, 15. August 2026</strong>
+            <span>Einschulung 2026</span>
+            <strong>Samstag,<br />15. August 2026</strong>
           </div>
           <div class="state-result-card state-result-card-wide">
             <span>Erster Schultag</span>
-            <strong>Donnerstag, 13. August 2026</strong>
+            <strong>Donnerstag,<br />13. August 2026</strong>
           </div>
         </div>
         <p class="state-calculator-note">
-          Der erste Schultag nach den Sommerferien ist voraussichtlich Donnerstag,
-          13. August 2026. Die Einschulung erfolgt am Sonnabend nach dem ersten
-          Schultag, also voraussichtlich Samstag, 15. August 2026. Den konkreten
-          Ablauf legt die zuständige Grundschule fest.
+          Für ${stateName} enden die Sommerferien 2026 am Mittwoch,
+          12. August 2026. Der erste Schultag ist Donnerstag, 13. August 2026.
+          Die Einschulung findet laut Ferienordnung am Sonnabend nach dem ersten
+          Schultag statt – also voraussichtlich Samstag, 15. August 2026.
+          Den konkreten Ablauf legt die zuständige Grundschule fest.
         </p>
       `;
     }
