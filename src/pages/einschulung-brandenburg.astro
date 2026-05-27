@@ -450,7 +450,7 @@ const faqSchema = {
   </main>
 </BaseLayout>
 
-<style>
+<style is:global>
   :root {
     font-family:
       system-ui,
@@ -557,7 +557,7 @@ const faqSchema = {
     margin-top: 34px;
   }
 
-  :global(body.has-brandenburg-calculator-result) .quick-facts-master .fact-card-highlight {
+  body.has-brandenburg-calculator-result .quick-facts-master .fact-card-highlight {
     display: none;
   }
 
