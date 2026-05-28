@@ -1453,7 +1453,7 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
     }
 
     if (normalizedSlug === "rheinland-pfalz") {
-      result = buildGenericEnrollmentResult(birthdateValue, stateRuleFromData) || calculateRheinlandPfalzEnrollment(birthdateValue);
+      result = calculateRheinlandPfalzEnrollment(birthdateValue) || buildGenericEnrollmentResult(birthdateValue, stateRuleFromData);
     }
 
     if (normalizedSlug === "schleswig-holstein") {
@@ -1763,19 +1763,20 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
       dateDetails = `
         <div class="state-result-grid state-result-grid-priority" aria-label="Einschulungstermin ${stateName}">
           <div class="state-result-card state-result-card-wide">
-            <span>Nächste Einschulung</span>
-            <strong>Montag, 10. August 2026 (schulabhängig)</strong>
+            <span>Einschulung 2026</span>
+            <strong>schulabhängig,<br />ab 10. August 2026</strong>
           </div>
           <div class="state-result-card state-result-card-wide">
             <span>Erster Schultag</span>
-            <strong>Montag, 10. August 2026</strong>
+            <strong>Montag,<br />10. August 2026</strong>
           </div>
         </div>
         <p class="state-calculator-note">
-          Für ${stateName} beginnt der Unterricht nach den Sommerferien 2026
-          voraussichtlich Montag, 10. August 2026. Die Einschulung der
-          Erstklässlerinnen und Erstklässler liegt in der Regel zum Schuljahresbeginn;
-          den konkreten Termin legt die zuständige Grundschule fest.
+          Für ${stateName} enden die Sommerferien 2026 am Freitag,
+          7. August 2026. Der erste reguläre Schultag ist Montag,
+          10. August 2026. Die Einschulung der ersten Klassen wird von der
+          zuständigen Grundschule festgelegt. Verbindliche Informationen erhältst
+          du daher direkt bei der Schule.
         </p>
       `;
     }
