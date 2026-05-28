@@ -1,11 +1,35 @@
 ---
+import BaseLayout from "../layouts/BaseLayout.astro";
 import StateEnrollmentCalculator from "../components/StateEnrollmentCalculator.astro";
 
 const pageTitle =
-  "Einschulung Hamburg 2026: Schulstart, Stichtag und Schuljahr";
+  "Einschulung Hamburg 2026: Termin, Stichtag & Rechner";
 
 const pageDescription =
-  "Wann kommt mein Kind in Hamburg in die Schule? Erfahre alles zu Einschulungsstichtag, Schulpflicht, vorzeitiger Einschulung und voraussichtlichem Schuljahr.";
+  "Wann ist die Einschulung in Hamburg 2026? Hier findest du Termin, Stichtag 30. Juni, Kann-Kind-Regelung und den kostenlosen Einschulungsrechner.";
+
+const canonical = "https://www.einschulungsrechner.de/einschulung-hamburg/";
+const dateModified = "2026-05-27";
+
+const ADSENSE_ID = import.meta.env.PUBLIC_ADSENSE_ID || "";
+const STATE_CONTENT_AD_SLOT = import.meta.env.PUBLIC_ADSENSE_STATE_CONTENT_SLOT || "";
+const showContentAd = Boolean(ADSENSE_ID && STATE_CONTENT_AD_SLOT);
+
+const webPageSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  name: pageTitle,
+  description: pageDescription,
+  url: canonical,
+  datePublished: "2025-10-01",
+  dateModified,
+  inLanguage: "de",
+  publisher: {
+    "@type": "Organization",
+    name: "Einschulungsrechner",
+    url: "https://www.einschulungsrechner.de/",
+  },
+};
 
 const faqSchema = {
   "@context": "https://schema.org",
@@ -24,7 +48,15 @@ const faqSchema = {
       name: "Wann ist die Einschulung in Hamburg 2026?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Der erste Schultag nach den Sommerferien ist in Hamburg Donnerstag, 20. August 2026. Die Einschulungsfeier der ersten Klassen legt die jeweilige Grundschule individuell fest. Häufig starten Erstklässlerinnen und Erstklässler am Montag oder Dienstag nach dem ersten Schultag. Verbindliche Informationen erhältst du bei der zuständigen Grundschule.",
+        text: "Die Sommerferien in Hamburg enden 2026 am Mittwoch, 19. August 2026. Der erste Schultag ist Donnerstag, 20. August 2026. Die Einschulungsfeier der ersten Klassen legt die jeweilige Grundschule individuell fest. Häufig starten Erstklässlerinnen und Erstklässler am Montag oder Dienstag nach dem ersten Schultag. Verbindliche Informationen erhältst du bei der zuständigen Grundschule.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Wann beginnt die Grundschule in Hamburg 2026?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Der erste Schultag im Schuljahr 2026/2027 ist in Hamburg Donnerstag, 20. August 2026. Die Einschulung der ersten Klassen wird von der jeweiligen Grundschule festgelegt. Verbindliche Informationen erhältst du bei der zuständigen Grundschule.",
       },
     },
     {
@@ -63,34 +95,35 @@ const faqSchema = {
 };
 ---
 
-<html lang="de">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{pageTitle}</title>
-    <meta name="description" content={pageDescription} />
-    <link rel="canonical" href="https://www.einschulungsrechner.de/einschulung-hamburg/" />
-    <script type="application/ld+json" set:html={JSON.stringify(faqSchema)}></script>
-  </head>
-
-  <body>
-    <main class="state-page">
+<BaseLayout
+  title={pageTitle}
+  description={pageDescription}
+  canonical={canonical}
+  schema={[faqSchema, webPageSchema]}
+>
+  <main class="state-page">
       <a class="back-link" href="/">← Zur Startseite</a>
 
       <article class="state-card">
         <p class="state-kicker">Hamburg</p>
 
         <h1>
-          Einschulung in Hamburg:<br />
-          Schulstart, Stichtag und Schuljahr
+          Einschulung Hamburg 2026:<br />
+          Wann kommt mein Kind in die Schule?
         </h1>
 
         <p class="lead">
-          Wann kommt mein Kind in Hamburg in die Schule? Der Einschulungsrechner
-          zeigt dir anhand des Geburtsdatums das voraussichtliche Schuljahr. In
-          Hamburg gilt der Stichtag 30. Juni. Für das Schuljahr 2026/2027 wird die
-          Einschulung von der jeweiligen Grundschule festgelegt – der erste Schultag
-          ist Donnerstag, 20. August 2026.
+          Wann kommt mein Kind in Hamburg in die Schule? Gib das Geburtsdatum ein
+          und berechne das voraussichtliche Schuljahr. In Hamburg gilt der Stichtag
+          30. Juni. Für das Schuljahr 2026/2027 ist der erste Schultag Donnerstag,
+          20. August 2026. Die Einschulung wird von der jeweiligen Grundschule festgelegt.
+        </p>
+
+        <p class="answer-box">
+          Kurzantwort: Der erste Schultag in Hamburg 2026 ist Donnerstag,
+          20. August 2026. Die Einschulung wird schulabhängig von der jeweiligen
+          Grundschule festgelegt. Schulpflichtig werden Kinder, die bis zum
+          30. Juni 2026 sechs Jahre alt werden.
         </p>
 
         <StateEnrollmentCalculator
@@ -104,13 +137,13 @@ const faqSchema = {
 
         <div class="quick-facts quick-facts-master" aria-label="Kurzüberblick Einschulung Hamburg">
           <div class="fact-card fact-card-highlight">
-            <span>Nächste Einschulung</span>
-            <strong>24.–25. August 2026 (schulabhängig)</strong>
+            <span>Einschulung 2026</span>
+            <strong>schulabhängig,<br />ab 24. August 2026</strong>
           </div>
 
           <div class="fact-card fact-card-highlight">
             <span>Erster Schultag</span>
-            <strong>Donnerstag, 20. August 2026</strong>
+            <strong>Donnerstag,<br />20. August 2026</strong>
           </div>
 
           <div class="fact-card">
@@ -124,7 +157,33 @@ const faqSchema = {
           </div>
         </div>
 
-        <section class="example-box">
+        {showContentAd ? (
+          <aside class="ad-slot ad-slot-after-facts" aria-label="Anzeige">
+            <p class="ad-label">Anzeige</p>
+            <ins
+              class="adsbygoogle"
+              style="display:block"
+              data-ad-client={ADSENSE_ID}
+              data-ad-slot={STATE_CONTENT_AD_SLOT}
+              data-ad-format="auto"
+              data-full-width-responsive="true"
+            ></ins>
+          </aside>
+        ) : null}
+
+        <section>
+          <h2>Wann ist die Einschulung in Hamburg 2026?</h2>
+
+          <p>
+            Die Sommerferien in Hamburg enden 2026 am Mittwoch, 19. August 2026.
+            Der erste Schultag ist Donnerstag, 20. August 2026. Die Einschulung
+            der ersten Klassen wird von der jeweiligen Grundschule festgelegt –
+            häufig am Montag oder Dienstag nach dem ersten Schultag. Verbindliche
+            Informationen erhältst du bei der zuständigen Grundschule.
+          </p>
+        </section>
+
+        <section class="seo-explanation-box">
           <h2>Wie funktioniert der Einschulungsrechner für Hamburg?</h2>
 
           <p>
@@ -219,12 +278,22 @@ const faqSchema = {
             <article class="faq-item">
               <h3>Wann ist die Einschulung in Hamburg 2026?</h3>
               <p>
-                Der erste Schultag nach den Sommerferien ist in Hamburg Donnerstag,
-                20. August 2026. Die Einschulungsfeier der ersten Klassen legt die
-                jeweilige Grundschule individuell fest. Häufig starten
-                Erstklässlerinnen und Erstklässler am Montag oder Dienstag nach dem
-                ersten Schultag. Verbindliche Informationen erhältst du bei der
-                zuständigen Grundschule.
+                Die Sommerferien in Hamburg enden 2026 am Mittwoch, 19. August 2026.
+                Der erste Schultag ist Donnerstag, 20. August 2026. Die
+                Einschulungsfeier der ersten Klassen legt die jeweilige Grundschule
+                individuell fest. Häufig starten Erstklässlerinnen und Erstklässler
+                am Montag oder Dienstag nach dem ersten Schultag. Verbindliche
+                Informationen erhältst du bei der zuständigen Grundschule.
+              </p>
+            </article>
+
+            <article class="faq-item">
+              <h3>Wann beginnt die Grundschule in Hamburg 2026?</h3>
+              <p>
+                Der erste Schultag im Schuljahr 2026/2027 ist in Hamburg Donnerstag,
+                20. August 2026. Die Einschulung der ersten Klassen wird von der
+                jeweiligen Grundschule festgelegt. Verbindliche Informationen erhältst
+                du bei der zuständigen Grundschule.
               </p>
             </article>
 
@@ -325,14 +394,13 @@ const faqSchema = {
             Grundschule, der Schulbehörde oder beim Schulinformationszentrum Hamburg.
           </p>
 
-          <p class="stand">Stand der Informationen: Mai 2026</p>
+          <p class="stand">Stand der Informationen:<span class="stand-date">Mai 2026</span></p>
         </section>
       </article>
-    </main>
-  </body>
-</html>
+  </main>
+</BaseLayout>
 
-<style>
+<style is:global>
   :root {
     font-family:
       system-ui,
@@ -416,6 +484,19 @@ const faqSchema = {
     line-height: 1.64;
   }
 
+  .answer-box {
+    max-width: 760px;
+    margin: 20px 0 0;
+    padding: 18px 20px;
+    border: 1px solid rgba(129, 97, 38, 0.18);
+    border-radius: 18px;
+    background: rgba(245, 210, 138, 0.14);
+    color: #172033;
+    font-size: clamp(1.02rem, 1.35vw, 1.12rem);
+    font-weight: 800;
+    line-height: 1.5;
+  }
+
   .quick-facts {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -427,7 +508,7 @@ const faqSchema = {
     margin-top: 34px;
   }
 
-  :global(body.has-hamburg-calculator-result) .quick-facts-master .fact-card-highlight {
+  body.has-hamburg-calculator-result .quick-facts-master .fact-card-highlight {
     display: none;
   }
 
@@ -462,6 +543,23 @@ const faqSchema = {
     font-weight: 950;
     line-height: 1.12;
     letter-spacing: -0.035em;
+  }
+
+  .ad-slot {
+    margin: 30px 0 0;
+    padding: 14px 0;
+    border-top: 1px solid rgba(42, 35, 21, 0.08);
+    border-bottom: 1px solid rgba(42, 35, 21, 0.08);
+  }
+
+  .ad-label {
+    margin: 0 0 10px;
+    color: #8a7960;
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    line-height: 1.2;
+    text-transform: uppercase;
   }
 
   section {
@@ -572,6 +670,8 @@ const faqSchema = {
 
   .stand {
     display: inline-flex;
+    align-items: center;
+    gap: 0.25em;
     width: fit-content;
     margin-top: 16px;
     padding: 8px 12px;
@@ -581,6 +681,10 @@ const faqSchema = {
     font-size: 0.82rem;
     font-weight: 850;
     line-height: 1.2;
+  }
+
+  .stand-date {
+    display: inline;
   }
 
   @media (max-width: 720px) {
@@ -612,6 +716,12 @@ const faqSchema = {
     .lead {
       font-size: 1.02rem;
       line-height: 1.55;
+    }
+
+    .answer-box {
+      padding: 16px 18px;
+      font-size: 1rem;
+      line-height: 1.5;
     }
 
     .fact-card {
@@ -660,6 +770,16 @@ const faqSchema = {
       width: auto;
       font-size: 1rem;
       line-height: 1.42;
+    }
+
+    .stand {
+      align-items: flex-start;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .stand-date {
+      display: block;
     }
   }
 

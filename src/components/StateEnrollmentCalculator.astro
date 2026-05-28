@@ -1445,7 +1445,7 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
     }
 
     if (normalizedSlug === "hamburg") {
-      result = buildGenericEnrollmentResult(birthdateValue, stateRuleFromData) || calculateHamburgEnrollment(birthdateValue);
+      result = calculateHamburgEnrollment(birthdateValue) || buildGenericEnrollmentResult(birthdateValue, stateRuleFromData);
     }
 
     if (normalizedSlug === "brandenburg") {
@@ -1604,6 +1604,15 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
 
     if (
       result.hasConfirmedDate &&
+      normalizedSlug === "hamburg" &&
+      result.statusTone === "regular"
+    ) {
+      displayedHeadline =
+        "<span class=\"result-headline-label\">Dein Kind kommt in Hamburg im Schuljahr <span class=\"result-date-nowrap\">2026/2027</span> in die Schule.</span><span class=\"result-headline-label\">Die Einschulung der ersten Klassen findet schulabhängig am</span><span class=\"result-headline-highlight\">Montag, 24. August<br />oder Dienstag, 25. August 2026</span><span class=\"result-headline-meta\">statt.</span>";
+    }
+
+    if (
+      result.hasConfirmedDate &&
       normalizedSlug === "hessen" &&
       result.statusTone === "regular"
     ) {
@@ -1703,20 +1712,20 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
       dateDetails = `
         <div class="state-result-grid state-result-grid-priority" aria-label="Einschulungstermin ${stateName}">
           <div class="state-result-card state-result-card-wide">
-            <span>Nächste Einschulung</span>
-            <strong>24.–25. August 2026 (schulabhängig)</strong>
+            <span>Einschulung 2026</span>
+            <strong>schulabhängig,<br />ab 24. August 2026</strong>
           </div>
           <div class="state-result-card state-result-card-wide">
             <span>Erster Schultag</span>
-            <strong>Donnerstag, 20. August 2026</strong>
+            <strong>Donnerstag,<br />20. August 2026</strong>
           </div>
         </div>
         <p class="state-calculator-note">
           Für ${stateName} enden die Sommerferien 2026 am Mittwoch,
-          19. August 2026. Der erste Schultag nach den Sommerferien ist Donnerstag,
-          20. August 2026. Die Einschulungsfeier der ersten Klassen legt die
-          jeweilige Grundschule individuell fest. Häufig starten Erstklässlerinnen
-          und Erstklässler am Montag oder Dienstag nach dem ersten Schultag.
+          19. August 2026. Der erste Schultag ist Donnerstag, 20. August 2026.
+          Die Einschulung der ersten Klassen wird von der jeweiligen Grundschule
+          festgelegt – häufig am Montag oder Dienstag nach dem ersten Schultag.
+          Verbindliche Informationen erhältst du bei der zuständigen Grundschule.
         </p>
       `;
     }
