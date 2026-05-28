@@ -1,11 +1,35 @@
 ---
+import BaseLayout from "../layouts/BaseLayout.astro";
 import StateEnrollmentCalculator from "../components/StateEnrollmentCalculator.astro";
 
 const pageTitle =
-  "Einschulung Berlin 2026: Schulstart, Stichtag und Schuljahr";
+  "Einschulung Berlin 2026: Termin, Stichtag & Rechner";
 
 const pageDescription =
-  "Wann kommt mein Kind in Berlin in die Schule? Erfahre alles zu Schulstart, Einschulung, Stichtag 30. September, Kann-Kind-Regelung und Schuljahr.";
+  "Wann ist die Einschulung in Berlin 2026? Hier findest du Termin, Stichtag 30. September, Kann-Kind-Regelung und den kostenlosen Einschulungsrechner.";
+
+const canonical = "https://www.einschulungsrechner.de/einschulung-berlin/";
+const dateModified = "2026-05-28";
+
+const ADSENSE_ID = import.meta.env.PUBLIC_ADSENSE_ID || "";
+const STATE_CONTENT_AD_SLOT = import.meta.env.PUBLIC_ADSENSE_STATE_CONTENT_SLOT || "";
+const showContentAd = Boolean(ADSENSE_ID && STATE_CONTENT_AD_SLOT);
+
+const webPageSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  name: pageTitle,
+  description: pageDescription,
+  url: canonical,
+  datePublished: "2025-10-01",
+  dateModified,
+  inLanguage: "de",
+  publisher: {
+    "@type": "Organization",
+    name: "Einschulungsrechner",
+    url: "https://www.einschulungsrechner.de/",
+  },
+};
 
 const faqSchema = {
   "@context": "https://schema.org",
@@ -24,7 +48,15 @@ const faqSchema = {
       name: "Wann ist die Einschulung in Berlin 2026?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "In Berlin findet die Einschulungsfeier 2026 in der Regel am Samstag, 29. August 2026, statt. Der reguläre Unterricht für Schulanfängerinnen und Schulanfänger beginnt voraussichtlich Montag, 31. August 2026. Den konkreten Ablauf legt die zuständige Grundschule fest.",
+        text: "Die Sommerferien in Berlin enden 2026 am Freitag, 28. August 2026. Die Einschulungsfeier ist in der Regel für Samstag, 29. August 2026 vorgesehen. Der erste Schultag für Schulanfängerinnen und Schulanfänger ist voraussichtlich Montag, 31. August 2026. Den konkreten Ablauf legt die zuständige Grundschule fest.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Wann beginnt die Grundschule in Berlin 2026?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Der erste Schultag im Schuljahr 2026/2027 ist in Berlin voraussichtlich Montag, 31. August 2026. Die Einschulungsfeier ist in der Regel für Samstag, 29. August 2026 vorgesehen. Den konkreten Ablauf legt die zuständige Grundschule fest.",
       },
     },
     {
@@ -63,34 +95,36 @@ const faqSchema = {
 };
 ---
 
-<html lang="de">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{pageTitle}</title>
-    <meta name="description" content={pageDescription} />
-    <link rel="canonical" href="https://www.einschulungsrechner.de/einschulung-berlin/" />
-    <script type="application/ld+json" set:html={JSON.stringify(faqSchema)}></script>
-  </head>
-
-  <body>
-    <main class="state-page">
+<BaseLayout
+  title={pageTitle}
+  description={pageDescription}
+  canonical={canonical}
+  schema={[faqSchema, webPageSchema]}
+>
+  <main class="state-page">
       <a class="back-link" href="/">← Zur Startseite</a>
 
       <article class="state-card">
         <p class="state-kicker">Berlin</p>
 
         <h1>
-          Einschulung in Berlin:<br />
-          Schulstart, Stichtag und Schuljahr
+          Einschulung Berlin 2026:<br />
+          Wann kommt mein Kind in die Schule?
         </h1>
 
         <p class="lead">
-          Wann kommt mein Kind in Berlin in die Schule? Der Einschulungsrechner
-          zeigt dir anhand des Geburtsdatums das voraussichtliche Schuljahr. In
-          Berlin gilt der Stichtag 30. September. Für das Schuljahr 2026/2027 ist
-          die Einschulung voraussichtlich für Samstag, 29. August 2026 vorgesehen –
-          der erste Schultag ist Montag, 31. August 2026.
+          Wann kommt mein Kind in Berlin in die Schule? Gib das Geburtsdatum ein
+          und berechne das voraussichtliche Schuljahr. In Berlin gilt der Stichtag
+          30. September. Für das Schuljahr 2026/2027 ist die Einschulung
+          voraussichtlich für Samstag, 29. August 2026 vorgesehen – der erste
+          Schultag ist Montag, 31. August 2026.
+        </p>
+
+        <p class="answer-box">
+          Kurzantwort: Die Einschulung in Berlin 2026 ist voraussichtlich für
+          Samstag, 29. August 2026 vorgesehen. Der erste Schultag ist Montag,
+          31. August 2026. Schulpflichtig werden Kinder, die bis zum 30. September
+          2026 sechs Jahre alt werden.
         </p>
 
         <StateEnrollmentCalculator
@@ -104,13 +138,13 @@ const faqSchema = {
 
         <div class="quick-facts quick-facts-master" aria-label="Kurzüberblick Einschulung Berlin">
           <div class="fact-card fact-card-highlight">
-            <span>Nächste Einschulung</span>
-            <strong>Samstag, 29. August 2026</strong>
+            <span>Einschulung 2026</span>
+            <strong>Samstag,<br />29. August 2026</strong>
           </div>
 
           <div class="fact-card fact-card-highlight">
             <span>Erster Schultag</span>
-            <strong>Montag, 31. August 2026</strong>
+            <strong>Montag,<br />31. August 2026</strong>
           </div>
 
           <div class="fact-card">
@@ -123,6 +157,32 @@ const faqSchema = {
             <strong>Kann-Kind auf Antrag</strong>
           </div>
         </div>
+
+        {showContentAd ? (
+          <aside class="ad-slot ad-slot-after-facts" aria-label="Anzeige">
+            <p class="ad-label">Anzeige</p>
+            <ins
+              class="adsbygoogle"
+              style="display:block"
+              data-ad-client={ADSENSE_ID}
+              data-ad-slot={STATE_CONTENT_AD_SLOT}
+              data-ad-format="auto"
+              data-full-width-responsive="true"
+            ></ins>
+          </aside>
+        ) : null}
+
+        <section>
+          <h2>Wann ist die Einschulung in Berlin 2026?</h2>
+
+          <p>
+            Die Sommerferien in Berlin enden 2026 am Freitag, 28. August 2026.
+            Die Einschulungsfeier ist in der Regel für Samstag, 29. August 2026
+            vorgesehen. Der erste Schultag für Schulanfängerinnen und Schulanfänger
+            ist voraussichtlich Montag, 31. August 2026. Den konkreten Ablauf legt
+            die zuständige Grundschule fest.
+          </p>
+        </section>
 
         <section class="seo-explanation-box">
           <h2>Wie funktioniert der Einschulungsrechner für Berlin?</h2>
@@ -150,16 +210,6 @@ const faqSchema = {
           </p>
         </section>
 
-        <section>
-          <h2>Wann ist die Einschulung in Berlin 2026?</h2>
-
-          <p>
-            In Berlin findet die Einschulungsfeier 2026 in der Regel am Samstag,
-            29. August 2026, statt. Der reguläre Unterricht für Schulanfängerinnen
-            und Schulanfänger beginnt voraussichtlich Montag, 31. August 2026.
-            Den konkreten Ablauf legt die zuständige Grundschule fest.
-          </p>
-        </section>
 
         <section>
           <h2>Welcher Einschulungsstichtag gilt in Berlin?</h2>
@@ -224,11 +274,21 @@ const faqSchema = {
             <article class="faq-item">
               <h3>Wann ist die Einschulung in Berlin 2026?</h3>
               <p>
-                In Berlin findet die Einschulungsfeier 2026 in der Regel am
-                Samstag, 29. August 2026, statt. Der reguläre Unterricht für
-                Schulanfängerinnen und Schulanfänger beginnt voraussichtlich Montag,
-                31. August 2026. Den konkreten Ablauf legt die zuständige Grundschule
-                fest.
+                Die Sommerferien in Berlin enden 2026 am Freitag, 28. August 2026.
+                Die Einschulungsfeier ist in der Regel für Samstag, 29. August 2026
+                vorgesehen. Der erste Schultag für Schulanfängerinnen und Schulanfänger
+                ist voraussichtlich Montag, 31. August 2026. Den konkreten Ablauf
+                legt die zuständige Grundschule fest.
+              </p>
+            </article>
+
+            <article class="faq-item">
+              <h3>Wann beginnt die Grundschule in Berlin 2026?</h3>
+              <p>
+                Der erste Schultag im Schuljahr 2026/2027 ist in Berlin voraussichtlich
+                Montag, 31. August 2026. Die Einschulungsfeier ist in der Regel für
+                Samstag, 29. August 2026 vorgesehen. Den konkreten Ablauf legt die
+                zuständige Grundschule fest.
               </p>
             </article>
 
@@ -329,14 +389,13 @@ const faqSchema = {
             Jugend und Familie.
           </p>
 
-          <p class="stand">Stand der Informationen: Mai 2026</p>
+          <p class="stand">Stand der Informationen:<span class="stand-date">Mai 2026</span></p>
         </section>
       </article>
-    </main>
-  </body>
-</html>
+  </main>
+</BaseLayout>
 
-<style>
+<style is:global>
   :root {
     font-family:
       system-ui,
@@ -420,6 +479,19 @@ const faqSchema = {
     line-height: 1.64;
   }
 
+  .answer-box {
+    max-width: 760px;
+    margin: 20px 0 0;
+    padding: 18px 20px;
+    border: 1px solid rgba(129, 97, 38, 0.18);
+    border-radius: 18px;
+    background: rgba(245, 210, 138, 0.14);
+    color: #172033;
+    font-size: clamp(1.02rem, 1.35vw, 1.12rem);
+    font-weight: 800;
+    line-height: 1.5;
+  }
+
   .quick-facts {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -431,7 +503,7 @@ const faqSchema = {
     margin-top: 34px;
   }
 
-  :global(body.has-berlin-calculator-result) .quick-facts-master .fact-card-highlight {
+  body.has-berlin-calculator-result .quick-facts-master .fact-card-highlight {
     display: none;
   }
 
@@ -461,6 +533,23 @@ const faqSchema = {
     font-weight: 950;
     line-height: 1.12;
     letter-spacing: -0.035em;
+  }
+
+  .ad-slot {
+    margin: 30px 0 0;
+    padding: 14px 0;
+    border-top: 1px solid rgba(42, 35, 21, 0.08);
+    border-bottom: 1px solid rgba(42, 35, 21, 0.08);
+  }
+
+  .ad-label {
+    margin: 0 0 10px;
+    color: #8a7960;
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    line-height: 1.2;
+    text-transform: uppercase;
   }
 
   .fact-card-highlight {
@@ -576,6 +665,8 @@ const faqSchema = {
 
   .stand {
     display: inline-flex;
+    align-items: center;
+    gap: 0.25em;
     width: fit-content;
     margin-top: 16px;
     padding: 8px 12px;
@@ -585,6 +676,10 @@ const faqSchema = {
     font-size: 0.82rem;
     font-weight: 850;
     line-height: 1.2;
+  }
+
+  .stand-date {
+    display: inline;
   }
 
   @media (max-width: 720px) {
@@ -616,6 +711,12 @@ const faqSchema = {
     .lead {
       font-size: 1.02rem;
       line-height: 1.55;
+    }
+
+    .answer-box {
+      padding: 16px 18px;
+      font-size: 1rem;
+      line-height: 1.5;
     }
 
     .fact-card {
@@ -659,6 +760,16 @@ const faqSchema = {
     .seo-explanation-box {
       padding: 20px;
       border-radius: 20px;
+    }
+
+    .stand {
+      align-items: flex-start;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .stand-date {
+      display: block;
     }
   }
 

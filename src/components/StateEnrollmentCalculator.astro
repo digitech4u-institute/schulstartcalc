@@ -1441,7 +1441,7 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
     }
 
     if (normalizedSlug === "berlin") {
-      result = buildGenericEnrollmentResult(birthdateValue, stateRuleFromData) || calculateBerlinEnrollment(birthdateValue);
+      result = calculateBerlinEnrollment(birthdateValue) || buildGenericEnrollmentResult(birthdateValue, stateRuleFromData);
     }
 
     if (normalizedSlug === "hamburg") {
@@ -1613,6 +1613,15 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
 
     if (
       result.hasConfirmedDate &&
+      normalizedSlug === "berlin" &&
+      result.statusTone === "regular"
+    ) {
+      displayedHeadline =
+        "<span class=\"result-headline-label\">Dein Kind wird in Berlin im Schuljahr <span class=\"result-date-nowrap\">2026/2027</span> am</span><span class=\"result-headline-highlight\">Samstag,<br />29. August 2026</span><span class=\"result-headline-meta\">eingeschult.</span>";
+    }
+
+    if (
+      result.hasConfirmedDate &&
       normalizedSlug === "hessen" &&
       result.statusTone === "regular"
     ) {
@@ -1690,20 +1699,19 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
       dateDetails = `
         <div class="state-result-grid state-result-grid-priority" aria-label="Einschulungstermin ${stateName}">
           <div class="state-result-card state-result-card-wide">
-            <span>Nächste Einschulung</span>
-            <strong>Samstag, 29. August 2026</strong>
+            <span>Einschulung 2026</span>
+            <strong>Samstag,<br />29. August 2026</strong>
           </div>
           <div class="state-result-card state-result-card-wide">
             <span>Erster Schultag</span>
-            <strong>Montag, 31. August 2026</strong>
+            <strong>Montag,<br />31. August 2026</strong>
           </div>
         </div>
         <p class="state-calculator-note">
-          In ${stateName} findet die Einschulung 2026 in der Regel am
-          Samstag, 29. August 2026, statt. Der erste Schultag der neuen
-          Schulanfängerinnen und Schulanfänger ist voraussichtlich Montag,
-          31. August 2026. Den konkreten Ablauf legt die zuständige
-          Grundschule fest.
+          Für ${stateName} enden die Sommerferien 2026 am Freitag,
+          28. August 2026. Die Einschulung ist voraussichtlich am Samstag,
+          29. August 2026. Der erste Schultag ist voraussichtlich Montag,
+          31. August 2026. Den konkreten Ablauf legt die zuständige Grundschule fest.
         </p>
       `;
     }
@@ -2326,7 +2334,8 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
     display: grid;
     gap: 16px;
     width: 100%;
-    max-width: 100%;
+    max-width: 760px;
+    min-width: 0;
     justify-self: center;
     margin: 26px auto 0;
     padding: clamp(22px, 3vw, 34px);
@@ -2410,9 +2419,12 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
 
   :global(.state-result-top-grid) {
     display: grid;
+    width: min(100%, 640px);
+    max-width: 100%;
+    min-width: 0;
     grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
     gap: 12px;
-    margin-top: 6px;
+    margin: 6px auto 0;
   }
 
   :global(.state-result-summary),
@@ -2420,8 +2432,12 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
     display: grid;
     align-content: center;
     gap: 10px;
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
     min-height: 112px;
     padding: 18px 20px;
+    box-sizing: border-box;
     border: 1px solid rgba(129, 97, 38, 0.14);
     border-radius: 18px;
     background: rgba(245, 210, 138, 0.12);
@@ -2507,8 +2523,12 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
 
   :global(.state-result-grid) {
     display: grid;
+    width: min(100%, 640px);
+    max-width: 100%;
+    min-width: 0;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 12px;
+    margin-inline: auto;
   }
 
   :global(.state-result-grid-priority) {
@@ -2518,7 +2538,11 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
   }
 
   :global(.state-result-card) {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
     padding: 18px;
+    box-sizing: border-box;
     border: 1px solid rgba(42, 35, 21, 0.1);
     border-radius: 18px;
     background: rgba(255, 255, 255, 0.78);
@@ -2584,12 +2608,12 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
 
   @media (max-width: 720px) {
     :global(.state-result-top-grid),
-    :global(.state-result-grid) {
-      grid-template-columns: 1fr;
-    }
-
+    :global(.state-result-grid),
     :global(.state-result-grid-priority) {
+      width: min(100%, 460px);
+      max-width: 100%;
       grid-template-columns: 1fr;
+      margin-inline: auto;
     }
   }
 
