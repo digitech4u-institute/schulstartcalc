@@ -1457,7 +1457,7 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
     }
 
     if (normalizedSlug === "schleswig-holstein") {
-      result = buildGenericEnrollmentResult(birthdateValue, stateRuleFromData) || calculateSchleswigHolsteinEnrollment(birthdateValue);
+      result = calculateSchleswigHolsteinEnrollment(birthdateValue) || buildGenericEnrollmentResult(birthdateValue, stateRuleFromData);
     }
 
     if (normalizedSlug === "thueringen") {
@@ -1591,6 +1591,15 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
     ) {
       displayedHeadline =
         "<span class=\"result-headline-label\">Dein Kind kommt in Baden-Württemberg im Schuljahr <span class=\"result-date-nowrap\">2026/2027</span> in die Schule.</span><span class=\"result-headline-label\">Die Einschulung der ersten Klassen wird</span><span class=\"result-headline-highlight\">schulabhängig<br />ab 14. September 2026</span><span class=\"result-headline-meta\">festgelegt.</span>";
+    }
+
+    if (
+      result.hasConfirmedDate &&
+      normalizedSlug === "schleswig-holstein" &&
+      result.statusTone === "regular"
+    ) {
+      displayedHeadline =
+        "<span class=\"result-headline-label\">Dein Kind wird in Schleswig-Holstein im Schuljahr <span class=\"result-date-nowrap\">2026/2027</span> am</span><span class=\"result-headline-highlight\">Mittwoch,<br />19. August 2026</span><span class=\"result-headline-meta\">eingeschult.</span>";
     }
 
     if (
@@ -1785,20 +1794,20 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
       dateDetails = `
         <div class="state-result-grid state-result-grid-priority" aria-label="Einschulungstermin ${stateName}">
           <div class="state-result-card state-result-card-wide">
-            <span>Nächste Einschulung</span>
-            <strong>Mittwoch, 19. August 2026</strong>
+            <span>Einschulung 2026</span>
+            <strong>Mittwoch,<br />19. August 2026</strong>
           </div>
           <div class="state-result-card state-result-card-wide">
             <span>Erster Schultag</span>
-            <strong>Montag, 17. August 2026</strong>
+            <strong>Montag,<br />17. August 2026</strong>
           </div>
         </div>
         <p class="state-calculator-note">
           Für ${stateName} enden die Sommerferien 2026 am Samstag,
-          15. August 2026. Der erste Schultag ist Montag, 17. August 2026.
-          Die Einschulung an Grundschulen findet nach dem Erlass zu
-          Einschulungsterminen am dritten Schultag nach den Ferien statt – also
-          voraussichtlich Mittwoch, 19. August 2026.
+          15. August 2026. Der erste reguläre Schultag ist Montag,
+          17. August 2026. Die Einschulung an Grundschulen findet nach dem
+          Erlass zu Einschulungsterminen am dritten Schultag nach den Ferien statt –
+          für 2026 also voraussichtlich Mittwoch, 19. August 2026.
         </p>
       `;
     }
