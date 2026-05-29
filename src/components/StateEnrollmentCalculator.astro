@@ -1469,7 +1469,7 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
     }
 
     if (normalizedSlug === "mecklenburg-vorpommern") {
-      result = buildGenericEnrollmentResult(birthdateValue, stateRuleFromData) || calculateMecklenburgVorpommernEnrollment(birthdateValue);
+      result = calculateMecklenburgVorpommernEnrollment(birthdateValue) || buildGenericEnrollmentResult(birthdateValue, stateRuleFromData);
     }
 
     if (normalizedSlug === "saarland") {
@@ -1600,6 +1600,15 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
     ) {
       displayedHeadline =
         "<span class=\"result-headline-label\">Dein Kind wird in Schleswig-Holstein im Schuljahr <span class=\"result-date-nowrap\">2026/2027</span> am</span><span class=\"result-headline-highlight\">Mittwoch,<br />19. August 2026</span><span class=\"result-headline-meta\">eingeschult.</span>";
+    }
+
+    if (
+      result.hasConfirmedDate &&
+      normalizedSlug === "mecklenburg-vorpommern" &&
+      result.statusTone === "regular"
+    ) {
+      displayedHeadline =
+        "<span class=\"result-headline-label\">Dein Kind wird in Mecklenburg-Vorpommern im Schuljahr <span class=\"result-date-nowrap\">2026/2027</span> am</span><span class=\"result-headline-highlight\">Samstag,<br />22. August 2026</span><span class=\"result-headline-meta\">eingeschult.</span>";
     }
 
     if (
@@ -1812,6 +1821,27 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
       `;
     }
 
+    if (result.hasConfirmedDate && normalizedSlug === "mecklenburg-vorpommern") {
+      dateDetails = `
+        <div class="state-result-grid state-result-grid-priority" aria-label="Einschulungstermin ${stateName}">
+          <div class="state-result-card state-result-card-wide">
+            <span>Einschulung 2026</span>
+            <strong>Samstag,<br />22. August 2026</strong>
+          </div>
+          <div class="state-result-card state-result-card-wide">
+            <span>Erster Schultag</span>
+            <strong>Montag,<br />24. August 2026</strong>
+          </div>
+        </div>
+        <p class="state-calculator-note">
+          Für ${stateName} enden die Sommerferien 2026 am Samstag,
+          22. August 2026. Die Einschulung findet voraussichtlich ebenfalls an
+          diesem Tag statt. Der erste reguläre Schultag ist Montag,
+          24. August 2026.
+        </p>
+      `;
+    }
+
     if (result.hasConfirmedDate && normalizedSlug === "thueringen") {
       dateDetails = `
         <div class="state-result-grid state-result-grid-priority" aria-label="Schuleinführungstermin ${stateName}">
@@ -1854,26 +1884,6 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
       `;
     }
 
-    if (result.hasConfirmedDate && normalizedSlug === "mecklenburg-vorpommern") {
-      dateDetails = `
-        <div class="state-result-grid state-result-grid-priority" aria-label="Einschulungstermin ${stateName}">
-          <div class="state-result-card state-result-card-wide">
-            <span>Nächste Einschulung</span>
-            <strong>Samstag, 22. August 2026</strong>
-          </div>
-          <div class="state-result-card state-result-card-wide">
-            <span>Erster Schultag</span>
-            <strong>Montag, 24. August 2026</strong>
-          </div>
-        </div>
-        <p class="state-calculator-note">
-          Die Sommerferien in ${stateName} enden im Schuljahr 2026/2027 am
-          Samstag, 22. August 2026. Die Einschulung findet voraussichtlich
-          ebenfalls an diesem Tag statt. Der erste Schultag ist Montag,
-          24. August 2026. Den konkreten Ablauf legt die zuständige Grundschule fest.
-        </p>
-      `;
-    }
 
     if (result.hasConfirmedDate && normalizedSlug === "saarland") {
       dateDetails = `

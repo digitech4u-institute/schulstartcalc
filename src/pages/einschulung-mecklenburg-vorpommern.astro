@@ -1,11 +1,35 @@
 ---
+import BaseLayout from "../layouts/BaseLayout.astro";
 import StateEnrollmentCalculator from "../components/StateEnrollmentCalculator.astro";
 
 const pageTitle =
-  "Einschulung Mecklenburg-Vorpommern 2026: Schulstart, Stichtag und Schuljahr";
+  "Einschulung Mecklenburg-Vorpommern 2026: Termin, Stichtag & Rechner";
 
 const pageDescription =
-  "Wann kommt mein Kind in Mecklenburg-Vorpommern in die Schule? Alle Informationen zu Stichtag 30. Juni, Schulanmeldung, Kann-Kind-Regelung, Zurückstellung und Einschulung 2026.";
+  "Wann ist die Einschulung in Mecklenburg-Vorpommern 2026? Hier findest du Termin, Stichtag 30. Juni, Kann-Kind-Regelung und den kostenlosen Einschulungsrechner.";
+
+const canonical = "https://www.einschulungsrechner.de/einschulung-mecklenburg-vorpommern/";
+const dateModified = "2026-05-28";
+
+const ADSENSE_ID = import.meta.env.PUBLIC_ADSENSE_ID || "";
+const STATE_CONTENT_AD_SLOT = import.meta.env.PUBLIC_ADSENSE_STATE_CONTENT_SLOT || "";
+const showContentAd = Boolean(ADSENSE_ID && STATE_CONTENT_AD_SLOT);
+
+const webPageSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  name: pageTitle,
+  description: pageDescription,
+  url: canonical,
+  datePublished: "2025-10-01",
+  dateModified,
+  inLanguage: "de",
+  publisher: {
+    "@type": "Organization",
+    name: "Einschulungsrechner",
+    url: "https://www.einschulungsrechner.de/",
+  },
+};
 
 const faqSchema = {
   "@context": "https://schema.org",
@@ -24,7 +48,15 @@ const faqSchema = {
       name: "Wann ist die Einschulung in Mecklenburg-Vorpommern 2026?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Die Sommerferien in Mecklenburg-Vorpommern enden im Schuljahr 2026/2027 am Samstag, 22. August 2026. Die Einschulung findet voraussichtlich ebenfalls an diesem Tag statt; der erste reguläre Schultag ist Montag, 24. August 2026.",
+        text: "Die Sommerferien in Mecklenburg-Vorpommern enden 2026 am Samstag, 22. August 2026. Die Einschulung findet voraussichtlich ebenfalls an diesem Tag statt. Der erste reguläre Schultag ist Montag, 24. August 2026.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Wann beginnt die Grundschule in Mecklenburg-Vorpommern 2026?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Der erste reguläre Schultag im Schuljahr 2026/2027 ist in Mecklenburg-Vorpommern Montag, 24. August 2026. Die Einschulung findet voraussichtlich Samstag, 22. August 2026 statt.",
       },
     },
     {
@@ -63,35 +95,36 @@ const faqSchema = {
 };
 ---
 
-<html lang="de">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{pageTitle}</title>
-    <meta name="description" content={pageDescription} />
-    <link rel="canonical" href="https://www.einschulungsrechner.de/einschulung-mecklenburg-vorpommern/" />
-    <script type="application/ld+json" set:html={JSON.stringify(faqSchema)}></script>
-  </head>
-
-  <body>
-    <main class="state-page">
+<BaseLayout
+  title={pageTitle}
+  description={pageDescription}
+  canonical={canonical}
+  schema={[faqSchema, webPageSchema]}
+>
+  <main class="state-page">
       <a class="back-link" href="/">← Zur Startseite</a>
 
       <article class="state-card">
         <p class="state-kicker">Mecklenburg-Vorpommern</p>
 
         <h1>
-          Einschulung in<br />
-          Mecklenburg-Vorpommern:<br />
-          Schulstart, Stichtag und Schuljahr
+          Einschulung Mecklenburg-Vorpommern 2026:<br />
+          Wann kommt mein Kind in die Schule?
         </h1>
 
         <p class="lead">
-          Wann kommt mein Kind in Mecklenburg-Vorpommern in die Schule? Der Einschulungsrechner
-          zeigt dir anhand des Geburtsdatums das voraussichtliche Schuljahr. In
+          Wann kommt mein Kind in Mecklenburg-Vorpommern in die Schule? Gib das
+          Geburtsdatum ein und berechne das voraussichtliche Schuljahr. In
           Mecklenburg-Vorpommern gilt der Stichtag 30. Juni. Für das Schuljahr
           2026/2027 fällt die Einschulung voraussichtlich auf Samstag,
           22. August 2026 – der erste Schultag ist Montag, 24. August 2026.
+        </p>
+
+        <p class="answer-box">
+          Kurzantwort: Die Sommerferien in Mecklenburg-Vorpommern enden 2026 am
+          Samstag, 22. August 2026. Die Einschulung findet voraussichtlich ebenfalls
+          an diesem Tag statt. Der erste reguläre Schultag ist Montag,
+          24. August 2026.
         </p>
 
         <StateEnrollmentCalculator
@@ -105,13 +138,13 @@ const faqSchema = {
 
         <div class="quick-facts quick-facts-master" aria-label="Kurzüberblick Einschulung Mecklenburg-Vorpommern">
           <div class="fact-card fact-card-highlight">
-            <span>Nächste Einschulung</span>
-            <strong>Samstag, 22. August 2026</strong>
+            <span>Einschulung 2026</span>
+            <strong>Samstag,<br />22. August 2026</strong>
           </div>
 
           <div class="fact-card fact-card-highlight">
             <span>Erster Schultag</span>
-            <strong>Montag, 24. August 2026</strong>
+            <strong>Montag,<br />24. August 2026</strong>
           </div>
 
           <div class="fact-card">
@@ -124,6 +157,31 @@ const faqSchema = {
             <strong>Kann-Kind auf Antrag</strong>
           </div>
         </div>
+
+        {showContentAd ? (
+          <aside class="ad-slot ad-slot-after-facts" aria-label="Anzeige">
+            <p class="ad-label">Anzeige</p>
+            <ins
+              class="adsbygoogle"
+              style="display:block"
+              data-ad-client={ADSENSE_ID}
+              data-ad-slot={STATE_CONTENT_AD_SLOT}
+              data-ad-format="auto"
+              data-full-width-responsive="true"
+            ></ins>
+          </aside>
+        ) : null}
+
+        <section>
+          <h2>Wann ist die Einschulung in Mecklenburg-Vorpommern 2026?</h2>
+
+          <p>
+            Die Sommerferien in Mecklenburg-Vorpommern enden 2026 am Samstag,
+            22. August 2026. Die Einschulung findet voraussichtlich ebenfalls an
+            diesem Tag statt. Der erste reguläre Schultag ist Montag,
+            24. August 2026.
+          </p>
+        </section>
 
         <section class="example-box">
           <h2>Wie funktioniert der Einschulungsrechner für Mecklenburg-Vorpommern?</h2>
@@ -220,10 +278,19 @@ const faqSchema = {
             <article class="faq-item">
               <h3>Wann ist die Einschulung in Mecklenburg-Vorpommern 2026?</h3>
               <p>
-                Die Sommerferien in Mecklenburg-Vorpommern enden im Schuljahr
-                2026/2027 am Samstag, 22. August 2026. Die Einschulung findet
-                voraussichtlich ebenfalls an diesem Tag statt; der erste reguläre
-                Schultag ist Montag, 24. August 2026.
+                Die Sommerferien in Mecklenburg-Vorpommern enden 2026 am Samstag,
+                22. August 2026. Die Einschulung findet voraussichtlich ebenfalls an
+                diesem Tag statt. Der erste reguläre Schultag ist Montag,
+                24. August 2026.
+              </p>
+            </article>
+
+            <article class="faq-item">
+              <h3>Wann beginnt die Grundschule in Mecklenburg-Vorpommern 2026?</h3>
+              <p>
+                Der erste reguläre Schultag im Schuljahr 2026/2027 ist in
+                Mecklenburg-Vorpommern Montag, 24. August 2026. Die Einschulung
+                findet voraussichtlich Samstag, 22. August 2026 statt.
               </p>
             </article>
 
@@ -323,12 +390,11 @@ const faqSchema = {
             Grundschule, der Schulbehörde oder beim Land Mecklenburg-Vorpommern.
           </p>
 
-          <p class="stand">Stand der Informationen: Mai 2026</p>
+          <p class="stand">Stand der Informationen:<span class="stand-date">Mai 2026</span></p>
         </section>
       </article>
-    </main>
-  </body>
-</html>
+  </main>
+</BaseLayout>
 
 <style>
   :root {
@@ -414,6 +480,19 @@ const faqSchema = {
     line-height: 1.64;
   }
 
+  .answer-box {
+    max-width: 760px;
+    margin: 20px 0 0;
+    padding: 18px 20px;
+    border: 1px solid rgba(129, 97, 38, 0.18);
+    border-radius: 18px;
+    background: rgba(245, 210, 138, 0.14);
+    color: #172033;
+    font-size: clamp(1.02rem, 1.35vw, 1.12rem);
+    font-weight: 800;
+    line-height: 1.5;
+  }
+
   .quick-facts {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -460,6 +539,23 @@ const faqSchema = {
     font-weight: 950;
     line-height: 1.12;
     letter-spacing: -0.035em;
+  }
+
+  .ad-slot {
+    margin: 30px 0 0;
+    padding: 14px 0;
+    border-top: 1px solid rgba(42, 35, 21, 0.08);
+    border-bottom: 1px solid rgba(42, 35, 21, 0.08);
+  }
+
+  .ad-label {
+    margin: 0 0 10px;
+    color: #8a7960;
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    line-height: 1.2;
+    text-transform: uppercase;
   }
 
   section {
@@ -569,6 +665,8 @@ const faqSchema = {
 
   .stand {
     display: inline-flex;
+    align-items: center;
+    gap: 0.25em;
     width: fit-content;
     margin-top: 16px;
     padding: 8px 12px;
@@ -578,6 +676,10 @@ const faqSchema = {
     font-size: 0.82rem;
     font-weight: 850;
     line-height: 1.2;
+  }
+
+  .stand-date {
+    display: inline;
   }
 
   @media (max-width: 720px) {
@@ -609,6 +711,12 @@ const faqSchema = {
     .lead {
       font-size: 1.02rem;
       line-height: 1.55;
+    }
+
+    .answer-box {
+      padding: 16px 18px;
+      font-size: 1rem;
+      line-height: 1.5;
     }
 
     .fact-card {
@@ -656,6 +764,16 @@ const faqSchema = {
       width: auto;
       font-size: 1rem;
       line-height: 1.42;
+    }
+
+    .stand {
+      align-items: flex-start;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .stand-date {
+      display: block;
     }
   }
 
