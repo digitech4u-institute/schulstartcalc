@@ -1,11 +1,35 @@
 ---
+import BaseLayout from "../layouts/BaseLayout.astro";
 import StateEnrollmentCalculator from "../components/StateEnrollmentCalculator.astro";
 
 const pageTitle =
-  "Einschulung Baden-Württemberg 2026: Schulstart, Stichtag und Schuljahr";
+  "Einschulung Baden-Württemberg 2026: Termin, Stichtag & Rechner";
 
 const pageDescription =
-  "Wann kommt mein Kind in Baden-Württemberg in die Schule? Erfahre alles zu Schulstart, Einschulung, Stichtag 30. Juni, Stichtagsflexibilisierung und Schuljahr.";
+  "Wann ist die Einschulung in Baden-Württemberg 2026? Hier findest du Termin, Stichtag 30. Juni, Stichtagsflexibilisierung und den kostenlosen Einschulungsrechner.";
+
+const canonical = "https://www.einschulungsrechner.de/einschulung-baden-wuerttemberg/";
+const dateModified = "2026-05-28";
+
+const ADSENSE_ID = import.meta.env.PUBLIC_ADSENSE_ID || "";
+const STATE_CONTENT_AD_SLOT = import.meta.env.PUBLIC_ADSENSE_STATE_CONTENT_SLOT || "";
+const showContentAd = Boolean(ADSENSE_ID && STATE_CONTENT_AD_SLOT);
+
+const webPageSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  name: pageTitle,
+  description: pageDescription,
+  url: canonical,
+  datePublished: "2025-10-01",
+  dateModified,
+  inLanguage: "de",
+  publisher: {
+    "@type": "Organization",
+    name: "Einschulungsrechner",
+    url: "https://www.einschulungsrechner.de/",
+  },
+};
 
 const faqSchema = {
   "@context": "https://schema.org",
@@ -24,7 +48,15 @@ const faqSchema = {
       name: "Wann ist die Einschulung in Baden-Württemberg 2026?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Der erste Schultag nach den Sommerferien ist in Baden-Württemberg Montag, 14. September 2026. Der genaue Einschulungstermin wird von der jeweiligen Grundschule festgelegt. Als Orientierung wird voraussichtlich Samstag, 19. September 2026, genutzt. Verbindliche Informationen erhältst du bei der zuständigen Grundschule.",
+        text: "Die Sommerferien in Baden-Württemberg enden 2026 am Samstag, 12. September 2026. Der erste Schultag ist Montag, 14. September 2026. Die Einschulung der ersten Klassen wird von der zuständigen Grundschule festgelegt. Verbindliche Informationen erhältst du daher direkt bei der Schule.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Wann beginnt die Grundschule in Baden-Württemberg 2026?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Der erste Schultag im Schuljahr 2026/2027 ist in Baden-Württemberg Montag, 14. September 2026. Die Einschulung der ersten Klassen wird schulabhängig festgelegt.",
       },
     },
     {
@@ -63,36 +95,35 @@ const faqSchema = {
 };
 ---
 
-<html lang="de">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{pageTitle}</title>
-    <meta name="description" content={pageDescription} />
-    <link rel="canonical" href="https://www.einschulungsrechner.de/einschulung-baden-wuerttemberg/" />
-    <script type="application/ld+json" set:html={JSON.stringify(faqSchema)}></script>
-  </head>
-
-  <body>
-    <main class="state-page">
+<BaseLayout
+  title={pageTitle}
+  description={pageDescription}
+  canonical={canonical}
+  schema={[faqSchema, webPageSchema]}
+>
+  <main class="state-page">
       <a class="back-link" href="/">← Zur Startseite</a>
 
       <article class="state-card">
         <p class="state-kicker">Baden-Württemberg</p>
 
         <h1>
-          Einschulung in<br />
-          Baden-Württemberg:<br />
-          Schulstart, Stichtag und Schuljahr
+          Einschulung Baden-Württemberg 2026:<br />
+          Wann kommt mein Kind in die Schule?
         </h1>
 
         <p class="lead">
-          Wann kommt mein Kind in Baden-Württemberg in die Schule? Der
-          Einschulungsrechner zeigt dir anhand des Geburtsdatums das voraussichtliche
-          Schuljahr. In Baden-Württemberg gilt der Stichtag 30. Juni. Für das
-          Schuljahr 2026/2027 ist die Einschulung voraussichtlich am Samstag,
-          19. September 2026 – der erste Schultag ist Montag,
-          14. September 2026.
+          Wann kommt mein Kind in Baden-Württemberg in die Schule? Gib das Geburtsdatum
+          ein und berechne das voraussichtliche Schuljahr. In Baden-Württemberg gilt
+          der Stichtag 30. Juni. Für das Schuljahr 2026/2027 ist der erste Schultag
+          Montag, 14. September 2026. Die Einschulung wird schulabhängig festgelegt.
+        </p>
+
+        <p class="answer-box">
+          Kurzantwort: Die Sommerferien in Baden-Württemberg enden 2026 am Samstag,
+          12. September 2026. Der erste Schultag ist Montag, 14. September 2026.
+          Die Einschulung der ersten Klassen wird von der zuständigen Grundschule
+          festgelegt.
         </p>
 
         <StateEnrollmentCalculator
@@ -106,13 +137,13 @@ const faqSchema = {
 
         <div class="quick-facts quick-facts-master" aria-label="Kurzüberblick Einschulung Baden-Württemberg">
           <div class="fact-card fact-card-highlight">
-            <span>Nächste Einschulung</span>
-            <strong>Samstag, 19. September 2026 (schulabhängig)</strong>
+            <span>Einschulung 2026</span>
+            <strong>schulabhängig,<br />ab 14. September 2026</strong>
           </div>
 
           <div class="fact-card fact-card-highlight">
             <span>Erster Schultag</span>
-            <strong>Montag, 14. September 2026</strong>
+            <strong>Montag,<br />14. September 2026</strong>
           </div>
 
           <div class="fact-card">
@@ -126,39 +157,46 @@ const faqSchema = {
           </div>
         </div>
 
+        {showContentAd ? (
+          <aside class="ad-slot ad-slot-after-facts" aria-label="Anzeige">
+            <p class="ad-label">Anzeige</p>
+            <ins
+              class="adsbygoogle"
+              style="display:block"
+              data-ad-client={ADSENSE_ID}
+              data-ad-slot={STATE_CONTENT_AD_SLOT}
+              data-ad-format="auto"
+              data-full-width-responsive="true"
+            ></ins>
+          </aside>
+        ) : null}
+
+        <section>
+          <h2>Wann ist die Einschulung in Baden-Württemberg 2026?</h2>
+
+          <p>
+            Die Sommerferien in Baden-Württemberg enden 2026 am Samstag,
+            12. September 2026. Der erste Schultag ist Montag,
+            14. September 2026. Die Einschulung der ersten Klassen wird von der
+            zuständigen Grundschule festgelegt. Verbindliche Informationen erhältst
+            du daher direkt bei der Schule.
+          </p>
+        </section>
+
         <section class="seo-explanation-box">
           <h2>Wie funktioniert der Einschulungsrechner für Baden-Württemberg?</h2>
 
           <p>
             Der Einschulungsrechner prüft das Geburtsdatum deines Kindes und gleicht
             es mit den Regeln zur Einschulung in Baden-Württemberg ab. Entscheidend
-            sind vor allem der Stichtag 30. Juni und die Möglichkeit der
-            Stichtagsflexibilisierung.
+            sind vor allem der Stichtag 30. Juni und die Stichtagsflexibilisierung.
           </p>
 
           <p>
-            Beispielhaft zeigt der Rechner: Wird ein Kind am 15. Juni 2020 geboren,
-            wird es am 15. Juni 2026 sechs Jahre alt. Da dieses Datum vor dem
-            Stichtag 30. Juni liegt, ist das Kind in Baden-Württemberg regulär
-            schulpflichtig und voraussichtlich für das Schuljahr 2026/2027 vorgesehen.
-          </p>
-
-          <p>
-            Die wichtigsten Termine zum allgemeinen Schulstart und zur Einschulung
-            findest du im Terminblock oben. Den konkreten Einschulungstermin legt
-            die zuständige Grundschule fest.
-          </p>
-        </section>
-
-        <section>
-          <h2>Wann ist die Einschulung in Baden-Württemberg 2026?</h2>
-
-          <p>
-            Der erste Schultag nach den Sommerferien ist in Baden-Württemberg
-            Montag, 14. September 2026. Der genaue Einschulungstermin wird von der
-            jeweiligen Grundschule festgelegt. Als Orientierung wird voraussichtlich
-            Samstag, 19. September 2026, genutzt. Verbindliche Informationen
-            erhältst du bei der zuständigen Grundschule.
+            Beispiel: Wird ein Kind am 15. Juni 2020 geboren, wird es vor dem
+            Stichtag 30. Juni 2026 sechs Jahre alt. Damit ist das Kind in
+            Baden-Württemberg voraussichtlich für das Schuljahr 2026/2027 regulär
+            schulpflichtig.
           </p>
         </section>
 
@@ -222,11 +260,20 @@ const faqSchema = {
             <article class="faq-item">
               <h3>Wann ist die Einschulung in Baden-Württemberg 2026?</h3>
               <p>
-                Der erste Schultag nach den Sommerferien ist in Baden-Württemberg
-                Montag, 14. September 2026. Der genaue Einschulungstermin wird von
-                der jeweiligen Grundschule festgelegt. Als Orientierung wird
-                voraussichtlich Samstag, 19. September 2026, genutzt. Verbindliche
-                Informationen erhältst du bei der zuständigen Grundschule.
+                Die Sommerferien in Baden-Württemberg enden 2026 am Samstag,
+                12. September 2026. Der erste Schultag ist Montag,
+                14. September 2026. Die Einschulung der ersten Klassen wird von der
+                zuständigen Grundschule festgelegt. Verbindliche Informationen
+                erhältst du daher direkt bei der Schule.
+              </p>
+            </article>
+
+            <article class="faq-item">
+              <h3>Wann beginnt die Grundschule in Baden-Württemberg 2026?</h3>
+              <p>
+                Der erste Schultag im Schuljahr 2026/2027 ist in Baden-Württemberg
+                Montag, 14. September 2026. Die Einschulung der ersten Klassen wird
+                schulabhängig festgelegt.
               </p>
             </article>
 
@@ -326,14 +373,13 @@ const faqSchema = {
             und Sport Baden-Württemberg.
           </p>
 
-          <p class="stand">Stand der Informationen: Mai 2026</p>
+          <p class="stand">Stand der Informationen:<span class="stand-date">Mai 2026</span></p>
         </section>
       </article>
-    </main>
-  </body>
-</html>
+  </main>
+</BaseLayout>
 
-<style>
+<style is:global>
   :root {
     font-family:
       system-ui,
@@ -417,6 +463,19 @@ const faqSchema = {
     line-height: 1.64;
   }
 
+  .answer-box {
+    max-width: 760px;
+    margin: 20px 0 0;
+    padding: 18px 20px;
+    border: 1px solid rgba(129, 97, 38, 0.18);
+    border-radius: 18px;
+    background: rgba(245, 210, 138, 0.14);
+    color: #172033;
+    font-size: clamp(1.02rem, 1.35vw, 1.12rem);
+    font-weight: 800;
+    line-height: 1.5;
+  }
+
   .quick-facts {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -428,7 +487,7 @@ const faqSchema = {
     margin-top: 34px;
   }
 
-  :global(body.has-baden-wuerttemberg-calculator-result) .quick-facts-master .fact-card-highlight {
+  body.has-baden-wuerttemberg-calculator-result .quick-facts-master .fact-card-highlight {
     display: none;
   }
 
@@ -458,6 +517,23 @@ const faqSchema = {
     font-weight: 950;
     line-height: 1.12;
     letter-spacing: -0.035em;
+  }
+
+  .ad-slot {
+    margin: 30px 0 0;
+    padding: 14px 0;
+    border-top: 1px solid rgba(42, 35, 21, 0.08);
+    border-bottom: 1px solid rgba(42, 35, 21, 0.08);
+  }
+
+  .ad-label {
+    margin: 0 0 10px;
+    color: #8a7960;
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    line-height: 1.2;
+    text-transform: uppercase;
   }
 
   .fact-card-highlight {
@@ -573,6 +649,8 @@ const faqSchema = {
 
   .stand {
     display: inline-flex;
+    align-items: center;
+    gap: 0.25em;
     width: fit-content;
     margin-top: 16px;
     padding: 8px 12px;
@@ -582,6 +660,10 @@ const faqSchema = {
     font-size: 0.82rem;
     font-weight: 850;
     line-height: 1.2;
+  }
+
+  .stand-date {
+    display: inline;
   }
 
   @media (max-width: 720px) {
@@ -613,6 +695,12 @@ const faqSchema = {
     .lead {
       font-size: 1.02rem;
       line-height: 1.55;
+    }
+
+    .answer-box {
+      padding: 16px 18px;
+      font-size: 1rem;
+      line-height: 1.5;
     }
 
     .fact-card {
@@ -655,6 +743,22 @@ const faqSchema = {
     .seo-explanation-box {
       padding: 20px;
       border-radius: 20px;
+    }
+
+    .source-link {
+      width: auto;
+      font-size: 1rem;
+      line-height: 1.42;
+    }
+
+    .stand {
+      align-items: flex-start;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .stand-date {
+      display: block;
     }
   }
 

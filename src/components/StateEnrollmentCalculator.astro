@@ -1425,7 +1425,7 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
     }
 
     if (normalizedSlug === "baden-wuerttemberg") {
-      result = buildGenericEnrollmentResult(birthdateValue, stateRuleFromData) || calculateBadenWuerttembergEnrollment(birthdateValue);
+      result = calculateBadenWuerttembergEnrollment(birthdateValue) || buildGenericEnrollmentResult(birthdateValue, stateRuleFromData);
     }
 
     if (normalizedSlug === "nordrhein-westfalen") {
@@ -1590,7 +1590,7 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
       result.statusTone === "regular"
     ) {
       displayedHeadline =
-        "Dein Kind wird in Baden-Württemberg voraussichtlich im Schuljahr <span class=\"result-date-nowrap\">2026/2027</span> regulär eingeschult.";
+        "<span class=\"result-headline-label\">Dein Kind kommt in Baden-Württemberg im Schuljahr <span class=\"result-date-nowrap\">2026/2027</span> in die Schule.</span><span class=\"result-headline-label\">Die Einschulung der ersten Klassen wird</span><span class=\"result-headline-highlight\">schulabhängig<br />ab 14. September 2026</span><span class=\"result-headline-meta\">festgelegt.</span>";
     }
 
     if (
@@ -1633,20 +1633,20 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
       dateDetails = `
         <div class="state-result-grid state-result-grid-priority" aria-label="Einschulungstermin ${stateName}">
           <div class="state-result-card state-result-card-wide">
-            <span>Nächste Einschulung</span>
-            <strong>Samstag, 19. September 2026 (schulabhängig)</strong>
+            <span>Einschulung 2026</span>
+            <strong>schulabhängig,<br />ab 14. September 2026</strong>
           </div>
           <div class="state-result-card state-result-card-wide">
             <span>Erster Schultag</span>
-            <strong>Montag, 14. September 2026</strong>
+            <strong>Montag,<br />14. September 2026</strong>
           </div>
         </div>
         <p class="state-calculator-note">
-          Der erste Schultag nach den Sommerferien ist in ${stateName} Montag,
-          14. September 2026. Der genaue Einschulungstermin wird von der jeweiligen
-          Grundschule festgelegt. Als Orientierung gilt voraussichtlich Samstag,
-          19. September 2026. Verbindliche Informationen erhältst du bei der
-          zuständigen Grundschule.
+          Für ${stateName} enden die Sommerferien 2026 am Samstag,
+          12. September 2026. Der erste Schultag ist Montag,
+          14. September 2026. Die Einschulung der ersten Klassen wird von der
+          zuständigen Grundschule festgelegt. Verbindliche Informationen erhältst
+          du daher direkt bei der Schule.
         </p>
       `;
     }
@@ -2608,14 +2608,48 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
     line-height: 1.58;
   }
 
+  :global(.state-calculator-result *),
+  :global(.state-calculator-result *::before),
+  :global(.state-calculator-result *::after) {
+    box-sizing: border-box;
+  }
+
+  :global(.state-result-top-grid),
+  :global(.state-result-grid),
+  :global(.state-result-grid-priority) {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+  }
+
+  :global(.state-result-summary),
+  :global(.state-result-status),
+  :global(.state-result-card),
+  :global(.state-result-card-wide) {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+  }
+
+  :global(.state-result-card strong),
+  :global(.state-result-card-wide strong),
+  :global(.state-result-summary strong),
+  :global(.state-result-status strong) {
+    max-width: 100%;
+    overflow-wrap: anywhere;
+  }
+
   @media (max-width: 720px) {
     :global(.state-result-top-grid),
     :global(.state-result-grid),
     :global(.state-result-grid-priority) {
-      width: min(100%, 460px);
+      width: 100%;
       max-width: 100%;
-      grid-template-columns: 1fr;
-      margin-inline: auto;
+      min-width: 0;
+      grid-template-columns: minmax(0, 1fr);
+      margin-inline: 0;
     }
   }
 
