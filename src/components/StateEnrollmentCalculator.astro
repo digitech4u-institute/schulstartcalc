@@ -1358,24 +1358,33 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
       "Informiere dich frühzeitig bei der zuständigen Grundschule über Anmeldung, schulische und gesundheitliche Einschätzungen sowie konkrete Termine.";
 
     const afterJune = month > 6 || (month === 6 && day > 30);
-    const inKarenzzeit = afterJune && month <= 12;
-    const inJanuaryEarlyAdmission = month === 1;
+    const julyToSeptember = month >= 7 && month <= 9;
+    const octoberToDecember = month >= 10;
+    const januaryEarlyAdmission = month === 1;
 
-    if (inKarenzzeit) {
-      statusLabel = "Karenzzeitkind";
+    if (julyToSeptember) {
+      statusLabel = "Antrag innerhalb der Anmeldefrist";
       statusTone = "optional";
       nextStepTitle = "Wichtig für dich";
       nextStepText =
-        "Sprich die zuständige Grundschule direkt an. Die Anmeldung eines Karenzzeitkindes ist verbindlich; bei Geburtstagen ab Oktober kann zusätzlich eine Antragsprüfung erforderlich sein.";
+        "Sprich die zuständige Grundschule direkt an. Kinder mit Geburtstag vom 1. Juli bis 30. September können in Bremen innerhalb der Anmeldefrist auf Antrag ebenfalls zum 1. August schulpflichtig werden.";
     }
 
-    if (inJanuaryEarlyAdmission) {
+    if (octoberToDecember) {
+      statusLabel = "Vorzeitige Einschulung auf Antrag";
+      statusTone = "optional";
+      nextStepTitle = "Wichtig für dich";
+      nextStepText =
+        "Sprich die zuständige Grundschule direkt an, wenn du eine vorzeitige Einschulung prüfen möchtest. Bei Geburtstagen vom 1. Oktober bis 31. Januar des Folgejahres prüft die Grundschule zusätzlich, ob dein Kind nicht überfordert wird.";
+    }
+
+    if (januaryEarlyAdmission) {
       schoolStartYear = sixthBirthdayYear - 1;
       statusLabel = "Vorzeitige Einschulung auf Antrag";
       statusTone = "optional";
       nextStepTitle = "Wichtig für dich";
       nextStepText =
-        "Sprich die zuständige Grundschule direkt an, wenn du eine vorzeitige Einschulung für dein Kind prüfen möchtest. Maßgeblich sind unter anderem Schulreife und schulärztliche Einschätzung.";
+        "Sprich die zuständige Grundschule direkt an, wenn du eine vorzeitige Einschulung prüfen möchtest. Bei Geburtstagen vom 1. Oktober bis 31. Januar des Folgejahres prüft die Grundschule zusätzlich, ob dein Kind nicht überfordert wird.";
     }
 
     const schoolYear = `${schoolStartYear}/${schoolStartYear + 1}`;
@@ -1387,18 +1396,21 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
     let explanation =
       `Dein Kind wird in Bremen regulär schulpflichtig, weil es bis zum 30. Juni ${cutoffYear} sechs Jahre alt wird und damit zum 1. August ${cutoffYear} schulpflichtig ist.`;
 
-    if (statusLabel === "Karenzzeitkind") {
+    if (statusLabel === "Antrag innerhalb der Anmeldefrist") {
       resultHeadline =
-        `Dein Kind ist in Bremen ein Karenzzeitkind. Eine Einschulung im Schuljahr ${schoolYear} ist innerhalb der Anmeldefrist möglich.`;
+        `Dein Kind kann in Bremen auf Antrag innerhalb der Anmeldefrist im Schuljahr ${schoolYear} eingeschult werden.`;
       explanation =
-        `Dein Kind wird nach dem Stichtag 30. Juni ${cutoffYear}, aber bis zum 31. Dezember ${cutoffYear} sechs Jahre alt. Damit gilt es in Bremen als Karenzzeitkind. Die Anmeldung innerhalb der Anmeldefrist ist verbindlich; die zuständige Grundschule klärt die konkrete Einordnung.`;
+        `Dein Kind wird nach dem Stichtag 30. Juni ${cutoffYear}, aber bis zum 30. September ${cutoffYear} sechs Jahre alt. In Bremen können Kinder in diesem Zeitraum innerhalb der Anmeldefrist auf Antrag ebenfalls zum 1. August schulpflichtig werden.`;
     }
 
     if (statusLabel === "Vorzeitige Einschulung auf Antrag") {
+      const regularSchoolStartYear = januaryEarlyAdmission ? sixthBirthdayYear : sixthBirthdayYear + 1;
+      const regularSchoolYear = `${regularSchoolStartYear}/${regularSchoolStartYear + 1}`;
+
       resultHeadline =
-        `Dein Kind kann in Bremen nur auf Antrag vorzeitig im Schuljahr ${schoolYear} eingeschult werden.`;
+        `Dein Kind kann in Bremen auf Antrag vorzeitig im Schuljahr ${schoolYear} eingeschult werden. Regulär wäre voraussichtlich das Schuljahr ${regularSchoolYear}.`;
       explanation =
-        `Dein Kind vollendet das sechste Lebensjahr im Januar ${schoolStartYear + 1}. Für Kinder, die bis zum 31. Januar des Folgejahres sechs Jahre alt werden, kann in Bremen eine vorzeitige Aufnahme auf Antrag geprüft werden. Maßgeblich sind unter anderem Schulreife und schulärztliche Einschätzung.`;
+        `Dein Kind vollendet das sechste Lebensjahr nach dem regulären Stichtag 30. Juni ${cutoffYear}. Für Kinder, die vom 1. Oktober bis zum 31. Januar des Folgejahres sechs Jahre alt werden, kann in Bremen eine vorzeitige Aufnahme auf Antrag geprüft werden. Regulär wäre voraussichtlich das Schuljahr ${regularSchoolYear}. Maßgeblich sind unter anderem Schulreife und schulärztliche Einschätzung.`;
     }
 
     return {
@@ -1477,7 +1489,7 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
     }
 
     if (normalizedSlug === "bremen") {
-      result = buildGenericEnrollmentResult(birthdateValue, stateRuleFromData) || calculateBremenEnrollment(birthdateValue);
+      result = calculateBremenEnrollment(birthdateValue) || buildGenericEnrollmentResult(birthdateValue, stateRuleFromData);
     }
 
     let dateDetails = `
@@ -1609,6 +1621,15 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
     ) {
       displayedHeadline =
         "<span class=\"result-headline-label\">Dein Kind wird in Mecklenburg-Vorpommern im Schuljahr <span class=\"result-date-nowrap\">2026/2027</span> am</span><span class=\"result-headline-highlight\">Samstag,<br />22. August 2026</span><span class=\"result-headline-meta\">eingeschult.</span>";
+    }
+
+    if (
+      result.hasConfirmedDate &&
+      normalizedSlug === "bremen" &&
+      result.statusTone === "regular"
+    ) {
+      displayedHeadline =
+        "<span class=\"result-headline-label\">Dein Kind wird in Bremen im Schuljahr <span class=\"result-date-nowrap\">2026/2027</span> am</span><span class=\"result-headline-highlight\">Samstag,<br />15. August 2026</span><span class=\"result-headline-meta\">eingeschult.</span>";
     }
 
     if (
@@ -1908,24 +1929,45 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
     }
 
     if (result.hasConfirmedDate && normalizedSlug === "bremen") {
-      dateDetails = `
-        <div class="state-result-grid state-result-grid-priority" aria-label="Einschulungstermin ${stateName}">
-          <div class="state-result-card state-result-card-wide">
-            <span>Nächste Einschulung</span>
-            <strong>Samstag, 15. August 2026</strong>
+      if (result.statusLabel === "Vorzeitige Einschulung auf Antrag") {
+        dateDetails = `
+          <div class="state-result-grid state-result-grid-priority" aria-label="Mögliche vorzeitige Einschulung ${stateName}">
+            <div class="state-result-card state-result-card-wide">
+              <span>Möglich auf Antrag</span>
+              <strong>2026/2027</strong>
+            </div>
+            <div class="state-result-card state-result-card-wide">
+              <span>Regulär voraussichtlich</span>
+              <strong>2027/2028</strong>
+            </div>
           </div>
-          <div class="state-result-card state-result-card-wide">
-            <span>Erster Schultag</span>
-            <strong>Donnerstag, 13. August 2026</strong>
+          <p class="state-calculator-note">
+            Dieses Ergebnis bedeutet nicht, dass dein Kind regulär im Schuljahr
+            2026/2027 schulpflichtig ist. Es zeigt die mögliche vorzeitige Einschulung
+            auf Antrag. Regulär wäre voraussichtlich das Schuljahr 2027/2028.
+            Verbindlich entscheidet die zuständige Grundschule.
+          </p>
+        `;
+      } else {
+        dateDetails = `
+          <div class="state-result-grid state-result-grid-priority" aria-label="Einschulungstermin ${stateName}">
+            <div class="state-result-card state-result-card-wide">
+              <span>Einschulung 2026</span>
+              <strong>Samstag,<br />15. August 2026</strong>
+            </div>
+            <div class="state-result-card state-result-card-wide">
+              <span>Erster Schultag</span>
+              <strong>Donnerstag,<br />13. August 2026</strong>
+            </div>
           </div>
-        </div>
-        <p class="state-calculator-note">
-          Für ${stateName} enden die Sommerferien 2026 am Mittwoch,
-          12. August 2026. Der erste Schultag ist Donnerstag, 13. August 2026.
-          Die Einschulungsfeier für Erstklässlerinnen und Erstklässler ist offiziell
-          für Samstag, 15. August 2026 festgelegt.
-        </p>
-      `;
+          <p class="state-calculator-note">
+            Für ${stateName} enden die Sommerferien 2026 am Mittwoch,
+            12. August 2026. Der erste reguläre Schultag ist Donnerstag,
+            13. August 2026. Die Einschulung ist offiziell für Samstag,
+            15. August 2026 festgelegt.
+          </p>
+        `;
+      }
     }
 
     if (result.hasConfirmedDate && normalizedSlug === "nordrhein-westfalen") {

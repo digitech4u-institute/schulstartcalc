@@ -1,11 +1,35 @@
 ---
+import BaseLayout from "../layouts/BaseLayout.astro";
 import StateEnrollmentCalculator from "../components/StateEnrollmentCalculator.astro";
 
 const pageTitle =
-  "Einschulung Bremen 2026: Schulstart, Stichtag und Schuljahr";
+  "Einschulung Bremen 2026: Termin, Stichtag & Rechner";
 
 const pageDescription =
-  "Wann kommt mein Kind in Bremen in die Schule? Alle Informationen zu Stichtag 30. Juni, Karenzzeit, vorzeitiger Einschulung, Zurückstellung und Einschulung 2026.";
+  "Wann ist die Einschulung in Bremen 2026? Hier findest du Termin, Stichtag 30. Juni, Antrag bis 31. Januar und den kostenlosen Einschulungsrechner.";
+
+const canonical = "https://www.einschulungsrechner.de/einschulung-bremen/";
+const dateModified = "2026-05-28";
+
+const ADSENSE_ID = import.meta.env.PUBLIC_ADSENSE_ID || "";
+const STATE_CONTENT_AD_SLOT = import.meta.env.PUBLIC_ADSENSE_STATE_CONTENT_SLOT || "";
+const showContentAd = Boolean(ADSENSE_ID && STATE_CONTENT_AD_SLOT);
+
+const webPageSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  name: pageTitle,
+  description: pageDescription,
+  url: canonical,
+  datePublished: "2025-10-01",
+  dateModified,
+  inLanguage: "de",
+  publisher: {
+    "@type": "Organization",
+    name: "Einschulungsrechner",
+    url: "https://www.einschulungsrechner.de/",
+  },
+};
 
 const faqSchema = {
   "@context": "https://schema.org",
@@ -24,15 +48,23 @@ const faqSchema = {
       name: "Wann ist die Einschulung in Bremen 2026?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Für das Schuljahr 2026/2027 enden die Sommerferien in Bremen am Mittwoch, 12. August 2026. Der erste reguläre Schultag ist Donnerstag, 13. August 2026. Die Einschulungsfeier für Erstklässler ist offiziell für Samstag, 15. August 2026 festgelegt.",
+        text: "Die Sommerferien in Bremen enden 2026 am Mittwoch, 12. August 2026. Der erste reguläre Schultag ist Donnerstag, 13. August 2026. Die Einschulung ist offiziell für Samstag, 15. August 2026 festgelegt.",
       },
     },
     {
       "@type": "Question",
-      name: "Was bedeutet Karenzzeit in Bremen?",
+      name: "Wann beginnt die Grundschule in Bremen 2026?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Als Karenzzeitkinder gelten in Bremen Kinder, die zwischen dem 1. Juli und dem 31. Dezember sechs Jahre alt werden. Sie können innerhalb der Anmeldefrist für die Einschulung angemeldet werden; die Anmeldung ist verbindlich.",
+        text: "Der erste reguläre Schultag im Schuljahr 2026/2027 ist in Bremen Donnerstag, 13. August 2026. Die Einschulung ist offiziell für Samstag, 15. August 2026 festgelegt.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Welche Sonderregel gilt in Bremen nach dem Stichtag?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Kinder, die nach dem 30. Juni sechs Jahre alt werden, können in Bremen unter bestimmten Voraussetzungen auf Antrag ebenfalls zum 1. August schulpflichtig werden: vom 1. Juli bis 30. September innerhalb der Anmeldefrist; vom 1. Oktober bis 31. Januar des Folgejahres mit zusätzlicher Prüfung durch die Grundschule.",
       },
     },
     {
@@ -40,7 +72,7 @@ const faqSchema = {
       name: "Kann mein Kind in Bremen vorzeitig eingeschult werden?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Kinder, die zwischen dem 1. Oktober eines Jahres und dem 31. Januar des Folgejahres sechs Jahre alt werden, können in Bremen auf Antrag vorzeitig schulpflichtig werden. Die zuständige Grundschule prüft den Antrag; maßgeblich sind unter anderem die Schulreife und die schulärztliche Einschätzung. Kinder mit Geburtstag zwischen Oktober und Dezember gehören zugleich zur Karenzzeit.",
+        text: "Kinder, die zwischen dem 1. Oktober eines Jahres und dem 31. Januar des Folgejahres sechs Jahre alt werden, können in Bremen auf Antrag vorzeitig schulpflichtig werden. Die zuständige Grundschule prüft den Antrag; maßgeblich sind unter anderem die Schulreife und die schulärztliche Einschätzung.",
       },
     },
     {
@@ -64,34 +96,36 @@ const faqSchema = {
 
 ---
 
-<html lang="de">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{pageTitle}</title>
-    <meta name="description" content={pageDescription} />
-    <link rel="canonical" href="https://www.einschulungsrechner.de/einschulung-bremen/" />
-    <script type="application/ld+json" set:html={JSON.stringify(faqSchema)}></script>
-  </head>
-
-  <body>
-    <main class="state-page">
+<BaseLayout
+  title={pageTitle}
+  description={pageDescription}
+  canonical={canonical}
+  schema={[faqSchema, webPageSchema]}
+>
+  <main class="state-page">
       <a class="back-link" href="/">← Zur Startseite</a>
 
       <article class="state-card">
         <p class="state-kicker">Bremen</p>
 
         <h1>
-          Einschulung in Bremen:<br />
-          Schulstart, Stichtag und Schuljahr
+          Einschulung Bremen 2026:<br />
+          Wann kommt mein Kind in die Schule?
         </h1>
 
         <p class="lead">
-          Wann kommt mein Kind in Bremen in die Schule? Der Einschulungsrechner
-          zeigt dir anhand des Geburtsdatums das voraussichtliche Schuljahr. In
-          Bremen gilt der Stichtag 30. Juni. Für das Schuljahr 2026/2027 ist der
-          erste reguläre Schultag Donnerstag, 13. August 2026 – die Einschulungsfeier
-          für Erstklässler ist offiziell für Samstag, 15. August 2026 festgelegt.
+          Wann kommt mein Kind in Bremen in die Schule? Gib das Geburtsdatum ein
+          und berechne das voraussichtliche Schuljahr. In Bremen gilt der Stichtag
+          30. Juni. Für das Schuljahr 2026/2027 ist der erste reguläre Schultag
+          Donnerstag, 13. August 2026 – die Einschulung ist offiziell für Samstag,
+          15. August 2026 festgelegt.
+        </p>
+
+        <p class="answer-box">
+          Kurzantwort: Die Sommerferien in Bremen enden 2026 am Mittwoch,
+          12. August 2026. Der erste reguläre Schultag ist Donnerstag,
+          13. August 2026. Die Einschulung ist offiziell für Samstag,
+          15. August 2026 festgelegt.
         </p>
 
         <StateEnrollmentCalculator
@@ -105,13 +139,13 @@ const faqSchema = {
 
         <div class="quick-facts quick-facts-master" aria-label="Kurzüberblick Einschulung Bremen">
           <div class="fact-card fact-card-highlight">
-            <span>Nächste Einschulung</span>
-            <strong>Samstag, 15. August 2026</strong>
+            <span>Einschulung 2026</span>
+            <strong>Samstag,<br />15. August 2026</strong>
           </div>
 
           <div class="fact-card fact-card-highlight">
             <span>Erster Schultag</span>
-            <strong>Donnerstag, 13. August 2026</strong>
+            <strong>Donnerstag,<br />13. August 2026</strong>
           </div>
 
           <div class="fact-card">
@@ -121,9 +155,33 @@ const faqSchema = {
 
           <div class="fact-card">
             <span>Sonderregel</span>
-            <strong>Karenzzeit bis 31. Dezember</strong>
+            <strong>Antrag bis 31. Januar</strong>
           </div>
         </div>
+
+        {showContentAd ? (
+          <aside class="ad-slot ad-slot-after-facts" aria-label="Anzeige">
+            <p class="ad-label">Anzeige</p>
+            <ins
+              class="adsbygoogle"
+              style="display:block"
+              data-ad-client={ADSENSE_ID}
+              data-ad-slot={STATE_CONTENT_AD_SLOT}
+              data-ad-format="auto"
+              data-full-width-responsive="true"
+            ></ins>
+          </aside>
+        ) : null}
+
+        <section>
+          <h2>Wann ist die Einschulung in Bremen 2026?</h2>
+
+          <p>
+            Die Sommerferien in Bremen enden 2026 am Mittwoch, 12. August 2026.
+            Der erste reguläre Schultag ist Donnerstag, 13. August 2026. Die
+            Einschulung ist offiziell für Samstag, 15. August 2026 festgelegt.
+          </p>
+        </section>
 
         <section class="example-box">
           <h2>Wie funktioniert der Einschulungsrechner für Bremen?</h2>
@@ -143,12 +201,14 @@ const faqSchema = {
           </p>
 
           <p>
-            Wird ein Kind zwischen dem 1. Juli und dem 31. Dezember sechs Jahre
-            alt, gilt es in Bremen als Karenzzeitkind. Wird ein Kind zwischen dem
-            1. Oktober und dem 31. Januar des Folgejahres sechs Jahre alt, kommt
-            eine vorzeitige Einschulung auf Antrag in Betracht. Kinder mit Geburtstag
-            zwischen Oktober und Dezember liegen damit in einem Überschneidungsbereich,
-            der über die zuständige Grundschule geklärt wird.
+            Wird ein Kind nach dem 30. Juni sechs Jahre alt, gelten in Bremen
+            besondere Antragsregeln: Kinder mit Geburtstag vom 1. Juli bis
+            30. September können innerhalb der Anmeldefrist auf Antrag ebenfalls
+            zum 1. August schulpflichtig werden. Kinder mit Geburtstag vom
+            1. Oktober bis 31. Januar des Folgejahres können ebenfalls auf Antrag
+            aufgenommen werden; hier prüft die Grundschule zusätzlich, insbesondere
+            auf Basis des schulärztlichen Gutachtens, ob das Kind nicht überfordert
+            wird.
           </p>
         </section>
 
@@ -163,24 +223,27 @@ const faqSchema = {
           </p>
 
           <p>
-            Für Kinder nach dem Stichtag gelten besondere Regeln: Kinder mit
-            Geburtstag vom 1. Juli bis 31. Dezember sind Karenzzeitkinder. Kinder,
-            die vom 1. Oktober bis 31. Januar des Folgejahres sechs Jahre alt
-            werden, können auf Antrag vorzeitig schulpflichtig werden. Für Kinder
-            mit Geburtstag von Oktober bis Dezember überschneiden sich diese
-            Regelungen in der Praxis; die zuständige Grundschule hilft bei der
-            konkreten Einordnung.
+            Für Kinder nach dem Stichtag gelten in Bremen besondere Antragsregeln:
+            Kinder mit Geburtstag vom 1. Juli bis 30. September können innerhalb
+            der Anmeldefrist auf Antrag ebenfalls zum 1. August schulpflichtig
+            werden. Kinder, die vom 1. Oktober bis 31. Januar des Folgejahres
+            sechs Jahre alt werden, können ebenfalls auf Antrag aufgenommen werden;
+            hier prüft die Grundschule zusätzlich, ob das Kind durch den Schulbesuch
+            nicht überfordert wird.
           </p>
         </section>
 
         <section>
-          <h2>Was bedeutet Karenzzeit in Bremen?</h2>
+          <h2>Welche Sonderregel gilt in Bremen nach dem Stichtag?</h2>
 
           <p>
-            Die Karenzzeit betrifft Kinder, die zwischen dem 1. Juli und dem
-            31. Dezember sechs Jahre alt werden. Diese Kinder können innerhalb der
-            Anmeldefrist für die Einschulung angemeldet werden. Wichtig für Eltern:
-            Die Anmeldung eines Karenzzeitkindes ist verbindlich.
+            Kinder, die nach dem 30. Juni sechs Jahre alt werden, können in Bremen
+            unter bestimmten Voraussetzungen auf Antrag ebenfalls zum 1. August
+            schulpflichtig werden. Für Kinder mit Geburtstag vom 1. Juli bis
+            30. September gilt der Antrag innerhalb der Anmeldefrist. Für Kinder
+            mit Geburtstag vom 1. Oktober bis 31. Januar des Folgejahres prüft die
+            Grundschule zusätzlich, ob das Kind durch den Schulbesuch nicht
+            überfordert wird.
           </p>
         </section>
 
@@ -192,9 +255,9 @@ const faqSchema = {
             Folgejahres sechs Jahre alt werden, können in Bremen auf Antrag
             vorzeitig schulpflichtig werden. Die Anmeldung erfolgt bei der
             zuständigen Grundschule während der Anmeldezeit. Die Schule prüft, ob
-            das Kind bereits schulreif ist; dabei spielt auch die schulärztliche
-            Einschätzung eine wichtige Rolle. Kinder mit Geburtstag zwischen Oktober
-            und Dezember gehören zugleich zur Karenzzeit.
+            das Kind bereits schulreif ist und durch den Schulbesuch nicht
+            überfordert wird; dabei spielt auch die schulärztliche Einschätzung
+            eine wichtige Rolle.
           </p>
         </section>
 
@@ -246,20 +309,30 @@ const faqSchema = {
             <article class="faq-item">
               <h3>Wann ist die Einschulung in Bremen 2026?</h3>
               <p>
-                Für das Schuljahr 2026/2027 enden die Sommerferien in Bremen am
-                Mittwoch, 12. August 2026. Der erste reguläre Schultag ist
-                Donnerstag, 13. August 2026. Die Einschulungsfeier für Erstklässler
-                ist offiziell für Samstag, 15. August 2026 festgelegt.
+                Die Sommerferien in Bremen enden 2026 am Mittwoch,
+                12. August 2026. Der erste reguläre Schultag ist Donnerstag,
+                13. August 2026. Die Einschulung ist offiziell für Samstag,
+                15. August 2026 festgelegt.
               </p>
             </article>
 
             <article class="faq-item">
-              <h3>Was bedeutet Karenzzeit in Bremen?</h3>
+              <h3>Wann beginnt die Grundschule in Bremen 2026?</h3>
               <p>
-                Als Karenzzeitkinder gelten in Bremen Kinder, die zwischen dem
-                1. Juli und dem 31. Dezember sechs Jahre alt werden. Sie können
-                innerhalb der Anmeldefrist für die Einschulung angemeldet werden;
-                die Anmeldung ist verbindlich.
+                Der erste reguläre Schultag im Schuljahr 2026/2027 ist in Bremen
+                Donnerstag, 13. August 2026. Die Einschulung ist offiziell für
+                Samstag, 15. August 2026 festgelegt.
+              </p>
+            </article>
+
+            <article class="faq-item">
+              <h3>Welche Sonderregel gilt in Bremen nach dem Stichtag?</h3>
+              <p>
+                Kinder, die nach dem 30. Juni sechs Jahre alt werden, können in
+                Bremen unter bestimmten Voraussetzungen auf Antrag ebenfalls zum
+                1. August schulpflichtig werden: vom 1. Juli bis 30. September
+                innerhalb der Anmeldefrist; vom 1. Oktober bis 31. Januar des
+                Folgejahres mit zusätzlicher Prüfung durch die Grundschule.
               </p>
             </article>
 
@@ -270,8 +343,7 @@ const faqSchema = {
                 des Folgejahres sechs Jahre alt werden, können in Bremen auf Antrag
                 vorzeitig schulpflichtig werden. Die zuständige Grundschule prüft
                 den Antrag; maßgeblich sind unter anderem die Schulreife und die
-                schulärztliche Einschätzung. Kinder mit Geburtstag zwischen Oktober
-                und Dezember gehören zugleich zur Karenzzeit.
+                schulärztliche Einschätzung.
               </p>
             </article>
 
@@ -361,12 +433,11 @@ const faqSchema = {
             Bildung Bremen.
           </p>
 
-          <p class="stand">Stand der Informationen: Mai 2026</p>
+          <p class="stand">Stand der Informationen:<span class="stand-date">Mai 2026</span></p>
         </section>
       </article>
-    </main>
-  </body>
-</html>
+  </main>
+</BaseLayout>
 
 <style>
   :root {
@@ -452,6 +523,19 @@ const faqSchema = {
     line-height: 1.64;
   }
 
+  .answer-box {
+    max-width: 760px;
+    margin: 20px 0 0;
+    padding: 18px 20px;
+    border: 1px solid rgba(129, 97, 38, 0.18);
+    border-radius: 18px;
+    background: rgba(245, 210, 138, 0.14);
+    color: #172033;
+    font-size: clamp(1.02rem, 1.35vw, 1.12rem);
+    font-weight: 800;
+    line-height: 1.5;
+  }
+
   .quick-facts {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -498,6 +582,23 @@ const faqSchema = {
     font-weight: 950;
     line-height: 1.12;
     letter-spacing: -0.035em;
+  }
+
+  .ad-slot {
+    margin: 30px 0 0;
+    padding: 14px 0;
+    border-top: 1px solid rgba(42, 35, 21, 0.08);
+    border-bottom: 1px solid rgba(42, 35, 21, 0.08);
+  }
+
+  .ad-label {
+    margin: 0 0 10px;
+    color: #8a7960;
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    line-height: 1.2;
+    text-transform: uppercase;
   }
 
   section {
@@ -607,6 +708,8 @@ const faqSchema = {
 
   .stand {
     display: inline-flex;
+    align-items: center;
+    gap: 0.25em;
     width: fit-content;
     margin-top: 16px;
     padding: 8px 12px;
@@ -616,6 +719,10 @@ const faqSchema = {
     font-size: 0.82rem;
     font-weight: 850;
     line-height: 1.2;
+  }
+
+  .stand-date {
+    display: inline;
   }
 
   @media (max-width: 720px) {
@@ -647,6 +754,12 @@ const faqSchema = {
     .lead {
       font-size: 1.02rem;
       line-height: 1.55;
+    }
+
+    .answer-box {
+      padding: 16px 18px;
+      font-size: 1rem;
+      line-height: 1.5;
     }
 
     .fact-card {
@@ -694,6 +807,16 @@ const faqSchema = {
       width: auto;
       font-size: 1rem;
       line-height: 1.42;
+    }
+
+    .stand {
+      align-items: flex-start;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .stand-date {
+      display: block;
     }
   }
 
