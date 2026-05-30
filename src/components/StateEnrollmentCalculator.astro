@@ -1429,7 +1429,7 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
     if (!resultBox || !birthdateValue) return;
 
     let result = normalizedSlug === "sachsen"
-      ? buildGenericEnrollmentResult(birthdateValue, stateRuleFromData) || calculateSachsenEnrollment(birthdateValue)
+      ? calculateSachsenEnrollment(birthdateValue) || buildGenericEnrollmentResult(birthdateValue, stateRuleFromData)
       : calculateSachsenEnrollment(birthdateValue);
 
     if (normalizedSlug === "bayern") {
@@ -1502,20 +1502,20 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
 
     if (result.hasConfirmedDate && normalizedSlug === "sachsen") {
       dateDetails = `
-        <div class="state-result-grid state-result-grid-priority" aria-label="Einschulungstermin ${stateName}">
+        <div class="state-result-grid state-result-grid-priority" aria-label="Schuleinführung ${stateName}">
           <div class="state-result-card state-result-card-wide">
-            <span>Nächste Einschulung</span>
-            <strong>Samstag, 15. August 2026</strong>
+            <span>Schuleinführung 2026</span>
+            <strong>Samstag,<br />15. August 2026</strong>
           </div>
           <div class="state-result-card state-result-card-wide">
             <span>Erster Schultag</span>
-            <strong>Montag, 17. August 2026</strong>
+            <strong>Montag,<br />17. August 2026</strong>
           </div>
         </div>
         <p class="state-calculator-note">
-          Für ${stateName} ist die Schuleinführung 2026 offiziell veröffentlicht.
-          Der erste Schultag ist Montag, 17. August 2026. Den konkreten Ablauf
-          legt die zuständige Grundschule fest.
+          Für ${stateName} ist die Schuleinführung 2026 offiziell für Samstag,
+          15. August 2026, genannt. Der erste reguläre Schultag ist Montag,
+          17. August 2026. Den konkreten Ablauf legt die zuständige Grundschule fest.
         </p>
       `;
     }
@@ -1549,6 +1549,15 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
 
     if (result.statusTone === "following") {
       displayedHeadline = `Dein Kind wird in ${stateName} voraussichtlich im Schuljahr <span class="result-date-nowrap">${result.schoolYear}</span> eingeschult.`;
+    }
+
+    if (
+      result.hasConfirmedDate &&
+      normalizedSlug === "sachsen" &&
+      result.statusTone === "regular"
+    ) {
+      displayedHeadline =
+        "<span class=\"result-headline-label\">Die Schuleinführung deines Kindes findet in Sachsen im Schuljahr <span class=\"result-date-nowrap\">2026/2027</span> am</span><span class=\"result-headline-highlight\">Samstag,<br />15. August 2026</span><span class=\"result-headline-meta\">statt.</span>";
     }
 
     if (
