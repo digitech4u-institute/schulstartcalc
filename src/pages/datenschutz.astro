@@ -14,7 +14,7 @@ const canonical = "https://www.einschulungsrechner.de/datenschutz/";
       <section class="legal-card">
         <p class="legal-kicker">Datenschutz</p>
 
-        <h1>Datenschutzerklärung</h1>
+        <h1>Datenschutz&shy;erklärung</h1>
 
         <h2>1. Verantwortlicher</h2>
 
@@ -22,11 +22,13 @@ const canonical = "https://www.einschulungsrechner.de/datenschutz/";
           Verantwortlich für die Datenverarbeitung auf dieser Website ist:<br /><br />
 
           DigiTech4U Institute<br />
-          M. Lanzend. Str. 6-8<br />
-          2333 Leopoldsdorf<br />
-          Österreich<br /><br />
+          Gemeinnütziger Forschungsverein für<br />
+          ökologische Ressourcen,<br />
+          Nachhaltigkeit &amp; digitale Innovation<br />
+          2333 Leopoldsdorf | Austria<br />
+          ZVR-Zahl: 1342737440<br /><br />
 
-          E-Mail: <a href="mailto:info@digitech4u.org">info@digitech4u.org</a>
+          E-Mail: info[at]DigiTech4U[punkt]org
         </p>
 
         <h2>2. Allgemeine Hinweise</h2>
@@ -67,30 +69,39 @@ const canonical = "https://www.einschulungsrechner.de/datenschutz/";
         <h2>6. Cookies, Consent Mode, Analyse und Werbung</h2>
 
         <p>
-          Diese Website verwendet derzeit keine nicht notwendigen Cookies, keine
-          Webanalyse und keine personalisierten Werbe- oder Marketingdienste. Der
-          Google Consent Mode ist technisch vorbereitet und standardmäßig so
-          eingestellt, dass Analyse- und Werbespeicher abgelehnt sind. Ohne deine
-          ausdrückliche Einwilligung werden keine entsprechenden Analyse- oder
-          Werbedienste aktiviert.
+          Diese Website kann technisch erforderliche Cookies oder vergleichbare
+          Technologien verwenden, soweit sie für den sicheren und stabilen Betrieb
+          der Website notwendig sind. Darüber hinaus können Dienste für Consent
+          Management, Reichweitenmessung, Werbung oder Partnerangebote eingebunden
+          werden, sofern hierfür eine entsprechende Rechtsgrundlage besteht oder
+          eine erforderliche Einwilligung eingeholt wurde.
         </p>
 
         <p>
-          Ein Cookie-Banner bzw. Consent-Management-Dienst wird erst eingebunden,
-          wenn Dienste eingesetzt werden, die eine Einwilligung erfordern. In diesem
-          Fall kannst du deine Einwilligung über die Cookie-Einstellungen jederzeit
-          anpassen oder widerrufen. Diese Datenschutzerklärung wird dann entsprechend
-          ergänzt.
+          Der Einschulungsrechner ist ein kostenloses Informationsangebot. Zur
+          Deckung von Betriebskosten sowie zur Finanzierung der laufenden Pflege
+          und Weiterentwicklung kann diese Website Werbung, Affiliate-Links oder
+          Kooperationen enthalten. Etwaige Einnahmen werden ausschließlich
+          zweckgebunden für den Betrieb und die Weiterentwicklung dieses
+          gemeinnützigen Projekts verwendet.
+        </p>
+
+        <p>
+          Soweit ein Consent-Management-Dienst eingesetzt wird, kannst du deine
+          Einwilligung über die Cookie-Einstellungen erteilen, ablehnen, anpassen
+          oder widerrufen. Ohne erforderliche Einwilligung werden entsprechende
+          Analyse-, Marketing- oder Werbedienste nicht aktiviert.
         </p>
 
         <h2>7. Externe Links und Partnerangebote</h2>
 
         <p>
-          Diese Website enthält Links zu externen Informationsquellen. Künftig können
-          außerdem einzelne Links zu Partnerangeboten oder Werbepartnern ergänzt
-          werden. Wenn du einen externen Link anklickst, verlässt du diese Website.
-          Für die Verarbeitung personenbezogener Daten auf externen Websites sind die
-          jeweiligen Anbieter verantwortlich.
+          Diese Website enthält Links zu externen Informationsquellen, insbesondere
+          zu offiziellen Stellen, Schulbehörden und weiteren hilfreichen Angeboten.
+          Zusätzlich können einzelne Links zu Partnerangeboten, Affiliate-Angeboten
+          oder Werbepartnern enthalten sein. Wenn du einen externen Link anklickst,
+          verlässt du diese Website. Für die Verarbeitung personenbezogener Daten
+          auf externen Websites sind die jeweiligen Anbieter verantwortlich.
         </p>
 
         <h2>8. Speicherdauer</h2>
@@ -109,7 +120,7 @@ const canonical = "https://www.einschulungsrechner.de/datenschutz/";
           Datenübertragbarkeit sowie Widerspruch gegen bestimmte Verarbeitungen.
           Außerdem hast du das Recht, dich bei einer zuständigen Datenschutzaufsicht
           zu beschweren. Zur Ausübung deiner Rechte wende dich bitte an:
-          <a href="mailto:info@digitech4u.org">info@digitech4u.org</a>.
+          info[at]DigiTech4U[punkt]org.
         </p>
 
         <h2>10. Hinweis zur Verbindlichkeit des Rechners</h2>
@@ -201,6 +212,9 @@ const canonical = "https://www.einschulungsrechner.de/datenschutz/";
     font-weight: 900;
     line-height: 0.98;
     letter-spacing: -0.06em;
+    overflow-wrap: normal;
+    word-break: normal;
+    hyphens: manual;
   }
 
   h2 {
@@ -219,11 +233,6 @@ const canonical = "https://www.einschulungsrechner.de/datenschutz/";
     line-height: 1.7;
   }
 
-  a {
-    color: #172033;
-    font-weight: 800;
-  }
-
   @media (max-width: 520px) {
     .legal-page {
       padding: 22px 14px 42px;
@@ -235,7 +244,9 @@ const canonical = "https://www.einschulungsrechner.de/datenschutz/";
     }
 
     h1 {
-      font-size: 2.3rem;
+      font-size: clamp(1.75rem, 9.4vw, 2.25rem);
+      line-height: 1.04;
+      letter-spacing: -0.055em;
     }
 
     h2 {

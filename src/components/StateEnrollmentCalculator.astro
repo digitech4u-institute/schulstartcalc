@@ -245,11 +245,10 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
       };
     }
 
-    if (year < currentYear - 12) {
+    if (year < 1900) {
       return {
         value: "",
-        error:
-          "Das Geburtsdatum wirkt für einen Einschulungsrechner ungewöhnlich. Bitte prüfe deine Eingabe.",
+        error: "Bitte gib ein Geburtsjahr ab 1900 ein.",
       };
     }
 
@@ -477,6 +476,40 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
       nextStepTitle,
       nextStepText,
       hasConfirmedDate: Boolean(enrollmentDatesBySchoolYearFromData?.[schoolYear]),
+    };
+  }
+
+  function isRetrospectiveBirthdate(birthdateValue) {
+    const { birthYear } = parseDateParts(birthdateValue);
+    const currentYear = new Date().getFullYear();
+
+    return birthYear <= currentYear - 12;
+  }
+
+  function getStateLocationLabel() {
+    return normalizedSlug === "saarland" ? `im ${stateName}` : `in ${stateName}`;
+  }
+
+  function buildRetrospectiveEnrollmentResult(birthdateValue, result) {
+    if (!result?.schoolYear) return result;
+
+    const { birthYear } = parseDateParts(birthdateValue);
+    const isHistoricEstimate = birthYear < 2000;
+    const historicHint = isHistoricEstimate
+      ? " Bei älteren Jahrgängen kann die tatsächliche Einschulung stärker von heutigen Stichtagsregeln abweichen, weil frühere Landesregelungen, Umzüge oder individuelle Entscheidungen eine Rolle spielen können."
+      : "";
+    const stateLocationLabel = getStateLocationLabel();
+
+    return {
+      ...result,
+      statusLabel: "Rückblick",
+      statusTone: "retrospective",
+      resultHeadline: `Deine Einschulung ${stateLocationLabel} war wahrscheinlich im Schuljahr ${result.schoolYear}`,
+      explanation: `Diese Rückblick-Berechnung zeigt dir, in welchem Schuljahr deine Einschulung anhand deines Geburtsdatums und der heutigen Stichtagslogik ${stateLocationLabel} wahrscheinlich war.${historicHint}`,
+      nextStepTitle: "Hinweis zur Einordnung",
+      nextStepText:
+        "Das Ergebnis ist eine Orientierung. Individuelle Fälle wie frühere Einschulung, Zurückstellung, Schulwechsel oder abweichende frühere Regelungen können dazu führen, dass deine tatsächliche Einschulung in einem anderen Schuljahr lag.",
+      hasConfirmedDate: false,
     };
   }
 
@@ -1492,6 +1525,10 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
       result = calculateBremenEnrollment(birthdateValue) || buildGenericEnrollmentResult(birthdateValue, stateRuleFromData);
     }
 
+    if (isRetrospectiveBirthdate(birthdateValue)) {
+      result = buildRetrospectiveEnrollmentResult(birthdateValue, result);
+    }
+
     let dateDetails = `
       <p class="state-calculator-note">
         Für dieses Schuljahr zeigen wir aktuell noch keinen konkreten
@@ -1545,6 +1582,12 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
 
     if (result.statusTone === "regular") {
       displayedHeadline = `Dein Kind wird in ${stateName} voraussichtlich im Schuljahr <span class="result-date-nowrap">${result.schoolYear}</span> regulär eingeschult.`;
+    }
+
+    if (result.statusTone === "retrospective") {
+      const stateLocationLabel = getStateLocationLabel();
+      displayedHeadline = `Deine Einschulung ${stateLocationLabel} war wahrscheinlich im Schuljahr <span class="result-date-nowrap">${result.schoolYear}</span>`;
+      dateDetails = "";
     }
 
     if (result.statusTone === "following") {
@@ -2012,54 +2055,65 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
     const schoolYearAlreadyStarted = schoolYearTimeState.hasStarted;
     const schoolYearIsActive = schoolYearTimeState.isActive;
     const schoolYearIsCompleted = schoolYearTimeState.isCompleted;
-    const resultStatusLabel = schoolYearIsCompleted
-      ? "Vergangenes Schuljahr"
-      : schoolYearIsActive
-        ? "Aktuelles Schuljahr"
-        : result.statusLabel;
+    const resultStatusLabel = result.statusTone === "retrospective"
+      ? "Rückblick"
+      : schoolYearIsCompleted
+        ? "Vergangenes Schuljahr"
+        : schoolYearIsActive
+          ? "Aktuelles Schuljahr"
+          : result.statusLabel;
 
-    if (schoolYearIsCompleted) {
+    if (result.statusTone !== "retrospective" && schoolYearIsCompleted) {
       displayedHeadline = `Das berechnete Schuljahr <span class="result-date-nowrap">${result.schoolYear}</span> liegt bereits in der Vergangenheit.`;
       dateDetails = "";
-    } else if (schoolYearIsActive) {
+    } else if (result.statusTone !== "retrospective" && schoolYearIsActive) {
       displayedHeadline = `Das berechnete Schuljahr <span class="result-date-nowrap">${result.schoolYear}</span> ist in ${stateName} das laufende Schuljahr.`;
       dateDetails = "";
     }
 
-    const displayedStatusTone = schoolYearAlreadyStarted ? "following" : result.statusTone;
-    const displayedStatusLabel = schoolYearAlreadyStarted
-      ? "Vergangenes Schuljahr"
-      : result.statusLabel;
-    const displayedExplanation = schoolYearAlreadyStarted
-      ? schoolYearIsCompleted
-        ? `Das Ergebnis dient nur noch der zeitlichen Einordnung. Für rückwirkende Fragen, Nachweise oder verbindliche Auskünfte ist die zuständige Grundschule maßgeblich.`
-        : `Das Ergebnis bezieht sich auf das laufende Schuljahr. Wenn dein Kind bereits schulpflichtig ist oder Fragen zur laufenden Einschulung bestehen, ist die zuständige Grundschule maßgeblich.`
-      : result.explanation;
-    const displayedNextStepTitle = schoolYearAlreadyStarted
-      ? "Wichtig für dich"
-      : result.nextStepTitle;
-    const displayedNextStepText = schoolYearAlreadyStarted
-      ? schoolYearIsCompleted
-        ? "Wende dich bei rückwirkenden Fragen, Nachweisen oder verbindlichen Auskünften direkt an die zuständige Grundschule."
-        : "Wende dich bei Fragen zur laufenden Einschulung, Anmeldung oder weiteren Schritten direkt an die zuständige Grundschule."
-      : result.nextStepText;
+    const displayedStatusTone = result.statusTone === "retrospective" ? "retrospective" : schoolYearAlreadyStarted ? "following" : result.statusTone;
+    const displayedStatusLabel = result.statusTone === "retrospective"
+      ? "Rückblick"
+      : schoolYearAlreadyStarted
+        ? "Vergangenes Schuljahr"
+        : result.statusLabel;
+    const displayedExplanation = result.statusTone === "retrospective"
+      ? result.explanation
+      : schoolYearAlreadyStarted
+        ? schoolYearIsCompleted
+          ? `Das Ergebnis dient nur noch der zeitlichen Einordnung. Für rückwirkende Fragen, Nachweise oder verbindliche Auskünfte ist die zuständige Grundschule maßgeblich.`
+          : `Das Ergebnis bezieht sich auf das laufende Schuljahr. Wenn dein Kind bereits schulpflichtig ist oder Fragen zur laufenden Einschulung bestehen, ist die zuständige Grundschule maßgeblich.`
+        : result.explanation;
+    const displayedNextStepTitle = result.statusTone === "retrospective"
+      ? "Hinweis zur Einordnung"
+      : schoolYearAlreadyStarted
+        ? "Wichtig für dich"
+        : result.nextStepTitle;
+    const displayedNextStepText = result.statusTone === "retrospective"
+      ? result.nextStepText
+      : schoolYearAlreadyStarted
+        ? schoolYearIsCompleted
+          ? "Wende dich bei rückwirkenden Fragen, Nachweisen oder verbindlichen Auskünften direkt an die zuständige Grundschule."
+          : "Wende dich bei Fragen zur laufenden Einschulung, Anmeldung oder weiteren Schritten direkt an die zuständige Grundschule."
+        : result.nextStepText;
 
-    const displayedSchoolYearLabel =
-      !schoolYearAlreadyStarted &&
-      (normalizedSlug === "sachsen" ||
-        normalizedSlug === "nordrhein-westfalen" ||
-        normalizedSlug === "rheinland-pfalz" ||
-        normalizedSlug === "schleswig-holstein" ||
-        normalizedSlug === "thueringen" ||
-        normalizedSlug === "sachsen-anhalt" ||
-        normalizedSlug === "mecklenburg-vorpommern" ||
-        normalizedSlug === "saarland" ||
-        normalizedSlug === "bremen") &&
-      result.statusTone === "optional"
-        ? "Mögliches Schuljahr"
-        : "Voraussichtliches Schuljahr";
+    const displayedSchoolYearLabel = result.statusTone === "retrospective"
+      ? "Wahrscheinliches Schuljahr"
+      : !schoolYearAlreadyStarted &&
+        (normalizedSlug === "sachsen" ||
+          normalizedSlug === "nordrhein-westfalen" ||
+          normalizedSlug === "rheinland-pfalz" ||
+          normalizedSlug === "schleswig-holstein" ||
+          normalizedSlug === "thueringen" ||
+          normalizedSlug === "sachsen-anhalt" ||
+          normalizedSlug === "mecklenburg-vorpommern" ||
+          normalizedSlug === "saarland" ||
+          normalizedSlug === "bremen") &&
+        result.statusTone === "optional"
+          ? "Mögliches Schuljahr"
+          : "Voraussichtliches Schuljahr";
 
-    const schoolYearStartedWarning = schoolYearAlreadyStarted
+    const schoolYearStartedWarning = schoolYearAlreadyStarted && result.statusTone !== "retrospective"
       ? `
         <div class="state-result-warning-box">
           <strong>Wichtiger Hinweis</strong>
@@ -2094,9 +2148,11 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
       </div>
     `;
 
-    const orderedResultDetails = primaryResultType === "date-first"
-      ? `${dateDetails}${summaryDetails}`
-      : `${summaryDetails}${dateDetails}`;
+    const orderedResultDetails = result.statusTone === "retrospective"
+      ? summaryDetails
+      : primaryResultType === "date-first"
+        ? `${dateDetails}${summaryDetails}`
+        : `${summaryDetails}${dateDetails}`;
 
     updatePageResultState(result);
 
