@@ -108,6 +108,14 @@ const faqSchema = {
 	  },
 	  {
 		"@type": "Question",
+		"name": "Wann wurde ich eingeschult?",
+		"acceptedAnswer": {
+		  "@type": "Answer",
+		  "text": "Du kannst den Einschulungsrechner auch rückblickend nutzen. Gib dein Geburtsdatum ein und wähle das Bundesland aus, in dem du eingeschult wurdest. Der Rechner zeigt dir, in welchem Schuljahr deine Einschulung wahrscheinlich war. Das Ergebnis ist eine Orientierung, weil frühere Einschulung, Zurückstellung, Umzug oder frühere abweichende Landesregelungen das tatsächliche Einschulungsjahr beeinflussen können."
+		}
+	  },
+	  {
+		"@type": "Question",
 		"name": "Wodurch unterscheidet sich der Einschulungsstichtag vom Einschulungstermin?",
 		"acceptedAnswer": {
 		  "@type": "Answer",
@@ -399,6 +407,32 @@ const webApplicationSchema = {
 			<a class="guide-teaser-link" href="/einschulung-checkliste/">Zur Einschulungs-Checkliste</a>
 		  </article>
 		</div>
+
+        <div class="content-block retrospective-block">
+          <p class="content-kicker">Rückblick berechnen</p>
+
+          <h2>Wann wurde ich eingeschult?</h2>
+
+          <p>
+            Du möchtest wissen, wann deine Einschulung war? Der Einschulungsrechner
+            funktioniert auch rückblickend: Gib dein Geburtsdatum ein und wähle das
+            Bundesland aus, in dem du eingeschult wurdest. Der Rechner zeigt dir
+            dann, in welchem Schuljahr deine Einschulung wahrscheinlich war.
+          </p>
+
+          <p>
+            Das ist besonders hilfreich, wenn du dein Einschulungsjahr berechnen
+            möchtest, alte Schulunterlagen zeitlich einordnest oder wissen willst,
+            wann du vermutlich in die Grundschule gekommen bist. Das Ergebnis ist
+            eine Orientierung: Frühere Einschulung, Zurückstellung, Umzug oder
+            frühere abweichende Landesregelungen können dazu führen, dass dein
+            tatsächliches Einschulungsjahr abweicht.
+          </p>
+
+          <a class="retrospective-link" href="#einschulungsrechner">
+            Einschulungsjahr rückblickend berechnen
+          </a>
+        </div>
 	  
 		<div class="content-block">
 		  <h2>Was ist ein Einschulungsstichtag?</h2>
@@ -584,6 +618,18 @@ const webApplicationSchema = {
 				  Das hängt vom Geburtsdatum deines Kindes und vom Einschulungsstichtag
 				  deines Bundeslands ab. Der Rechner zeigt dir eine erste Orientierung zum
 				  voraussichtlichen Schuljahr.
+				</p>
+			  </article>
+
+			  <article class="faq-item">
+				<h3>Wann wurde ich eingeschult?</h3>
+				<p>
+				  Du kannst den Einschulungsrechner auch rückblickend nutzen. Gib dein
+				  Geburtsdatum ein und wähle das Bundesland aus, in dem du eingeschult
+				  wurdest. Der Rechner zeigt dir, in welchem Schuljahr deine Einschulung
+				  wahrscheinlich war. Das Ergebnis ist eine Orientierung, weil frühere
+				  Einschulung, Zurückstellung, Umzug oder frühere abweichende
+				  Landesregelungen das tatsächliche Einschulungsjahr beeinflussen können.
 				</p>
 			  </article>
 		  
@@ -2183,9 +2229,37 @@ select {
   text-decoration: none;
 }
 
-.checklist-mini-link:hover {
-  background: #2a3550;
-}
+  .checklist-mini-link:hover {
+    background: #2a3550;
+  }
+
+  .retrospective-block {
+    max-width: none;
+    padding: 24px;
+    border: 1px solid rgba(129, 97, 38, 0.16);
+    border-radius: 22px;
+    background: rgba(245, 210, 138, 0.12);
+  }
+
+  .retrospective-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 18px;
+    min-height: 50px;
+    padding: 0 20px;
+    border-radius: 15px;
+    background: #172033;
+    color: #fff;
+    font-weight: 850;
+    line-height: 1.2;
+    text-align: center;
+    text-decoration: none;
+  }
+
+  .retrospective-link:hover {
+    background: #2a3550;
+  }
 .table-wrap {
   position: relative;
   margin-top: 22px;
@@ -2651,6 +2725,7 @@ select {
   }
 
   .guide-teaser,
+  .retrospective-block,
   .checklist-mini-block {
     padding: 20px !important;
     border-radius: 20px !important;
@@ -2658,6 +2733,7 @@ select {
 
   .guide-teaser-link,
   .checklist-mini-link,
+  .retrospective-link,
   .result-checklist-cta {
     width: 100% !important;
   }
