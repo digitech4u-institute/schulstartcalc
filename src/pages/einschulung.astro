@@ -1,110 +1,109 @@
 
 
 ---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
 const pageTitle =
-  "Einschulungsrechner Deutschland 2026/2027 – Stichtag & Schuljahr berechnen";
+  "Einschulung in Deutschland: Schulpflicht, Stichtag und Anmeldung einfach erklärt";
 
 const pageDescription =
-  "Alles rund um die Einschulung: Stichtag, Schulpflicht, Bundesländer, Schulanmeldung, Kann-Kind, Zurückstellung und Checkliste für den Schulstart.";
+  "Ratgeber zur Einschulung in Deutschland: Schulpflicht, Stichtag, Kann-Kind, Zurückstellung, Schulanmeldung und nächste Schritte verständlich erklärt.";
+
+const canonical = "https://www.einschulungsrechner.de/einschulung/";
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Wann ist mein Kind schulpflichtig?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Dein Kind wird schulpflichtig, wenn es bis zum Einschulungsstichtag seines Bundeslands sechs Jahre alt wird. Der genaue Stichtag hängt vom Bundesland ab."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Was ist der Einschulungsstichtag?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Der Einschulungsstichtag entscheidet, ob ein Kind in diesem oder erst im nächsten Schuljahr eingeschult wird. Die Stichtage unterscheiden sich je nach Bundesland."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Was ist ein Kann-Kind?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Ein Kann-Kind hat den regulären Stichtag noch nicht erreicht, kann aber auf Antrag der Eltern früher eingeschult werden. Die Schule prüft die Schulreife und entscheidet."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Was bedeutet Zurückstellung?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Zurückstellung bedeutet, dass ein eigentlich schulpflichtiges Kind auf Antrag ein Jahr später eingeschult wird. Die Entscheidung trifft die zuständige Schule oder Schulbehörde."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Wann findet die Schulanmeldung statt?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Die Schulanmeldung findet je nach Bundesland und Schule meist zwischen Oktober und Februar vor dem geplanten Schuljahr statt. Verbindliche Fristen nennt die zuständige Grundschule."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Ist der Einschulungsrechner verbindlich?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Nein. Der Einschulungsrechner dient der Orientierung. Verbindliche Auskünfte geben die zuständige Grundschule, das Schulamt oder die Bildungsbehörde."
+      }
+    }
+  ]
+};
 ---
 
-<html lang="de">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{pageTitle}</title>
-    <meta name="description" content={pageDescription} />
-    <link rel="canonical" href="https://www.einschulungsrechner.de/einschulung/" />
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "FAQPage",
-        "mainEntity": [
-          {
-            "@type": "Question",
-            "name": "Was bedeutet Einschulung?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Die Einschulung ist der Beginn der Schulzeit eines Kindes. Sie richtet sich in Deutschland nach dem jeweiligen Bundesland, dem Geburtsdatum des Kindes und dem dort geltenden Einschulungsstichtag."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Wann wird ein Kind eingeschult?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Wann ein Kind eingeschult wird, hängt vom Geburtsdatum und vom Bundesland ab. Jedes Bundesland hat eigene Stichtage und teilweise besondere Regelungen für frühere oder spätere Einschulungen."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Wie hilft der Einschulungsrechner?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Der Einschulungsrechner gibt eine erste Orientierung zum voraussichtlichen Schuljahr, zum geltenden Stichtag und zu möglichen Besonderheiten im jeweiligen Bundesland. Das Ergebnis ist nicht verbindlich."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Ist das Ergebnis des Einschulungsrechners verbindlich?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Nein. Der Einschulungsrechner dient der Orientierung. Verbindliche Informationen erhalten Eltern bei der zuständigen Grundschule, Schulbehörde oder dem jeweiligen Bundesland."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Ändert sich der Einschulungsstichtag in Brandenburg?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Brandenburg plant, den Einschulungsstichtag vom 30. September auf den 30. Juni zu verlegen. Diese Änderung ist im Koalitionsvertrag festgehalten, aber noch nicht in Kraft. Verbindliche Auskunft erteilt das Ministerium für Bildung, Jugend und Sport Brandenburg."
-            }
-          }
-        ]
-      }
-    </script>
-  </head>
-
-  <body>
-    <main class="guide-page">
+<BaseLayout title={pageTitle} description={pageDescription} canonical={canonical}>
+  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)}></script>
+  <main class="guide-page">
       <a class="back-link" href="/">← Zum Einschulungsrechner</a>
 
       <article class="guide-card">
         <p class="guide-kicker">Ratgeber</p>
 
-        <h1>
-          <span class="headline-question">Wann kommt mein Kind in die Schule?</span><br />
-          Einschulungsrechner für alle 16 Bundesländer
-        </h1>
+        <h1>Einschulung in Deutschland – einfach erklärt für Eltern</h1>
 
         <p class="lead">
-          Die Einschulung ist für Familien ein großer Schritt. In Deutschland gilt:
-          Ein Kind wird schulpflichtig, wenn es bis zum Einschulungsstichtag seines
-          Bundeslands sechs Jahre alt wird. Die Stichtage unterscheiden sich je
-          nach Bundesland — sie reichen vom 30. Juni bis zum 1. August.
-          Gleichzeitig sind Bundesländer-Regeln, Kann-Kind, Zurückstellung und
-          Schulanmeldung oft schwer zu überblicken. Diese Seite gibt dir eine klare
-          Orientierung — vom ersten Rechenergebnis bis zu den nächsten Schritten
-          vor dem Schulstart.
+          Wann ist mein Kind schulpflichtig? Was passiert,
+          wenn der Geburtstag knapp am Stichtag liegt?
+        </p>
+
+        <p class="lead">
+          Hier findest du klare Antworten zur Einschulung in Deutschland –
+          ohne Behördensprache und mit den wichtigsten nächsten Schritten.
         </p>
 
         <div class="journey-box" aria-label="Schulstart-Journey">
           <div class="journey-step">
             <span>1</span>
-            <strong>Wann?</strong>
-            <p>Geburtsdatum und Bundesland prüfen.</p>
+            <strong>Stichtag prüfen</strong>
+            <p>Geburtsdatum und Bundesland einordnen.</p>
           </div>
 
           <div class="journey-step">
             <span>2</span>
-            <strong>Was jetzt?</strong>
-            <p>Schulanmeldung und Fristen verstehen.</p>
+            <strong>Regel verstehen</strong>
+            <p>Schulpflicht, Kann-Kind oder Zurückstellung klären.</p>
           </div>
 
           <div class="journey-step">
             <span>3</span>
-            <strong>Was brauche ich?</strong>
-            <p>Unterlagen, Checkliste und Vorbereitung planen.</p>
+            <strong>Nächsten Schritt planen</strong>
+            <p>Schulanmeldung, Untersuchung und Vorbereitung angehen.</p>
           </div>
         </div>
 
@@ -112,28 +111,30 @@ const pageDescription =
           <h2>Der schnellste Einstieg: Einschulung berechnen</h2>
 
           <p>
-            Der Einschulungsrechner zeigt dir in wenigen Sekunden, welches
-            Schuljahr für dein Kind voraussichtlich relevant ist. Du brauchst nur
-            das Geburtsdatum und das Bundesland.
+            Gib Geburtsdatum und Bundesland ein. Der Rechner zeigt dir sofort,
+            wann dein Kind voraussichtlich in die Schule kommt.
           </p>
 
           <a class="cta-link" href="/">Jetzt Einschulung berechnen</a>
         </section>
 
         <section>
-          <h2>Was bedeutet Einschulung?</h2>
+          <h2>Was bedeutet Schulpflicht?</h2>
 
           <p>
-            Mit der Einschulung beginnt für ein Kind die Schulzeit. In Deutschland
-            hängt der Zeitpunkt nicht nur vom Alter des Kindes ab, sondern auch
-            vom jeweiligen Bundesland. Jedes Bundesland legt eigene Stichtage und
-            besondere Regelungen fest.
+            Dein Kind muss in die Schule, sobald es das gesetzlich festgelegte
+            Einschulungsalter erreicht.
           </p>
 
           <p>
-            Deshalb kann es vorkommen, dass zwei Kinder mit ähnlichem Geburtsdatum
-            in unterschiedlichen Bundesländern nicht im selben Schuljahr
-            eingeschult werden.
+            In Deutschland beginnt die Schulpflicht mit der Grundschule.
+            Der genaue Zeitpunkt hängt aber vom Bundesland ab.
+          </p>
+
+          <p>
+            Entscheidend ist fast immer der Einschulungsstichtag:
+            Wird dein Kind bis zu diesem Datum sechs Jahre alt,
+            gilt es regulär als schulpflichtig.
           </p>
         </section>
 
@@ -141,36 +142,35 @@ const pageDescription =
           <h2>Was ist der Einschulungsstichtag?</h2>
 
           <p>
-            Der Einschulungsstichtag ist das Datum, bis zu dem ein Kind ein
-            bestimmtes Alter erreicht haben muss, um regulär schulpflichtig zu
-            werden. In vielen Bundesländern liegt dieser Stichtag am 30. Juni oder
-            am 30. September. Es gibt aber auch abweichende Regelungen.
+            Der Einschulungsstichtag entscheidet, ob dein Kind in diesem
+            oder erst im nächsten Schuljahr eingeschult wird.
           </p>
 
           <p>
-            Der Stichtag sagt noch nicht automatisch, an welchem Kalendertag die
-            Einschulungsfeier stattfindet. Er entscheidet vor allem darüber, ob ein
-            Kind grundsätzlich für ein bestimmtes Schuljahr schulpflichtig wird.
+            Die Stichtage sind nicht überall gleich. Je nach Bundesland
+            liegen sie zwischen Ende Juni und Ende September.
           </p>
-        </section>
-
-        <section>
-          <h2>Warum unterscheiden sich die Bundesländer?</h2>
 
           <p>
-            Bildung ist in Deutschland Ländersache. Deshalb regeln die
-            Bundesländer die Einschulung unterschiedlich. Neben dem Stichtag kann
-            es auch Sonderregelungen geben, etwa für vorzeitige Einschulung,
-            Zurückstellung, Einschulungskorridore oder besondere Anmeldefristen.
+            Das bedeutet: Dasselbe Geburtsdatum kann in einem Bundesland
+            zur Einschulung führen – in einem anderen aber erst ein Jahr später.
           </p>
+
+          <p>Typische Beispiele:</p>
+
+          <ul>
+            <li><strong>30. Juni:</strong> zum Beispiel Sachsen oder Hamburg</li>
+            <li><strong>30. September:</strong> zum Beispiel Niedersachsen, Hessen oder Nordrhein-Westfalen</li>
+            <li><strong>Sonderfall Bayern:</strong> Einschulungskorridor für Kinder vom 1. Juli bis 30. September</li>
+          </ul>
         </section>
 
         <section>
           <h2>Einschulung nach Bundesland</h2>
 
           <p>
-            Wähle dein Bundesland aus, um die wichtigsten Informationen zu
-            Stichtag, Schulpflicht, Sonderregeln und Quellen direkt nachzulesen.
+            Jedes Bundesland hat eigene Regeln zur Einschulung.
+            Wähle dein Bundesland aus und lies die wichtigsten Informationen direkt nach.
           </p>
 
           <div class="state-grid" aria-label="Bundeslandseiten zur Einschulung">
@@ -192,32 +192,6 @@ const pageDescription =
             <a href="/einschulung-thueringen/">Thüringen</a>
           </div>
 
-          <div class="state-rule-notes" aria-label="Wichtige Hinweise zu ausgewählten Bundesländern">
-            <article>
-              <span>Berlin</span>
-              <strong>Stichtag: 30. September</strong>
-              <p>
-                Besonderheit: Kann-Kind: 1. Oktober bis 31. März auf Antrag (kein Sprachförderbedarf)
-              </p>
-            </article>
-
-            <article>
-              <span>Brandenburg</span>
-              <strong>Stichtag: 30. September</strong>
-              <p>
-                Besonderheit: Kann-Kind: 1. Oktober bis 31. Dezember auf Antrag
-              </p>
-            </article>
-
-            <article>
-              <span>Hamburg</span>
-              <strong>Stichtag: 30. Juni</strong>
-              <p>
-                Besonderheit: Schulpflicht für Kinder, die bis zum 30. Juni sechs Jahre alt werden
-              </p>
-            </article>
-          </div>
-
           <p class="state-rule-hint">
             Hinweis: In Brandenburg ist politisch eine Verlegung des Stichtags auf
             den 30. Juni geplant. Solange diese Änderung nicht gesetzlich umgesetzt
@@ -226,38 +200,63 @@ const pageDescription =
         </section>
 
         <section>
-          <h2>Was bedeutet Kann-Kind?</h2>
+          <h2>Was ist ein Kann-Kind?</h2>
 
           <p>
-            Als Kann-Kind wird häufig ein Kind bezeichnet, das noch nicht regulär
-            schulpflichtig ist, aber unter bestimmten Voraussetzungen früher in die
-            Schule aufgenommen werden kann. Ob das möglich ist, hängt vom
-            Bundesland, vom Geburtsdatum, von der Entwicklung des Kindes und von
-            der Entscheidung der zuständigen Stellen ab.
+            Ein Kann-Kind hat den regulären Stichtag noch nicht erreicht,
+            kann aber auf Antrag der Eltern früher eingeschult werden.
           </p>
 
           <p>
-            Für Eltern ist wichtig: Eine frühere Einschulung sollte nicht nur nach
-            dem Alter entschieden werden. Auch emotionale, soziale, körperliche und
-            sprachliche Entwicklung spielen eine Rolle.
+            Die Schule prüft dann, ob dein Kind bereit für den Schulalltag ist –
+            zum Beispiel sprachlich, körperlich und sozial.
+          </p>
+
+          <p>
+            Wichtig: Der Antrag allein reicht nicht aus.
+            Die Entscheidung trifft die zuständige Schule oder Schulbehörde.
           </p>
         </section>
 
         <section>
-          <h2>Kann mein Kind später eingeschult werden?</h2>
+          <h2>Was bedeutet Zurückstellung?</h2>
 
           <p>
-            In manchen Fällen kann eine spätere Einschulung oder Zurückstellung
-            möglich sein. Das betrifft etwa Kinder, bei denen ein erfolgreicher
-            Schulbesuch noch nicht zu erwarten ist oder besondere gesundheitliche
-            Gründe vorliegen. Auch hier unterscheiden sich die Regelungen je nach
-            Bundesland.
+            Zurückstellung bedeutet: Dein Kind ist eigentlich schulpflichtig,
+            startet aber auf Antrag ein Jahr später in die Schule.
           </p>
 
           <p>
-            Verbindlich entscheidet nicht der Rechner, sondern die zuständige
-            Schule oder Schulbehörde. Der Rechner kann aber helfen, die eigene
-            Situation besser einzuordnen und gezielte Fragen zu stellen.
+            Das kann sinnvoll sein, wenn dein Kind noch nicht schulreif wirkt
+            oder die Schule eine spätere Einschulung empfiehlt.
+          </p>
+
+          <p>
+            Sprich das Thema frühzeitig mit Kindergarten und Grundschule an.
+            In vielen Bundesländern gelten feste Fristen.
+          </p>
+        </section>
+
+        <section>
+          <h2>Wie läuft die Schulanmeldung ab?</h2>
+
+          <p>
+            Die Schulanmeldung ist der formelle Schritt vor der Einschulung.
+            Sie findet je nach Bundesland und Schule meist zwischen Oktober und Februar statt.
+          </p>
+
+          <p>Diese Unterlagen brauchst du häufig:</p>
+
+          <ul>
+            <li>Geburtsurkunde des Kindes</li>
+            <li>Personalausweis eines Elternteils</li>
+            <li>Nachweis über die Masernimpfung</li>
+            <li>ggf. Einladung oder Nachweis zur Schuleingangsuntersuchung</li>
+          </ul>
+
+          <p>
+            Die zuständige Grundschule sagt dir verbindlich,
+            welche Unterlagen und Fristen bei euch gelten.
           </p>
         </section>
 
@@ -265,10 +264,8 @@ const pageDescription =
           <h2>Was müssen Eltern nach dem Ergebnis tun?</h2>
 
           <p>
-            Nach dem Rechenergebnis geht es vor allem darum, die nächsten Schritte
-            zu planen. Dazu gehören typischerweise die Schulanmeldung, mögliche
-            Beratungsgespräche, Unterlagen, schulärztliche Untersuchungen und die
-            praktische Vorbereitung auf den Schulstart.
+            Wenn du das voraussichtliche Schuljahr kennst,
+            kannst du die nächsten Schritte gezielt planen.
           </p>
 
           <a class="guide-inline-link" href="/einschulung-checkliste/">Zur Einschulungs-Checkliste</a>
@@ -286,7 +283,7 @@ const pageDescription =
               <h3>2. Bundeslandseite lesen</h3>
               <p>
                 Lies die Informationen für dein Bundesland und prüfe die dort
-                verlinkte Quelle.
+                verlinkten offiziellen Quellen.
               </p>
             </article>
 
@@ -301,19 +298,21 @@ const pageDescription =
         </section>
 
         <section class="project-note">
-          <h2>Ein gemeinnütziges Orientierungsprojekt</h2>
+          <h2>Ein ehrenamtliches Orientierungsprojekt</h2>
 
           <p>
-            einschulungsrechner.de ist ein gemeinnützig getragenes Pilot- und
-            Forschungsprojekt von DigiTech4U. Ziel ist es, Eltern eine kostenlose,
-            verständliche und datensparsame Orientierung rund um Einschulung und
-            Schulstart zu bieten.
+            Einschulungsrechner.de ist ein ehrenamtliches Informationsangebot
+            des <strong>DigiTech4U Institute</strong>.
+          </p>
+
+          <p>
+            Ziel ist es, Eltern eine kostenlose, verständliche und datensparsame
+            Orientierung rund um Einschulung und Schulstart zu bieten.
           </p>
 
           <p>
             Das Angebot ersetzt keine verbindliche Auskunft der zuständigen Schule
-            oder Behörde. Es soll helfen, Informationen einfacher zugänglich zu
-            machen und den nächsten Schritt besser vorbereitet zu gehen.
+            oder Behörde. Es hilft dir, schneller die richtigen Fragen zu stellen.
           </p>
         </section>
 
@@ -322,50 +321,94 @@ const pageDescription =
 
           <div class="faq-list">
             <article class="faq-item">
-              <h3>Wann kommt mein Kind in die Schule?</h3>
+              <h3>Wann ist mein Kind schulpflichtig?</h3>
               <p>
-                Das hängt vom Geburtsdatum und vom Bundesland ab. Der
-                Einschulungsrechner gibt dir eine erste Orientierung zum
-                voraussichtlichen Schuljahr.
+                Dein Kind wird schulpflichtig, wenn es bis zum Einschulungsstichtag
+                seines Bundeslands sechs Jahre alt wird.
               </p>
             </article>
 
             <article class="faq-item">
-              <h3>Ist der Einschulungstermin dasselbe wie der Stichtag?</h3>
+              <h3>Was ist der Einschulungsstichtag?</h3>
               <p>
-                Nein. Der Stichtag entscheidet über die Schulpflicht. Der konkrete
-                Einschulungstermin oder die Einschulungsfeier kann je nach Schule
-                und Schuljahr an einem anderen Datum stattfinden.
+                Der Stichtag entscheidet, ob dein Kind in diesem oder erst im
+                nächsten Schuljahr eingeschult wird.
               </p>
             </article>
 
             <article class="faq-item">
-              <h3>Ist das Ergebnis verbindlich?</h3>
+              <h3>Was ist ein Kann-Kind?</h3>
               <p>
-                Nein. Der Rechner und diese Seite dienen der Orientierung.
-                Verbindliche Informationen erhältst du bei der zuständigen Schule,
-                Schulbehörde oder beim jeweiligen Bundesland.
+                Ein Kann-Kind hat den regulären Stichtag noch nicht erreicht,
+                kann aber auf Antrag der Eltern früher eingeschult werden.
               </p>
             </article>
 
             <article class="faq-item">
-              <h3>Ändert sich der Einschulungsstichtag in Brandenburg?</h3>
+              <h3>Was bedeutet Zurückstellung?</h3>
               <p>
-                Brandenburg plant, den Einschulungsstichtag vom 30. September auf
-                den 30. Juni zu verlegen. Diese Änderung ist im Koalitionsvertrag
-                festgehalten, aber noch nicht in Kraft. Verbindliche Auskunft
-                erteilt das Ministerium für Bildung, Jugend und Sport Brandenburg.
+                Zurückstellung bedeutet, dass ein eigentlich schulpflichtiges Kind
+                auf Antrag ein Jahr später eingeschult wird.
+              </p>
+            </article>
+
+            <article class="faq-item">
+              <h3>Wann findet die Schulanmeldung statt?</h3>
+              <p>
+                Die Schulanmeldung findet je nach Bundesland und Schule meist
+                zwischen Oktober und Februar vor dem geplanten Schuljahr statt.
+              </p>
+            </article>
+
+            <article class="faq-item">
+              <h3>Ist der Einschulungsrechner verbindlich?</h3>
+              <p>
+                Nein. Der Rechner dient der Orientierung. Verbindliche Informationen
+                bekommst du bei der zuständigen Grundschule oder Schulbehörde.
               </p>
             </article>
           </div>
         </section>
+
+        <section class="source-note">
+          <h2>Quellen und Hinweis</h2>
+
+          <p>
+            Diese Ratgeberseite wird redaktionell gepflegt und basiert auf
+            offiziellen Informationen der Bundesländer, Schulbehörden,
+            Kultusministerien und der Kultusministerkonferenz.
+          </p>
+
+          <p>
+            Stand der Informationen: Mai 2026. Verbindliche Auskünfte erteilt
+            immer die zuständige Grundschule oder Schulbehörde.
+          </p>
+        </section>
+
+        <div class="content-note">
+          <h2>Wichtig: Orientierung statt verbindliche Auskunft</h2>
+      
+          <p>
+            Dieser Ratgeber dient als verständliche Orientierung für Eltern.
+            Verbindliche Informationen erhältst du bei der zuständigen Schule,
+            beim Schulamt oder bei der Bildungsbehörde deines Bundeslands.
+          </p>
+        </div>
       </article>
-    </main>
-  </body>
-</html>
+
+  </main>
+</BaseLayout>
 
 <style>
-  :root {
+
+  * {
+    box-sizing: border-box;
+  }
+
+
+  :global(body) {
+    margin: 0;
+    color: #172033;
     font-family:
       system-ui,
       -apple-system,
@@ -375,16 +418,6 @@ const pageDescription =
       Helvetica,
       Arial,
       sans-serif;
-    color: #172033;
-    background: #f6f3ec;
-  }
-
-  * {
-    box-sizing: border-box;
-  }
-
-  body {
-    margin: 0;
     background:
       radial-gradient(circle at top left, rgba(255, 208, 122, 0.32), transparent 32rem),
       linear-gradient(180deg, #fbf8f1 0%, #f2eee5 100%);
@@ -393,6 +426,20 @@ const pageDescription =
   .guide-page {
     min-height: 100vh;
     padding: 32px 20px 64px;
+    color: #172033;
+    font-family:
+      system-ui,
+      -apple-system,
+      BlinkMacSystemFont,
+      "Segoe UI",
+      Roboto,
+      Helvetica,
+      Arial,
+      sans-serif;
+  }
+
+  .guide-page :where(h1, h2, h3, p, a, li, strong, span) {
+    font-family: inherit;
   }
 
   .back-link {
@@ -535,6 +582,60 @@ const pageDescription =
     font-size: 1.03rem;
     line-height: 1.7;
   }
+
+  .lead + .lead {
+    margin-top: 12px;
+  }
+
+  .guide-card ul {
+    margin: 14px 0 0;
+    padding-left: 1.25rem;
+    color: #465266;
+  }
+
+  .guide-card li {
+    font-size: 1rem;
+    line-height: 1.62;
+  }
+
+  .guide-card li + li {
+    margin-top: 8px;
+  }
+
+  .source-note {
+    padding: 24px;
+    border: 1px solid rgba(42, 35, 21, 0.1);
+    border-radius: 22px;
+    background: rgba(255, 255, 255, 0.68);
+  }
+
+  .source-note p {
+    font-size: 0.94rem;
+    line-height: 1.58;
+  }
+
+  .content-note {
+    max-width: none;
+    margin-top: 38px;
+    padding: 24px;
+    border: 1px solid rgba(129, 97, 38, 0.16);
+    border-radius: 22px;
+    background: rgba(245, 210, 138, 0.12);
+  }
+
+  .content-note h2 {
+    font-size: clamp(1.45rem, 2.2vw, 1.9rem) !important;
+    line-height: 1.14 !important;
+    letter-spacing: -0.04em !important;
+  }
+
+  .content-note p {
+    max-width: 64rem;
+    font-size: 0.94rem !important;
+    line-height: 1.58 !important;
+  }
+
+
 
   .cta-link {
     display: inline-flex;
@@ -742,7 +843,8 @@ const pageDescription =
     }
 
     .highlight-section,
-    .project-note {
+    .project-note,
+    .content-note {
       padding: 20px;
       border-radius: 20px;
     }
@@ -767,5 +869,6 @@ const pageDescription =
     .guide-inline-link {
       width: 100%;
     }
+
   }
 </style>

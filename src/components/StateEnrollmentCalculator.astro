@@ -77,9 +77,9 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
     data-result-kicker={resultKicker}
   >
     <div class="form-group form-group-centered">
-      <span class="form-label form-label-large">Geburtsdatum deines Kindes</span>
+      <span class="form-label form-label-large">Geburtsdatum des Kindes</span>
 
-      <div class="date-input-group" aria-label="Geburtsdatum deines Kindes">
+      <div class="date-input-group" aria-label="Geburtsdatum des Kindes">
         <div class="date-field">
           <input
             id={dayInputId}
@@ -381,8 +381,8 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
     let schoolStartYear = isBeforeOrOnCutoff ? sixthBirthdayYear : sixthBirthdayYear + 1;
     let statusLabel = "Regulär schulpflichtig";
     let statusTone = "regular";
-    let resultHeadline = `Dein Kind wird in ${stateRule.name} voraussichtlich im Schuljahr ${schoolStartYear}/${schoolStartYear + 1} regulär eingeschult.`;
-    let explanation = `Dein Kind wird in ${stateRule.name} regulär schulpflichtig, weil es bis zum ${stateRule.label.replace("Stichtag ", "")} ${schoolStartYear} sechs Jahre alt wird.`;
+    let resultHeadline = `Das Kind wird in ${stateRule.name} voraussichtlich im Schuljahr ${schoolStartYear}/${schoolStartYear + 1} regulär eingeschult.`;
+    let explanation = `Das Kind wird in ${stateRule.name} regulär schulpflichtig, weil es bis zum ${stateRule.label.replace("Stichtag ", "")} ${schoolStartYear} sechs Jahre alt wird.`;
     let nextStepTitle = "Nächster sinnvoller Schritt";
     let nextStepText = "Informiere dich frühzeitig bei der zuständigen Grundschule über Anmeldung, Unterlagen und konkrete Termine.";
 
@@ -398,8 +398,8 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
         statusLabel = "Einschulungskorridor";
         statusTone = "optional";
         schoolStartYear = sixthBirthdayYear;
-        resultHeadline = "Dein Kind liegt im Einschulungskorridor.";
-        explanation = `Dein Kind fällt in ${stateRule.name} in den Einschulungskorridor, weil es zwischen dem 1. Juli und dem 30. September sechs Jahre alt wird.`;
+        resultHeadline = "Das Kind liegt im Einschulungskorridor.";
+        explanation = `Das Kind fällt in ${stateRule.name} in den Einschulungskorridor, weil es zwischen dem 1. Juli und dem 30. September sechs Jahre alt wird.`;
         nextStepTitle = "Wichtig für dich";
         nextStepText = "Prüfe die Fristen bei der zuständigen Grundschule. Unter bestimmten Voraussetzungen kann eine spätere Einschulung geklärt werden.";
       }
@@ -408,8 +408,8 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
         statusLabel = "Karenzzeitkind";
         statusTone = "optional";
         schoolStartYear = sixthBirthdayYear;
-        resultHeadline = `Dein Kind ist in ${stateRule.name} ein Karenzzeitkind.`;
-        explanation = `Dein Kind wird nach dem regulären Stichtag sechs Jahre alt und liegt in ${stateRule.name} innerhalb der Karenzzeit.`;
+        resultHeadline = `Das Kind ist in ${stateRule.name} ein Karenzzeitkind.`;
+        explanation = `Das Kind wird nach dem regulären Stichtag sechs Jahre alt und liegt in ${stateRule.name} innerhalb der Karenzzeit.`;
         nextStepTitle = "Wichtig für dich";
         nextStepText = "Sprich die zuständige Grundschule direkt an. Dort erfährst du, wie Anmeldung, Fristen und die konkrete Einordnung geregelt sind.";
       }
@@ -418,7 +418,7 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
         statusLabel = "Flexibler Einschulungszeitraum";
         statusTone = "optional";
         schoolStartYear = sixthBirthdayYear;
-        resultHeadline = `Dein Kind fällt in ${stateRule.name} in den flexiblen Einschulungszeitraum. Eine Einschulung zum Schuljahr ${schoolStartYear}/${schoolStartYear + 1} ist grundsätzlich möglich.`;
+        resultHeadline = `Das Kind fällt in ${stateRule.name} in den flexiblen Einschulungszeitraum. Eine Einschulung zum Schuljahr ${schoolStartYear}/${schoolStartYear + 1} ist grundsätzlich möglich.`;
         explanation = `In ${stateRule.name} gilt der 30. September als Stichtag. Da dein Kind zwischen dem 1. Juli und dem 30. September sechs Jahre alt wird, ist es grundsätzlich schulpflichtig; zugleich gibt es eine besondere Flexibilisierung.`;
         nextStepTitle = "Wichtig für dich";
         nextStepText = "Informiere dich bei der zuständigen Grundschule, ob eine Verschiebung des Einschulungstermins in Frage kommt und welche Fristen dafür gelten.";
@@ -428,7 +428,7 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
         statusLabel = "Anmeldung möglich";
         statusTone = "optional";
         schoolStartYear = sixthBirthdayYear;
-        resultHeadline = `Dein Kind liegt in ${stateRule.name} im erweiterten Anmeldezeitraum.`;
+        resultHeadline = `Das Kind liegt in ${stateRule.name} im erweiterten Anmeldezeitraum.`;
         explanation = `In ${stateRule.name} gilt der 30. Juni als regulärer Stichtag. Kinder, die bis zum 30. September sechs Jahre alt werden, können durch Anmeldung der Eltern ebenfalls schulpflichtig werden.`;
         nextStepTitle = "Wichtig für dich";
         nextStepText = "Informiere dich bei der zuständigen Grundschule, ob und wie die Anmeldung für eine Einschulung in diesem Schuljahr möglich ist.";
@@ -438,8 +438,8 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
         statusLabel = "Kann-Kind";
         statusTone = "optional";
         schoolStartYear = month <= 3 ? sixthBirthdayYear - 1 : sixthBirthdayYear;
-        resultHeadline = `Dein Kind ist in ${stateRule.name} ein Kann-Kind.`;
-        explanation = `Dein Kind liegt in ${stateRule.name} im Zeitraum der Kann-Kind-Regelung. Eine Einschulung im Schuljahr ${schoolStartYear}/${schoolStartYear + 1} kann auf Antrag der Erziehungsberechtigten geprüft werden.`;
+        resultHeadline = `Das Kind ist in ${stateRule.name} ein Kann-Kind.`;
+        explanation = `Das Kind liegt in ${stateRule.name} im Zeitraum der Kann-Kind-Regelung. Eine Einschulung im Schuljahr ${schoolStartYear}/${schoolStartYear + 1} kann auf Antrag der Erziehungsberechtigten geprüft werden.`;
         nextStepTitle = "Wichtig für dich";
         nextStepText = "Sprich frühzeitig mit der zuständigen Grundschule, wenn du eine vorzeitige Einschulung beantragen möchtest.";
       }
@@ -448,8 +448,8 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
         statusLabel = "Kann-Kind auf Antrag";
         statusTone = "optional";
         schoolStartYear = sixthBirthdayYear;
-        resultHeadline = `Dein Kind ist in ${stateRule.name} ein Kann-Kind für das Schuljahr ${schoolStartYear}/${schoolStartYear + 1}.`;
-        explanation = `Dein Kind wird nach dem regulären Stichtag, aber bis zum 31. Dezember sechs Jahre alt. In ${stateRule.name} kann eine vorzeitige Einschulung für das Schuljahr ${schoolStartYear}/${schoolStartYear + 1} auf Antrag geprüft werden.`;
+        resultHeadline = `Das Kind ist in ${stateRule.name} ein Kann-Kind für das Schuljahr ${schoolStartYear}/${schoolStartYear + 1}.`;
+        explanation = `Das Kind wird nach dem regulären Stichtag, aber bis zum 31. Dezember sechs Jahre alt. In ${stateRule.name} kann eine vorzeitige Einschulung für das Schuljahr ${schoolStartYear}/${schoolStartYear + 1} auf Antrag geprüft werden.`;
         nextStepTitle = "Wichtig für dich";
         nextStepText = "Sprich frühzeitig mit der zuständigen Grundschule, wenn du eine vorzeitige Einschulung für dieses Schuljahr prüfen lassen möchtest.";
       }
@@ -459,8 +459,8 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
       schoolStartYear = sixthBirthdayYear - 1;
       statusLabel = "Aufnahme im Ausnahmefall möglich";
       statusTone = "optional";
-      resultHeadline = `Dein Kind kann in ${stateRule.name} für das Schuljahr ${schoolStartYear}/${schoolStartYear + 1} nur im Ausnahmefall aufgenommen werden.`;
-      explanation = `Dein Kind wird erst nach dem 31. Dezember und vor dem 1. August des Folgejahres sechs Jahre alt. In ${stateRule.name} kann eine Aufnahme in diesem Schuljahr nur in begründeten Ausnahmefällen geprüft werden.`;
+      resultHeadline = `Das Kind kann in ${stateRule.name} für das Schuljahr ${schoolStartYear}/${schoolStartYear + 1} nur im Ausnahmefall aufgenommen werden.`;
+      explanation = `Das Kind wird erst nach dem 31. Dezember und vor dem 1. August des Folgejahres sechs Jahre alt. In ${stateRule.name} kann eine Aufnahme in diesem Schuljahr nur in begründeten Ausnahmefällen geprüft werden.`;
       nextStepTitle = "Wichtig für dich";
       nextStepText = "Für diesen Sonderfall solltest du dich direkt an die zuständige Grundschule wenden.";
     }
@@ -1581,7 +1581,7 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
     let displayedHeadline = result.resultHeadline;
 
     if (result.statusTone === "regular") {
-      displayedHeadline = `Dein Kind wird in ${stateName} voraussichtlich im Schuljahr <span class="result-date-nowrap">${result.schoolYear}</span> regulär eingeschult.`;
+      displayedHeadline = `Das Kind wird in ${stateName} voraussichtlich im Schuljahr <span class="result-date-nowrap">${result.schoolYear}</span> regulär eingeschult.`;
     }
 
     if (result.statusTone === "retrospective") {
@@ -1591,7 +1591,7 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
     }
 
     if (result.statusTone === "following") {
-      displayedHeadline = `Dein Kind wird in ${stateName} voraussichtlich im Schuljahr <span class="result-date-nowrap">${result.schoolYear}</span> eingeschult.`;
+      displayedHeadline = `Das Kind wird in ${stateName} voraussichtlich im Schuljahr <span class="result-date-nowrap">${result.schoolYear}</span> eingeschult.`;
     }
 
     if (
@@ -1600,7 +1600,7 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
       result.statusTone === "regular"
     ) {
       displayedHeadline =
-        "<span class=\"result-headline-label\">Die Schuleinführung deines Kindes findet in Sachsen im Schuljahr <span class=\"result-date-nowrap\">2026/2027</span> am</span><span class=\"result-headline-highlight\">Samstag,<br />15. August 2026</span><span class=\"result-headline-meta\">statt.</span>";
+        "<span class=\"result-headline-label\">Die Schuleinführung des Kindes findet in Sachsen im Schuljahr <span class=\"result-date-nowrap\">2026/2027</span> am</span><span class=\"result-headline-highlight\">Samstag,<br />15. August 2026</span><span class=\"result-headline-meta\">statt.</span>";
     }
 
     if (
@@ -1609,7 +1609,7 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
       result.statusTone === "regular"
     ) {
       displayedHeadline =
-        "<span class=\"result-headline-label\">Dein Kind wird in Bayern im Schuljahr <span class=\"result-date-nowrap\">2026/2027</span> am</span><span class=\"result-headline-highlight\">Mittwoch,<br />16. September 2026</span><span class=\"result-headline-meta\">eingeschult.</span>";
+        "<span class=\"result-headline-label\">Dein Kind wird in Bayern voraussichtlich am</span><span class=\"result-headline-highlight\">Mittwoch,<br />16. September 2026</span><span class=\"result-headline-meta\">für das Schuljahr <span class=\"result-date-nowrap\">2026/2027</span> eingeschult.</span>";
     }
 
     if (
@@ -1645,7 +1645,7 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
       result.statusTone === "regular"
     ) {
       displayedHeadline =
-        "<span class=\"result-headline-label\">Die Schuleinführung deines Kindes findet in Thüringen im Schuljahr <span class=\"result-date-nowrap\">2026/2027</span> am</span><span class=\"result-headline-highlight\">Montag,<br />17. August 2026</span><span class=\"result-headline-meta\">statt.</span>";
+        "<span class=\"result-headline-label\">Die Schuleinführung des Kindes findet in Thüringen im Schuljahr <span class=\"result-date-nowrap\">2026/2027</span> am</span><span class=\"result-headline-highlight\">Montag,<br />17. August 2026</span><span class=\"result-headline-meta\">statt.</span>";
     }
 
     if (
@@ -1654,7 +1654,7 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
       result.statusTone === "regular"
     ) {
       displayedHeadline =
-        "<span class=\"result-headline-label\">Dein Kind kommt in Baden-Württemberg im Schuljahr <span class=\"result-date-nowrap\">2026/2027</span> in die Schule.</span><span class=\"result-headline-label\">Die Einschulung der ersten Klassen wird</span><span class=\"result-headline-highlight\">schulabhängig<br />ab 14. September 2026</span><span class=\"result-headline-meta\">festgelegt.</span>";
+        "<span class=\"result-headline-label\">Das Kind kommt in Baden-Württemberg im Schuljahr <span class=\"result-date-nowrap\">2026/2027</span> in die Schule.</span><span class=\"result-headline-label\">Die Einschulung der ersten Klassen wird</span><span class=\"result-headline-highlight\">schulabhängig<br />ab 14. September 2026</span><span class=\"result-headline-meta\">festgelegt.</span>";
     }
 
     if (
@@ -1663,7 +1663,7 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
       result.statusTone === "regular"
     ) {
       displayedHeadline =
-        "<span class=\"result-headline-label\">Dein Kind wird in Schleswig-Holstein im Schuljahr <span class=\"result-date-nowrap\">2026/2027</span> am</span><span class=\"result-headline-highlight\">Mittwoch,<br />19. August 2026</span><span class=\"result-headline-meta\">eingeschult.</span>";
+        "<span class=\"result-headline-label\">Das Kind wird in Schleswig-Holstein im Schuljahr <span class=\"result-date-nowrap\">2026/2027</span> am</span><span class=\"result-headline-highlight\">Mittwoch,<br />19. August 2026</span><span class=\"result-headline-meta\">eingeschult.</span>";
     }
 
     if (
@@ -1672,7 +1672,7 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
       result.statusTone === "regular"
     ) {
       displayedHeadline =
-        "<span class=\"result-headline-label\">Dein Kind wird in Mecklenburg-Vorpommern im Schuljahr <span class=\"result-date-nowrap\">2026/2027</span> am</span><span class=\"result-headline-highlight\">Samstag,<br />22. August 2026</span><span class=\"result-headline-meta\">eingeschult.</span>";
+        "<span class=\"result-headline-label\">Das Kind wird in Mecklenburg-Vorpommern im Schuljahr <span class=\"result-date-nowrap\">2026/2027</span> am</span><span class=\"result-headline-highlight\">Samstag,<br />22. August 2026</span><span class=\"result-headline-meta\">eingeschult.</span>";
     }
 
     if (
@@ -1708,7 +1708,7 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
       result.statusTone === "regular"
     ) {
       displayedHeadline =
-        "<span class=\"result-headline-label\">Dein Kind kommt in Hamburg im Schuljahr <span class=\"result-date-nowrap\">2026/2027</span> in die Schule.</span><span class=\"result-headline-label\">Die Einschulung der ersten Klassen findet schulabhängig am</span><span class=\"result-headline-highlight\">Montag, 24. August<br />oder Dienstag, 25. August 2026</span><span class=\"result-headline-meta\">statt.</span>";
+        "<span class=\"result-headline-label\">Das Kind kommt in Hamburg im Schuljahr <span class=\"result-date-nowrap\">2026/2027</span> in die Schule.</span><span class=\"result-headline-label\">Die Einschulung der ersten Klassen findet schulabhängig am</span><span class=\"result-headline-highlight\">Montag, 24. August<br />oder Dienstag, 25. August 2026</span><span class=\"result-headline-meta\">statt.</span>";
     }
 
     if (

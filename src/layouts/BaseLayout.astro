@@ -82,6 +82,10 @@ const currentPath = new URL(canonical).pathname;
     <slot />
 
     <footer class="base-footer">
+      <p class="base-footer-copyright">
+        © 2026 DigiTech4U Institute
+      </p>
+
       <nav class="base-footer-nav" aria-label="Rechtliches">
         {currentPath !== "/impressum/" ? <a class="base-footer-link" href="/impressum/">Impressum</a> : null}
         {currentPath !== "/datenschutz/" ? <a class="base-footer-link" href="/datenschutz/">Datenschutz</a> : null}
@@ -125,26 +129,39 @@ const currentPath = new URL(canonical).pathname;
 <style is:global>
   .base-footer {
     display: flex !important;
-    justify-content: center !important;
+    justify-content: space-between !important;
     align-items: center !important;
-    width: 100% !important;
+    gap: 18px !important;
+    width: min(960px, calc(100% - 40px)) !important;
     box-sizing: border-box !important;
-    margin: 38px 0 0 !important;
-    padding: 18px 14px !important;
-    border-top: 1px solid rgba(42, 35, 21, 0.08) !important;
+    margin: 34px auto 0 !important;
+    padding: 16px 0 18px !important;
+    border-top: 1px solid rgba(42, 35, 21, 0.07) !important;
     text-align: center !important;
+  }
+
+  .base-footer-copyright {
+    flex: 0 0 auto !important;
+    margin: 0 !important;
+    color: rgba(75, 85, 99, 0.78) !important;
+    font: inherit;
+    font-size: clamp(0.66rem, 2.2vw, 0.78rem);
+    font-weight: 500;
+    letter-spacing: 0.002em;
+    line-height: 1.15;
+    white-space: nowrap !important;
   }
 
   .base-footer-nav {
     display: flex !important;
     flex: 0 1 auto !important;
     flex-wrap: nowrap !important;
-    justify-content: center !important;
+    justify-content: flex-end !important;
     align-items: center !important;
     gap: clamp(10px, 2.4vw, 22px) !important;
     width: auto !important;
     max-width: calc(100vw - 20px) !important;
-    margin: 0 auto !important;
+    margin: 0 !important;
     white-space: nowrap !important;
   }
 
@@ -154,11 +171,11 @@ const currentPath = new URL(canonical).pathname;
     flex: 0 0 auto !important;
     align-items: center !important;
     justify-content: center !important;
-    color: #816126;
+    color: rgba(75, 85, 99, 0.82);
     font: inherit;
-    font-size: clamp(0.7rem, 2.8vw, 0.86rem);
-    font-weight: 800;
-    letter-spacing: 0.005em;
+    font-size: clamp(0.66rem, 2.2vw, 0.78rem);
+    font-weight: 550;
+    letter-spacing: 0.002em;
     line-height: 1.15;
     text-align: center;
     text-decoration: none;
@@ -175,7 +192,7 @@ const currentPath = new URL(canonical).pathname;
     border-radius: 0 !important;
     background: transparent !important;
     box-shadow: none !important;
-    color: #816126 !important;
+    color: rgba(75, 85, 99, 0.82) !important;
     cursor: pointer;
     appearance: none;
   }
@@ -188,17 +205,23 @@ const currentPath = new URL(canonical).pathname;
 
   @media (max-width: 520px) {
     .base-footer {
+      flex-direction: column !important;
+      justify-content: center !important;
+      gap: 10px !important;
+      width: calc(100% - 28px) !important;
       margin-top: 28px !important;
-      padding: 14px 6px !important;
+      padding: 14px 0 !important;
     }
 
     .base-footer-nav {
+      justify-content: center !important;
       gap: clamp(7px, 2vw, 10px) !important;
       width: auto !important;
       max-width: calc(100vw - 12px) !important;
       margin: 0 auto !important;
     }
 
+    .base-footer-copyright,
     .base-footer-link,
     .base-footer-button {
       font-size: clamp(0.66rem, 2.75vw, 0.78rem);
