@@ -79,6 +79,19 @@ const currentPath = new URL(canonical).pathname;
   </head>
 
   <body>
+    <header class="base-header">
+      <a class="base-header-brand" href="/" aria-label="Zur Startseite von Einschulungsrechner.de">
+        Einschulungsrechner.de
+      </a>
+
+      <nav class="base-header-nav" aria-label="Hauptnavigation">
+        <a class="base-header-link" href="/#einschulungsrechner">Rechner</a>
+        <a class="base-header-link" href="/einschulung/">Ratgeber</a>
+        <a class="base-header-link" href="/einschulung-checkliste/">Checkliste</a>
+        <a class="base-header-link" href="/einschulung/#bundeslaender">Bundesländer</a>
+      </nav>
+    </header>
+
     <slot />
 
     <footer class="base-footer">
@@ -127,6 +140,77 @@ const currentPath = new URL(canonical).pathname;
 </html>
 
 <style is:global>
+  .base-header {
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 1000 !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    gap: 28px !important;
+    width: min(1280px, calc(100% - 56px)) !important;
+    box-sizing: border-box !important;
+    margin: 0 auto !important;
+    padding: 18px 0 18px !important;
+    background:
+      linear-gradient(180deg, rgba(251, 248, 241, 0.96) 0%, rgba(251, 248, 241, 0.88) 100%) !important;
+    backdrop-filter: blur(12px) !important;
+  }
+
+  .base-header-brand {
+    flex: 0 0 auto !important;
+    color: #172033 !important;
+    font: inherit;
+    font-size: clamp(0.88rem, 2.2vw, 1.02rem);
+    font-weight: 850;
+    letter-spacing: -0.015em;
+    line-height: 1.15;
+    text-decoration: none;
+    white-space: nowrap !important;
+  }
+
+  .base-header-brand:hover {
+    color: #816126 !important;
+  }
+
+  .base-header-nav {
+    display: flex !important;
+    flex: 0 1 auto !important;
+    flex-wrap: nowrap !important;
+    justify-content: flex-end !important;
+    align-items: center !important;
+    gap: clamp(14px, 2.8vw, 30px) !important;
+    width: auto !important;
+    max-width: calc(100vw - 20px) !important;
+    margin: 0 !important;
+    white-space: nowrap !important;
+  }
+
+  .base-header-link {
+    display: inline-flex !important;
+    flex: 0 0 auto !important;
+    align-items: center !important;
+    justify-content: center !important;
+    color: rgba(75, 85, 99, 0.88) !important;
+    font: inherit;
+    font-size: clamp(0.72rem, 2vw, 0.88rem);
+    font-weight: 650;
+    letter-spacing: 0.002em;
+    line-height: 1.15;
+    text-align: center;
+    text-decoration: none;
+    white-space: nowrap !important;
+  }
+
+  .base-header-link:hover {
+    color: #172033 !important;
+    text-decoration: underline;
+  }
+
+  :target {
+    scroll-margin-top: 96px;
+  }
+
   .base-footer {
     display: flex !important;
     justify-content: space-between !important;
@@ -204,6 +288,30 @@ const currentPath = new URL(canonical).pathname;
   }
 
   @media (max-width: 520px) {
+    .base-header {
+      flex-direction: column !important;
+      justify-content: center !important;
+      align-items: center !important;
+      gap: 10px !important;
+      width: calc(100% - 28px) !important;
+      padding: 14px 0 12px !important;
+      text-align: center !important;
+    }
+
+    .base-header-nav {
+      justify-content: center !important;
+      flex-wrap: wrap !important;
+      gap: 8px 12px !important;
+      width: 100% !important;
+      max-width: calc(100vw - 28px) !important;
+      margin: 0 auto !important;
+      white-space: normal !important;
+    }
+
+    .base-header-link {
+      font-size: clamp(0.7rem, 3vw, 0.8rem);
+      font-weight: 600;
+    }
     .base-footer {
       flex-direction: column !important;
       justify-content: center !important;

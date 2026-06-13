@@ -3,13 +3,13 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import StateEnrollmentCalculator from "../components/StateEnrollmentCalculator.astro";
 
 const pageTitle =
-  "Einschulung Brandenburg 2026: Termin, Stichtag & Rechner";
+  "Einschulung Brandenburg 2026 & 2027: Termin, Stichtag 30.9. & Rechner";
 
 const pageDescription =
-  "Wann ist die Einschulung in Brandenburg 2026? Hier findest du Termin, Stichtag 30. September, Kann-Kind-Regel und den kostenlosen Einschulungsrechner.";
+  "Wann ist die Einschulung in Brandenburg 2026 oder 2027? Hier findest du Termin, Stichtag 30. September, Kann-Kind-Regel und den kostenlosen Einschulungsrechner.";
 
 const canonical = "https://www.einschulungsrechner.de/einschulung-brandenburg/";
-const dateModified = "2026-05-27";
+const dateModified = "2026-06-13";
 
 const ADSENSE_ID = import.meta.env.PUBLIC_ADSENSE_ID || "";
 const STATE_CONTENT_AD_SLOT = import.meta.env.PUBLIC_ADSENSE_STATE_CONTENT_SLOT || "";
@@ -49,14 +49,6 @@ const faqSchema = {
       acceptedAnswer: {
         "@type": "Answer",
         text: "Der erste Schultag im Schuljahr 2026/2027 ist in Brandenburg Montag, 24. August 2026. Die Einschulungsfeiern werden in der Regel am Samstag vor dem ersten Schultag durchgeführt, also voraussichtlich am Samstag, 22. August 2026. Den konkreten Ablauf legt die zuständige Grundschule fest.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "Wann beginnt die Grundschule in Brandenburg 2026?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Der erste Schultag im Schuljahr 2026/2027 ist in Brandenburg Montag, 24. August 2026. Die Einschulungsfeier ist voraussichtlich am Samstag, 22. August 2026. Den konkreten Ablauf legt die zuständige Grundschule fest.",
       },
     },
     {
@@ -101,6 +93,22 @@ const faqSchema = {
     },
     {
       "@type": "Question",
+      name: "Wie läuft die Einschulungsfeier in Brandenburg 2026 ab?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Die Einschulungsfeier in Brandenburg 2026 ist voraussichtlich am Samstag, 22. August 2026. Meist begrüßen Schulleitung und Lehrkräfte die neuen Erstklässlerinnen und Erstklässler. Anschließend gehen die Kinder häufig für eine kurze erste Unterrichtseinheit in den Klassenraum. Den genauen Ablauf legt die jeweilige Schule fest.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Kann ich die Einschulung Brandenburg 2027 schon berechnen?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Ja. Der Einschulungsrechner kann auch für die Einschulung in Brandenburg 2027 genutzt werden. Er orientiert sich an der aktuell geltenden Rechtslage. Wegen der geplanten, aber Stand Mai 2026 noch nicht umgesetzten Stichtagsänderung sollten Eltern spätere Schuljahre zusätzlich bei Schule oder Behörde prüfen.",
+      },
+    },
+    {
+      "@type": "Question",
       name: "Ist das Ergebnis zur Einschulung in Brandenburg verbindlich?",
       acceptedAnswer: {
         "@type": "Answer",
@@ -118,7 +126,6 @@ const faqSchema = {
   schema={[faqSchema, webPageSchema]}
 >
   <main class="state-page">
-      <a class="back-link" href="/">← Zur Startseite</a>
 
       <article class="state-card">
         <p class="state-kicker">Brandenburg</p>
@@ -174,6 +181,18 @@ const faqSchema = {
           </div>
         </div>
 
+
+        <section>
+          <h2>Wann ist die Einschulung in Brandenburg 2026?</h2>
+
+          <p>
+            Die Sommerferien in Brandenburg enden 2026 am Samstag, 22. August 2026.
+            Die Einschulungsfeier ist voraussichtlich ebenfalls für Samstag,
+            22. August 2026 vorgesehen. Der erste Schultag ist Montag,
+            24. August 2026. Den konkreten Ablauf legt die zuständige Grundschule fest.
+          </p>
+        </section>
+
         {showContentAd ? (
           <aside class="ad-slot ad-slot-after-facts" aria-label="Anzeige">
             <p class="ad-label">Anzeige</p>
@@ -188,17 +207,6 @@ const faqSchema = {
           </aside>
         ) : null}
 
-        <section>
-          <h2>Wann ist die Einschulung in Brandenburg 2026?</h2>
-
-          <p>
-            Die Sommerferien in Brandenburg enden 2026 am Samstag, 22. August 2026.
-            Die Einschulungsfeier ist voraussichtlich ebenfalls für Samstag,
-            22. August 2026 vorgesehen. Der erste Schultag ist Montag,
-            24. August 2026. Den konkreten Ablauf legt die zuständige Grundschule fest.
-          </p>
-        </section>
-
         <section class="example-box">
           <h2>Wie funktioniert der Einschulungsrechner für Brandenburg?</h2>
 
@@ -210,16 +218,18 @@ const faqSchema = {
           </p>
 
           <p>
-            Beispiel: Wird ein Kind am 15. September 2020 geboren, wird es am
-            15. September 2026 sechs Jahre alt. Da dieses Datum vor dem Stichtag
-            30. September liegt, ist das Kind voraussichtlich für das Schuljahr
-            2026/2027 regulär schulpflichtig.
+            <strong>Beispiel 1 — regulär schulpflichtig:</strong> Wird ein Kind am
+            15. September 2020 geboren, wird es am 15. September 2026 sechs Jahre alt.
+            Da dieses Datum vor dem Stichtag 30. September liegt, ist das Kind
+            voraussichtlich für das Schuljahr 2026/2027 regulär schulpflichtig.
           </p>
 
           <p>
-            Wird ein Kind dagegen zwischen dem 1. Oktober und dem 31. Dezember
-            sechs Jahre alt, ist es nicht automatisch regulär schulpflichtig. Eine
-            vorzeitige Einschulung kann auf Antrag der Eltern geprüft werden.
+            <strong>Beispiel 2 — noch nicht regulär schulpflichtig:</strong> Wird ein
+            Kind am 15. November 2020 geboren, wird es erst am 15. November 2026
+            sechs Jahre alt — also nach dem Stichtag 30. September. Es ist damit
+            für das Schuljahr 2026/2027 kein regulär schulpflichtiges Kind. Eltern
+            können jedoch eine vorzeitige Einschulung als Kann-Kind beantragen.
           </p>
         </section>
 
@@ -230,6 +240,26 @@ const faqSchema = {
             Ein Kind wird in Brandenburg regulär schulpflichtig, wenn es bis zum
             30. September des jeweiligen Kalenderjahres das sechste Lebensjahr
             vollendet. Die Schulpflicht beginnt dann am 1. August desselben Jahres.
+            Für die Einschulung 2026 bedeutet das: Kinder, die bis einschließlich
+            30. September 2026 sechs Jahre alt werden, gehören grundsätzlich zum
+            Schuljahr 2026/2027.
+          </p>
+
+          <p>
+            Besonders wichtig ist diese Regel für Kinder mit Geburtstag im Sommer
+            oder Frühherbst. Liegt der sechste Geburtstag knapp vor oder am
+            Stichtag, wird das Kind regulär schulpflichtig. Liegt der Geburtstag
+            nach dem 30. September, beginnt die Schule normalerweise erst im
+            folgenden Schuljahr. In bestimmten Fällen können Eltern aber eine
+            frühere Aufnahme beantragen.
+          </p>
+
+          <p>
+            Eltern erhalten in der Regel Informationen von der zuständigen
+            Grundschule oder Schulbehörde, sobald der Anmeldeprozess beginnt. Wer
+            kein Schreiben erhält oder unsicher ist, welche Schule zuständig ist,
+            sollte direkt bei der Wohnortgemeinde oder der nächstgelegenen
+            Grundschule nachfragen.
           </p>
         </section>
 
@@ -238,37 +268,86 @@ const faqSchema = {
 
           <p>
             Kinder, die zwischen dem 1. Oktober und dem 31. Dezember sechs Jahre
-            alt werden, können auf Antrag der Eltern vorzeitig aufgenommen werden.
-            Diese Kinder werden häufig als Kann-Kinder bezeichnet.
+            alt werden, können in Brandenburg auf Antrag der Eltern vorzeitig in
+            die Schule aufgenommen werden. Diese Kinder werden häufig als
+            Kann-Kinder bezeichnet, weil sie nicht automatisch schulpflichtig sind,
+            aber unter bestimmten Voraussetzungen früher starten können.
+          </p>
+
+          <p>
+            Der Antrag wird bei der zuständigen Grundschule gestellt. Die Schule
+            prüft anschließend, ob das Kind voraussichtlich erfolgreich am
+            Anfangsunterricht teilnehmen kann. Dabei können unter anderem die
+            schulärztliche Untersuchung, ein Gespräch mit der Schule und die
+            persönliche Entwicklung des Kindes eine Rolle spielen.
           </p>
 
           <p>
             Darüber hinaus kann in begründeten Ausnahmefällen auch eine vorzeitige
             Aufnahme für Kinder geprüft werden, die erst nach dem 31. Dezember —
             aber noch vor dem 1. August des Folgejahres — das sechste Lebensjahr
-            vollenden.
+            vollenden. Ob eine frühere Einschulung sinnvoll ist, sollte deshalb
+            immer gemeinsam mit der Schule und den zuständigen Fachstellen
+            besprochen werden.
+          </p>
+
+          <p>
+            <strong>Wichtig für Eltern:</strong> Ein Antrag auf vorzeitige Aufnahme
+            ersetzt nicht die reguläre Schulanmeldung. Informiere dich deshalb
+            frühzeitig bei der zuständigen Grundschule über das genaue Verfahren,
+            erforderliche Unterlagen und geltende Fristen.
           </p>
         </section>
 
         <section>
-          <h2>Wie läuft die Schulanmeldung in Brandenburg ab?</h2>
+          <h2>Schulanmeldung Brandenburg: Ablauf und Fristen</h2>
 
           <p>
             Die Anmeldung erfolgt bei der zuständigen Grundschule. Für das Schuljahr
             2026/2027 musste die Anmeldung nach Angaben des MBJS bis zum 27. Februar
             2026 erfolgen. Die Frist für das Schuljahr 2027/2028 wird vom MBJS
-            rechtzeitig bekanntgegeben. Im Anschluss finden unter anderem die
-            schulärztliche Untersuchung und das Schulaufnahmegespräch statt.
+            rechtzeitig bekanntgegeben.
           </p>
 
           <p>
-            Über die Aufnahme entscheidet die Schulleitung. Die Entscheidung wird
-            den Eltern in der Regel schriftlich mitgeteilt.
+            Nach der Anmeldung folgen in der Regel diese Schritte:
+          </p>
+
+          <ol class="process-list">
+            <li>
+              <strong>Schulärztliche Untersuchung:</strong> Dabei werden unter anderem
+              Entwicklungsstand, Seh- und Hörvermögen sowie motorische Fähigkeiten
+              des Kindes betrachtet.
+            </li>
+            <li>
+              <strong>Schulaufnahmegespräch:</strong> Die Schule lernt das Kind kennen
+              und bespricht mit den Eltern wichtige Fragen zum Schulstart.
+            </li>
+            <li>
+              <strong>Aufnahmeentscheidung:</strong> Die Schulleitung entscheidet über
+              die Aufnahme und teilt den Eltern das Ergebnis in der Regel schriftlich mit.
+            </li>
+          </ol>
+
+          <p>
+            Manche Schulen versenden die Einladungen zur Schulanmeldung automatisch
+            an die Erziehungsberechtigten schulpflichtiger Kinder. Wer keine Einladung
+            erhält oder unsicher ist, sollte selbst aktiv werden und die zuständige
+            Grundschule kontaktieren.
           </p>
         </section>
 
         <section>
           <h2>Mein Kind ist noch nicht schulreif – was muss ich in Brandenburg tun?</h2>
+
+          <p>
+            Wenn ein Kind zwar schulpflichtig ist, aber aus Sicht der Eltern noch
+            nicht bereit für den Schulstart wirkt, sollte frühzeitig das Gespräch
+            mit der zuständigen Grundschule gesucht werden. Dabei geht es nicht
+            nur um einzelne Fähigkeiten wie Stifthaltung oder Zahlenverständnis,
+            sondern auch um Konzentration, Selbstständigkeit, Belastbarkeit und
+            die emotionale Entwicklung des Kindes.
+          </p>
 
           <p>
             Schulpflichtige Kinder können in Brandenburg im Ausnahmefall auf Antrag
@@ -277,6 +356,79 @@ const faqSchema = {
             Die Entscheidung trifft die Schulleitung nach schulärztlicher
             Untersuchung und Beratung durch die Schule.
           </p>
+
+          <p>
+            Eine Zurückstellung ist keine automatische Option, sondern erfordert
+            eine begründete Einschätzung. Eltern sollten den Wunsch nach
+            Zurückstellung deshalb möglichst früh ansprechen und die Hinweise der
+            Schule sowie der schulärztlichen Untersuchung ernst nehmen.
+          </p>
+        </section>
+
+        <section>
+          <h2>Einschulungsfeier Brandenburg 2026: Was passiert am ersten Schultag?</h2>
+
+          <p>
+            Der erste Schultag ist für Kinder und Eltern ein besonderer Moment.
+            In Brandenburg findet vor dem regulären Unterricht meist eine
+            Einschulungsfeier an der zuständigen Grundschule statt. Häufig werden
+            die neuen Erstklässlerinnen und Erstklässler von der Schulleitung,
+            den Lehrkräften und manchmal auch von älteren Kindern begrüßt.
+          </p>
+
+          <p>
+            Danach gehen die Kinder oft für eine kurze erste Unterrichtseinheit
+            in ihren Klassenraum. Eltern erhalten in dieser Zeit je nach Schule
+            weitere Informationen oder warten auf dem Schulgelände. Uhrzeit,
+            Treffpunkt, Dauer und Ablauf können von Schule zu Schule unterschiedlich
+            sein. Verbindlich ist deshalb immer die Einladung oder Information der
+            zuständigen Grundschule.
+          </p>
+        </section>
+
+        <section>
+          <h2>Einschulung Brandenburg 2027 – Ausblick & Stichtagsänderung</h2>
+
+          <p>
+            Ja, du kannst den Einschulungsrechner auch für die Einschulung in
+            Brandenburg 2027 nutzen. Wenn du das Geburtsdatum deines Kindes
+            eingibst, zeigt dir der Rechner, welches Schuljahr nach der aktuell
+            geltenden Regelung voraussichtlich relevant ist. Das ist besonders
+            hilfreich, wenn der Geburtstag nah am Stichtag liegt.
+          </p>
+
+          <p>
+            Wichtig ist dabei: In Brandenburg ist eine Änderung des Stichtags im
+            Koalitionsvertrag 2024–2029 vorgesehen, Stand Mai 2026 aber noch nicht
+            gesetzlich umgesetzt. Der Rechner orientiert sich an der aktuell
+            geltenden Rechtslage. Verbindliche Informationen für spätere Schuljahre
+            erhältst du bei der zuständigen Grundschule, der Schulbehörde oder beim
+            Ministerium für Bildung, Jugend und Sport Brandenburg.
+          </p>
+        </section>
+
+        <section class="next-links">
+          <h2>Nächste Schritte für Eltern</h2>
+
+          <p>
+            Wenn du jetzt weißt, welches Schuljahr für dein Kind voraussichtlich
+            relevant ist, lohnt sich als Nächstes der Blick auf die praktische
+            Vorbereitung. In unserer Checkliste findest du eine Schritt-für-Schritt-
+            Übersicht zu Unterlagen, Material, Schulweg und Organisation rund um
+            den Schulstart.
+          </p>
+
+          <div class="next-link-grid">
+            <a class="next-link-card" href="/einschulung-checkliste/">
+              <span>Praktische Vorbereitung</span>
+              <strong>Zur Einschulungs-Checkliste</strong>
+            </a>
+
+            <a class="next-link-card" href="/einschulung/">
+              <span>Grundlagen verstehen</span>
+              <strong>Ratgeber zur Einschulung lesen</strong>
+            </a>
+          </div>
         </section>
 
         <section class="example-box">
@@ -312,16 +464,6 @@ const faqSchema = {
                 am Samstag vor dem ersten Schultag durchgeführt, also voraussichtlich
                 am Samstag, 22. August 2026. Den konkreten Ablauf legt die zuständige
                 Grundschule fest.
-              </p>
-            </article>
-
-            <article class="faq-item">
-              <h3>Wann beginnt die Grundschule in Brandenburg 2026?</h3>
-              <p>
-                Der erste Schultag im Schuljahr 2026/2027 ist in Brandenburg
-                Montag, 24. August 2026. Die Einschulungsfeier ist voraussichtlich
-                am Samstag, 22. August 2026. Den konkreten Ablauf legt die
-                zuständige Grundschule fest.
               </p>
             </article>
 
@@ -377,6 +519,28 @@ const faqSchema = {
                 Mai 2026 ist diese Änderung noch nicht gesetzlich umgesetzt. Bis
                 dahin gilt weiterhin der 30. September. Verbindliche Auskunft
                 erteilt das Ministerium für Bildung, Jugend und Sport Brandenburg.
+              </p>
+            </article>
+
+            <article class="faq-item">
+              <h3>Wie läuft die Einschulungsfeier in Brandenburg 2026 ab?</h3>
+              <p>
+                Die Einschulungsfeier in Brandenburg 2026 ist voraussichtlich am
+                Samstag, 22. August 2026. Meist begrüßen Schulleitung und Lehrkräfte
+                die neuen Erstklässlerinnen und Erstklässler. Anschließend gehen die
+                Kinder häufig für eine kurze erste Unterrichtseinheit in den Klassenraum.
+                Den genauen Ablauf legt die jeweilige Schule fest.
+              </p>
+            </article>
+
+            <article class="faq-item">
+              <h3>Kann ich die Einschulung Brandenburg 2027 schon berechnen?</h3>
+              <p>
+                Ja. Der Einschulungsrechner kann auch für die Einschulung in Brandenburg
+                2027 genutzt werden. Er orientiert sich an der aktuell geltenden
+                Rechtslage. Wegen der geplanten, aber Stand Mai 2026 noch nicht
+                umgesetzten Stichtagsänderung sollten Eltern spätere Schuljahre
+                zusätzlich bei Schule oder Behörde prüfen.
               </p>
             </article>
 
@@ -444,14 +608,21 @@ const faqSchema = {
             Jugend und Sport Brandenburg.
           </p>
 
-          <p class="stand">Stand der Informationen:<span class="stand-date">Mai 2026</span></p>
+          <p class="stand">Stand der Informationen:<span class="stand-date">Juni 2026</span></p>
         </section>
       </article>
   </main>
 </BaseLayout>
 
 <style is:global>
-  :root {
+
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0;
+    color: #172033;
     font-family:
       system-ui,
       -apple-system,
@@ -461,16 +632,6 @@ const faqSchema = {
       Helvetica,
       Arial,
       sans-serif;
-    color: #172033;
-    background: #f6f3ec;
-  }
-
-  * {
-    box-sizing: border-box;
-  }
-
-  body {
-    margin: 0;
     background:
       radial-gradient(circle at top left, rgba(255, 208, 122, 0.32), transparent 32rem),
       linear-gradient(180deg, #fbf8f1 0%, #f2eee5 100%);
@@ -479,21 +640,22 @@ const faqSchema = {
   .state-page {
     min-height: 100vh;
     padding: 32px 20px 64px;
-  }
-
-  .back-link {
-    display: block;
-    max-width: 960px;
-    margin: 0 auto 20px;
-    color: #465266;
-    font-weight: 800;
-    text-decoration: none;
-  }
-
-  .back-link:hover {
     color: #172033;
-    text-decoration: underline;
+    font-family:
+      system-ui,
+      -apple-system,
+      BlinkMacSystemFont,
+      "Segoe UI",
+      Roboto,
+      Helvetica,
+      Arial,
+      sans-serif;
   }
+
+  .state-page :where(h1, h2, h3, p, a, li, strong, span) {
+    font-family: inherit;
+  }
+
 
   .state-card {
     max-width: 960px;
@@ -642,12 +804,88 @@ const faqSchema = {
     line-height: 1.7;
   }
 
+  .process-list {
+    display: grid;
+    gap: 12px;
+    margin: 18px 0 0;
+    padding-left: 1.25rem;
+    color: #465266;
+    font-size: 1.03rem;
+    line-height: 1.65;
+  }
+
+  .process-list li::marker {
+    color: #816126;
+    font-weight: 900;
+  }
+
+  .process-list strong {
+    color: #172033;
+  }
+
   .example-box,
-  .source-note {
+  .source-note,
+  .next-links {
     padding: 24px;
     border: 1px solid rgba(129, 97, 38, 0.16);
     border-radius: 22px;
     background: rgba(245, 210, 138, 0.12);
+  }
+
+  .next-link-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 22px;
+  }
+
+  .next-link-card {
+    display: inline-flex;
+    flex: 1 1 260px;
+    align-items: center;
+    justify-content: center;
+    min-height: 56px;
+    padding: 0 22px;
+    border: 1px solid rgba(129, 97, 38, 0.16);
+    border-radius: 16px;
+    background: linear-gradient(135deg, #f1b95f 0%, #d89235 100%);
+    color: #172033;
+    text-align: center;
+    text-decoration: none;
+    box-shadow: 0 12px 24px rgba(216, 146, 53, 0.18);
+    transition:
+      transform 0.18s ease,
+      filter 0.18s ease,
+      box-shadow 0.18s ease;
+  }
+
+  .next-link-card:nth-child(2) {
+    border-color: rgba(47, 143, 70, 0.18);
+    background: linear-gradient(135deg, #7ccf8d 0%, #2f8f46 100%);
+    color: #fff;
+    box-shadow: 0 12px 24px rgba(47, 143, 70, 0.16);
+  }
+
+  .next-link-card:hover {
+    transform: translateY(-1px);
+    filter: brightness(1.03);
+    box-shadow: 0 16px 30px rgba(129, 97, 38, 0.18);
+  }
+
+  .next-link-card:nth-child(2):hover {
+    box-shadow: 0 16px 30px rgba(47, 143, 70, 0.2);
+  }
+
+  .next-link-card span {
+    display: none;
+  }
+
+  .next-link-card strong {
+    color: inherit;
+    font-size: 0.98rem;
+    font-weight: 850;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
   }
 
   .faq-list {
@@ -737,6 +975,10 @@ const faqSchema = {
     .quick-facts {
       grid-template-columns: 1fr;
     }
+
+    .next-link-grid {
+      flex-direction: column;
+    }
   }
 
   @media (max-width: 520px) {
@@ -800,15 +1042,35 @@ const faqSchema = {
       line-height: 1.62;
     }
 
+    .process-list {
+      font-size: 0.96rem;
+      line-height: 1.62;
+    }
+
     .faq-item p {
       font-size: 1.02rem;
       line-height: 1.62;
     }
 
     .example-box,
-    .source-note {
+    .source-note,
+    .next-links {
       padding: 20px;
       border-radius: 20px;
+    }
+
+    .next-link-card {
+      width: 100%;
+      flex: 0 0 auto;
+      min-height: 48px;
+      padding: 0 14px;
+      border-radius: 14px;
+      box-shadow: 0 8px 18px rgba(23, 32, 51, 0.1);
+    }
+
+    .next-link-card strong {
+      font-size: 0.92rem;
+      line-height: 1.18;
     }
 
     .source-link {
