@@ -135,6 +135,39 @@ const currentPath = new URL(canonical).pathname;
           window.history.back();
         }
       });
+
+      let lastScrollY = window.scrollY;
+      let ticking = false;
+
+      const updateHeaderVisibility = () => {
+        const header = document.querySelector(".base-header");
+        if (!header) return;
+
+        const currentScrollY = window.scrollY;
+        const scrollDelta = currentScrollY - lastScrollY;
+
+        if (currentScrollY < 80) {
+          header.classList.remove("base-header-hidden");
+        } else if (scrollDelta > 8) {
+          header.classList.add("base-header-hidden");
+        } else if (scrollDelta < -8) {
+          header.classList.remove("base-header-hidden");
+        }
+
+        lastScrollY = currentScrollY;
+        ticking = false;
+      };
+
+      window.addEventListener(
+        "scroll",
+        () => {
+          if (!ticking) {
+            window.requestAnimationFrame(updateHeaderVisibility);
+            ticking = true;
+          }
+        },
+        { passive: true }
+      );
     </script>
   </body>
 </html>
@@ -148,18 +181,28 @@ const currentPath = new URL(canonical).pathname;
     justify-content: space-between !important;
     align-items: center !important;
     gap: 28px !important;
-    width: min(1280px, calc(100% - 56px)) !important;
+    width: min(960px, calc(100% - 40px)) !important;
     box-sizing: border-box !important;
     margin: 0 auto !important;
-    padding: 18px 0 18px !important;
+    padding: 14px 22px !important;
+    border: 1px solid rgba(129, 97, 38, 0.12) !important;
+    border-top: 0 !important;
+    border-radius: 0 0 22px 22px !important;
     background:
-      linear-gradient(180deg, rgba(251, 248, 241, 0.96) 0%, rgba(251, 248, 241, 0.88) 100%) !important;
-    backdrop-filter: blur(12px) !important;
+      linear-gradient(180deg, rgba(255, 252, 246, 0.98) 0%, rgba(247, 238, 222, 0.94) 100%) !important;
+    box-shadow: 0 14px 34px rgba(42, 35, 21, 0.08) !important;
+    backdrop-filter: blur(14px) !important;
+    transform: translateY(0) !important;
+    transition: transform 0.22s ease !important;
+  }
+
+  .base-header.base-header-hidden {
+    transform: translateY(-120%) !important;
   }
 
   .base-header-brand {
     flex: 0 0 auto !important;
-    color: #172033 !important;
+    color: #816126 !important;
     font: inherit;
     font-size: clamp(0.88rem, 2.2vw, 1.02rem);
     font-weight: 850;
@@ -170,7 +213,7 @@ const currentPath = new URL(canonical).pathname;
   }
 
   .base-header-brand:hover {
-    color: #816126 !important;
+    color: #172033 !important;
   }
 
   .base-header-nav {
@@ -191,7 +234,7 @@ const currentPath = new URL(canonical).pathname;
     flex: 0 0 auto !important;
     align-items: center !important;
     justify-content: center !important;
-    color: rgba(75, 85, 99, 0.88) !important;
+    color: #816126 !important;
     font: inherit;
     font-size: clamp(0.72rem, 2vw, 0.88rem);
     font-weight: 650;
@@ -294,7 +337,8 @@ const currentPath = new URL(canonical).pathname;
       align-items: center !important;
       gap: 10px !important;
       width: calc(100% - 28px) !important;
-      padding: 14px 0 12px !important;
+      padding: 12px 16px 11px !important;
+      border-radius: 0 0 18px 18px !important;
       text-align: center !important;
     }
 
