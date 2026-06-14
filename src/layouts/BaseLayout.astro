@@ -89,10 +89,15 @@ const currentPath = new URL(canonical).pathname;
         <a class="base-header-link" href="/einschulung/">Ratgeber</a>
         <a class="base-header-link" href="/einschulung-checkliste/">Checkliste</a>
         <a class="base-header-link" href="/einschulung/#bundeslaender">Bundesländer</a>
+        <a class="base-header-link" href="/ueber-uns/">Über uns</a>
       </nav>
     </header>
 
     <slot />
+
+    <button type="button" class="base-scroll-top" aria-label="Nach oben scrollen" data-scroll-top>
+      ↑
+    </button>
 
     <footer class="base-footer">
       <p class="base-footer-copyright">
@@ -124,6 +129,16 @@ const currentPath = new URL(canonical).pathname;
           return;
         }
 
+        const scrollTopTarget = event.target instanceof Element
+          ? event.target.closest("[data-scroll-top]")
+          : null;
+
+        if (scrollTopTarget) {
+          event.preventDefault();
+          window.scrollTo({ top: 0, behavior: "smooth" });
+          return;
+        }
+
         const backTarget = event.target instanceof Element
           ? event.target.closest("[data-history-back]")
           : null;
@@ -141,10 +156,15 @@ const currentPath = new URL(canonical).pathname;
 
       const updateHeaderVisibility = () => {
         const header = document.querySelector(".base-header");
+        const scrollTopButton = document.querySelector(".base-scroll-top");
         if (!header) return;
 
         const currentScrollY = window.scrollY;
         const scrollDelta = currentScrollY - lastScrollY;
+
+        if (scrollTopButton) {
+          scrollTopButton.classList.toggle("base-scroll-top-visible", currentScrollY > 520);
+        }
 
         if (currentScrollY < 80) {
           header.classList.remove("base-header-hidden");
@@ -190,7 +210,9 @@ const currentPath = new URL(canonical).pathname;
     border-radius: 0 0 22px 22px !important;
     background:
       linear-gradient(180deg, rgba(255, 252, 246, 0.98) 0%, rgba(247, 238, 222, 0.94) 100%) !important;
-    box-shadow: 0 14px 34px rgba(42, 35, 21, 0.08) !important;
+    box-shadow:
+      0 20px 42px rgba(42, 35, 21, 0.14),
+      0 4px 12px rgba(129, 97, 38, 0.12) !important;
     backdrop-filter: blur(14px) !important;
     transform: translateY(0) !important;
     transition: transform 0.22s ease !important;
@@ -248,6 +270,48 @@ const currentPath = new URL(canonical).pathname;
   .base-header-link:hover {
     color: #172033 !important;
     text-decoration: underline;
+  }
+
+  .base-scroll-top {
+    position: fixed !important;
+    right: max(16px, env(safe-area-inset-right)) !important;
+    bottom: max(18px, env(safe-area-inset-bottom)) !important;
+    z-index: 980 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 42px !important;
+    height: 42px !important;
+    border: 1px solid rgba(129, 97, 38, 0.16) !important;
+    border-radius: 999px !important;
+    background: rgba(255, 252, 246, 0.94) !important;
+    box-shadow: 0 12px 26px rgba(42, 35, 21, 0.12) !important;
+    color: #816126 !important;
+    font: inherit !important;
+    font-size: 1.15rem !important;
+    font-weight: 900 !important;
+    line-height: 1 !important;
+    cursor: pointer !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+    transform: translateY(12px) !important;
+    transition:
+      opacity 0.18s ease,
+      transform 0.18s ease,
+      color 0.18s ease,
+      background 0.18s ease !important;
+    backdrop-filter: blur(12px) !important;
+  }
+
+  .base-scroll-top.base-scroll-top-visible {
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    transform: translateY(0) !important;
+  }
+
+  .base-scroll-top:hover {
+    background: #fff8ec !important;
+    color: #172033 !important;
   }
 
   :target {
@@ -343,18 +407,21 @@ const currentPath = new URL(canonical).pathname;
     }
 
     .base-header-nav {
+      display: flex !important;
       justify-content: center !important;
-      flex-wrap: wrap !important;
-      gap: 8px 12px !important;
+      align-items: center !important;
+      flex-wrap: nowrap !important;
+      gap: clamp(8px, 2.35vw, 13px) !important;
       width: 100% !important;
-      max-width: calc(100vw - 28px) !important;
+      max-width: calc(100vw - 36px) !important;
       margin: 0 auto !important;
-      white-space: normal !important;
+      white-space: nowrap !important;
     }
 
     .base-header-link {
-      font-size: clamp(0.7rem, 3vw, 0.8rem);
-      font-weight: 600;
+      font-size: clamp(0.58rem, 2.45vw, 0.72rem);
+      font-weight: 650;
+      letter-spacing: -0.012em;
     }
     .base-footer {
       flex-direction: column !important;
@@ -378,6 +445,14 @@ const currentPath = new URL(canonical).pathname;
     .base-footer-button {
       font-size: clamp(0.66rem, 2.75vw, 0.78rem);
       letter-spacing: 0;
+    }
+
+    .base-scroll-top {
+      right: max(14px, env(safe-area-inset-right)) !important;
+      bottom: max(14px, env(safe-area-inset-bottom)) !important;
+      width: 38px !important;
+      height: 38px !important;
+      font-size: 1rem !important;
     }
   }
 </style>
