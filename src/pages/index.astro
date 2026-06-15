@@ -202,7 +202,7 @@ const webApplicationSchema = {
 
         <h1 class="hero-title">
           <span>Wann kommt mein Kind in die Schule?</span>
-          <span>Einschulungsrechner für alle 16 Bundesländer</span>
+          <span class="hero-title-subline">Einschulungsrechner für alle 16 Bundesländer</span>
         </h1>
 
         <p class="lead">
@@ -506,7 +506,7 @@ const webApplicationSchema = {
 			</div>
 
 			<p class="state-table-hint">
-			  * Stand Mai 2026: Brandenburg plant eine Verlegung des Stichtags auf den
+			  * Stand Juni 2026: Brandenburg plant eine Verlegung des Stichtags auf den
 			  30. Juni. Bis zur gesetzlichen Umsetzung gilt der 30. September. Alle
 			  Termine dienen der Orientierung; verbindlich sind die Angaben der
 			  zuständigen Schule oder Schulbehörde.
@@ -773,9 +773,9 @@ const webApplicationSchema = {
 
 		  <p>
 			Einschulungsrechner.de ist ein ehrenamtliches Informationsangebot
-			des <strong>DigiTech4U Institute</strong> – einer gemeinnützigen
-			Organisation aus Österreich, die digitale Bildungsprojekte
-			für Familien entwickelt und betreibt.
+			des DigiTech4U Institute – einer gemeinnützigen
+			Organisation (NPO) aus Österreich, die digitale Bildungsprojekte
+      entwickelt und betreibt.
 		  </p>
 
 		  <p>
@@ -883,7 +883,7 @@ const webApplicationSchema = {
 			Schulbehörde.
 		  </p>
 
-		  <p class="stand">Stand der Informationen: Mai 2026</p>
+		  <p class="stand">Stand der Informationen: Juni 2026</p>
 		</section>
 
 		<div class="content-block content-note">
@@ -1742,7 +1742,11 @@ select {
 	.hero-title span {
 	  display: block;
 	}
-  
+
+  .hero-title-subline {
+  font-size: 0.92em;
+  line-height: 1.02;
+}
 	.lead {
 	  max-width: 680px;
 	  margin: 26px 0 0;
@@ -2233,13 +2237,13 @@ select {
   text-align: center;
 }
 
-.guide-teaser-title {
+.content-section h3.guide-teaser-title {
   margin: 0;
   color: #172033;
-  font-size: clamp(1.72rem, 2.05vw, 1.95rem) !important;
-  font-weight: 900;
-  line-height: 1.08 !important;
-  letter-spacing: -0.045em !important;
+  font-size: clamp(1.78rem, 2.25vw, 2.08rem) !important;
+  font-weight: 930;
+  line-height: 1.04 !important;
+  letter-spacing: -0.048em !important;
   text-wrap: balance;
 }
 
@@ -2702,6 +2706,12 @@ select {
 		line-height: 1.02;
 		letter-spacing: -0.052em;
 	  }
+
+    .hero-title-subline {
+  font-size: 0.78em;
+  line-height: 1.04;
+  letter-spacing: -0.052em;
+}
   
 	  .lead {
 		margin-top: 22px;
@@ -2895,7 +2905,7 @@ select {
 }
 /* === Content Mobile Typography Polish === */
 
-@media (max-width: 520px) {
+@media (max-width: 720px) {
   .content-section h2 {
     font-size: 1.55rem !important;
     line-height: 1.12 !important;
@@ -2938,6 +2948,12 @@ select {
   .retrospective-link,
   .result-checklist-cta {
     width: 100% !important;
+  }
+
+  .content-section h3.guide-teaser-title {
+    font-size: clamp(1.62rem, 6.15vw, 1.9rem) !important;
+    line-height: 1.05 !important;
+    letter-spacing: -0.046em !important;
   }
 }
 
