@@ -3,13 +3,13 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import StateEnrollmentCalculator from "../components/StateEnrollmentCalculator.astro";
 
 const pageTitle =
-  "Schuleinführung Thüringen 2026: Termin, Stichtag & Rechner";
+  "Schuleinführung Thüringen 2026 & 2027: Termin, Stichtag & Rechner";
 
 const pageDescription =
-  "Wann ist die Schuleinführung in Thüringen 2026? Hier findest du Termin, Stichtag 1. August, Kann-Kind-Regelung und den kostenlosen Einschulungsrechner.";
+  "Schuleinführung Thüringen 2026: Termin 17. August, erster Schultag 17. August. Stichtag 1. August. Jetzt kostenlos berechnen.";
 
 const canonical = "https://www.einschulungsrechner.de/einschulung-thueringen/";
-const dateModified = "2026-05-27";
+const dateModified = "2026-06-16";
 
 const ADSENSE_ID = import.meta.env.PUBLIC_ADSENSE_ID || "";
 const STATE_CONTENT_AD_SLOT = import.meta.env.PUBLIC_ADSENSE_STATE_CONTENT_SLOT || "";
@@ -40,7 +40,7 @@ const faqSchema = {
       name: "Welcher Einschulungsstichtag gilt in Thüringen?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "In Thüringen gilt der 1. August als maßgeblicher Stichtag für die Schulpflicht. Kinder, die bis zu diesem Datum sechs Jahre alt sind, werden mit Beginn des Schuljahres schulpflichtig.",
+        text: "In Thüringen gilt der 1. August als maßgeblicher Stichtag für die Schulpflicht. Kinder, die am 1. August sechs Jahre alt sind, werden mit Beginn des Schuljahres schulpflichtig.",
       },
     },
     {
@@ -48,7 +48,7 @@ const faqSchema = {
       name: "Wann ist die Schuleinführung in Thüringen 2026?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Für das Schuljahr 2026/2027 enden die Sommerferien in Thüringen am Freitag, 14. August 2026. Die Schuleinführung ist voraussichtlich für Montag, 17. August 2026 vorgesehen. Dieser Tag ist zugleich der erste Schultag. Den konkreten Ablauf legt die zuständige Grundschule fest.",
+        text: "Für das Schuljahr 2026/2027 ist der erste Unterrichtstag in Thüringen Montag, 17. August 2026. Die Schuleinführungsfeiern finden nach offizieller Ferienübersicht ebenfalls an diesem Tag statt. Den konkreten Ablauf legt die zuständige Grundschule fest.",
       },
     },
     {
@@ -56,7 +56,7 @@ const faqSchema = {
       name: "Wann beginnt die Grundschule in Thüringen 2026?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Der erste Schultag im Schuljahr 2026/2027 ist in Thüringen Montag, 17. August 2026. Die Schuleinführung ist voraussichtlich ebenfalls für Montag, 17. August 2026 vorgesehen. Den konkreten Ablauf legt die zuständige Grundschule fest.",
+        text: "Der erste Unterrichtstag im Schuljahr 2026/2027 ist in Thüringen Montag, 17. August 2026. Die Schuleinführungsfeiern sind laut offizieller Ferienübersicht ebenfalls für Montag, 17. August 2026 vorgesehen.",
       },
     },
     {
@@ -72,7 +72,7 @@ const faqSchema = {
       name: "Wann findet die Schulanmeldung in Thüringen statt?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Die Schulanmeldung findet in Thüringen in der Regel im Januar oder Februar statt. Die zuständige Grundschule informiert die Eltern über den konkreten Termin und die erforderlichen Unterlagen.",
+        text: "Die Anmeldung zur Einschulung erfolgt in Thüringen bereits im Kalenderjahr vor der Einschulung im Zeitraum vom 2. bis 10. Mai. Die zuständige Grundschule oder der Schulträger informiert über den konkreten Ablauf und die erforderlichen Unterlagen.",
       },
     },
     {
@@ -102,29 +102,28 @@ const faqSchema = {
   schema={[faqSchema, webPageSchema]}
 >
   <main class="state-page">
-      <a class="back-link" href="/">← Zur Startseite</a>
 
       <article class="state-card">
         <p class="state-kicker">Thüringen</p>
 
         <h1>
-          Schuleinführung Thüringen 2026:<br />
-          Wann kommt mein Kind in die Schule?
+          <span class="headline-line headline-line-year">Schuleinführung 2026/2027</span>
+          <span class="headline-line headline-line-state">in Thüringen:</span>
+          <span class="headline-line headline-line-question">Wann kommt mein Kind in die Schule?</span>
         </h1>
 
         <p class="lead">
-          Wann kommt mein Kind in Thüringen in die Schule? Gib das Geburtsdatum ein
-          und berechne das voraussichtliche Schuljahr. In Thüringen gilt der
-          Stichtag 1. August. Für das Schuljahr 2026/2027 ist die Schuleinführung
-          voraussichtlich für Montag, 17. August 2026 vorgesehen – dieser Tag ist
-          zugleich der erste Schultag.
+          Wann kommt mein Kind in Thüringen in die Schule? Der Einschulungsrechner
+          zeigt dir anhand des Geburtsdatums das voraussichtliche Schuljahr. In
+          Thüringen gilt der Stichtag 1. August. Für das Schuljahr 2026/2027 ist der
+          erste Unterrichtstag Montag, 17. August 2026 – die Schuleinführungsfeiern
+          finden laut offizieller Ferienübersicht ebenfalls an diesem Tag statt.
         </p>
 
         <p class="answer-box">
-          Kurzantwort: Die Schuleinführung in Thüringen 2026 ist voraussichtlich
-          für Montag, 17. August 2026 vorgesehen. Dieser Tag ist zugleich der erste
-          Schultag. Schulpflichtig werden Kinder, die bis zum 1. August 2026 sechs
-          Jahre alt sind.
+          Kurzantwort: Die Schuleinführung in Thüringen 2026 ist für Montag,
+          17. August 2026 vorgesehen. Dieser Tag ist auch der erste Unterrichtstag.
+          Schulpflichtig werden Kinder, die am 1. August 2026 sechs Jahre alt sind.
         </p>
 
         <StateEnrollmentCalculator
@@ -133,7 +132,7 @@ const faqSchema = {
           calculatorKicker="Thüringen-Rechner"
           resultKicker="Thüringen-Ergebnis"
           headline="Einschulung in Thüringen berechnen"
-          intro="Gib das Geburtsdatum deines Kindes ein. Thüringen ist hier bereits vorausgewählt. Wenn du von der Startseite kommst, übernehmen wir das Geburtsdatum automatisch aus dem Link."
+          intro="Gib das Geburtsdatum ein und erfahre, für welches Schuljahr dein Kind in Thüringen voraussichtlich schulpflichtig wird."
         />
 
         <div class="quick-facts quick-facts-master" aria-label="Kurzüberblick Einschulung Thüringen">
@@ -156,6 +155,11 @@ const faqSchema = {
             <span>Sonderregel</span>
             <strong>Kann-Kind auf Antrag</strong>
           </div>
+
+          <div class="fact-card">
+            <span>Anmeldung</span>
+            <strong>2.–10. Mai<br />des Vorjahres</strong>
+          </div>
         </div>
 
         {showContentAd ? (
@@ -176,10 +180,15 @@ const faqSchema = {
           <h2>Wann ist die Schuleinführung in Thüringen 2026?</h2>
 
           <p>
-            Die Sommerferien in Thüringen enden 2026 am Freitag, 14. August 2026.
-            Die Schuleinführung ist voraussichtlich für Montag, 17. August 2026
-            vorgesehen. Dieser Tag ist zugleich der erste Schultag. Den konkreten
-            Ablauf legt die zuständige Grundschule fest.
+            Der erste Unterrichtstag im Schuljahr 2026/2027 ist in Thüringen Montag,
+            17. August 2026. Die Schuleinführungsfeiern sind laut offizieller
+            Ferienübersicht ebenfalls für Montag, 17. August 2026 vorgesehen.
+          </p>
+
+          <p>
+            Den konkreten Ablauf, die Uhrzeit und organisatorische Hinweise legt die
+            zuständige Grundschule fest. Für die persönliche Planung solltest du
+            deshalb immer auch die Mitteilung deiner Schule oder Kommune beachten.
           </p>
         </section>
 
@@ -188,9 +197,22 @@ const faqSchema = {
 
           <p>
             Der Einschulungsrechner prüft das Geburtsdatum deines Kindes und
-            vergleicht es mit den Einschulungsregeln in Thüringen. Entscheidend
-            ist der Stichtag 1. August. Ist dein Kind am 1. August sechs Jahre
-            alt, beginnt die Vollzeitschulpflicht am 1. August desselben Jahres.
+            vergleicht es mit den Einschulungsregeln in Thüringen. Entscheidend ist
+            der Stichtag 1. August. Ist dein Kind an diesem Tag sechs Jahre alt,
+            beginnt die Vollzeitschulpflicht mit Beginn des Schuljahres.
+          </p>
+
+          <p>
+            Beispiel: Wird ein Kind am 20. Juli 2020 geboren, ist es am 1. August
+            2026 bereits sechs Jahre alt. Damit ist es in Thüringen regulär
+            schulpflichtig und voraussichtlich für das Schuljahr 2026/2027 vorgesehen.
+          </p>
+
+          <p>
+            Wird ein Kind dagegen nach dem 1. August 2020 geboren, fällt es nicht
+            mehr unter die reguläre Schulpflicht für das Schuljahr 2026/2027. Eine
+            vorzeitige Einschulung kann als Kann-Kind auf Antrag geprüft werden,
+            wenn das Kind am 30. Juni mindestens fünf Jahre alt ist.
           </p>
         </section>
 
@@ -199,16 +221,16 @@ const faqSchema = {
 
           <p>
             In Thüringen gilt der 1. August als maßgeblicher Stichtag für die
-            Schulpflicht. Kinder, die spätestens an diesem Tag sechs Jahre alt
-            sind, werden mit Beginn des Schuljahres schulpflichtig.
+            Schulpflicht. Kinder, die am 1. August sechs Jahre alt sind, werden mit
+            Beginn des Schuljahres schulpflichtig.
           </p>
 
           <p>
-            Entscheidend ist also nicht nur das Geburtsjahr, sondern ob der
-            sechste Geburtstag bis einschließlich 1. August erreicht ist. Liegt
-            der Geburtstag nach dem Stichtag, besteht keine automatische
-            Schulpflicht für dieses Schuljahr; eine vorzeitige Einschulung kann
-            aber als Kann-Kind auf Antrag geprüft werden.
+            Entscheidend ist also nicht nur das Geburtsjahr, sondern ob der sechste
+            Geburtstag bis zum Stichtag erreicht ist. Liegt der Geburtstag nach dem
+            1. August, besteht keine automatische Schulpflicht für dieses Schuljahr;
+            eine vorzeitige Einschulung kann aber als Kann-Kind auf Antrag geprüft
+            werden.
           </p>
         </section>
 
@@ -216,10 +238,18 @@ const faqSchema = {
           <h2>Kann mein Kind in Thüringen früher eingeschult werden?</h2>
 
           <p>
-            Ein Kind, das noch nicht regulär schulpflichtig ist, kann auf Antrag
-            der Eltern am 1. August desselben Jahres vorzeitig in die Schule
-            aufgenommen werden, wenn es am 30. Juni mindestens fünf Jahre alt ist.
-            Die Entscheidung trifft die Schulleitung im Benehmen mit dem Schularzt.
+            Ein Kind, das noch nicht regulär schulpflichtig ist, kann in Thüringen
+            auf Antrag der Eltern am 1. August desselben Jahres vorzeitig in die
+            Schule aufgenommen werden, wenn es am 30. Juni mindestens fünf Jahre alt
+            ist. Die Entscheidung trifft die Schulleitung im Benehmen mit dem
+            Schularzt.
+          </p>
+
+          <p>
+            Wenn du eine frühere Einschulung prüfen lassen möchtest, solltest du
+            frühzeitig Kontakt mit der zuständigen Grundschule aufnehmen. Dort erfährst
+            du, welche Unterlagen benötigt werden und wie der Antrag im konkreten
+            Einzelfall abläuft.
           </p>
         </section>
 
@@ -227,12 +257,18 @@ const faqSchema = {
           <h2>Wie läuft die Schulanmeldung in Thüringen ab?</h2>
 
           <p>
-            Die Schulanmeldung erfolgt in Thüringen üblicherweise im Januar oder
-            Februar des Jahres, in dem das Kind schulpflichtig wird. Die zuständige
-            Grundschule oder der Schulträger informiert die Eltern rechtzeitig über
-            den konkreten Termin und die benötigten Unterlagen. Zum Einschulungsverfahren
-            gehört in der Regel auch die schulärztliche Untersuchung.
+            Die Anmeldung zur Einschulung erfolgt in Thüringen bereits im Kalenderjahr
+            vor der Einschulung im Zeitraum vom 2. bis 10. Mai. Die zuständige
+            Grundschule oder der Schulträger informiert über den konkreten Ablauf und
+            die erforderlichen Unterlagen.
           </p>
+
+          <ol class="process-list">
+            <li>Hinweise von Grundschule oder Schulträger beachten</li>
+            <li>Kind im Zeitraum vom 2. bis 10. Mai des Vorjahres anmelden</li>
+            <li>Erforderliche Unterlagen bereithalten</li>
+            <li>Schulärztliche Untersuchung im weiteren Verfahren einplanen</li>
+          </ol>
         </section>
 
         <section>
@@ -240,12 +276,47 @@ const faqSchema = {
 
           <p>
             In Thüringen können Eltern einen Antrag auf Zurückstellung ihres
-            schulpflichtigen Kindes für ein Schuljahr stellen. Der Antrag setzt die
-            schulärztliche Untersuchung und eine Beratung durch die Schule voraus.
+            schulpflichtigen Kindes für ein Schuljahr stellen. Voraussetzung sind die
+            schulärztliche Untersuchung und eine Beratung durch die Schule.
+          </p>
+
+          <p>
             Die Entscheidung trifft die Schulleitung. Eine Zurückstellung ist nur
             einmal möglich. Verbindliche Auskunft erhältst du bei der zuständigen
             Grundschule oder Schulbehörde.
           </p>
+        </section>
+
+        <section>
+          <h2>Schuleinführung Thüringen 2027: Kann ich das schon berechnen?</h2>
+
+          <p>
+            Ja. Du kannst den Einschulungsrechner auch für die Schuleinführung in
+            Thüringen 2027 nutzen. Gib einfach das Geburtsdatum deines Kindes ein
+            und wähle Thüringen aus. Der Rechner zeigt dir, welches Schuljahr
+            voraussichtlich relevant ist.
+          </p>
+        </section>
+
+        <section class="next-steps-box">
+          <h2>Nächste Schritte für Eltern</h2>
+
+          <p>
+            Wenn du jetzt weißt, welches Schuljahr für dein Kind voraussichtlich
+            relevant ist, lohnt sich als Nächstes der Blick auf die praktische
+            Vorbereitung. In unserer Checkliste findest du eine Schritt-für-Schritt-
+            Übersicht zu Unterlagen, Material, Schulweg und Organisation rund um den
+            Schulstart.
+          </p>
+
+          <div class="next-steps-actions">
+            <a class="next-step-button next-step-button-primary" href="/einschulung-checkliste/">
+              Zur Einschulungs-Checkliste
+            </a>
+            <a class="next-step-button next-step-button-secondary" href="/einschulung/">
+              Ratgeber zur Einschulung lesen
+            </a>
+          </div>
         </section>
 
         <section>
@@ -256,28 +327,28 @@ const faqSchema = {
               <h3>Welcher Einschulungsstichtag gilt in Thüringen?</h3>
               <p>
                 In Thüringen gilt der 1. August als maßgeblicher Stichtag für die
-                Schulpflicht. Kinder, die bis zu diesem Datum sechs Jahre alt sind,
-                werden mit Beginn des Schuljahres schulpflichtig.
+                Schulpflicht. Kinder, die am 1. August sechs Jahre alt sind, werden
+                mit Beginn des Schuljahres schulpflichtig.
               </p>
             </article>
 
             <article class="faq-item">
               <h3>Wann ist die Schuleinführung in Thüringen 2026?</h3>
               <p>
-                Für das Schuljahr 2026/2027 enden die Sommerferien in Thüringen
-                am Freitag, 14. August 2026. Die Schuleinführung ist voraussichtlich
-                für Montag, 17. August 2026 vorgesehen. Dieser Tag ist zugleich der
-                erste Schultag. Den konkreten Ablauf legt die zuständige Grundschule fest.
+                Für das Schuljahr 2026/2027 ist der erste Unterrichtstag in Thüringen
+                Montag, 17. August 2026. Die Schuleinführungsfeiern finden nach
+                offizieller Ferienübersicht ebenfalls an diesem Tag statt. Den
+                konkreten Ablauf legt die zuständige Grundschule fest.
               </p>
             </article>
 
             <article class="faq-item">
               <h3>Wann beginnt die Grundschule in Thüringen 2026?</h3>
               <p>
-                Der erste Schultag im Schuljahr 2026/2027 ist in Thüringen Montag,
-                17. August 2026. Die Schuleinführung ist voraussichtlich ebenfalls
-                für Montag, 17. August 2026 vorgesehen. Den konkreten Ablauf legt
-                die zuständige Grundschule fest.
+                Der erste Unterrichtstag im Schuljahr 2026/2027 ist in Thüringen
+                Montag, 17. August 2026. Die Schuleinführungsfeiern sind laut
+                offizieller Ferienübersicht ebenfalls für Montag, 17. August 2026
+                vorgesehen.
               </p>
             </article>
 
@@ -295,9 +366,10 @@ const faqSchema = {
             <article class="faq-item">
               <h3>Wann findet die Schulanmeldung in Thüringen statt?</h3>
               <p>
-                Die Schulanmeldung findet in Thüringen in der Regel im Januar oder
-                Februar statt. Die zuständige Grundschule informiert die Eltern über
-                den konkreten Termin und die erforderlichen Unterlagen.
+                Die Anmeldung zur Einschulung erfolgt in Thüringen bereits im
+                Kalenderjahr vor der Einschulung im Zeitraum vom 2. bis 10. Mai.
+                Die zuständige Grundschule oder der Schulträger informiert über den
+                konkreten Ablauf und die erforderlichen Unterlagen.
               </p>
             </article>
 
@@ -375,7 +447,7 @@ const faqSchema = {
             Bildung, Wissenschaft und Kultur.
           </p>
 
-          <p class="stand">Stand der Informationen:<span class="stand-date">Mai 2026</span></p>
+          <p class="stand">Stand der Informationen:<span class="stand-date">Juni 2026</span></p>
         </section>
       </article>
   </main>
@@ -412,19 +484,6 @@ const faqSchema = {
     padding: 32px 20px 64px;
   }
 
-  .back-link {
-    display: block;
-    max-width: 960px;
-    margin: 0 auto 20px;
-    color: #465266;
-    font-weight: 800;
-    text-decoration: none;
-  }
-
-  .back-link:hover {
-    color: #172033;
-    text-decoration: underline;
-  }
 
   .state-card {
     max-width: 960px;
@@ -454,6 +513,10 @@ const faqSchema = {
     font-weight: 950;
     line-height: 1.02;
     letter-spacing: -0.055em;
+  }
+
+  .headline-line {
+    display: block;
   }
 
   .lead {
@@ -577,11 +640,64 @@ const faqSchema = {
 
   .example-box,
   .source-note,
-  .seo-explanation-box {
+  .seo-explanation-box,
+  .next-steps-box {
     padding: 24px;
     border: 1px solid rgba(129, 97, 38, 0.16);
     border-radius: 22px;
     background: rgba(245, 210, 138, 0.12);
+  }
+  .process-list {
+    display: grid;
+    gap: 10px;
+    margin: 18px 0 0;
+    padding-left: 1.25rem;
+    color: #465266;
+    font-size: clamp(1rem, 1.2vw, 1.08rem);
+    font-weight: 600;
+    line-height: 1.62;
+  }
+
+  .process-list li::marker {
+    color: #816126;
+    font-weight: 950;
+  }
+
+  .next-steps-actions {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+    margin-top: 24px;
+  }
+
+  .next-step-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 58px;
+    padding: 16px 14px;
+    border-radius: 16px;
+    color: #172033;
+    font-size: clamp(1rem, 1.2vw, 1.08rem);
+    font-weight: 950;
+    line-height: 1.2;
+    text-align: center;
+    text-decoration: none;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.34);
+  }
+
+  .next-step-button:hover {
+    transform: translateY(-1px);
+  }
+
+  .next-step-button-primary {
+    background: linear-gradient(135deg, #f5bf5b, #e99d25);
+  }
+
+  .next-step-button-secondary {
+    background: linear-gradient(135deg, #74d58b, #1f9b4a);
+    color: #ffffff;
   }
 
   .faq-list {
@@ -686,12 +802,17 @@ const faqSchema = {
 
     h1 {
       max-width: 100%;
-      font-size: clamp(1.7rem, 7.25vw, 2.18rem);
-      line-height: 1.06;
-      letter-spacing: -0.05em;
+      font-size: clamp(1.56rem, 6.55vw, 2.04rem);
+      line-height: 1.08;
+      letter-spacing: -0.047em;
       overflow-wrap: normal;
       word-break: normal;
       hyphens: none;
+    }
+
+    .headline-line-year,
+    .headline-line-state {
+      white-space: nowrap;
     }
 
     .lead {
@@ -742,9 +863,26 @@ const faqSchema = {
 
     .example-box,
     .source-note,
-    .seo-explanation-box {
+    .seo-explanation-box,
+    .next-steps-box {
       padding: 20px;
       border-radius: 20px;
+    }
+
+    .next-steps-actions {
+      grid-template-columns: 1fr;
+    }
+
+    .next-step-button {
+      width: 100%;
+      max-width: 100%;
+      min-height: 56px;
+      padding: 15px 12px;
+      font-size: clamp(0.88rem, 3.75vw, 1rem);
+      letter-spacing: -0.02em;
+      overflow-wrap: normal;
+      word-break: normal;
+      white-space: normal;
     }
 
     .source-link {
@@ -766,9 +904,9 @@ const faqSchema = {
 
   @media (max-width: 390px) {
     h1 {
-      font-size: clamp(1.58rem, 7vw, 1.95rem);
-      line-height: 1.07;
-      letter-spacing: -0.046em;
+      font-size: clamp(1.46rem, 6.35vw, 1.82rem);
+      line-height: 1.09;
+      letter-spacing: -0.044em;
     }
   }
 </style>

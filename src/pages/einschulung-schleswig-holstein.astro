@@ -3,13 +3,13 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import StateEnrollmentCalculator from "../components/StateEnrollmentCalculator.astro";
 
 const pageTitle =
-  "Einschulung Schleswig-Holstein 2026: Termin, Stichtag & Rechner";
+  "Einschulung Schleswig-Holstein 2026 & 2027: Termin, Stichtag & Rechner";
 
 const pageDescription =
-  "Wann ist die Einschulung in Schleswig-Holstein 2026? Hier findest du Termin, Stichtag 30. Juni, Kann-Kind-Regelung und den kostenlosen Einschulungsrechner.";
+  "Einschulung Schleswig-Holstein 2026: Termin 19. August, erster Schultag 17. August. Stichtag 30. Juni. Jetzt kostenlos berechnen.";
 
 const canonical = "https://www.einschulungsrechner.de/einschulung-schleswig-holstein/";
-const dateModified = "2026-05-28";
+const dateModified = "2026-06-16";
 
 const ADSENSE_ID = import.meta.env.PUBLIC_ADSENSE_ID || "";
 const STATE_CONTENT_AD_SLOT = import.meta.env.PUBLIC_ADSENSE_STATE_CONTENT_SLOT || "";
@@ -40,7 +40,7 @@ const faqSchema = {
       name: "Welcher Einschulungsstichtag gilt in Schleswig-Holstein?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "In Schleswig-Holstein gilt grundsätzlich der 30. Juni als Einschulungsstichtag. Kinder, die bis zu diesem Datum im laufenden Kalenderjahr sechs Jahre alt werden, sind schulpflichtig.",
+        text: "In Schleswig-Holstein gilt der 30. Juni als Einschulungsstichtag. Kinder, die bis zu diesem Datum im laufenden Kalenderjahr sechs Jahre alt werden, sind schulpflichtig.",
       },
     },
     {
@@ -64,7 +64,7 @@ const faqSchema = {
       name: "Was bedeutet Kann-Kind in Schleswig-Holstein?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Als Kann-Kind gilt in Schleswig-Holstein ein Kind, das nach dem regulären Stichtag 30. Juni sechs Jahre alt wird und deshalb nicht automatisch schulpflichtig ist. Eltern können gegebenenfalls bei der zuständigen Schule einen Antrag auf vorzeitige Einschulung stellen.",
+        text: "Als Kann-Kind gilt in Schleswig-Holstein ein Kind, das nach dem 30. Juni sechs Jahre alt wird und deshalb nicht automatisch schulpflichtig ist. Eltern können bei der Schule einen Antrag auf vorzeitige Einschulung stellen.",
       },
     },
     {
@@ -72,15 +72,15 @@ const faqSchema = {
       name: "Wann findet die Schulanmeldung in Schleswig-Holstein statt?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Die zuständige Grundschule informiert die Eltern über die Anmeldung und lädt in der Regel zu einem Einschulungsgespräch ein. Bei der Anmeldung werden die Personalien des Kindes und weitere Angaben erfasst, die für den Schulalltag wichtig sind.",
+        text: "Die zuständige Grundschule informiert die Eltern über die Anmeldung und lädt in der Regel zu einem Einschulungsgespräch ein. Außerdem gehört die Schuleingangsuntersuchung zum Einschulungsverfahren.",
       },
     },
     {
       "@type": "Question",
-      name: "Kann die Einschulung in Schleswig-Holstein zurückgestellt werden?",
+      name: "Kann die Einschulung in Schleswig-Holstein verschoben werden?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Eine Zurückstellung ist in Schleswig-Holstein im Ausnahmefall möglich, wenn Gründe gegen eine Einschulung zum vorgesehenen Zeitpunkt sprechen. Eltern sollten sich dazu frühzeitig an die zuständige Grundschule wenden; verbindlich entscheidet die Schule beziehungsweise die zuständige Schulbehörde.",
+        text: "Eine klassische Zurückstellung vom Schulbesuch sieht das Schulgesetz in Schleswig-Holstein nicht vor. Aus gesundheitlichen Gründen ist im Ausnahmefall eine zeitlich begrenzte Beurlaubung möglich. Eltern sollten sich dazu frühzeitig an die zuständige Grundschule wenden.",
       },
     },
     {
@@ -102,29 +102,30 @@ const faqSchema = {
   schema={[faqSchema, webPageSchema]}
 >
   <main class="state-page">
-      <a class="back-link" href="/">← Zur Startseite</a>
 
       <article class="state-card">
         <p class="state-kicker">Schleswig-Holstein</p>
 
         <h1>
-          Einschulung Schleswig-Holstein 2026:<br />
-          Wann kommt mein Kind in die Schule?
+          <span class="headline-line headline-line-year">Einschulung 2026/2027</span>
+          <span class="headline-line headline-line-state">in Schleswig-Holstein:</span>
+          <span class="headline-line headline-line-question">Wann kommt mein Kind in die Schule?</span>
         </h1>
 
         <p class="lead">
-          Wann kommt mein Kind in Schleswig-Holstein in die Schule? Gib das Geburtsdatum
-          ein und berechne das voraussichtliche Schuljahr. In Schleswig-Holstein gilt
-          der Stichtag 30. Juni. Für das Schuljahr 2026/2027 ist die Einschulung an
-          Grundschulen voraussichtlich Mittwoch, 19. August 2026 – der erste
-          Schultag ist Montag, 17. August 2026.
+          Wann kommt mein Kind in Schleswig-Holstein in die Schule? Der
+          Einschulungsrechner zeigt dir anhand des Geburtsdatums das voraussichtliche
+          Schuljahr. In Schleswig-Holstein gilt der Stichtag 30. Juni. Für das
+          Schuljahr 2026/2027 ist die Einschulung an Grundschulen voraussichtlich
+          Mittwoch, 19. August 2026 – der erste Schultag ist Montag,
+          17. August 2026.
         </p>
 
         <p class="answer-box">
-          Kurzantwort: Die Sommerferien in Schleswig-Holstein enden 2026 am Samstag,
-          15. August 2026. Der erste reguläre Schultag ist Montag, 17. August 2026.
-          Die Einschulung an Grundschulen ist voraussichtlich Mittwoch,
-          19. August 2026.
+          Kurzantwort: Die Einschulung in Schleswig-Holstein 2026 ist voraussichtlich
+          Mittwoch, 19. August 2026. Der erste reguläre Schultag nach den Sommerferien
+          ist Montag, 17. August 2026. Schulpflichtig werden Kinder, die bis zum
+          30. Juni 2026 sechs Jahre alt werden.
         </p>
 
         <StateEnrollmentCalculator
@@ -133,7 +134,7 @@ const faqSchema = {
           calculatorKicker="Schleswig-Holstein-Rechner"
           resultKicker="Schleswig-Holstein-Ergebnis"
           headline="Einschulung in Schleswig-Holstein berechnen"
-          intro="Gib das Geburtsdatum deines Kindes ein. Schleswig-Holstein ist hier bereits vorausgewählt. Wenn du von der Startseite kommst, übernehmen wir das Geburtsdatum automatisch aus dem Link."
+          intro="Gib das Geburtsdatum ein und erfahre, für welches Schuljahr dein Kind in Schleswig-Holstein voraussichtlich schulpflichtig wird."
         />
 
         <div class="quick-facts quick-facts-master" aria-label="Kurzüberblick Einschulung Schleswig-Holstein">
@@ -155,6 +156,11 @@ const faqSchema = {
           <div class="fact-card">
             <span>Sonderregel</span>
             <strong>Kann-Kind auf Antrag</strong>
+          </div>
+
+          <div class="fact-card">
+            <span>Hinweis</span>
+            <strong>keine klassische<br />Zurückstellung</strong>
           </div>
         </div>
 
@@ -178,13 +184,20 @@ const faqSchema = {
           <p>
             Die Sommerferien in Schleswig-Holstein enden 2026 am Samstag,
             15. August 2026. Der erste reguläre Schultag ist Montag,
-            17. August 2026. Die Einschulung an Grundschulen findet nach dem
-            Erlass zu Einschulungsterminen am dritten Schultag nach den Ferien statt
-            – für 2026 also voraussichtlich Mittwoch, 19. August 2026.
+            17. August 2026. Die Einschulung an Grundschulen findet nach dem Erlass
+            zu Einschulungsterminen am dritten Schultag nach den Ferien statt – für
+            2026 also voraussichtlich Mittwoch, 19. August 2026.
+          </p>
+
+          <p>
+            Den konkreten Ablauf, die Uhrzeit der Einschulungsfeier und mögliche
+            organisatorische Hinweise legt die zuständige Grundschule fest. Für die
+            persönliche Planung solltest du deshalb immer auch die Mitteilung deiner
+            Schule oder Kommune beachten.
           </p>
         </section>
 
-        <section class="example-box">
+        <section class="seo-explanation-box">
           <h2>Wie funktioniert der Einschulungsrechner für Schleswig-Holstein?</h2>
 
           <p>
@@ -197,14 +210,16 @@ const faqSchema = {
 
           <p>
             Beispiel: Wird ein Kind am 15. Juni 2020 geboren, wird es vor dem
-            Stichtag 30. Juni 2026 sechs Jahre alt. Damit ist das Kind
-            voraussichtlich für das Schuljahr 2026/2027 regulär schulpflichtig.
+            Stichtag 30. Juni 2026 sechs Jahre alt. Damit ist das Kind in
+            Schleswig-Holstein regulär schulpflichtig und voraussichtlich für das
+            Schuljahr 2026/2027 vorgesehen.
           </p>
 
           <p>
-            Wird ein Kind dagegen erst nach dem 30. Juni sechs Jahre alt, ist es
-            nicht automatisch regulär schulpflichtig. Eine frühere Einschulung kann
-            auf Antrag der Eltern bei der zuständigen Schule geprüft werden.
+            Wird ein Kind dagegen am 1. Juli 2020 oder später geboren, fällt es nicht
+            mehr unter den Stichtag für das Schuljahr 2026/2027. Eine frühere
+            Einschulung kann auf Antrag der Eltern bei der zuständigen Schule geprüft
+            werden.
           </p>
         </section>
 
@@ -212,9 +227,17 @@ const faqSchema = {
           <h2>Wann ist ein Kind in Schleswig-Holstein schulpflichtig?</h2>
 
           <p>
-            Ein Kind wird in Schleswig-Holstein regulär schulpflichtig, wenn es
-            bis zum 30. Juni des laufenden Kalenderjahres sechs Jahre alt wird.
-            Die Schulpflicht beginnt dann mit dem Start des neuen Schuljahres.
+            Ein Kind wird in Schleswig-Holstein regulär schulpflichtig, wenn es bis
+            zum 30. Juni des laufenden Kalenderjahres sechs Jahre alt wird. Die
+            Schulpflicht beginnt dann mit dem Start des neuen Schuljahres.
+          </p>
+
+          <p>
+            Praktisch bedeutet das: Für die Einschulung 2026 sind Kinder regulär
+            schulpflichtig, die bis zum Stichtag sechs Jahre alt werden. Kinder mit
+            Geburtstag ab dem 1. Juli gehören grundsätzlich zum nächsten
+            Einschulungsjahrgang, sofern keine vorzeitige Einschulung beantragt und
+            bewilligt wird.
           </p>
         </section>
 
@@ -223,9 +246,16 @@ const faqSchema = {
 
           <p>
             Wird ein Kind erst nach dem 30. Juni sechs Jahre alt, ist es nicht
-            automatisch schulpflichtig. Eltern können gegebenenfalls bei der
-            zuständigen Schule einen Antrag auf vorzeitige Einschulung stellen.
-            Die Schule prüft dann, ob eine frühere Aufnahme möglich ist.
+            automatisch schulpflichtig. Eltern können bei der zuständigen Schule einen
+            Antrag auf vorzeitige Einschulung stellen. Die Schule prüft dann, ob eine
+            frühere Aufnahme möglich ist.
+          </p>
+
+          <p>
+            Wenn du eine frühere Einschulung prüfen lassen möchtest, solltest du
+            frühzeitig Kontakt mit der zuständigen Grundschule aufnehmen. Dort erfährst
+            du, welche Unterlagen benötigt werden und wie der Antrag im konkreten
+            Einzelfall abläuft.
           </p>
         </section>
 
@@ -236,9 +266,15 @@ const faqSchema = {
             Die zuständige Grundschule informiert die Eltern über die Anmeldung und
             lädt in der Regel zu einem Einschulungsgespräch ein. Bei der Anmeldung
             werden die Personalien des Kindes und weitere Angaben erfasst, die für
-            den Schulalltag wichtig sind. Zusätzlich gehört die Schuleingangsuntersuchung
-            zum Einschulungsverfahren.
+            den Schulalltag wichtig sind.
           </p>
+
+          <ol class="process-list">
+            <li>Einladung oder Hinweise der zuständigen Grundschule beachten</li>
+            <li>Kind zur Aufnahme an der Grundschule anmelden</li>
+            <li>Einschulungsgespräch wahrnehmen</li>
+            <li>Schuleingangsuntersuchung im weiteren Verfahren einplanen</li>
+          </ol>
         </section>
 
         <section>
@@ -247,10 +283,47 @@ const faqSchema = {
           <p>
             Wenn du den Eindruck hast, dass dein Kind noch nicht schulreif ist,
             solltest du frühzeitig mit der zuständigen Grundschule sprechen. Eine
-            Zurückstellung ist im Ausnahmefall möglich, wenn Gründe gegen eine
-            Einschulung zum vorgesehenen Zeitpunkt sprechen. Verbindliche Auskunft
-            erhältst du bei der zuständigen Schule oder Schulbehörde.
+            klassische Zurückstellung vom Schulbesuch sieht das Schulgesetz in
+            Schleswig-Holstein nicht vor.
           </p>
+
+          <p>
+            Aus gesundheitlichen Gründen ist im Ausnahmefall eine zeitlich begrenzte
+            Beurlaubung möglich. Die zuständige Grundschule kann dir erklären, welche
+            Unterlagen und Einschätzungen dafür im konkreten Fall erforderlich sind.
+          </p>
+        </section>
+
+        <section>
+          <h2>Einschulung Schleswig-Holstein 2027: Kann ich das schon berechnen?</h2>
+
+          <p>
+            Ja. Du kannst den Einschulungsrechner auch für die Einschulung in
+            Schleswig-Holstein 2027 nutzen. Gib einfach das Geburtsdatum deines Kindes
+            ein und wähle Schleswig-Holstein aus. Der Rechner zeigt dir, welches
+            Schuljahr voraussichtlich relevant ist.
+          </p>
+        </section>
+
+        <section class="next-steps-box">
+          <h2>Nächste Schritte für Eltern</h2>
+
+          <p>
+            Wenn du jetzt weißt, welches Schuljahr für dein Kind voraussichtlich
+            relevant ist, lohnt sich als Nächstes der Blick auf die praktische
+            Vorbereitung. In unserer Checkliste findest du eine Schritt-für-Schritt-
+            Übersicht zu Unterlagen, Material, Schulweg und Organisation rund um den
+            Schulstart.
+          </p>
+
+          <div class="next-steps-actions">
+            <a class="next-step-button next-step-button-primary" href="/einschulung-checkliste/">
+              Zur Einschulungs-Checkliste
+            </a>
+            <a class="next-step-button next-step-button-secondary" href="/einschulung/">
+              Ratgeber zur Einschulung lesen
+            </a>
+          </div>
         </section>
 
         <section>
@@ -260,9 +333,9 @@ const faqSchema = {
             <article class="faq-item">
               <h3>Welcher Einschulungsstichtag gilt in Schleswig-Holstein?</h3>
               <p>
-                In Schleswig-Holstein gilt grundsätzlich der 30. Juni als
-                Einschulungsstichtag. Kinder, die bis zu diesem Datum im laufenden
-                Kalenderjahr sechs Jahre alt werden, sind schulpflichtig.
+                In Schleswig-Holstein gilt der 30. Juni als Einschulungsstichtag.
+                Kinder, die bis zu diesem Datum im laufenden Kalenderjahr sechs Jahre
+                alt werden, sind schulpflichtig.
               </p>
             </article>
 
@@ -290,9 +363,9 @@ const faqSchema = {
               <h3>Was bedeutet Kann-Kind in Schleswig-Holstein?</h3>
               <p>
                 Als Kann-Kind gilt in Schleswig-Holstein ein Kind, das nach dem
-                regulären Stichtag 30. Juni sechs Jahre alt wird und deshalb nicht
-                automatisch schulpflichtig ist. Eltern können gegebenenfalls bei der
-                zuständigen Schule einen Antrag auf vorzeitige Einschulung stellen.
+                30. Juni sechs Jahre alt wird und deshalb nicht automatisch
+                schulpflichtig ist. Eltern können bei der Schule einen Antrag auf
+                vorzeitige Einschulung stellen.
               </p>
             </article>
 
@@ -300,20 +373,18 @@ const faqSchema = {
               <h3>Wann findet die Schulanmeldung in Schleswig-Holstein statt?</h3>
               <p>
                 Die zuständige Grundschule informiert die Eltern über die Anmeldung
-                und lädt in der Regel zu einem Einschulungsgespräch ein. Bei der
-                Anmeldung werden die Personalien des Kindes und weitere Angaben
-                erfasst, die für den Schulalltag wichtig sind.
+                und lädt in der Regel zu einem Einschulungsgespräch ein. Außerdem
+                gehört die Schuleingangsuntersuchung zum Einschulungsverfahren.
               </p>
             </article>
 
             <article class="faq-item">
-              <h3>Kann die Einschulung in Schleswig-Holstein zurückgestellt werden?</h3>
+              <h3>Kann die Einschulung in Schleswig-Holstein verschoben werden?</h3>
               <p>
-                Eine Zurückstellung ist in Schleswig-Holstein im Ausnahmefall möglich,
-                wenn Gründe gegen eine Einschulung zum vorgesehenen Zeitpunkt sprechen.
-                Eltern sollten sich dazu frühzeitig an die zuständige Grundschule
-                wenden; verbindlich entscheidet die Schule beziehungsweise die
-                zuständige Schulbehörde.
+                Eine klassische Zurückstellung vom Schulbesuch sieht das Schulgesetz
+                in Schleswig-Holstein nicht vor. Aus gesundheitlichen Gründen ist im
+                Ausnahmefall eine zeitlich begrenzte Beurlaubung möglich. Eltern
+                sollten sich dazu frühzeitig an die zuständige Grundschule wenden.
               </p>
             </article>
 
@@ -379,7 +450,7 @@ const faqSchema = {
             Grundschule, der Schulbehörde oder beim Land Schleswig-Holstein.
           </p>
 
-          <p class="stand">Stand der Informationen:<span class="stand-date">Mai 2026</span></p>
+          <p class="stand">Stand der Informationen:<span class="stand-date">Juni 2026</span></p>
         </section>
       </article>
   </main>
@@ -416,19 +487,6 @@ const faqSchema = {
     padding: 32px 20px 64px;
   }
 
-  .back-link {
-    display: block;
-    max-width: 960px;
-    margin: 0 auto 20px;
-    color: #465266;
-    font-weight: 800;
-    text-decoration: none;
-  }
-
-  .back-link:hover {
-    color: #172033;
-    text-decoration: underline;
-  }
 
   .state-card {
     max-width: 960px;
@@ -458,6 +516,10 @@ const faqSchema = {
     font-weight: 950;
     line-height: 1.02;
     letter-spacing: -0.055em;
+  }
+
+  .headline-line {
+    display: block;
   }
 
   .lead {
@@ -580,7 +642,9 @@ const faqSchema = {
   }
 
   .example-box,
-  .source-note {
+  .source-note,
+  .seo-explanation-box,
+  .next-steps-box {
     padding: 24px;
     border: 1px solid rgba(129, 97, 38, 0.16);
     border-radius: 22px;
@@ -606,6 +670,59 @@ const faqSchema = {
     font-size: clamp(1rem, 1.2vw, 1.08rem);
     font-weight: 500;
     line-height: 1.66;
+  }
+
+  .process-list {
+    display: grid;
+    gap: 10px;
+    margin: 18px 0 0;
+    padding-left: 1.25rem;
+    color: #465266;
+    font-size: clamp(1rem, 1.2vw, 1.08rem);
+    font-weight: 600;
+    line-height: 1.62;
+  }
+
+  .process-list li::marker {
+    color: #816126;
+    font-weight: 950;
+  }
+
+  .next-steps-actions {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+    margin-top: 24px;
+  }
+
+  .next-step-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 58px;
+    padding: 16px 14px;
+    border-radius: 16px;
+    color: #172033;
+    font-size: clamp(1rem, 1.2vw, 1.08rem);
+    font-weight: 950;
+    line-height: 1.2;
+    text-align: center;
+    text-decoration: none;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.34);
+  }
+
+  .next-step-button:hover {
+    transform: translateY(-1px);
+  }
+
+  .next-step-button-primary {
+    background: linear-gradient(135deg, #f5bf5b, #e99d25);
+  }
+
+  .next-step-button-secondary {
+    background: linear-gradient(135deg, #74d58b, #1f9b4a);
+    color: #ffffff;
   }
 
   .source-list {
@@ -689,12 +806,17 @@ const faqSchema = {
 
     h1 {
       max-width: 100%;
-      font-size: clamp(1.7rem, 7.25vw, 2.18rem);
-      line-height: 1.06;
-      letter-spacing: -0.05em;
+      font-size: clamp(1.56rem, 6.55vw, 2.04rem);
+      line-height: 1.08;
+      letter-spacing: -0.047em;
       overflow-wrap: normal;
       word-break: normal;
       hyphens: none;
+    }
+
+    .headline-line-year,
+    .headline-line-state {
+      white-space: nowrap;
     }
 
     .lead {
@@ -744,9 +866,27 @@ const faqSchema = {
     }
 
     .example-box,
-    .source-note {
+    .source-note,
+    .seo-explanation-box,
+    .next-steps-box {
       padding: 20px;
       border-radius: 20px;
+    }
+
+    .next-steps-actions {
+      grid-template-columns: 1fr;
+    }
+
+    .next-step-button {
+      width: 100%;
+      max-width: 100%;
+      min-height: 56px;
+      padding: 15px 12px;
+      font-size: clamp(0.88rem, 3.75vw, 1rem);
+      letter-spacing: -0.02em;
+      overflow-wrap: normal;
+      word-break: normal;
+      white-space: normal;
     }
 
     .source-link {
@@ -768,9 +908,9 @@ const faqSchema = {
 
   @media (max-width: 390px) {
     h1 {
-      font-size: clamp(1.58rem, 7vw, 1.95rem);
-      line-height: 1.07;
-      letter-spacing: -0.046em;
+      font-size: clamp(1.46rem, 6.35vw, 1.82rem);
+      line-height: 1.09;
+      letter-spacing: -0.044em;
     }
   }
 </style>
