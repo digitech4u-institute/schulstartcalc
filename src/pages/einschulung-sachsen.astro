@@ -3,13 +3,13 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import StateEnrollmentCalculator from "../components/StateEnrollmentCalculator.astro";
 
 const pageTitle =
-  "Einschulung Sachsen 2026: Termin, Stichtag & Rechner";
+  "Schuleinführung Sachsen 2026 & 2027: Termin, Stichtag & Rechner";
 
 const pageDescription =
-  "Wann ist die Einschulung in Sachsen 2026? Hier findest du Schuleinführung, Stichtag 30. Juni, Kann-Kind-Regelung und den kostenlosen Einschulungsrechner.";
+  "Schuleinführung Sachsen 2026: Termin 15. August, erster Schultag 17. August. Stichtag 30. Juni. Jetzt kostenlos berechnen.";
 
 const canonical = "https://www.einschulungsrechner.de/einschulung-sachsen/";
-const dateModified = "2026-05-28";
+const dateModified = "2026-06-16";
 
 const ADSENSE_ID = import.meta.env.PUBLIC_ADSENSE_ID || "";
 const STATE_CONTENT_AD_SLOT = import.meta.env.PUBLIC_ADSENSE_STATE_CONTENT_SLOT || "";
@@ -40,7 +40,7 @@ const faqSchema = {
       name: "Welcher Einschulungsstichtag gilt in Sachsen?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "In Sachsen gilt grundsätzlich der 30. Juni als Einschulungsstichtag. Kinder, die bis zu diesem Datum sechs Jahre alt werden, werden mit Beginn des Schuljahres schulpflichtig.",
+        text: "In Sachsen gilt der 30. Juni als Einschulungsstichtag. Kinder, die bis zu diesem Datum sechs Jahre alt werden, werden mit Beginn des Schuljahres schulpflichtig.",
       },
     },
     {
@@ -48,7 +48,7 @@ const faqSchema = {
       name: "Wann ist die Einschulung in Sachsen 2026?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Für Sachsen ist die Schuleinführung im Schuljahr 2026/2027 offiziell für Samstag, 15. August 2026, genannt. Der erste reguläre Schultag ist Montag, 17. August 2026. Einzelne organisatorische Details können je nach Schule abweichen.",
+        text: "Für Sachsen ist die Schuleinführung im Schuljahr 2026/2027 offiziell für Samstag, 15. August 2026, genannt. Der erste reguläre Schultag ist Montag, 17. August 2026. Den konkreten Ablauf legt die zuständige Grundschule fest.",
       },
     },
     {
@@ -64,7 +64,7 @@ const faqSchema = {
       name: "Was bedeutet Kann-Kind in Sachsen?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Als Kann-Kind gilt in Sachsen ein Kind, das nach dem regulären Stichtag 30. Juni sechs Jahre alt wird und deshalb nicht automatisch schulpflichtig ist. Eine frühere Einschulung kann auf Antrag der Eltern geprüft werden, wenn das Kind den erforderlichen Entwicklungsstand für den Schulbesuch besitzt.",
+        text: "Als Kann-Kind gilt in Sachsen ein Kind, das nach dem Stichtag 30. Juni sechs Jahre alt wird und deshalb nicht automatisch schulpflichtig ist. Eine frühere Einschulung kann auf Antrag der Eltern geprüft werden, wenn das Kind den erforderlichen Entwicklungsstand für den Schulbesuch besitzt.",
       },
     },
     {
@@ -80,7 +80,7 @@ const faqSchema = {
       name: "Kann die Einschulung in Sachsen zurückgestellt werden?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Eine Zurückstellung ist in Sachsen im Ausnahmefall möglich, wenn ein Kind bei Beginn der Schulpflicht geistig oder körperlich nicht genügend entwickelt ist, um mit Erfolg am Unterricht teilzunehmen. Die Entscheidung trifft die Schulleitung.",
+        text: "Eine Zurückstellung ist in Sachsen im Ausnahmefall möglich, wenn ein schulpflichtiges Kind bei Beginn der Schulpflicht geistig oder körperlich nicht genügend entwickelt ist, um mit Erfolg am Unterricht teilzunehmen. Die Entscheidung trifft die Schulleitung; zugleich werden geeignete Fördermaßnahmen vereinbart.",
       },
     },
     {
@@ -102,28 +102,29 @@ const faqSchema = {
   schema={[faqSchema, webPageSchema]}
 >
   <main class="state-page">
-      <a class="back-link" href="/">← Zur Startseite</a>
 
       <article class="state-card">
         <p class="state-kicker">Sachsen</p>
 
         <h1>
-          Einschulung Sachsen 2026:<br />
-          Wann kommt mein Kind in die Schule?
+          <span class="headline-line headline-line-year">Schuleinführung 2026/2027</span>
+          <span class="headline-line headline-line-state">in Sachsen:</span>
+          <span class="headline-line headline-line-question">Wann kommt mein Kind in die Schule?</span>
         </h1>
 
         <p class="lead">
-          Wann kommt mein Kind in Sachsen in die Schule? Gib das Geburtsdatum ein
-          und berechne das voraussichtliche Schuljahr. In Sachsen gilt der
-          Stichtag 30. Juni. Für das Schuljahr 2026/2027 ist die Schuleinführung
-          für Samstag, 15. August 2026 vorgesehen – der erste Schultag ist
-          Montag, 17. August 2026.
+          Wann kommt mein Kind in Sachsen in die Schule? Der Einschulungsrechner
+          zeigt dir anhand des Geburtsdatums das voraussichtliche Schuljahr. In
+          Sachsen gilt der Stichtag 30. Juni. Für das Schuljahr 2026/2027 ist die
+          Schuleinführung für Samstag, 15. August 2026 vorgesehen – der erste
+          Schultag ist Montag, 17. August 2026.
         </p>
 
         <p class="answer-box">
-          Kurzantwort: In Sachsen ist die Schuleinführung 2026 für Samstag,
+          Kurzantwort: Die Schuleinführung in Sachsen 2026 ist für Samstag,
           15. August 2026 vorgesehen. Der erste reguläre Schultag ist Montag,
-          17. August 2026.
+          17. August 2026. Schulpflichtig werden Kinder, die bis zum 30. Juni 2026
+          sechs Jahre alt werden.
         </p>
 
         <StateEnrollmentCalculator
@@ -132,7 +133,7 @@ const faqSchema = {
           calculatorKicker="Sachsen-Rechner"
           resultKicker="Sachsen-Ergebnis"
           headline="Einschulung in Sachsen berechnen"
-          intro="Gib das Geburtsdatum deines Kindes ein. Sachsen ist hier bereits vorausgewählt. Wenn du von der Startseite kommst, übernehmen wir das Geburtsdatum automatisch aus dem Link."
+          intro="Gib das Geburtsdatum ein und erfahre, für welches Schuljahr dein Kind in Sachsen voraussichtlich schulpflichtig wird."
         />
 
         <div class="quick-facts quick-facts-master" aria-label="Kurzüberblick Einschulung Sachsen">
@@ -154,6 +155,11 @@ const faqSchema = {
           <div class="fact-card">
             <span>Sonderregel</span>
             <strong>Kann-Kind auf Antrag</strong>
+          </div>
+
+          <div class="fact-card">
+            <span>Anmeldung</span>
+            <strong>1. August bis<br />15. September des Vorjahres</strong>
           </div>
         </div>
 
@@ -177,12 +183,18 @@ const faqSchema = {
           <p>
             Für Sachsen ist die Schuleinführung im Schuljahr 2026/2027 offiziell
             für Samstag, 15. August 2026, genannt. Der erste reguläre Schultag ist
-            Montag, 17. August 2026. Einzelne organisatorische Details können je
-            nach Schule abweichen.
+            Montag, 17. August 2026.
+          </p>
+
+          <p>
+            Den konkreten Ablauf, die Uhrzeit der Schuleinführung und mögliche
+            organisatorische Hinweise legt die zuständige Grundschule fest. Für die
+            persönliche Planung solltest du deshalb immer auch die Mitteilung deiner
+            Schule oder Kommune beachten.
           </p>
         </section>
 
-        <section class="example-box">
+        <section class="seo-explanation-box">
           <h2>Wie funktioniert der Einschulungsrechner für Sachsen?</h2>
 
           <p>
@@ -194,15 +206,16 @@ const faqSchema = {
 
           <p>
             Beispiel: Wird ein Kind am 15. Juni 2020 geboren, wird es vor dem
-            Stichtag 30. Juni 2026 sechs Jahre alt. Damit ist das Kind
-            voraussichtlich für das Schuljahr 2026/2027 regulär schulpflichtig.
+            Stichtag 30. Juni 2026 sechs Jahre alt. Damit ist das Kind in Sachsen
+            regulär schulpflichtig und voraussichtlich für das Schuljahr 2026/2027
+            vorgesehen.
           </p>
 
           <p>
-            Wird ein Kind dagegen erst nach dem 30. Juni sechs Jahre alt, ist es
-            nicht automatisch regulär schulpflichtig. Eine frühere Einschulung kann
-            auf Antrag der Eltern geprüft werden, wenn das Kind den erforderlichen
-            Entwicklungsstand für den Schulbesuch besitzt.
+            Wird ein Kind dagegen am 1. Juli 2020 oder später geboren, fällt es nicht
+            mehr unter den Stichtag für das Schuljahr 2026/2027. Eine frühere
+            Einschulung kann auf Antrag der Eltern geprüft werden, wenn das Kind den
+            erforderlichen Entwicklungsstand für den Schulbesuch besitzt.
           </p>
         </section>
 
@@ -214,6 +227,14 @@ const faqSchema = {
             30. Juni des jeweiligen Kalenderjahres sechs Jahre alt wird. Die
             Schulpflicht beginnt dann mit dem Start des neuen Schuljahres.
           </p>
+
+          <p>
+            Praktisch bedeutet das: Für die Schuleinführung 2026 sind Kinder regulär
+            schulpflichtig, die bis zum Stichtag sechs Jahre alt werden. Kinder mit
+            Geburtstag ab dem 1. Juli gehören grundsätzlich zum nächsten
+            Einschulungsjahrgang, sofern keine vorzeitige Einschulung beantragt und
+            bewilligt wird.
+          </p>
         </section>
 
         <section>
@@ -222,36 +243,67 @@ const faqSchema = {
           <p>
             Maßgeblich für die reguläre Schulpflicht ist in Sachsen der 30. Juni.
             Kinder, die nach diesem Stichtag sechs Jahre alt werden, sind nicht
-            automatisch schulpflichtig. Eine frühere Einschulung kann aber auf
-            Antrag der Eltern geprüft werden, wenn das Kind den erforderlichen
-            geistigen und körperlichen Entwicklungsstand für den Schulbesuch besitzt.
+            automatisch schulpflichtig. Eine frühere Einschulung kann auf Antrag der
+            Eltern geprüft werden, wenn das Kind den erforderlichen geistigen und
+            körperlichen Entwicklungsstand für den Schulbesuch besitzt.
           </p>
-        </section>
-
-
-        <section>
-          <h2>Wie läuft die vorzeitige Einschulung in Sachsen ab?</h2>
 
           <p>
-            Die vorzeitige Einschulung ist keine automatische Schulpflicht, sondern
-            erfolgt auf Antrag der Eltern. Die Schule prüft, ob das Kind den für
-            den Schulbesuch erforderlichen geistigen und körperlichen Entwicklungsstand
-            besitzt. Entscheidend ist also nicht nur das Geburtsdatum, sondern die
-            individuelle Schulbereitschaft des Kindes.
+            Wenn du eine frühere Einschulung prüfen lassen möchtest, solltest du
+            frühzeitig Kontakt mit der zuständigen Grundschule aufnehmen. Dort erfährst
+            du, welche Unterlagen benötigt werden und wie der Antrag im konkreten
+            Einzelfall abläuft.
           </p>
         </section>
 
         <section>
-          <h2>Wie läuft die Anmeldung zur Schule in Sachsen ab?</h2>
+          <h2>Wie läuft die Schulanmeldung in Sachsen ab?</h2>
 
           <p>
             Die Schulanmeldung findet in Sachsen in der Regel im Zeitraum vom
-            1. August bis zum 15. September im Jahr vor der Einschulung statt –
-            also nicht erst im Einschulungsjahr selbst. Ort und Zeit der Anmeldung
-            geben die Städte und Gemeinden in Abstimmung mit den Schulleitungen
-            der Grundschulen im Mai bekannt. Angemeldet werden müssen Kinder, die
-            bis zum 30. Juni des folgenden Kalenderjahres sechs Jahre alt werden.
+            1. August bis zum 15. September im Jahr vor der Einschulung statt – also
+            nicht erst im Einschulungsjahr selbst. Ort und Zeit der Anmeldung geben
+            die Städte und Gemeinden in Abstimmung mit den Schulleitungen der
+            Grundschulen im Mai bekannt.
           </p>
+
+          <ol class="process-list">
+            <li>Bekanntmachung von Stadt oder Gemeinde im Mai beachten</li>
+            <li>Kind im Zeitraum vom 1. August bis 15. September anmelden</li>
+            <li>Erforderliche Unterlagen bereithalten</li>
+            <li>Schulaufnahmegespräch und weitere Hinweise der Grundschule beachten</li>
+          </ol>
+        </section>
+        <section>
+          <h2>Schuleinführung Sachsen 2027: Kann ich das schon berechnen?</h2>
+
+          <p>
+            Ja. Du kannst den Einschulungsrechner auch für die Schuleinführung in
+            Sachsen 2027 nutzen. Gib einfach das Geburtsdatum deines Kindes ein und
+            wähle Sachsen aus. Der Rechner zeigt dir, welches Schuljahr voraussichtlich
+            relevant ist.
+          </p>
+        </section>
+
+        <section class="next-steps-box">
+          <h2>Nächste Schritte für Eltern</h2>
+
+          <p>
+            Wenn du jetzt weißt, welches Schuljahr für dein Kind voraussichtlich
+            relevant ist, lohnt sich als Nächstes der Blick auf die praktische
+            Vorbereitung. In unserer Checkliste findest du eine Schritt-für-Schritt-
+            Übersicht zu Unterlagen, Material, Schulweg und Organisation rund um den
+            Schulstart.
+          </p>
+
+          <div class="next-steps-actions">
+            <a class="next-step-button next-step-button-primary" href="/einschulung-checkliste/">
+              Zur Einschulungs-Checkliste
+            </a>
+            <a class="next-step-button next-step-button-secondary" href="/einschulung/">
+              Ratgeber zur Einschulung lesen
+            </a>
+          </div>
         </section>
 
         <section>
@@ -274,7 +326,7 @@ const faqSchema = {
             <article class="faq-item">
               <h3>Welcher Einschulungsstichtag gilt in Sachsen?</h3>
               <p>
-                In Sachsen gilt grundsätzlich der 30. Juni als Einschulungsstichtag.
+                In Sachsen gilt der 30. Juni als Einschulungsstichtag.
                 Kinder, die bis zu diesem Datum sechs Jahre alt werden, werden mit
                 Beginn des Schuljahres schulpflichtig.
               </p>
@@ -285,8 +337,8 @@ const faqSchema = {
               <p>
                 Für Sachsen ist die Schuleinführung im Schuljahr 2026/2027 offiziell
                 für Samstag, 15. August 2026, genannt. Der erste reguläre Schultag
-                ist Montag, 17. August 2026. Einzelne organisatorische Details
-                können je nach Schule abweichen.
+                ist Montag, 17. August 2026. Den konkreten Ablauf legt die zuständige
+                Grundschule fest.
               </p>
             </article>
 
@@ -302,7 +354,7 @@ const faqSchema = {
             <article class="faq-item">
               <h3>Was bedeutet Kann-Kind in Sachsen?</h3>
               <p>
-                Als Kann-Kind gilt in Sachsen ein Kind, das nach dem regulären
+                Als Kann-Kind gilt in Sachsen ein Kind, das nach dem
                 Stichtag 30. Juni sechs Jahre alt wird und deshalb nicht automatisch
                 schulpflichtig ist. Eine frühere Einschulung kann auf Antrag der
                 Eltern geprüft werden, wenn das Kind den erforderlichen
@@ -323,9 +375,10 @@ const faqSchema = {
               <h3>Kann die Einschulung in Sachsen zurückgestellt werden?</h3>
               <p>
                 Eine Zurückstellung ist in Sachsen im Ausnahmefall möglich, wenn ein
-                Kind bei Beginn der Schulpflicht geistig oder körperlich nicht genügend
-                entwickelt ist, um mit Erfolg am Unterricht teilzunehmen. Die
-                Entscheidung trifft die Schulleitung.
+                schulpflichtiges Kind bei Beginn der Schulpflicht geistig oder körperlich
+                nicht genügend entwickelt ist, um mit Erfolg am Unterricht teilzunehmen.
+                Die Entscheidung trifft die Schulleitung; zugleich werden geeignete
+                Fördermaßnahmen vereinbart.
               </p>
             </article>
 
@@ -392,7 +445,7 @@ const faqSchema = {
             Staatsministerium für Kultus.
           </p>
 
-          <p class="stand">Stand der Informationen:<span class="stand-date">Mai 2026</span></p>
+          <p class="stand">Stand der Informationen:<span class="stand-date">Juni 2026</span></p>
         </section>
       </article>
   </main>
@@ -429,19 +482,6 @@ const faqSchema = {
     padding: 32px 20px 64px;
   }
 
-  .back-link {
-    display: block;
-    max-width: 960px;
-    margin: 0 auto 20px;
-    color: #465266;
-    font-weight: 800;
-    text-decoration: none;
-  }
-
-  .back-link:hover {
-    color: #172033;
-    text-decoration: underline;
-  }
 
   .state-card {
     max-width: 960px;
@@ -471,6 +511,10 @@ const faqSchema = {
     font-weight: 950;
     line-height: 1.02;
     letter-spacing: -0.055em;
+  }
+
+  .headline-line {
+    display: block;
   }
 
   .lead {
@@ -593,11 +637,65 @@ const faqSchema = {
   }
 
   .example-box,
-  .source-note {
+  .source-note,
+  .seo-explanation-box,
+  .next-steps-box {
     padding: 24px;
     border: 1px solid rgba(129, 97, 38, 0.16);
     border-radius: 22px;
     background: rgba(245, 210, 138, 0.12);
+  }
+  .process-list {
+    display: grid;
+    gap: 10px;
+    margin: 18px 0 0;
+    padding-left: 1.25rem;
+    color: #465266;
+    font-size: clamp(1rem, 1.2vw, 1.08rem);
+    font-weight: 600;
+    line-height: 1.62;
+  }
+
+  .process-list li::marker {
+    color: #816126;
+    font-weight: 950;
+  }
+
+  .next-steps-actions {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+    margin-top: 24px;
+  }
+
+  .next-step-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 58px;
+    padding: 16px 14px;
+    border-radius: 16px;
+    color: #172033;
+    font-size: clamp(1rem, 1.2vw, 1.08rem);
+    font-weight: 950;
+    line-height: 1.2;
+    text-align: center;
+    text-decoration: none;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.34);
+  }
+
+  .next-step-button:hover {
+    transform: translateY(-1px);
+  }
+
+  .next-step-button-primary {
+    background: linear-gradient(135deg, #f5bf5b, #e99d25);
+  }
+
+  .next-step-button-secondary {
+    background: linear-gradient(135deg, #74d58b, #1f9b4a);
+    color: #ffffff;
   }
 
   .faq-list {
@@ -702,12 +800,20 @@ const faqSchema = {
 
     h1 {
       max-width: 100%;
-      font-size: clamp(1.7rem, 7.25vw, 2.18rem);
-      line-height: 1.06;
-      letter-spacing: -0.05em;
+      font-size: clamp(1.42rem, 5.95vw, 1.9rem);
+      line-height: 1.1;
+      letter-spacing: -0.045em;
       overflow-wrap: normal;
       word-break: normal;
       hyphens: none;
+    }
+
+    .headline-line-state {
+      white-space: nowrap;
+    }
+
+    .headline-line-year {
+      white-space: normal;
     }
 
     .lead {
@@ -757,9 +863,27 @@ const faqSchema = {
     }
 
     .example-box,
-    .source-note {
+    .source-note,
+    .seo-explanation-box,
+    .next-steps-box {
       padding: 20px;
       border-radius: 20px;
+    }
+
+    .next-steps-actions {
+      grid-template-columns: 1fr;
+    }
+
+    .next-step-button {
+      width: 100%;
+      max-width: 100%;
+      min-height: 56px;
+      padding: 15px 12px;
+      font-size: clamp(0.88rem, 3.75vw, 1rem);
+      letter-spacing: -0.02em;
+      overflow-wrap: normal;
+      word-break: normal;
+      white-space: normal;
     }
 
     .source-link {
@@ -781,9 +905,9 @@ const faqSchema = {
 
   @media (max-width: 390px) {
     h1 {
-      font-size: clamp(1.58rem, 7vw, 1.95rem);
-      line-height: 1.07;
-      letter-spacing: -0.046em;
+      font-size: clamp(1.34rem, 5.8vw, 1.68rem);
+      line-height: 1.1;
+      letter-spacing: -0.042em;
     }
   }
 </style>

@@ -3,13 +3,13 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import StateEnrollmentCalculator from "../components/StateEnrollmentCalculator.astro";
 
 const pageTitle =
-  "Einschulung Rheinland-Pfalz 2026: Termin, Stichtag & Rechner";
+  "Einschulung Rheinland-Pfalz 2026 & 2027: Termin, Stichtag & Rechner";
 
 const pageDescription =
-  "Wann ist die Einschulung in Rheinland-Pfalz 2026? Hier findest du Termin, Stichtag 31. August, Kann-Kind-Regelung und den kostenlosen Einschulungsrechner.";
+  "Einschulung Rheinland-Pfalz 2026: erster Schultag 10. August, Einschulung schulabhängig. Stichtag 31. August. Jetzt kostenlos berechnen.";
 
 const canonical = "https://www.einschulungsrechner.de/einschulung-rheinland-pfalz/";
-const dateModified = "2026-05-28";
+const dateModified = "2026-06-16";
 
 const ADSENSE_ID = import.meta.env.PUBLIC_ADSENSE_ID || "";
 const STATE_CONTENT_AD_SLOT = import.meta.env.PUBLIC_ADSENSE_STATE_CONTENT_SLOT || "";
@@ -40,7 +40,7 @@ const faqSchema = {
       name: "Welcher Einschulungsstichtag gilt in Rheinland-Pfalz?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "In Rheinland-Pfalz gilt grundsätzlich der 31. August als Einschulungsstichtag. Kinder, die bis zu diesem Datum im Einschulungsjahr sechs Jahre alt sind, werden mit Beginn des Schuljahres schulpflichtig.",
+        text: "In Rheinland-Pfalz gilt der 31. August als Einschulungsstichtag. Kinder, die bis zu diesem Datum im Einschulungsjahr sechs Jahre alt sind, werden mit Beginn des Schuljahres schulpflichtig.",
       },
     },
     {
@@ -48,7 +48,7 @@ const faqSchema = {
       name: "Wann ist die Einschulung in Rheinland-Pfalz 2026?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Die Sommerferien in Rheinland-Pfalz enden 2026 am Freitag, 7. August 2026. Der erste reguläre Schultag ist Montag, 10. August 2026. Die Einschulung der ersten Klassen wird von der zuständigen Grundschule festgelegt. Verbindliche Informationen erhältst du daher direkt bei der Schule.",
+        text: "Die Sommerferien in Rheinland-Pfalz enden 2026 am Freitag, 7. August 2026. Der erste reguläre Schultag ist Montag, 10. August 2026. Die Einschulung der ersten Klassen wird von der zuständigen Grundschule festgelegt. Den konkreten Termin und Ablauf teilt die Schule mit.",
       },
     },
     {
@@ -64,7 +64,7 @@ const faqSchema = {
       name: "Was bedeutet Kann-Kind in Rheinland-Pfalz?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Als Kann-Kind gilt in Rheinland-Pfalz ein Kind, das nach dem regulären Stichtag 31. August sechs Jahre alt wird und deshalb nicht automatisch schulpflichtig ist. Eine vorzeitige Einschulung kann auf Antrag der Eltern geprüft werden, wenn aufgrund der Entwicklung zu erwarten ist, dass das Kind erfolgreich am Unterricht teilnehmen kann.",
+        text: "Als Kann-Kind gilt in Rheinland-Pfalz ein Kind, das nach dem Stichtag 31. August sechs Jahre alt wird und deshalb nicht automatisch schulpflichtig ist. Eine vorzeitige Einschulung kann auf Antrag der Eltern geprüft werden, wenn aufgrund der Entwicklung zu erwarten ist, dass das Kind erfolgreich am Unterricht teilnehmen kann.",
       },
     },
     {
@@ -80,7 +80,7 @@ const faqSchema = {
       name: "Kann die Einschulung in Rheinland-Pfalz zurückgestellt werden?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Eine Zurückstellung ist nur im Ausnahmefall möglich – in der Regel aus gesundheitlichen Gründen. Eltern stellen den Antrag schriftlich bei der zuständigen Grundschule bis spätestens 15. Mai. Die Entscheidung trifft die Schulleitung gemeinsam mit dem Schularzt.",
+        text: "Eine Zurückstellung ist in Rheinland-Pfalz nur im Ausnahmefall möglich – in der Regel aus gesundheitlichen Gründen. Eltern stellen den Antrag schriftlich bei der zuständigen Grundschule bis spätestens 15. Mai. Die Entscheidung trifft die Schulleitung gemeinsam mit dem Schularzt.",
       },
     },
     {
@@ -102,29 +102,30 @@ const faqSchema = {
   schema={[faqSchema, webPageSchema]}
 >
   <main class="state-page">
-      <a class="back-link" href="/">← Zur Startseite</a>
 
       <article class="state-card">
         <p class="state-kicker">Rheinland-Pfalz</p>
 
         <h1>
-          Einschulung Rheinland-Pfalz 2026:<br />
-          Wann kommt mein Kind in die Schule?
+          <span class="headline-line headline-line-year">Einschulung 2026/2027</span>
+          <span class="headline-line headline-line-state">in Rheinland-Pfalz:</span>
+          <span class="headline-line headline-line-question">Wann kommt mein Kind in die Schule?</span>
         </h1>
 
         <p class="lead">
-          Wann kommt mein Kind in Rheinland-Pfalz in die Schule? Gib das Geburtsdatum
-          ein und berechne das voraussichtliche Schuljahr. In Rheinland-Pfalz gilt
-          der Stichtag 31. August. Für das Schuljahr 2026/2027 beginnt der Unterricht
-          nach den Sommerferien voraussichtlich am Montag, 10. August 2026. Die
-          Einschulung wird schulabhängig festgelegt.
+          Wann kommt mein Kind in Rheinland-Pfalz in die Schule? Der
+          Einschulungsrechner zeigt dir anhand des Geburtsdatums das voraussichtliche
+          Schuljahr. In Rheinland-Pfalz gilt der Stichtag 31. August. Für das
+          Schuljahr 2026/2027 ist der erste reguläre Schultag Montag,
+          10. August 2026 – die Einschulung der ersten Klassen legt die zuständige
+          Grundschule fest.
         </p>
 
         <p class="answer-box">
-          Kurzantwort: Die Sommerferien in Rheinland-Pfalz enden 2026 am Freitag,
-          7. August 2026. Der erste reguläre Schultag ist Montag, 10. August 2026.
-          Die Einschulung der ersten Klassen wird von der zuständigen Grundschule
-          festgelegt.
+          Kurzantwort: Der erste reguläre Schultag in Rheinland-Pfalz 2026 ist
+          Montag, 10. August 2026. Die Einschulung der ersten Klassen wird von der
+          zuständigen Grundschule festgelegt. Schulpflichtig werden Kinder, die bis
+          zum 31. August 2026 sechs Jahre alt sind.
         </p>
 
         <StateEnrollmentCalculator
@@ -133,7 +134,7 @@ const faqSchema = {
           calculatorKicker="Rheinland-Pfalz-Rechner"
           resultKicker="Rheinland-Pfalz-Ergebnis"
           headline="Einschulung in Rheinland-Pfalz berechnen"
-          intro="Gib das Geburtsdatum deines Kindes ein. Rheinland-Pfalz ist hier bereits vorausgewählt. Wenn du von der Startseite kommst, übernehmen wir das Geburtsdatum automatisch aus dem Link."
+          intro="Gib das Geburtsdatum ein und erfahre, für welches Schuljahr dein Kind in Rheinland-Pfalz voraussichtlich schulpflichtig wird."
         />
 
         <div class="quick-facts quick-facts-master" aria-label="Kurzüberblick Einschulung Rheinland-Pfalz">
@@ -155,6 +156,11 @@ const faqSchema = {
           <div class="fact-card">
             <span>Sonderregel</span>
             <strong>Kann-Kind auf Antrag</strong>
+          </div>
+
+          <div class="fact-card">
+            <span>Anmeldung</span>
+            <strong>im Februar<br />des Vorjahres</strong>
           </div>
         </div>
 
@@ -179,12 +185,18 @@ const faqSchema = {
             Die Sommerferien in Rheinland-Pfalz enden 2026 am Freitag,
             7. August 2026. Der erste reguläre Schultag ist Montag,
             10. August 2026. Die Einschulung der ersten Klassen wird von der
-            zuständigen Grundschule festgelegt. Verbindliche Informationen erhältst
-            du daher direkt bei der Schule.
+            zuständigen Grundschule festgelegt.
+          </p>
+
+          <p>
+            Den konkreten Termin, die Uhrzeit der Einschulungsfeier und mögliche
+            organisatorische Hinweise teilt die zuständige Grundschule mit. Für die
+            persönliche Planung solltest du deshalb immer auch die Mitteilung deiner
+            Schule oder Kommune beachten.
           </p>
         </section>
 
-        <section class="example-box">
+        <section class="seo-explanation-box">
           <h2>Wie funktioniert der Einschulungsrechner für Rheinland-Pfalz?</h2>
 
           <p>
@@ -197,15 +209,17 @@ const faqSchema = {
 
           <p>
             Beispiel: Wird ein Kind am 15. August 2020 geboren, wird es vor dem
-            Stichtag 31. August 2026 sechs Jahre alt. Damit ist das Kind
-            voraussichtlich für das Schuljahr 2026/2027 regulär schulpflichtig.
+            Stichtag 31. August 2026 sechs Jahre alt. Damit ist das Kind in
+            Rheinland-Pfalz regulär schulpflichtig und voraussichtlich für das
+            Schuljahr 2026/2027 vorgesehen.
           </p>
 
           <p>
-            Wird ein Kind dagegen erst nach dem 31. August sechs Jahre alt, ist es
-            nicht automatisch regulär schulpflichtig. Eine frühere Einschulung kann
-            auf Antrag der Eltern geprüft werden, wenn aufgrund der Entwicklung zu
-            erwarten ist, dass das Kind erfolgreich am Unterricht teilnehmen kann.
+            Wird ein Kind dagegen am 1. September 2020 oder später geboren, fällt es
+            nicht mehr unter den Stichtag für das Schuljahr 2026/2027. Eine frühere
+            Einschulung kann auf Antrag der Eltern geprüft werden, wenn aufgrund der
+            Entwicklung zu erwarten ist, dass das Kind erfolgreich am Unterricht
+            teilnehmen kann.
           </p>
         </section>
 
@@ -217,17 +231,32 @@ const faqSchema = {
             31. August im Einschulungsjahr sechs Jahre alt sind. Sie besuchen die
             Grundschule mit Beginn des Schuljahres.
           </p>
+
+          <p>
+            Praktisch bedeutet das: Für die Einschulung 2026 sind Kinder regulär
+            schulpflichtig, die bis zum Stichtag sechs Jahre alt werden. Kinder mit
+            Geburtstag ab dem 1. September gehören grundsätzlich zum nächsten
+            Einschulungsjahrgang, sofern keine vorzeitige Einschulung beantragt und
+            bewilligt wird.
+          </p>
         </section>
 
         <section>
           <h2>Kann mein Kind in Rheinland-Pfalz früher eingeschult werden?</h2>
 
           <p>
-            Jüngere Kinder, die noch nicht schulpflichtig sind, können auf Antrag
-            der Eltern in die Grundschule aufgenommen werden. Voraussetzung ist,
-            dass aufgrund ihrer Entwicklung zu erwarten ist, dass sie erfolgreich
-            am Unterricht teilnehmen können. Über die Aufnahme entscheidet die
+            Jüngere Kinder, die noch nicht schulpflichtig sind, können auf Antrag der
+            Eltern in die Grundschule aufgenommen werden. Voraussetzung ist, dass
+            aufgrund ihrer Entwicklung zu erwarten ist, dass sie erfolgreich am
+            Unterricht teilnehmen können. Über die Aufnahme entscheidet die
             Schulleitung der jeweiligen Grundschule.
+          </p>
+
+          <p>
+            Wenn du eine frühere Einschulung prüfen lassen möchtest, solltest du
+            frühzeitig Kontakt mit der zuständigen Grundschule aufnehmen. Dort erfährst
+            du, welche Unterlagen benötigt werden und wie der Antrag im konkreten
+            Einzelfall abläuft.
           </p>
         </section>
 
@@ -235,12 +264,49 @@ const faqSchema = {
           <h2>Wie läuft die Schulanmeldung in Rheinland-Pfalz ab?</h2>
 
           <p>
-            Alle Kinder, die im folgenden Kalenderjahr schulpflichtig werden,
-            werden in Rheinland-Pfalz im Februar von den Eltern an der zuständigen
-            Grundschule angemeldet. Hierzu erhalten die Eltern durch den Schulträger
-            eine Aufforderung zur Anmeldung. Die für den Wohnort zuständige
-            Grundschule teilt den konkreten Anmeldetermin mit.
+            Alle Kinder, die im folgenden Kalenderjahr schulpflichtig werden, werden
+            in Rheinland-Pfalz im Februar von den Eltern an der zuständigen
+            Grundschule angemeldet. Der Schulträger fordert die Eltern zur Anmeldung
+            auf; die Grundschule teilt den konkreten Anmeldetermin mit.
           </p>
+
+          <ol class="process-list">
+            <li>Aufforderung des Schulträgers beachten</li>
+            <li>Kind im Februar an der zuständigen Grundschule anmelden</li>
+            <li>Erforderliche Unterlagen bereithalten</li>
+            <li>Weitere Hinweise der Grundschule und Schulbehörde beachten</li>
+          </ol>
+        </section>
+        <section>
+          <h2>Einschulung Rheinland-Pfalz 2027: Kann ich das schon berechnen?</h2>
+
+          <p>
+            Ja. Du kannst den Einschulungsrechner auch für die Einschulung in
+            Rheinland-Pfalz 2027 nutzen. Gib einfach das Geburtsdatum deines Kindes
+            ein und wähle Rheinland-Pfalz aus. Der Rechner zeigt dir, welches
+            Schuljahr voraussichtlich relevant ist.
+          </p>
+        </section>
+
+        <section class="next-steps-box">
+          <h2>Nächste Schritte für Eltern</h2>
+
+          <p>
+            Wenn du jetzt weißt, welches Schuljahr für dein Kind voraussichtlich
+            relevant ist, lohnt sich als Nächstes der Blick auf die praktische
+            Vorbereitung. In unserer Checkliste findest du eine Schritt-für-Schritt-
+            Übersicht zu Unterlagen, Material, Schulweg und Organisation rund um den
+            Schulstart.
+          </p>
+
+          <div class="next-steps-actions">
+            <a class="next-step-button next-step-button-primary" href="/einschulung-checkliste/">
+              Zur Einschulungs-Checkliste
+            </a>
+            <a class="next-step-button next-step-button-secondary" href="/einschulung/">
+              Ratgeber zur Einschulung lesen
+            </a>
+          </div>
         </section>
 
         <section>
@@ -264,7 +330,7 @@ const faqSchema = {
             <article class="faq-item">
               <h3>Welcher Einschulungsstichtag gilt in Rheinland-Pfalz?</h3>
               <p>
-                In Rheinland-Pfalz gilt grundsätzlich der 31. August als
+                In Rheinland-Pfalz gilt der 31. August als
                 Einschulungsstichtag. Kinder, die bis zu diesem Datum im
                 Einschulungsjahr sechs Jahre alt sind, werden mit Beginn des
                 Schuljahres schulpflichtig.
@@ -277,8 +343,8 @@ const faqSchema = {
                 Die Sommerferien in Rheinland-Pfalz enden 2026 am Freitag,
                 7. August 2026. Der erste reguläre Schultag ist Montag,
                 10. August 2026. Die Einschulung der ersten Klassen wird von der
-                zuständigen Grundschule festgelegt. Verbindliche Informationen
-                erhältst du daher direkt bei der Schule.
+                zuständigen Grundschule festgelegt. Den konkreten Termin und Ablauf
+                teilt die Schule mit.
               </p>
             </article>
 
@@ -295,7 +361,7 @@ const faqSchema = {
               <h3>Was bedeutet Kann-Kind in Rheinland-Pfalz?</h3>
               <p>
                 Als Kann-Kind gilt in Rheinland-Pfalz ein Kind, das nach dem
-                regulären Stichtag 31. August sechs Jahre alt wird und deshalb
+                Stichtag 31. August sechs Jahre alt wird und deshalb
                 nicht automatisch schulpflichtig ist. Eine vorzeitige Einschulung
                 kann auf Antrag der Eltern geprüft werden, wenn aufgrund der
                 Entwicklung zu erwarten ist, dass das Kind erfolgreich am Unterricht
@@ -317,10 +383,10 @@ const faqSchema = {
             <article class="faq-item">
               <h3>Kann die Einschulung in Rheinland-Pfalz zurückgestellt werden?</h3>
               <p>
-                Eine Zurückstellung ist nur im Ausnahmefall möglich – in der Regel
-                aus gesundheitlichen Gründen. Eltern stellen den Antrag schriftlich
-                bei der zuständigen Grundschule bis spätestens 15. Mai. Die Entscheidung
-                trifft die Schulleitung gemeinsam mit dem Schularzt.
+                Eine Zurückstellung ist in Rheinland-Pfalz nur im Ausnahmefall möglich –
+                in der Regel aus gesundheitlichen Gründen. Eltern stellen den Antrag
+                schriftlich bei der zuständigen Grundschule bis spätestens 15. Mai.
+                Die Entscheidung trifft die Schulleitung gemeinsam mit dem Schularzt.
               </p>
             </article>
 
@@ -387,7 +453,7 @@ const faqSchema = {
             Rheinland-Pfalz.
           </p>
 
-          <p class="stand">Stand der Informationen:<span class="stand-date">Mai 2026</span></p>
+          <p class="stand">Stand der Informationen:<span class="stand-date">Juni 2026</span></p>
         </section>
       </article>
   </main>
@@ -424,19 +490,6 @@ const faqSchema = {
     padding: 32px 20px 64px;
   }
 
-  .back-link {
-    display: block;
-    max-width: 960px;
-    margin: 0 auto 20px;
-    color: #465266;
-    font-weight: 800;
-    text-decoration: none;
-  }
-
-  .back-link:hover {
-    color: #172033;
-    text-decoration: underline;
-  }
 
   .state-card {
     max-width: 960px;
@@ -466,6 +519,10 @@ const faqSchema = {
     font-weight: 950;
     line-height: 1.02;
     letter-spacing: -0.055em;
+  }
+
+  .headline-line {
+    display: block;
   }
 
   .lead {
@@ -588,11 +645,65 @@ const faqSchema = {
   }
 
   .example-box,
-  .source-note {
+  .source-note,
+  .seo-explanation-box,
+  .next-steps-box {
     padding: 24px;
     border: 1px solid rgba(129, 97, 38, 0.16);
     border-radius: 22px;
     background: rgba(245, 210, 138, 0.12);
+  }
+  .process-list {
+    display: grid;
+    gap: 10px;
+    margin: 18px 0 0;
+    padding-left: 1.25rem;
+    color: #465266;
+    font-size: clamp(1rem, 1.2vw, 1.08rem);
+    font-weight: 600;
+    line-height: 1.62;
+  }
+
+  .process-list li::marker {
+    color: #816126;
+    font-weight: 950;
+  }
+
+  .next-steps-actions {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+    margin-top: 24px;
+  }
+
+  .next-step-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 58px;
+    padding: 16px 14px;
+    border-radius: 16px;
+    color: #172033;
+    font-size: clamp(1rem, 1.2vw, 1.08rem);
+    font-weight: 950;
+    line-height: 1.2;
+    text-align: center;
+    text-decoration: none;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.34);
+  }
+
+  .next-step-button:hover {
+    transform: translateY(-1px);
+  }
+
+  .next-step-button-primary {
+    background: linear-gradient(135deg, #f5bf5b, #e99d25);
+  }
+
+  .next-step-button-secondary {
+    background: linear-gradient(135deg, #74d58b, #1f9b4a);
+    color: #ffffff;
   }
 
   .faq-list {
@@ -697,12 +808,20 @@ const faqSchema = {
 
     h1 {
       max-width: 100%;
-      font-size: clamp(1.7rem, 7.25vw, 2.18rem);
-      line-height: 1.06;
-      letter-spacing: -0.05em;
+      font-size: clamp(1.56rem, 6.55vw, 2.04rem);
+      line-height: 1.08;
+      letter-spacing: -0.047em;
       overflow-wrap: normal;
       word-break: normal;
       hyphens: none;
+    }
+
+    .headline-line-state {
+      white-space: nowrap;
+    }
+
+    .headline-line-year {
+      white-space: normal;
     }
 
     .lead {
@@ -752,9 +871,27 @@ const faqSchema = {
     }
 
     .example-box,
-    .source-note {
+    .source-note,
+    .seo-explanation-box,
+    .next-steps-box {
       padding: 20px;
       border-radius: 20px;
+    }
+
+    .next-steps-actions {
+      grid-template-columns: 1fr;
+    }
+
+    .next-step-button {
+      width: 100%;
+      max-width: 100%;
+      min-height: 56px;
+      padding: 15px 12px;
+      font-size: clamp(0.88rem, 3.75vw, 1rem);
+      letter-spacing: -0.02em;
+      overflow-wrap: normal;
+      word-break: normal;
+      white-space: normal;
     }
 
     .source-link {
@@ -776,9 +913,9 @@ const faqSchema = {
 
   @media (max-width: 390px) {
     h1 {
-      font-size: clamp(1.58rem, 7vw, 1.95rem);
-      line-height: 1.07;
-      letter-spacing: -0.046em;
+      font-size: clamp(1.46rem, 6.35vw, 1.82rem);
+      line-height: 1.09;
+      letter-spacing: -0.044em;
     }
   }
 </style>
