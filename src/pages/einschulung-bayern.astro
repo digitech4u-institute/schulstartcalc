@@ -3,12 +3,12 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import StateEnrollmentCalculator from "../components/StateEnrollmentCalculator.astro";
 
 const pageTitle =
-  "Einschulung Bayern 2026: Termin, Stichtag & Rechner";
+  "Einschulung Bayern 2026 & 2027: Termin, Stichtag & Rechner";
 
 const pageDescription =
-  "Wann ist die Einschulung in Bayern 2026? Hier findest du Termin, Stichtag 30. September, Einschulungskorridor und den kostenlosen Einschulungsrechner.";
+  "Einschulung Bayern 2026: Einschulung 16. September, erster Schultag 15. September. Stichtag 30. September und Einschulungskorridor. Jetzt berechnen.";
 
-const dateModified = "2026-05-26";
+const dateModified = "2026-06-17";
 
 const canonical = "https://www.einschulungsrechner.de/einschulung-bayern/";
 
@@ -98,29 +98,29 @@ const faqSchema = {
 
 <BaseLayout title={pageTitle} description={pageDescription} canonical={canonical} schema={[faqSchema, webPageSchema]}>
   <main class="state-page">
-      <a class="back-link" href="/">← Zur Startseite</a>
-
       <article class="state-card">
         <p class="state-kicker">Bayern</p>
 
         <h1>
-          Einschulung Bayern 2026:<br />
-          Wann kommt mein Kind in die Schule?
+          <span class="headline-line headline-line-year">Einschulung 2026/2027</span>
+          <span class="headline-line headline-line-state">in Bayern:</span>
+          <span class="headline-line headline-line-question">Wann kommt mein Kind in die Schule?</span>
         </h1>
 
         <p class="lead">
-          Wann kommt mein Kind in Bayern in die Schule? Gib das Geburtsdatum ein und
-          berechne das voraussichtliche Schuljahr. In Bayern gilt der Stichtag
-          30. September. Für das Schuljahr 2026/2027 ist die Einschulung für
-          Mittwoch, 16. September 2026 vorgesehen – der erste Schultag ist
-          Dienstag, 15. September 2026.
+          Wann kommt mein Kind in Bayern in die Schule? Der Einschulungsrechner
+          zeigt dir anhand des Geburtsdatums das voraussichtliche Schuljahr. In
+          Bayern gilt der Stichtag 30. September. Für das Schuljahr 2026/2027 ist
+          die Einschulung für Mittwoch, 16. September 2026 vorgesehen – der erste
+          Schultag ist Dienstag, 15. September 2026.
         </p>
 
         <p class="answer-box">
           Kurzantwort: Die Einschulung in Bayern 2026 ist für Mittwoch,
-          16. September 2026 vorgesehen. Schulpflichtig werden Kinder, die bis zum
-          30. September 2026 sechs Jahre alt werden. Für Kinder mit Geburtstag zwischen
-          1. Juli und 30. September gilt der Einschulungskorridor.
+          16. September 2026 vorgesehen. Der erste reguläre Schultag ist Dienstag,
+          15. September 2026. Schulpflichtig werden Kinder, die bis zum
+          30. September 2026 sechs Jahre alt werden. Für Kinder mit Geburtstag
+          zwischen 1. Juli und 30. September gilt der Einschulungskorridor.
         </p>
 
         <StateEnrollmentCalculator
@@ -129,7 +129,7 @@ const faqSchema = {
           calculatorKicker="Bayern-Rechner"
           resultKicker="Bayern-Ergebnis"
           headline="Einschulung in Bayern berechnen"
-          intro="Gib das Geburtsdatum deines Kindes ein. Bayern ist hier bereits vorausgewählt. Wenn du von der Startseite kommst, übernehmen wir das Geburtsdatum automatisch aus dem Link."
+          intro="Gib das Geburtsdatum ein und erfahre, für welches Schuljahr dein Kind in Bayern voraussichtlich schulpflichtig wird."
         />
 
         <div class="quick-facts quick-facts-master" aria-label="Kurzüberblick Einschulung Bayern">
@@ -151,6 +151,11 @@ const faqSchema = {
           <div class="fact-card">
             <span>Sonderregel</span>
             <strong>Einschulungskorridor</strong>
+          </div>
+
+          <div class="fact-card">
+            <span>Anmeldung</span>
+            <strong>zuständige<br />Grundschule</strong>
           </div>
         </div>
 
@@ -175,9 +180,14 @@ const faqSchema = {
             Die nächste Einschulung in Bayern für Schulanfängerinnen und
             Schulanfänger ist nach aktueller Darstellung des Bayerischen
             Kultusministeriums Mittwoch, 16. September 2026. Der allgemeine
-            erste Schultag nach den Sommerferien ist voraussichtlich Dienstag,
-            15. September 2026. Die konkrete Organisation der Einschulung kann
-            je nach Grundschule abweichen.
+            erste Schultag nach den Sommerferien ist Dienstag, 15. September 2026.
+          </p>
+
+          <p>
+            Die konkrete Organisation der Einschulung, die Uhrzeit und mögliche
+            Hinweise zum Ablauf legt die zuständige Grundschule fest. Für die
+            persönliche Planung solltest du deshalb immer auch die Mitteilung deiner
+            Schule beachten.
           </p>
         </section>
 
@@ -200,9 +210,11 @@ const faqSchema = {
           </p>
 
           <p>
-            Die wichtigsten Termine zur Einschulung und zum allgemeinen Schulstart
-            findest du im Terminblock oben. Der konkrete Ablauf kann je nach
-            Grundschule organisatorisch abweichen.
+            Wird ein Kind dagegen erst nach dem 30. September 2020 geboren, fällt es
+            grundsätzlich in den nächsten Einschulungsjahrgang. Eine frühere
+            Einschulung kann auf Antrag der Erziehungsberechtigten geprüft werden,
+            wenn der Entwicklungsstand eine erfolgreiche Mitarbeit im ersten
+            Schuljahrgang erwarten lässt.
           </p>
         </section>
 
@@ -214,6 +226,14 @@ const faqSchema = {
             Wird ein Kind bis dahin sechs Jahre alt, ist es regulär schulpflichtig.
             Die Schulpflicht beginnt dann mit dem Start des neuen Schuljahres.
           </p>
+
+          <p>
+            Praktisch bedeutet das: Für die Einschulung 2026 sind Kinder regulär
+            schulpflichtig, die bis zum 30. September 2026 sechs Jahre alt werden.
+            Kinder mit Geburtstag ab dem 1. Oktober gehören grundsätzlich zum nächsten
+            Einschulungsjahrgang, sofern keine vorzeitige Einschulung beantragt und
+            bewilligt wird.
+          </p>
         </section>
 
         <section>
@@ -224,6 +244,13 @@ const faqSchema = {
             dem 30. September sechs Jahre alt werden. Für diese Kinder ist die
             Einschulung grundsätzlich vorgesehen. Der Beginn der Schulpflicht kann
             aber um ein Jahr nach hinten verschoben werden.
+          </p>
+
+          <p>
+            Diese Regel ist die wichtigste Besonderheit in Bayern: Das Kind ist
+            grundsätzlich schulpflichtig, aber Eltern können nach Beratung durch die
+            Schule entscheiden, dass ihr Kind erst ein Jahr später eingeschult wird.
+            Dafür muss die Schule rechtzeitig informiert werden.
           </p>
         </section>
 
@@ -237,28 +264,100 @@ const faqSchema = {
             zuständigen Grundschule; über die Aufnahme entscheidet die Schule
             nach Einschätzung des Entwicklungsstands deines Kindes.
           </p>
+
+          <p>
+            Wenn du eine frühere Einschulung prüfen lassen möchtest, solltest du
+            frühzeitig Kontakt mit der zuständigen Grundschule aufnehmen. Dort erfährst
+            du, welche Unterlagen benötigt werden und wie der Antrag im konkreten
+            Einzelfall abläuft.
+          </p>
         </section>
 
         <section>
           <h2>Wie läuft die Schulanmeldung in Bayern ab?</h2>
 
           <p>
-            Die Anmeldung erfolgt an der zuständigen Grundschule, die dich über
-            Termine, Unterlagen und mögliche Beratungstermine informiert. Wenn
-            du eine vorzeitige Einschulung wünschst, stellst du den Antrag
-            spätestens bei der Schulanmeldung; verbindliche Fristen erfährst du
-            direkt bei der Schule.
+            Die Anmeldung erfolgt an der zuständigen Grundschule. Dort erhalten Eltern
+            Informationen zu Terminen, Unterlagen, Schuleingangsuntersuchung und
+            Beratung. Für Kinder im Einschulungskorridor ist die Beratung der Schule
+            besonders wichtig, wenn Eltern den Schulbeginn um ein Jahr verschieben
+            möchten.
+          </p>
+
+          <ol class="process-list">
+            <li>Informationen der zuständigen Grundschule beachten</li>
+            <li>Kind zur Schulanmeldung an der Grundschule anmelden</li>
+            <li>Erforderliche Unterlagen und Nachweise bereithalten</li>
+            <li>Bei Korridor-Kindern Beratung und Entscheidung zum Schulbeginn klären</li>
+          </ol>
+        </section>
+
+        <section class="next-steps-box">
+          <h2 class="next-steps-headline">
+            <span>Nächste Schritte</span>
+            <span>für Eltern</span>
+          </h2>
+
+          <p>
+            Wenn du jetzt weißt, welches Schuljahr für dein Kind voraussichtlich
+            relevant ist, lohnt sich als Nächstes der Blick auf die praktische
+            Vorbereitung. In unserer Checkliste findest du eine Schritt-für-Schritt-
+            Übersicht zu Unterlagen, Material, Schulweg und Organisation rund um den
+            Schulstart.
+          </p>
+
+          <div class="next-steps-actions">
+            <a class="next-step-button next-step-button-primary" href="/einschulung-checkliste/">
+              Zur Einschulungs-Checkliste
+            </a>
+            <a class="next-step-button next-step-button-secondary" href="/einschulung/">
+              Ratgeber zur Einschulung lesen
+            </a>
+          </div>
+        </section>
+
+        <section>
+          <h2>Mein Kind ist noch nicht schulreif – was muss ich in Bayern tun?</h2>
+
+          <p>
+            In Bayern gibt es für Kinder mit Geburtstag zwischen dem 1. Juli und dem
+            30. September den Einschulungskorridor. Zusätzlich können schulpflichtige
+            Kinder in besonderen Fällen vom Schulbesuch zurückgestellt werden. Die
+            Entscheidung trifft die Schule nach Prüfung des Entwicklungsstands und
+            nach Beratung mit den Eltern.
           </p>
         </section>
 
-        <section class="example-box">
-          <h2>Beispiel: Geburtsdatum im August</h2>
+        <section>
+          <h2>Einschulung 2027 in Bayern: Kann ich das schon berechnen?</h2>
 
           <p>
-            Beispielhaft zeigt der Rechner: Wird ein Kind am 15. August 2020
-            geboren, wird es am 15. August 2026 sechs Jahre alt. Da dieses Datum
-            zwischen dem 1. Juli und dem 30. September liegt, fällt das Kind in
-            Bayern in den Einschulungskorridor für das Schuljahr 2026/2027.
+            Ja. Du kannst den Einschulungsrechner auch für die Einschulung 2027 in
+            Bayern nutzen. Gib einfach das Geburtsdatum des Kindes ein. Der Rechner
+            zeigt dir sämtliche relevanten Daten für das voraussichtliche Schuljahr.
+          </p>
+
+          <a class="section-cta-button" href="#bayernCalculatorForm">
+            Einschulung 2027 für Bayern berechnen
+          </a>
+        </section>
+
+        <section class="retrospective-box">
+          <p class="retrospective-kicker">Rückblick berechnen</p>
+          <h2>Wann wurde ich eingeschult?</h2>
+
+          <p>
+            Du kannst den Rechner auch rückblickend nutzen. Gib dein Geburtsdatum
+            ein und wähle dein damaliges Bundesland aus.
+          </p>
+
+          <a class="retrospective-link" href="/#einschulungsrechner">
+            Rückblick berechnen
+          </a>
+
+          <p>
+            Das Ergebnis ist eine Orientierung, weil frühere Einschulung,
+            Zurückstellung, Umzug oder frühere Landesregeln abweichen können.
           </p>
         </section>
 
@@ -394,7 +493,7 @@ const faqSchema = {
             für Unterricht und Kultus.
           </p>
 
-          <p class="stand">Stand der Informationen:<span class="stand-date">Mai 2026</span></p>
+          <p class="stand">Stand der Informationen:<span class="stand-date">Juni 2026</span></p>
         </section>
       </article>
   </main>
@@ -431,19 +530,6 @@ const faqSchema = {
     padding: 32px 20px 64px;
   }
 
-  .back-link {
-    display: block;
-    max-width: 960px;
-    margin: 0 auto 20px;
-    color: #465266;
-    font-weight: 800;
-    text-decoration: none;
-  }
-
-  .back-link:hover {
-    color: #172033;
-    text-decoration: underline;
-  }
 
   .state-card {
     max-width: 960px;
@@ -473,6 +559,10 @@ const faqSchema = {
     font-weight: 950;
     line-height: 1.02;
     letter-spacing: -0.055em;
+  }
+
+  .headline-line {
+    display: block;
   }
 
   .lead {
@@ -594,13 +684,20 @@ const faqSchema = {
     line-height: 1.68;
   }
 
-  .example-box,
   .source-note,
-  .seo-explanation-box {
+  .seo-explanation-box,
+  .next-steps-box {
     padding: 24px;
     border: 1px solid rgba(129, 97, 38, 0.16);
     border-radius: 22px;
     background: rgba(245, 210, 138, 0.12);
+  }
+
+  .retrospective-box {
+    padding: 24px;
+    border: 1px solid rgba(129, 97, 38, 0.14);
+    border-radius: 22px;
+    background: rgba(255, 255, 255, 0.52);
   }
 
   .faq-list {
@@ -622,6 +719,123 @@ const faqSchema = {
     font-size: clamp(1rem, 1.2vw, 1.08rem);
     font-weight: 500;
     line-height: 1.66;
+  }
+
+  .process-list {
+    display: grid;
+    gap: 10px;
+    margin: 18px 0 0;
+    padding-left: 1.25rem;
+    color: #465266;
+    font-size: clamp(1rem, 1.2vw, 1.08rem);
+    font-weight: 600;
+    line-height: 1.62;
+  }
+
+  .process-list li::marker {
+    color: #816126;
+    font-weight: 950;
+  }
+
+  .next-steps-actions {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+    margin-top: 24px;
+  }
+
+  .next-step-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 58px;
+    padding: 16px 14px;
+    border-radius: 16px;
+    color: #172033;
+    font-size: clamp(1rem, 1.2vw, 1.08rem);
+    font-weight: 950;
+    line-height: 1.2;
+    text-align: center;
+    text-decoration: none;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.34);
+  }
+
+  .next-step-button:hover {
+    transform: translateY(-1px);
+  }
+
+  .next-step-button-primary {
+    background: linear-gradient(135deg, #f5bf5b, #e99d25);
+  }
+
+  .next-step-button-secondary {
+    background: linear-gradient(135deg, #74d58b, #1f9b4a);
+    color: #ffffff;
+  }
+
+  .section-cta-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 46px;
+    margin-top: 20px;
+    padding: 12px 18px;
+    border: 1px solid rgba(233, 157, 37, 0.42);
+    border-radius: 999px;
+    background: linear-gradient(135deg, rgba(245, 191, 91, 0.92), rgba(233, 157, 37, 0.9));
+    color: #172033;
+    font-size: 0.98rem;
+    font-weight: 900;
+    line-height: 1.2;
+    text-align: center;
+    text-decoration: none;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.34);
+  }
+
+  .section-cta-button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 10px 24px rgba(233, 157, 37, 0.16);
+  }
+
+  .next-steps-headline span {
+    display: inline;
+  }
+
+  .retrospective-kicker {
+    margin: 0 0 12px;
+    color: #816126;
+    font-size: 0.82rem;
+    font-weight: 950;
+    letter-spacing: 0.14em;
+    line-height: 1.16;
+    text-transform: uppercase;
+  }
+
+  .retrospective-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    min-height: 42px;
+    margin: 18px auto 0;
+    padding: 10px 16px;
+    border: 1px solid rgba(31, 155, 74, 0.26);
+    border-radius: 999px;
+    background: rgba(116, 213, 139, 0.12);
+    color: #1f7f43;
+    font-size: 0.94rem;
+    font-weight: 850;
+    line-height: 1.2;
+    text-align: center;
+    text-decoration: none;
+  }
+
+  .retrospective-link:hover {
+    transform: translateY(-1px);
+    border-color: rgba(31, 155, 74, 0.38);
+    background: rgba(116, 213, 139, 0.18);
+    box-shadow: 0 8px 18px rgba(31, 155, 74, 0.08);
   }
 
   .source-list {
@@ -714,12 +928,17 @@ const faqSchema = {
 
     h1 {
       max-width: 100%;
-      font-size: clamp(1.7rem, 7.25vw, 2.18rem);
-      line-height: 1.06;
-      letter-spacing: -0.05em;
+      font-size: clamp(1.56rem, 6.55vw, 2.04rem);
+      line-height: 1.08;
+      letter-spacing: -0.047em;
       overflow-wrap: normal;
       word-break: normal;
       hyphens: none;
+    }
+
+    .headline-line-year,
+    .headline-line-state {
+      white-space: nowrap;
     }
 
     .lead {
@@ -758,6 +977,14 @@ const faqSchema = {
       line-height: 1.1;
     }
 
+    .next-steps-headline span {
+      display: block;
+    }
+
+    .section-cta-button {
+      width: 100%;
+    }
+
     p {
       font-size: 1rem;
       line-height: 1.62;
@@ -768,11 +995,39 @@ const faqSchema = {
       line-height: 1.62;
     }
 
-    .example-box,
     .source-note,
-    .seo-explanation-box {
+    .seo-explanation-box,
+    .next-steps-box,
+    .retrospective-box {
       padding: 20px;
       border-radius: 20px;
+    }
+
+    .next-steps-actions {
+      grid-template-columns: 1fr;
+    }
+
+    .next-step-button {
+      width: 100%;
+      max-width: 100%;
+      min-height: 56px;
+      padding: 15px 12px;
+      font-size: clamp(0.88rem, 3.75vw, 1rem);
+      letter-spacing: -0.02em;
+      overflow-wrap: normal;
+      word-break: normal;
+      white-space: normal;
+    }
+
+    
+    .retrospective-link {
+      width: fit-content;
+      max-width: 100%;
+      min-height: 42px;
+      margin-left: auto;
+      margin-right: auto;
+      padding: 10px 16px;
+      font-size: 0.94rem;
     }
 
     .source-link {
@@ -793,4 +1048,11 @@ const faqSchema = {
   }
 
 
+  @media (max-width: 390px) {
+    h1 {
+      font-size: clamp(1.46rem, 6.35vw, 1.82rem);
+      line-height: 1.09;
+      letter-spacing: -0.044em;
+    }
+  }
 </style>

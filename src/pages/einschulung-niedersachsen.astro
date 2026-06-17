@@ -3,13 +3,13 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import StateEnrollmentCalculator from "../components/StateEnrollmentCalculator.astro";
 
 const pageTitle =
-  "Einschulung Niedersachsen 2026: Termin, Stichtag & Rechner";
+  "Einschulung Niedersachsen 2026 & 2027: Termin, Stichtag & Rechner";
 
 const pageDescription =
-  "Wann ist die Einschulung in Niedersachsen 2026? Hier findest du Termin, Stichtag 30. September, Flexibilisierung und den kostenlosen Einschulungsrechner.";
+  "Einschulung Niedersachsen 2026: Einschulung voraussichtlich 15. August, erster Schultag 13. August. Stichtag 30. September. Jetzt kostenlos berechnen.";
 
 const canonical = "https://www.einschulungsrechner.de/einschulung-niedersachsen/";
-const dateModified = "2026-05-27";
+const dateModified = "2026-06-17";
 
 const ADSENSE_ID = import.meta.env.PUBLIC_ADSENSE_ID || "";
 const STATE_CONTENT_AD_SLOT = import.meta.env.PUBLIC_ADSENSE_STATE_CONTENT_SLOT || "";
@@ -40,7 +40,7 @@ const faqSchema = {
       name: "Welcher Einschulungsstichtag gilt in Niedersachsen?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "In Niedersachsen gilt der 30. September als Einschulungsstichtag. Kinder, die bis zu diesem Datum sechs Jahre alt werden, sind mit Beginn des neuen Schuljahres schulpflichtig. Nach offizieller Auslegung zählen dazu auch Kinder, die am 1. Oktober ihren sechsten Geburtstag haben.",
+        text: "In Niedersachsen gilt der 30. September als Einschulungsstichtag. Kinder, die bis zu diesem Datum im Einschulungsjahr sechs Jahre alt werden, sind mit Beginn des neuen Schuljahres schulpflichtig.",
       },
     },
     {
@@ -48,7 +48,7 @@ const faqSchema = {
       name: "Wann ist die Einschulung in Niedersachsen 2026?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Die Sommerferien in Niedersachsen enden 2026 am Mittwoch, 12. August 2026. Der erste Schultag ist Donnerstag, 13. August 2026. Die Einschulung findet laut Ferienordnung am Sonnabend nach dem ersten Schultag statt – für 2026 also voraussichtlich Samstag, 15. August 2026. Den konkreten Ablauf legt die zuständige Grundschule fest.",
+        text: "Die Sommerferien in Niedersachsen enden 2026 am Mittwoch, 12. August 2026. Der erste reguläre Schultag ist Donnerstag, 13. August 2026. Die Einschulung findet in der Regel am Sonnabend nach dem ersten Schultag statt – für 2026 also voraussichtlich Samstag, 15. August 2026. Den konkreten Ablauf legt die zuständige Grundschule fest.",
       },
     },
     {
@@ -56,7 +56,7 @@ const faqSchema = {
       name: "Wann beginnt die Grundschule in Niedersachsen 2026?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Der erste Schultag im Schuljahr 2026/2027 ist in Niedersachsen Donnerstag, 13. August 2026. Die Einschulung ist voraussichtlich für Samstag, 15. August 2026 vorgesehen. Den konkreten Ablauf legt die zuständige Grundschule fest.",
+        text: "Der erste reguläre Schultag im Schuljahr 2026/2027 ist in Niedersachsen Donnerstag, 13. August 2026. Die Einschulung ist voraussichtlich für Samstag, 15. August 2026 vorgesehen. Den konkreten Ablauf legt die zuständige Grundschule fest.",
       },
     },
     {
@@ -80,7 +80,15 @@ const faqSchema = {
       name: "Wie läuft die Schulanmeldung in Niedersachsen ab?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Die zuständige Grundschule beziehungsweise der Schulträger informiert die Eltern über Anmeldung, Fristen und erforderliche Unterlagen. Verbindliche Details erhältst du bei der zuständigen Grundschule oder Schulbehörde in Niedersachsen.",
+        text: "Etwa 15 Monate vor der Einschulung werden Eltern zur Anmeldung an der zuständigen Grundschule eingeladen. Der Schulträger oder die Grundschule teilt den genauen Anmeldetermin rechtzeitig mit. Im Rahmen der Anmeldung werden unter anderem die deutschen Sprachkenntnisse des Kindes festgestellt, sofern es im Jahr vor der Einschulung keine Kindertagesstätte besucht.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Kann die Einschulung in Niedersachsen zurückgestellt werden?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Ja. Schulpflichtige Kinder können in Niedersachsen für ein Jahr zurückgestellt werden, wenn aufgrund ihres Entwicklungsstands zu erwarten ist, dass sie nicht erfolgreich im ersten Schuljahrgang der Grundschule oder einer Förderschule mitarbeiten können. Die Entscheidung trifft die Schulleiterin oder der Schulleiter nach Beratung mit den Erziehungsberechtigten.",
       },
     },
     {
@@ -102,29 +110,29 @@ const faqSchema = {
   schema={[faqSchema, webPageSchema]}
 >
   <main class="state-page">
-      <a class="back-link" href="/">← Zur Startseite</a>
 
       <article class="state-card">
         <p class="state-kicker">Niedersachsen</p>
 
         <h1>
-          Einschulung Niedersachsen 2026:<br />
-          Wann kommt mein Kind in die Schule?
+          <span class="headline-line headline-line-year">Einschulung 2026/2027</span>
+          <span class="headline-line headline-line-state">in Niedersachsen:</span>
+          <span class="headline-line headline-line-question">Wann kommt mein Kind in die Schule?</span>
         </h1>
 
         <p class="lead">
-          Wann kommt mein Kind in Niedersachsen in die Schule? Gib das Geburtsdatum
-          ein und berechne das voraussichtliche Schuljahr. In Niedersachsen gilt
-          der Stichtag 30. September. Für das Schuljahr 2026/2027 ist die Einschulung
-          voraussichtlich für Samstag, 15. August 2026 vorgesehen – der erste
-          Schultag ist Donnerstag, 13. August 2026.
+          Wann kommt mein Kind in Niedersachsen in die Schule? Der Einschulungsrechner
+          zeigt dir anhand des Geburtsdatums das voraussichtliche Schuljahr. In
+          Niedersachsen gilt der Stichtag 30. September. Für das Schuljahr 2026/2027
+          ist die Einschulung voraussichtlich für Samstag, 15. August 2026 vorgesehen –
+          der erste Schultag ist Donnerstag, 13. August 2026.
         </p>
 
         <p class="answer-box">
-          Kurzantwort: Die Einschulung in Niedersachsen 2026 ist voraussichtlich
-          für Samstag, 15. August 2026 vorgesehen. Der erste Schultag ist Donnerstag,
-          13. August 2026. Schulpflichtig werden Kinder, die bis zum 30. September
-          2026 sechs Jahre alt werden.
+          Kurzantwort: Die Einschulung in Niedersachsen 2026 ist voraussichtlich für
+          Samstag, 15. August 2026 vorgesehen. Der erste reguläre Schultag ist
+          Donnerstag, 13. August 2026. Schulpflichtig werden Kinder, die bis zum
+          30. September 2026 sechs Jahre alt werden.
         </p>
 
         <StateEnrollmentCalculator
@@ -133,7 +141,7 @@ const faqSchema = {
           calculatorKicker="Niedersachsen-Rechner"
           resultKicker="Niedersachsen-Ergebnis"
           headline="Einschulung in Niedersachsen berechnen"
-          intro="Gib das Geburtsdatum deines Kindes ein. Niedersachsen ist hier bereits vorausgewählt. Wenn du von der Startseite kommst, übernehmen wir das Geburtsdatum automatisch aus dem Link."
+          intro="Gib das Geburtsdatum ein und erfahre, für welches Schuljahr dein Kind in Niedersachsen voraussichtlich schulpflichtig wird."
         />
 
         <div class="quick-facts quick-facts-master" aria-label="Kurzüberblick Einschulung Niedersachsen">
@@ -156,6 +164,11 @@ const faqSchema = {
             <span>Sonderregel</span>
             <strong>Flexibilisierung</strong>
           </div>
+
+          <div class="fact-card">
+            <span>Anmeldung</span>
+            <strong>ca. 15 Monate<br />vor Einschulung</strong>
+          </div>
         </div>
 
         {showContentAd ? (
@@ -177,10 +190,17 @@ const faqSchema = {
 
           <p>
             Die Sommerferien in Niedersachsen enden 2026 am Mittwoch,
-            12. August 2026. Der erste Schultag ist Donnerstag, 13. August 2026.
-            Die Einschulung findet laut Ferienordnung am Sonnabend nach dem ersten
-            Schultag statt – für 2026 also voraussichtlich Samstag, 15. August 2026.
-            Den konkreten Ablauf legt die zuständige Grundschule fest.
+            12. August 2026. Der erste reguläre Schultag ist Donnerstag,
+            13. August 2026. Die Einschulung findet in der Regel am Sonnabend nach
+            dem ersten Schultag statt – für 2026 also voraussichtlich Samstag,
+            15. August 2026.
+          </p>
+
+          <p>
+            Den konkreten Ablauf, die Uhrzeit der Einschulungsfeier und mögliche
+            organisatorische Hinweise legt die zuständige Grundschule fest. Für die
+            persönliche Planung solltest du deshalb immer auch die Mitteilung deiner
+            Schule oder des Schulträgers beachten.
           </p>
         </section>
 
@@ -196,18 +216,19 @@ const faqSchema = {
           </p>
 
           <p>
-            Beispielhaft zeigt der Rechner: Wird ein Kind am 15. August 2020
-            geboren, wird es am 15. August 2026 sechs Jahre alt. Da dieses Datum
-            im flexiblen Einschulungszeitraum liegt, ist das Kind grundsätzlich
-            für das Schuljahr 2026/2027 vorgesehen; Eltern können den Schulbesuch
-            aber durch schriftliche Erklärung um ein Jahr hinausschieben.
+            Beispiel: Wird ein Kind am 15. August 2020 geboren, wird es am
+            15. August 2026 sechs Jahre alt. Da dieses Datum im flexiblen
+            Einschulungszeitraum liegt, ist das Kind grundsätzlich für das Schuljahr
+            2026/2027 vorgesehen; Eltern können den Schulbesuch aber durch
+            schriftliche Erklärung gegenüber der Schule um ein Jahr hinausschieben.
           </p>
 
           <p>
-            Die wichtigsten Termine zum allgemeinen Schulstart und zur Einschulung
-            findest du im Terminblock oben. Der konkrete Einschulungstermin wird
-            von der zuständigen Grundschule festgelegt und kann organisatorisch
-            abweichen.
+            Wird ein Kind dagegen am 1. Oktober 2020 oder später geboren, fällt es
+            nicht mehr unter den regulären Stichtag für das Schuljahr 2026/2027. Eine
+            frühere Einschulung kann auf Antrag der Erziehungsberechtigten geprüft
+            werden, wenn der Entwicklungsstand eine erfolgreiche Mitarbeit im ersten
+            Schuljahrgang erwarten lässt.
           </p>
         </section>
 
@@ -216,11 +237,17 @@ const faqSchema = {
           <h2>Welcher Einschulungsstichtag gilt in Niedersachsen?</h2>
 
           <p>
-            In Niedersachsen gilt der 30. September als Stichtag für die
-            Einschulung. Kinder, die bis zu diesem Datum sechs Jahre alt werden,
-            sind mit Beginn des neuen Schuljahres regulär schulpflichtig. Nach
-            offizieller Auslegung zählen dazu auch Kinder, die am 1. Oktober ihren
-            sechsten Geburtstag haben.
+            In Niedersachsen gilt der 30. September als Stichtag für die Einschulung.
+            Kinder, die bis zu diesem Datum im Einschulungsjahr sechs Jahre alt
+            werden, sind mit Beginn des neuen Schuljahres regulär schulpflichtig.
+          </p>
+
+          <p>
+            Praktisch bedeutet das: Für die Einschulung 2026 sind Kinder regulär
+            schulpflichtig, die bis zum 30. September 2026 sechs Jahre alt werden.
+            Kinder mit Geburtstag ab dem 1. Oktober gehören grundsätzlich zum
+            nächsten Einschulungsjahrgang, sofern keine vorzeitige Einschulung
+            beantragt und bewilligt wird.
           </p>
         </section>
 
@@ -234,6 +261,13 @@ const faqSchema = {
             Jahr hinausschieben. Diese Erklärung soll in der Regel bis zum 1. Mai
             abgegeben werden.
           </p>
+
+          <p>
+            Diese Regel ist eine wichtige Besonderheit in Niedersachsen: Das Kind ist
+            grundsätzlich schulpflichtig, aber Eltern können den Schulbesuch innerhalb
+            dieses Zeitraums durch eine schriftliche Erklärung gegenüber der Schule um
+            ein Jahr verschieben.
+          </p>
         </section>
 
         <section>
@@ -245,28 +279,101 @@ const faqSchema = {
             ersten Schuljahrgang erwarten lässt. Die Entscheidung trifft die
             Schulleiterin oder der Schulleiter.
           </p>
+
+          <p>
+            Wenn du eine frühere Einschulung prüfen lassen möchtest, solltest du
+            frühzeitig Kontakt mit der zuständigen Grundschule aufnehmen. Dort erfährst
+            du, welche Unterlagen benötigt werden und wie der Antrag im konkreten
+            Einzelfall abläuft.
+          </p>
         </section>
 
         <section>
           <h2>Wie läuft die Schulanmeldung in Niedersachsen ab?</h2>
 
           <p>
-            Die zuständige Grundschule beziehungsweise der Schulträger informiert
-            die Eltern über Anmeldung, Fristen und erforderliche Unterlagen.
-            Verbindliche Details erhältst du bei der zuständigen Grundschule oder
-            Schulbehörde in Niedersachsen.
+            Etwa 15 Monate vor der Einschulung werden Eltern zur Anmeldung an der
+            zuständigen Grundschule eingeladen. Der Schulträger oder die Grundschule
+            teilt den genauen Anmeldetermin rechtzeitig mit. Im Rahmen der Anmeldung
+            werden unter anderem die deutschen Sprachkenntnisse des Kindes festgestellt,
+            sofern es im Jahr vor der Einschulung keine Kindertagesstätte besucht.
+          </p>
+
+          <ol class="process-list">
+            <li>Einladung oder Information der zuständigen Grundschule beachten</li>
+            <li>Kind zur Schulanmeldung an der zuständigen Grundschule anmelden</li>
+            <li>Erforderliche Unterlagen bereithalten</li>
+            <li>Hinweise zur Sprachstandsfeststellung und weiteren Vorbereitung beachten</li>
+          </ol>
+        </section>
+
+        <section class="next-steps-box">
+          <h2 class="next-steps-headline">
+            <span>Nächste Schritte</span>
+            <span>für Eltern</span>
+          </h2>
+
+          <p>
+            Wenn du jetzt weißt, welches Schuljahr für dein Kind voraussichtlich
+            relevant ist, lohnt sich als Nächstes der Blick auf die praktische
+            Vorbereitung. In unserer Checkliste findest du eine Schritt-für-Schritt-
+            Übersicht zu Unterlagen, Material, Schulweg und Organisation rund um den
+            Schulstart.
+          </p>
+
+          <div class="next-steps-actions">
+            <a class="next-step-button next-step-button-primary" href="/einschulung-checkliste/">
+              Zur Einschulungs-Checkliste
+            </a>
+            <a class="next-step-button next-step-button-secondary" href="/einschulung/">
+              Ratgeber zur Einschulung lesen
+            </a>
+          </div>
+        </section>
+
+        <section>
+          <h2>Mein Kind ist noch nicht schulreif – was muss ich in Niedersachsen tun?</h2>
+
+          <p>
+            Schulpflichtige Kinder können in Niedersachsen für ein Jahr zurückgestellt
+            werden, wenn aufgrund ihres Entwicklungsstands zu erwarten ist, dass sie
+            nicht erfolgreich im ersten Schuljahrgang der Grundschule oder einer
+            Förderschule mitarbeiten können. Die Entscheidung trifft die Schulleiterin
+            oder der Schulleiter nach Beratung mit den Erziehungsberechtigten.
           </p>
         </section>
 
-        <section class="example-box">
-          <h2>Beispiel: Geburtsdatum im August</h2>
+        <section>
+          <h2>Einschulung 2027 in Niedersachsen: Kann ich das schon berechnen?</h2>
 
           <p>
-            Beispielhaft zeigt der Rechner: Wird ein Kind am 15. August 2020
-            geboren, wird es am 15. August 2026 sechs Jahre alt. Da dieses Datum
-            zwischen dem 1. Juli und dem 30. September liegt, fällt das Kind in
-            Niedersachsen in den flexiblen Einschulungszeitraum für das Schuljahr
-            2026/2027.
+            Ja. Du kannst den Einschulungsrechner auch für die Einschulung 2027 in
+            Niedersachsen nutzen. Gib einfach das Geburtsdatum des Kindes ein. Der
+            Rechner zeigt dir sämtliche relevanten Daten für das voraussichtliche
+            Schuljahr.
+          </p>
+
+          <a class="section-cta-button" href="#niedersachsenCalculatorForm">
+            Einschulung 2027 für Niedersachsen berechnen
+          </a>
+        </section>
+
+        <section class="retrospective-box">
+          <p class="retrospective-kicker">Rückblick berechnen</p>
+          <h2>Wann wurde ich eingeschult?</h2>
+
+          <p>
+            Du kannst den Rechner auch rückblickend nutzen. Gib dein Geburtsdatum
+            ein und wähle dein damaliges Bundesland aus.
+          </p>
+
+          <a class="retrospective-link" href="/#einschulungsrechner">
+            Rückblick berechnen
+          </a>
+
+          <p>
+            Das Ergebnis ist eine Orientierung, weil frühere Einschulung,
+            Zurückstellung, Umzug oder frühere Landesregeln abweichen können.
           </p>
         </section>
 
@@ -278,10 +385,8 @@ const faqSchema = {
               <h3>Welcher Einschulungsstichtag gilt in Niedersachsen?</h3>
               <p>
                 In Niedersachsen gilt der 30. September als Einschulungsstichtag.
-                Kinder, die bis zu diesem Datum sechs Jahre alt werden, sind mit
-                Beginn des neuen Schuljahres schulpflichtig. Nach offizieller
-                Auslegung zählen dazu auch Kinder, die am 1. Oktober ihren sechsten
-                Geburtstag haben.
+                Kinder, die bis zu diesem Datum im Einschulungsjahr sechs Jahre alt
+                werden, sind mit Beginn des neuen Schuljahres schulpflichtig.
               </p>
             </article>
 
@@ -289,20 +394,21 @@ const faqSchema = {
               <h3>Wann ist die Einschulung in Niedersachsen 2026?</h3>
               <p>
                 Die Sommerferien in Niedersachsen enden 2026 am Mittwoch,
-                12. August 2026. Der erste Schultag ist Donnerstag, 13. August 2026.
-                Die Einschulung findet laut Ferienordnung am Sonnabend nach dem
-                ersten Schultag statt – für 2026 also voraussichtlich Samstag,
-                15. August 2026. Den konkreten Ablauf legt die zuständige Grundschule fest.
+                12. August 2026. Der erste reguläre Schultag ist Donnerstag,
+                13. August 2026. Die Einschulung findet in der Regel am Sonnabend
+                nach dem ersten Schultag statt – für 2026 also voraussichtlich
+                Samstag, 15. August 2026. Den konkreten Ablauf legt die zuständige
+                Grundschule fest.
               </p>
             </article>
 
             <article class="faq-item">
               <h3>Wann beginnt die Grundschule in Niedersachsen 2026?</h3>
               <p>
-                Der erste Schultag im Schuljahr 2026/2027 ist in Niedersachsen
-                Donnerstag, 13. August 2026. Die Einschulung ist voraussichtlich
-                für Samstag, 15. August 2026 vorgesehen. Den konkreten Ablauf legt
-                die zuständige Grundschule fest.
+                Der erste reguläre Schultag im Schuljahr 2026/2027 ist in
+                Niedersachsen Donnerstag, 13. August 2026. Die Einschulung ist
+                voraussichtlich für Samstag, 15. August 2026 vorgesehen. Den
+                konkreten Ablauf legt die zuständige Grundschule fest.
               </p>
             </article>
 
@@ -329,10 +435,24 @@ const faqSchema = {
             <article class="faq-item">
               <h3>Wie läuft die Schulanmeldung in Niedersachsen ab?</h3>
               <p>
-                Die zuständige Grundschule beziehungsweise der Schulträger informiert
-                die Eltern über Anmeldung, Fristen und erforderliche Unterlagen.
-                Verbindliche Details erhältst du bei der zuständigen Grundschule oder
-                Schulbehörde in Niedersachsen.
+                Etwa 15 Monate vor der Einschulung werden Eltern zur Anmeldung an der
+                zuständigen Grundschule eingeladen. Der Schulträger oder die
+                Grundschule teilt den genauen Anmeldetermin rechtzeitig mit. Im Rahmen
+                der Anmeldung werden unter anderem die deutschen Sprachkenntnisse des
+                Kindes festgestellt, sofern es im Jahr vor der Einschulung keine
+                Kindertagesstätte besucht.
+              </p>
+            </article>
+
+            <article class="faq-item">
+              <h3>Kann die Einschulung in Niedersachsen zurückgestellt werden?</h3>
+              <p>
+                Ja. Schulpflichtige Kinder können in Niedersachsen für ein Jahr
+                zurückgestellt werden, wenn aufgrund ihres Entwicklungsstands zu
+                erwarten ist, dass sie nicht erfolgreich im ersten Schuljahrgang der
+                Grundschule oder einer Förderschule mitarbeiten können. Die
+                Entscheidung trifft die Schulleiterin oder der Schulleiter nach
+                Beratung mit den Erziehungsberechtigten.
               </p>
             </article>
 
@@ -399,7 +519,7 @@ const faqSchema = {
             Kultusministerium.
           </p>
 
-          <p class="stand">Stand der Informationen:<span class="stand-date">Mai 2026</span></p>
+          <p class="stand">Stand der Informationen:<span class="stand-date">Juni 2026</span></p>
         </section>
       </article>
   </main>
@@ -436,19 +556,6 @@ const faqSchema = {
     padding: 32px 20px 64px;
   }
 
-  .back-link {
-    display: block;
-    max-width: 960px;
-    margin: 0 auto 20px;
-    color: #465266;
-    font-weight: 800;
-    text-decoration: none;
-  }
-
-  .back-link:hover {
-    color: #172033;
-    text-decoration: underline;
-  }
 
   .state-card {
     max-width: 960px;
@@ -478,6 +585,10 @@ const faqSchema = {
     font-weight: 950;
     line-height: 1.02;
     letter-spacing: -0.055em;
+  }
+
+  .headline-line {
+    display: block;
   }
 
   .lead {
@@ -599,13 +710,136 @@ const faqSchema = {
     line-height: 1.68;
   }
 
-  .example-box,
   .source-note,
-  .seo-explanation-box {
+  .seo-explanation-box,
+  .next-steps-box {
     padding: 24px;
     border: 1px solid rgba(129, 97, 38, 0.16);
     border-radius: 22px;
     background: rgba(245, 210, 138, 0.12);
+  }
+
+  .retrospective-box {
+    padding: 24px;
+    border: 1px solid rgba(129, 97, 38, 0.14);
+    border-radius: 22px;
+    background: rgba(255, 255, 255, 0.52);
+  }
+  .process-list {
+    display: grid;
+    gap: 10px;
+    margin: 18px 0 0;
+    padding-left: 1.25rem;
+    color: #465266;
+    font-size: clamp(1rem, 1.2vw, 1.08rem);
+    font-weight: 600;
+    line-height: 1.62;
+  }
+
+  .process-list li::marker {
+    color: #816126;
+    font-weight: 950;
+  }
+
+  .next-steps-actions {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+    margin-top: 24px;
+  }
+
+  .next-step-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 58px;
+    padding: 16px 14px;
+    border-radius: 16px;
+    color: #172033;
+    font-size: clamp(1rem, 1.2vw, 1.08rem);
+    font-weight: 950;
+    line-height: 1.2;
+    text-align: center;
+    text-decoration: none;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.34);
+  }
+
+  .next-step-button:hover {
+    transform: translateY(-1px);
+  }
+
+  .next-step-button-primary {
+    background: linear-gradient(135deg, #f5bf5b, #e99d25);
+  }
+
+  .next-step-button-secondary {
+    background: linear-gradient(135deg, #74d58b, #1f9b4a);
+    color: #ffffff;
+  }
+
+  .section-cta-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 46px;
+    margin-top: 20px;
+    padding: 12px 18px;
+    border: 1px solid rgba(233, 157, 37, 0.42);
+    border-radius: 999px;
+    background: linear-gradient(135deg, rgba(245, 191, 91, 0.92), rgba(233, 157, 37, 0.9));
+    color: #172033;
+    font-size: 0.98rem;
+    font-weight: 900;
+    line-height: 1.2;
+    text-align: center;
+    text-decoration: none;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.34);
+  }
+
+  .section-cta-button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 10px 24px rgba(233, 157, 37, 0.16);
+  }
+
+  .next-steps-headline span {
+    display: inline;
+  }
+
+  .retrospective-kicker {
+    margin: 0 0 12px;
+    color: #816126;
+    font-size: 0.82rem;
+    font-weight: 950;
+    letter-spacing: 0.14em;
+    line-height: 1.16;
+    text-transform: uppercase;
+  }
+
+  .retrospective-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    min-height: 42px;
+    margin: 18px auto 0;
+    padding: 10px 16px;
+    border: 1px solid rgba(31, 155, 74, 0.26);
+    border-radius: 999px;
+    background: rgba(116, 213, 139, 0.12);
+    color: #1f7f43;
+    font-size: 0.94rem;
+    font-weight: 850;
+    line-height: 1.2;
+    text-align: center;
+    text-decoration: none;
+  }
+
+  .retrospective-link:hover {
+    transform: translateY(-1px);
+    border-color: rgba(31, 155, 74, 0.38);
+    background: rgba(116, 213, 139, 0.18);
+    box-shadow: 0 8px 18px rgba(31, 155, 74, 0.08);
   }
 
   .faq-list {
@@ -697,12 +931,11 @@ const faqSchema = {
       grid-template-columns: 1fr;
     }
   }
-
   @media (max-width: 520px) {
     .state-page {
       padding: 22px 14px 42px;
     }
-
+  
     .state-card {
       padding: 24px;
       border-radius: 24px;
@@ -710,12 +943,17 @@ const faqSchema = {
 
     h1 {
       max-width: 100%;
-      font-size: clamp(1.7rem, 7.25vw, 2.18rem);
-      line-height: 1.06;
-      letter-spacing: -0.05em;
+      font-size: clamp(1.56rem, 6.55vw, 2.04rem);
+      line-height: 1.08;
+      letter-spacing: -0.047em;
       overflow-wrap: normal;
       word-break: normal;
       hyphens: none;
+    }
+
+    .headline-line-year,
+    .headline-line-state {
+      white-space: nowrap;
     }
 
     .lead {
@@ -755,6 +993,14 @@ const faqSchema = {
       line-height: 1.1;
     }
 
+    .next-steps-headline span {
+      display: block;
+    }
+
+    .section-cta-button {
+      width: 100%;
+    }
+
     p {
       font-size: 1rem;
       line-height: 1.62;
@@ -765,11 +1011,38 @@ const faqSchema = {
       line-height: 1.62;
     }
 
-    .example-box,
     .source-note,
-    .seo-explanation-box {
+    .seo-explanation-box,
+    .next-steps-box,
+    .retrospective-box {
       padding: 20px;
       border-radius: 20px;
+    }
+
+    .next-steps-actions {
+      grid-template-columns: 1fr;
+    }
+
+    .next-step-button {
+      width: 100%;
+      max-width: 100%;
+      min-height: 56px;
+      padding: 15px 12px;
+      font-size: clamp(0.88rem, 3.75vw, 1rem);
+      letter-spacing: -0.02em;
+      overflow-wrap: normal;
+      word-break: normal;
+      white-space: normal;
+    }
+
+    .retrospective-link {
+      width: fit-content;
+      max-width: 100%;
+      min-height: 42px;
+      margin-left: auto;
+      margin-right: auto;
+      padding: 10px 16px;
+      font-size: 0.94rem;
     }
 
     .source-link {
@@ -791,9 +1064,9 @@ const faqSchema = {
 
   @media (max-width: 390px) {
     h1 {
-      font-size: clamp(1.58rem, 7vw, 1.95rem);
-      line-height: 1.07;
-      letter-spacing: -0.046em;
+      font-size: clamp(1.46rem, 6.35vw, 1.82rem);
+      line-height: 1.09;
+      letter-spacing: -0.044em;
     }
   }
 </style>

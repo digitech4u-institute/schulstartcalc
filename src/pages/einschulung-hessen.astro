@@ -3,13 +3,13 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import StateEnrollmentCalculator from "../components/StateEnrollmentCalculator.astro";
 
 const pageTitle =
-  "Einschulung Hessen 2026: Termin, Stichtag & Rechner";
+  "Einschulung Hessen 2026 & 2027: Termin, Stichtag & Rechner";
 
 const pageDescription =
-  "Wann ist die Einschulung in Hessen 2026? Hier findest du Termin, Stichtag 30. Juni, Kann-Kind-Regelung und den kostenlosen Einschulungsrechner.";
+  "Wann ist die Einschulung in Hessen 2026 oder 2027? Hier findest du Stichtag 30. Juni, Schulpflicht, Kann-Kind-Regelung, Anmeldung und den kostenlosen Einschulungsrechner.";
 
 const canonical = "https://www.einschulungsrechner.de/einschulung-hessen/";
-const dateModified = "2026-05-28";
+const dateModified = "2026-06-17";
 
 const ADSENSE_ID = import.meta.env.PUBLIC_ADSENSE_ID || "";
 const STATE_CONTENT_AD_SLOT = import.meta.env.PUBLIC_ADSENSE_STATE_CONTENT_SLOT || "";
@@ -61,6 +61,14 @@ const faqSchema = {
     },
     {
       "@type": "Question",
+      name: "Wann wurde ich in Hessen eingeschult?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Du kannst den Einschulungsrechner auch rückblickend nutzen. Gib dein Geburtsdatum ein und wähle Hessen aus. Der Rechner zeigt dir, in welchem Schuljahr deine Einschulung wahrscheinlich war. Das Ergebnis ist eine Orientierung, weil frühere Einschulung, Zurückstellung, Umzug oder frühere abweichende Regeln das tatsächliche Einschulungsjahr beeinflussen können.",
+      },
+    },
+    {
+      "@type": "Question",
       name: "Was bedeutet Kann-Kind in Hessen?",
       acceptedAnswer: {
         "@type": "Answer",
@@ -73,6 +81,14 @@ const faqSchema = {
       acceptedAnswer: {
         "@type": "Answer",
         text: "Kinder, die nach dem 30. Juni sechs Jahre alt werden, können auf Antrag der Eltern vorzeitig eingeschult werden. Die Entscheidung trifft die Schulleitung in der Regel auf Grundlage eines schulärztlichen Gutachtens und nach Rücksprache mit der Kindertagesstätte. Wenn ein Kind erst nach dem 31. Dezember sechs Jahre alt wird, kann zusätzlich eine schulpsychologische Überprüfung angeordnet werden.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Kann die Einschulung in Hessen zurückgestellt werden?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Ja. Schulpflichtige Kinder, die noch nicht den für den Schulbesuch erforderlichen körperlichen, geistigen oder seelischen Entwicklungsstand haben, können auf Antrag der Eltern oder nach deren Anhörung für ein Jahr zurückgestellt werden. Die Entscheidung trifft die Schulleitung unter Beteiligung des schulpsychologischen Dienstes und des schulärztlichen Dienstes.",
       },
     },
     {
@@ -102,22 +118,22 @@ const faqSchema = {
   schema={[faqSchema, webPageSchema]}
 >
   <main class="state-page">
-      <a class="back-link" href="/">← Zur Startseite</a>
 
       <article class="state-card">
         <p class="state-kicker">Hessen</p>
 
         <h1>
-          Einschulung Hessen 2026:<br />
-          Wann kommt mein Kind in die Schule?
+          <span class="headline-line headline-line-year">Einschulung&nbsp;2026/2027</span>
+          <span class="headline-line headline-line-state">in Hessen:</span>
+          <span class="headline-line headline-line-question">Wann kommt mein Kind in die Schule?</span>
         </h1>
 
         <p class="lead">
-          Wann kommt mein Kind in Hessen in die Schule? Gib das Geburtsdatum ein
-          und berechne das voraussichtliche Schuljahr. In Hessen gilt der Stichtag
-          30. Juni. Für das Schuljahr 2026/2027 ist die Einschulung voraussichtlich
-          für Dienstag, 11. August 2026 vorgesehen – der erste Schultag ist Montag,
-          10. August 2026.
+          Wann kommt mein Kind in Hessen in die Schule? Der Einschulungsrechner zeigt
+          dir anhand des Geburtsdatums das voraussichtliche Schuljahr. In Hessen gilt
+          der Stichtag 30. Juni. Für das Schuljahr 2026/2027 ist die Einschulung
+          voraussichtlich für Dienstag, 11. August 2026 vorgesehen – der erste
+          Schultag ist Montag, 10. August 2026.
         </p>
 
         <p class="answer-box">
@@ -153,8 +169,8 @@ const faqSchema = {
           </div>
 
           <div class="fact-card">
-            <span>Sonderregel</span>
-            <strong>Kann-Kind auf Antrag</strong>
+            <span>Anmeldung</span>
+            <strong>März/April im Vorjahr</strong>
           </div>
         </div>
 
@@ -195,17 +211,22 @@ const faqSchema = {
           </p>
 
           <p>
-            Beispielhaft zeigt der Rechner: Wird ein Kind am 15. Juni 2020
-            geboren, vollendet es im Juni 2026 das sechste Lebensjahr. Damit ist
-            es in Hessen regulär schulpflichtig und voraussichtlich für das
-            Schuljahr 2026/2027 vorgesehen.
+            Beispiel: Wird ein Kind am 15. Juni 2020 geboren, wird es vor dem
+            Stichtag 30. Juni 2026 sechs Jahre alt. Damit ist es in Hessen regulär
+            schulpflichtig und voraussichtlich für das Schuljahr 2026/2027 vorgesehen.
+          </p>
+
+          <p>
+            Wird ein Kind dagegen am 1. Juli 2020 oder später geboren, fällt es nicht
+            mehr unter den Stichtag für das Schuljahr 2026/2027. Dann ist in Hessen
+            in der Regel das folgende Schuljahr relevant – eine frühere Einschulung
+            kann aber auf Antrag geprüft werden.
           </p>
 
           <p>
             Die wichtigsten Termine zum allgemeinen Schulstart und zur Einschulung
-            findest du im Terminblock oben. Der konkrete Einschulungstermin wird
-            von der zuständigen Grundschule festgelegt und kann organisatorisch
-            abweichen.
+            findest du im Terminblock oben. Verbindliche Informationen zum konkreten
+            Einschulungstermin erhältst du bei der zuständigen Grundschule.
           </p>
         </section>
 
@@ -221,15 +242,38 @@ const faqSchema = {
         </section>
 
         <section>
+          <h2>Was bedeutet Kann-Kind in Hessen?</h2>
+
+          <p>
+            Kinder, die nach dem 30. Juni sechs Jahre alt werden, sind in Hessen
+            nicht automatisch regulär schulpflichtig. Sie können aber auf Antrag der
+            Eltern vorzeitig eingeschult werden, wenn die Voraussetzungen für den
+            Schulbesuch erfüllt sind.
+          </p>
+
+          <p>
+            Die Entscheidung trifft die Schulleitung. Dabei werden in der Regel ein
+            schulärztliches Gutachten und die Entwicklung des Kindes berücksichtigt.
+            Für Eltern ist deshalb die zuständige Grundschule die erste Anlaufstelle.
+          </p>
+        </section>
+
+
+        <section>
           <h2>Kann mein Kind in Hessen früher eingeschult werden?</h2>
 
           <p>
             Kinder, die nach dem 30. Juni sechs Jahre alt werden, können auf Antrag
-            der Eltern vorzeitig eingeschult werden. Die Entscheidung trifft die
-            Schulleitung in der Regel auf Grundlage eines schulärztlichen Gutachtens
-            und nach Rücksprache mit der Kindertagesstätte. Wenn ein Kind erst nach
-            dem 31. Dezember sechs Jahre alt wird, kann zusätzlich eine
-            schulpsychologische Überprüfung angeordnet werden.
+            der Eltern vorzeitig eingeschult werden. Das betrifft vor allem Kinder,
+            die knapp nach dem Stichtag geboren sind und nach Einschätzung der Eltern
+            bereits ausreichend entwickelt wirken.
+          </p>
+
+          <p>
+            Die Entscheidung trifft die Schulleitung in der Regel auf Grundlage eines
+            schulärztlichen Gutachtens und nach Rücksprache mit der Kindertagesstätte.
+            Wird ein Kind erst nach dem 31. Dezember sechs Jahre alt, kann zusätzlich
+            eine schulpsychologische Überprüfung angeordnet werden.
           </p>
         </section>
 
@@ -237,21 +281,93 @@ const faqSchema = {
           <h2>Wie läuft die Schulanmeldung in Hessen ab?</h2>
 
           <p>
-            Die Anmeldung erfolgt in Hessen meist im März oder April des Jahres vor
-            der Einschulung. Die zuständige Grundschule lädt die Eltern schriftlich
-            ein und informiert über Termin, Unterlagen und Ablauf. Bei der Anmeldung
-            können auch die deutschen Sprachkenntnisse des Kindes festgestellt werden.
+            Die Anmeldung erfolgt in Hessen in den Monaten März oder April des Jahres
+            vor Beginn der Schulpflicht. Die Eltern werden von der für den Wohnbezirk
+            zuständigen Grundschule schriftlich informiert und zur Anmeldung gebeten.
+          </p>
+
+          <ol class="process-list">
+            <li>Information der zuständigen Grundschule zum Anmeldetermin beachten</li>
+            <li>Kind an der zuständigen Grundschule anmelden</li>
+            <li>Feststellung der deutschen Sprachkenntnisse einplanen</li>
+            <li>Schulärztliche Untersuchung und weitere Hinweise der Schule wahrnehmen</li>
+          </ol>
+        </section>
+
+        <section class="next-steps-box">
+          <h2 class="next-steps-headline">
+            <span>Nächste Schritte</span>
+            <span>für Eltern</span>
+          </h2>
+
+          <p>
+            Wenn du jetzt weißt, welches Schuljahr für dein Kind voraussichtlich
+            relevant ist, lohnt sich als Nächstes der Blick auf die praktische
+            Vorbereitung. In unserer Checkliste findest du eine Schritt-für-Schritt-
+            Übersicht zu Unterlagen, Material, Schulweg und Organisation rund um den
+            Schulstart.
+          </p>
+
+          <div class="next-steps-actions">
+            <a class="next-step-button next-step-button-primary" href="/einschulung-checkliste/">
+              Zur Einschulungs-Checkliste
+            </a>
+            <a class="next-step-button next-step-button-secondary" href="/einschulung/">
+              Ratgeber zur Einschulung lesen
+            </a>
+          </div>
+        </section>
+
+        <section>
+          <h2>Mein Kind ist noch nicht schulreif – was muss ich in Hessen tun?</h2>
+
+          <p>
+            Wenn du Zweifel hast, ob dein Kind bereits schulfähig ist, solltest du
+            frühzeitig Kontakt mit der zuständigen Grundschule aufnehmen.
+            Schulpflichtige Kinder können in Hessen für ein Jahr zurückgestellt
+            werden, wenn der erforderliche körperliche, geistige oder seelische
+            Entwicklungsstand noch nicht erreicht ist.
+          </p>
+
+          <p>
+            Die Entscheidung trifft die Schulleiterin oder der Schulleiter. Dabei
+            werden der schulpsychologische Dienst und der schulärztliche Dienst
+            beteiligt. Wichtig ist: Der Rechner kann dir die voraussichtliche
+            Schulpflicht zeigen, ersetzt aber keine pädagogische oder schulärztliche
+            Einschätzung im Einzelfall.
           </p>
         </section>
 
-        <section class="example-box">
-          <h2>Beispiel: Geburtsdatum im Juni</h2>
+        <section>
+          <h2>Einschulung 2027 in Hessen: Kann ich das schon berechnen?</h2>
 
           <p>
-            Beispielhaft zeigt der Rechner: Wird ein Kind am 15. Juni 2020
-            geboren, vollendet es im Juni 2026 das sechste Lebensjahr. Da dieses
-            Datum vor dem Stichtag 30. Juni liegt, wird das Kind in Hessen
-            voraussichtlich im Schuljahr 2026/2027 eingeschult.
+            Ja. Du kannst den Einschulungsrechner auch für die Einschulung 2027 in
+            Hessen nutzen. Gib einfach das Geburtsdatum des Kindes ein. Der Rechner
+            zeigt dir sämtliche relevanten Daten für das voraussichtliche Schuljahr.
+          </p>
+
+          <a class="section-cta-button" href="#hessenCalculatorForm">
+            Einschulung 2027 für Hessen berechnen
+          </a>
+        </section>
+
+        <section class="retrospective-box">
+          <p class="retrospective-kicker">Rückblick berechnen</p>
+          <h2>Wann wurde ich eingeschult?</h2>
+
+          <p>
+            Du kannst den Rechner auch rückblickend nutzen. Gib dein Geburtsdatum
+            ein und wähle dein damaliges Bundesland aus.
+          </p>
+
+          <a class="retrospective-link" href="/#einschulungsrechner">
+            Rückblick berechnen
+          </a>
+
+          <p>
+            Das Ergebnis ist eine Orientierung, weil frühere Einschulung,
+            Zurückstellung, Umzug oder frühere Landesregeln abweichen können.
           </p>
         </section>
 
@@ -292,6 +408,18 @@ const faqSchema = {
             </article>
 
             <article class="faq-item">
+              <h3>Wann wurde ich in Hessen eingeschult?</h3>
+              <p>
+                Du kannst den Einschulungsrechner auch rückblickend nutzen. Gib dein
+                Geburtsdatum ein und wähle Hessen aus. Der Rechner zeigt dir, in
+                welchem Schuljahr deine Einschulung wahrscheinlich war. Das Ergebnis
+                ist eine Orientierung, weil frühere Einschulung, Zurückstellung,
+                Umzug oder frühere abweichende Regeln das tatsächliche Einschulungsjahr
+                beeinflussen können.
+              </p>
+            </article>
+
+            <article class="faq-item">
               <h3>Was bedeutet Kann-Kind in Hessen?</h3>
               <p>
                 Als Kann-Kind gilt in Hessen ein Kind, das nach dem 30. Juni sechs
@@ -311,6 +439,18 @@ const faqSchema = {
                 Gutachtens und nach Rücksprache mit der Kindertagesstätte. Wenn ein
                 Kind erst nach dem 31. Dezember sechs Jahre alt wird, kann zusätzlich
                 eine schulpsychologische Überprüfung angeordnet werden.
+              </p>
+            </article>
+
+            <article class="faq-item">
+              <h3>Kann die Einschulung in Hessen zurückgestellt werden?</h3>
+              <p>
+                Ja. Schulpflichtige Kinder, die noch nicht den für den Schulbesuch
+                erforderlichen körperlichen, geistigen oder seelischen Entwicklungsstand
+                haben, können auf Antrag der Eltern oder nach deren Anhörung für ein
+                Jahr zurückgestellt werden. Die Entscheidung trifft die Schulleitung
+                unter Beteiligung des schulpsychologischen Dienstes und des
+                schulärztlichen Dienstes.
               </p>
             </article>
 
@@ -374,7 +514,7 @@ const faqSchema = {
               <p class="source-kicker">Offizielle Quelle 3</p>
               <a
                 class="source-link"
-                href="https://www.rv.hessenrecht.hessen.de/bshe/document/jlr-SchulGHE2017pP58"
+                href="https://www.rv.hessenrecht.hessen.de/bshe/document/jlr-SchulGHE2022pP58"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -389,7 +529,7 @@ const faqSchema = {
             für Kultus, Bildung und Chancen.
           </p>
 
-          <p class="stand">Stand der Informationen:<span class="stand-date">Mai 2026</span></p>
+          <p class="stand">Stand der Informationen:<span class="stand-date">Juni 2026</span></p>
         </section>
       </article>
   </main>
@@ -426,19 +566,6 @@ const faqSchema = {
     padding: 32px 20px 64px;
   }
 
-  .back-link {
-    display: block;
-    max-width: 960px;
-    margin: 0 auto 20px;
-    color: #465266;
-    font-weight: 800;
-    text-decoration: none;
-  }
-
-  .back-link:hover {
-    color: #172033;
-    text-decoration: underline;
-  }
 
   .state-card {
     max-width: 960px;
@@ -468,6 +595,15 @@ const faqSchema = {
     font-weight: 950;
     line-height: 1.02;
     letter-spacing: -0.055em;
+  }
+
+  .headline-line {
+    display: block;
+  }
+
+  .headline-line-year,
+  .headline-line-state {
+    white-space: nowrap;
   }
 
   .lead {
@@ -589,13 +725,138 @@ const faqSchema = {
     line-height: 1.68;
   }
 
-  .example-box,
   .source-note,
-  .seo-explanation-box {
+  .seo-explanation-box,
+  .next-steps-box {
     padding: 24px;
     border: 1px solid rgba(129, 97, 38, 0.16);
     border-radius: 22px;
     background: rgba(245, 210, 138, 0.12);
+  }
+
+  .retrospective-box {
+    padding: 24px;
+    border: 1px solid rgba(129, 97, 38, 0.14);
+    border-radius: 22px;
+    background: rgba(255, 255, 255, 0.52);
+  }
+
+  .process-list {
+    display: grid;
+    gap: 12px;
+    margin: 18px 0 0;
+    padding-left: 1.35rem;
+    color: #465266;
+    font-size: clamp(1rem, 1.2vw, 1.08rem);
+    font-weight: 600;
+    line-height: 1.62;
+  }
+
+  .process-list li::marker {
+    color: #816126;
+    font-weight: 950;
+  }
+
+
+  .retrospective-kicker {
+    margin: 0 0 8px;
+    color: #816126;
+    font-size: 0.82rem;
+    font-weight: 950;
+    letter-spacing: 0.095em;
+    line-height: 1.16;
+    text-transform: uppercase;
+  }
+
+  .next-steps-actions {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+    margin-top: 24px;
+  }
+
+  .next-step-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 58px;
+    padding: 16px 14px;
+    border-radius: 16px;
+    color: #172033;
+    font-size: clamp(1rem, 1.2vw, 1.08rem);
+    font-weight: 950;
+    line-height: 1.2;
+    text-align: center;
+    text-decoration: none;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.34);
+  }
+
+  .next-step-button:hover {
+    transform: translateY(-1px);
+  }
+
+  .next-step-button-primary {
+    background: linear-gradient(135deg, #f5bf5b, #e99d25);
+  }
+
+  .next-step-button-secondary {
+    background: linear-gradient(135deg, #74d58b, #1f9b4a);
+    color: #ffffff;
+  }
+
+  .section-cta-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 46px;
+    margin-top: 20px;
+    padding: 12px 18px;
+    border: 1px solid rgba(233, 157, 37, 0.42);
+    border-radius: 999px;
+    background: linear-gradient(135deg, rgba(245, 191, 91, 0.92), rgba(233, 157, 37, 0.9));
+    color: #172033;
+    font-size: 0.98rem;
+    font-weight: 900;
+    line-height: 1.2;
+    text-align: center;
+    text-decoration: none;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.34);
+  }
+
+  .section-cta-button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 10px 24px rgba(233, 157, 37, 0.16);
+  }
+
+  .next-steps-headline span {
+    display: inline;
+  }
+
+  .retrospective-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    min-height: 42px;
+    margin: 18px auto 0;
+    padding: 10px 16px;
+    border: 1px solid rgba(31, 155, 74, 0.26);
+    border-radius: 999px;
+    background: rgba(116, 213, 139, 0.12);
+    color: #1f7f43;
+    font-size: 0.94rem;
+    font-weight: 850;
+    line-height: 1.2;
+    text-align: center;
+    text-decoration: none;
+  }
+
+  .retrospective-link:hover {
+    transform: translateY(-1px);
+    border-color: rgba(31, 155, 74, 0.38);
+    background: rgba(116, 213, 139, 0.18);
+    box-shadow: 0 8px 18px rgba(31, 155, 74, 0.08);
   }
 
   .faq-list {
@@ -708,6 +969,15 @@ const faqSchema = {
       hyphens: none;
     }
 
+    .headline-line-year,
+    .headline-line-state {
+      white-space: nowrap;
+    }
+
+    .headline-line-question {
+      white-space: normal;
+    }
+
     .lead {
       font-size: 1.02rem;
       line-height: 1.55;
@@ -744,9 +1014,48 @@ const faqSchema = {
       line-height: 1.1;
     }
 
+    .next-steps-headline span {
+      display: block;
+    }
+
+    .section-cta-button {
+      width: 100%;
+    }
+
     p {
       font-size: 1rem;
       line-height: 1.62;
+    }
+
+    .process-list {
+      font-size: 1rem;
+      line-height: 1.58;
+    }
+
+    .next-steps-actions {
+      grid-template-columns: 1fr;
+    }
+
+    .next-step-button {
+      width: 100%;
+      max-width: 100%;
+      min-height: 56px;
+      padding: 15px 12px;
+      font-size: clamp(0.88rem, 3.75vw, 1rem);
+      letter-spacing: -0.02em;
+      overflow-wrap: normal;
+      word-break: normal;
+      white-space: normal;
+    }
+
+    .retrospective-link {
+      width: fit-content;
+      max-width: 100%;
+      min-height: 42px;
+      margin-left: auto;
+      margin-right: auto;
+      padding: 10px 16px;
+      font-size: 0.94rem;
     }
 
     .faq-item p {
@@ -754,9 +1063,10 @@ const faqSchema = {
       line-height: 1.62;
     }
 
-    .example-box,
     .source-note,
-    .seo-explanation-box {
+    .seo-explanation-box,
+    .next-steps-box,
+    .retrospective-box {
       padding: 20px;
       border-radius: 20px;
     }

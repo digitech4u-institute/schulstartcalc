@@ -3,13 +3,13 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import StateEnrollmentCalculator from "../components/StateEnrollmentCalculator.astro";
 
 const pageTitle =
-  "Einschulung Hamburg 2026: Termin, Stichtag & Rechner";
+  "Einschulung Hamburg 2026 & 2027: Termin, Stichtag & Rechner";
 
 const pageDescription =
   "Wann ist die Einschulung in Hamburg 2026? Hier findest du Termin, Stichtag 30. Juni, Kann-Kind-Regelung und den kostenlosen Einschulungsrechner.";
 
 const canonical = "https://www.einschulungsrechner.de/einschulung-hamburg/";
-const dateModified = "2026-05-27";
+const dateModified = "2026-06-17";
 
 const ADSENSE_ID = import.meta.env.PUBLIC_ADSENSE_ID || "";
 const STATE_CONTENT_AD_SLOT = import.meta.env.PUBLIC_ADSENSE_STATE_CONTENT_SLOT || "";
@@ -102,21 +102,22 @@ const faqSchema = {
   schema={[faqSchema, webPageSchema]}
 >
   <main class="state-page">
-      <a class="back-link" href="/">← Zur Startseite</a>
 
       <article class="state-card">
         <p class="state-kicker">Hamburg</p>
 
         <h1>
-          Einschulung Hamburg 2026:<br />
-          Wann kommt mein Kind in die Schule?
+          <span class="headline-line headline-line-year">Einschulung 2026/2027</span>
+          <span class="headline-line headline-line-state">in Hamburg:</span>
+          <span class="headline-line headline-line-question">Wann kommt mein Kind in die Schule?</span>
         </h1>
 
         <p class="lead">
-          Wann kommt mein Kind in Hamburg in die Schule? Gib das Geburtsdatum ein
-          und berechne das voraussichtliche Schuljahr. In Hamburg gilt der Stichtag
-          30. Juni. Für das Schuljahr 2026/2027 ist der erste Schultag Donnerstag,
-          20. August 2026. Die Einschulung wird von der jeweiligen Grundschule festgelegt.
+          Wann kommt mein Kind in Hamburg in die Schule? Der Einschulungsrechner
+          zeigt dir anhand des Geburtsdatums das voraussichtliche Schuljahr. In
+          Hamburg gilt der Stichtag 30. Juni. Für das Schuljahr 2026/2027 ist der
+          erste Schultag Donnerstag, 20. August 2026 – die Einschulung der ersten
+          Klassen legt die jeweilige Grundschule fest.
         </p>
 
         <p class="answer-box">
@@ -132,7 +133,7 @@ const faqSchema = {
           calculatorKicker="Hamburg-Rechner"
           resultKicker="Hamburg-Ergebnis"
           headline="Einschulung in Hamburg berechnen"
-          intro="Gib das Geburtsdatum deines Kindes ein. Hamburg ist hier bereits vorausgewählt. Wenn du von der Startseite kommst, übernehmen wir das Geburtsdatum automatisch aus dem Link."
+          intro="Gib das Geburtsdatum ein und erfahre, für welches Schuljahr dein Kind in Hamburg voraussichtlich schulpflichtig wird."
         />
 
         <div class="quick-facts quick-facts-master" aria-label="Kurzüberblick Einschulung Hamburg">
@@ -219,44 +220,127 @@ const faqSchema = {
         </section>
 
         <section>
-          <h2>Kann mein Kind in Hamburg früher eingeschult werden?</h2>
+          <h2>Was bedeutet Kann-Kind in Hamburg?</h2>
 
           <p>
-            Hamburg hat keinen Einschulungskorridor wie Bayern. Kinder, die nach
-            dem 30. Juni sechs Jahre alt werden, sind nicht automatisch regulär
-            schulpflichtig. Eine vorzeitige Einschulung kann aber auf Antrag der
-            Sorgeberechtigten geprüft werden. Diese Kinder werden auch als
-            Kann-Kinder bezeichnet.
+            Als Kann-Kind werden Kinder bezeichnet, die nach dem regulären Stichtag
+            sechs Jahre alt werden und deshalb nicht automatisch schulpflichtig sind.
+            In Hamburg betrifft das Kinder, die nach dem 30. Juni sechs Jahre alt
+            werden.
+          </p>
+
+          <p>
+            Eine vorzeitige Einschulung kann auf Antrag der Sorgeberechtigten geprüft
+            werden. Die zuständige Grundschule berücksichtigt dabei, ob das Kind
+            geistig, seelisch, körperlich und sprachlich ausreichend entwickelt ist.
           </p>
         </section>
 
         <section>
-          <h2>Wie läuft die vorzeitige Einschulung in Hamburg ab?</h2>
+          <h2>Kann mein Kind in Hamburg früher eingeschult werden?</h2>
 
           <p>
-            Wenn dein Kind nach dem 30. Juni sechs Jahre alt wird, kannst du eine
-            vorzeitige Einschulung bei der zuständigen Grundschule prüfen lassen.
-            Dabei wird berücksichtigt, ob dein Kind geistig, seelisch, körperlich
-            und sprachlich ausreichend entwickelt ist, um erfolgreich am Unterricht
-            teilzunehmen.
+            Ja. Kinder, die nach dem 30. Juni sechs Jahre alt werden, können in
+            Hamburg auf Antrag der Sorgeberechtigten vorzeitig eingeschult werden.
+            Die Entscheidung hängt davon ab, ob das Kind die Voraussetzungen für
+            einen erfolgreichen Schulbesuch erfüllt.
           </p>
 
           <p>
-            Nimm frühzeitig Kontakt mit der zuständigen Grundschule auf. Bei
-            allgemeinen Fragen unterstützt auch das Schulinformationszentrum
-            Hamburg unter der Telefonnummer 040 428 99 22 11.
+            Nimm dafür frühzeitig Kontakt mit der zuständigen Grundschule auf. Dort
+            erfährst du, welche Unterlagen benötigt werden und wie die Prüfung im
+            konkreten Einzelfall abläuft.
           </p>
         </section>
 
-        <section class="example-box">
-          <h2>Beispiel: Geburtsdatum nach dem Stichtag</h2>
+        <section>
+          <h2>Wie läuft die Schulanmeldung in Hamburg ab?</h2>
 
           <p>
-            Wird ein Kind am 1. Juli 2020 geboren, vollendet es am 1. Juli 2026
-            das sechste Lebensjahr. Damit liegt der Geburtstag nach dem Hamburger
-            Stichtag 30. Juni. Das Kind ist für das Schuljahr 2026/2027 nicht
-            automatisch regulär schulpflichtig; eine vorzeitige Einschulung kann
-            auf Antrag der Sorgeberechtigten geprüft werden.
+            Die Schulanmeldung erfolgt über die zuständige Grundschule. Dort erhalten
+            Eltern Informationen zu Terminen, Unterlagen, Ablauf und möglichen
+            Besonderheiten bei Kann-Kindern oder individuellen Entscheidungen.
+          </p>
+
+          <ol class="process-list">
+            <li>Information der zuständigen Grundschule beachten</li>
+            <li>Kind an der zuständigen Grundschule anmelden</li>
+            <li>Erforderliche Unterlagen und Nachweise bereithalten</li>
+            <li>Bei vorzeitiger Einschulung frühzeitig Beratung einholen</li>
+          </ol>
+        </section>
+
+        <section class="next-steps-box">
+          <h2 class="next-steps-headline">
+            <span>Nächste Schritte</span>
+            <span>für Eltern</span>
+          </h2>
+
+          <p>
+            Wenn du jetzt weißt, welches Schuljahr für dein Kind voraussichtlich
+            relevant ist, lohnt sich als Nächstes der Blick auf die praktische
+            Vorbereitung. In unserer Checkliste findest du eine Schritt-für-Schritt-
+            Übersicht zu Unterlagen, Material, Schulweg und Organisation rund um den
+            Schulstart.
+          </p>
+
+          <div class="next-steps-actions">
+            <a class="next-step-button next-step-button-primary" href="/einschulung-checkliste/">
+              Zur Einschulungs-Checkliste
+            </a>
+            <a class="next-step-button next-step-button-secondary" href="/einschulung/">
+              Ratgeber zur Einschulung lesen
+            </a>
+          </div>
+        </section>
+
+        <section>
+          <h2>Mein Kind ist noch nicht schulreif – was muss ich in Hamburg tun?</h2>
+
+          <p>
+            Wenn du Zweifel hast, ob dein Kind bereits schulfähig ist, solltest du
+            frühzeitig Kontakt mit der zuständigen Grundschule aufnehmen. Die Schule
+            prüft den Entwicklungsstand und informiert über das weitere Verfahren.
+          </p>
+
+          <p>
+            Der Rechner kann dir die voraussichtliche Schulpflicht zeigen, ersetzt
+            aber keine pädagogische oder schulische Einschätzung im Einzelfall.
+            Verbindliche Auskunft erhältst du bei der zuständigen Grundschule oder
+            beim Schulinformationszentrum Hamburg.
+          </p>
+        </section>
+
+        <section>
+          <h2>Einschulung 2027 in Hamburg: Kann ich das schon berechnen?</h2>
+
+          <p>
+            Ja. Du kannst den Einschulungsrechner auch für die Einschulung 2027 in
+            Hamburg nutzen. Gib einfach das Geburtsdatum des Kindes ein. Der Rechner
+            zeigt dir sämtliche relevanten Daten für das voraussichtliche Schuljahr.
+          </p>
+
+          <a class="section-cta-button" href="#hamburgCalculatorForm">
+            Einschulung 2027 für Hamburg berechnen
+          </a>
+        </section>
+
+        <section class="retrospective-box">
+          <p class="retrospective-kicker">Rückblick berechnen</p>
+          <h2>Wann wurde ich eingeschult?</h2>
+
+          <p>
+            Du kannst den Rechner auch rückblickend nutzen. Gib dein Geburtsdatum
+            ein und wähle dein damaliges Bundesland aus.
+          </p>
+
+          <a class="retrospective-link" href="/#einschulungsrechner">
+            Rückblick berechnen
+          </a>
+
+          <p>
+            Das Ergebnis ist eine Orientierung, weil frühere Einschulung,
+            Zurückstellung, Umzug oder frühere Landesregeln abweichen können.
           </p>
         </section>
 
@@ -394,7 +478,7 @@ const faqSchema = {
             Grundschule, der Schulbehörde oder beim Schulinformationszentrum Hamburg.
           </p>
 
-          <p class="stand">Stand der Informationen:<span class="stand-date">Mai 2026</span></p>
+          <p class="stand">Stand der Informationen:<span class="stand-date">Juni 2026</span></p>
         </section>
       </article>
   </main>
@@ -431,19 +515,6 @@ const faqSchema = {
     padding: 32px 20px 64px;
   }
 
-  .back-link {
-    display: block;
-    max-width: 960px;
-    margin: 0 auto 20px;
-    color: #465266;
-    font-weight: 800;
-    text-decoration: none;
-  }
-
-  .back-link:hover {
-    color: #172033;
-    text-decoration: underline;
-  }
 
   .state-card {
     max-width: 960px;
@@ -473,6 +544,10 @@ const faqSchema = {
     font-weight: 950;
     line-height: 1.02;
     letter-spacing: -0.055em;
+  }
+
+  .headline-line {
+    display: block;
   }
 
   .lead {
@@ -594,13 +669,137 @@ const faqSchema = {
     line-height: 1.68;
   }
 
-  .example-box,
   .source-note,
-  .seo-explanation-box {
+  .seo-explanation-box,
+  .next-steps-box {
     padding: 24px;
     border: 1px solid rgba(129, 97, 38, 0.16);
     border-radius: 22px;
     background: rgba(245, 210, 138, 0.12);
+  }
+
+  .retrospective-box {
+    padding: 24px;
+    border: 1px solid rgba(129, 97, 38, 0.14);
+    border-radius: 22px;
+    background: rgba(255, 255, 255, 0.52);
+  }
+
+  .process-list {
+    display: grid;
+    gap: 10px;
+    margin: 18px 0 0;
+    padding-left: 1.25rem;
+    color: #465266;
+    font-size: clamp(1rem, 1.2vw, 1.08rem);
+    font-weight: 600;
+    line-height: 1.62;
+  }
+
+  .process-list li::marker {
+    color: #816126;
+    font-weight: 950;
+  }
+
+  .next-steps-actions {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+    margin-top: 24px;
+  }
+
+  .next-step-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 58px;
+    padding: 16px 14px;
+    border-radius: 16px;
+    color: #172033;
+    font-size: clamp(1rem, 1.2vw, 1.08rem);
+    font-weight: 950;
+    line-height: 1.2;
+    text-align: center;
+    text-decoration: none;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.34);
+  }
+
+  .next-step-button:hover {
+    transform: translateY(-1px);
+  }
+
+  .next-step-button-primary {
+    background: linear-gradient(135deg, #f5bf5b, #e99d25);
+  }
+
+  .next-step-button-secondary {
+    background: linear-gradient(135deg, #74d58b, #1f9b4a);
+    color: #ffffff;
+  }
+
+  .section-cta-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 46px;
+    margin-top: 20px;
+    padding: 12px 18px;
+    border: 1px solid rgba(233, 157, 37, 0.42);
+    border-radius: 999px;
+    background: linear-gradient(135deg, rgba(245, 191, 91, 0.92), rgba(233, 157, 37, 0.9));
+    color: #172033;
+    font-size: 0.98rem;
+    font-weight: 900;
+    line-height: 1.2;
+    text-align: center;
+    text-decoration: none;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.34);
+  }
+
+  .section-cta-button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 10px 24px rgba(233, 157, 37, 0.16);
+  }
+
+  .next-steps-headline span {
+    display: inline;
+  }
+
+  .retrospective-kicker {
+    margin: 0 0 12px;
+    color: #816126;
+    font-size: 0.82rem;
+    font-weight: 950;
+    letter-spacing: 0.14em;
+    line-height: 1.16;
+    text-transform: uppercase;
+  }
+
+  .retrospective-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    min-height: 42px;
+    margin: 18px auto 0;
+    padding: 10px 16px;
+    border: 1px solid rgba(31, 155, 74, 0.26);
+    border-radius: 999px;
+    background: rgba(116, 213, 139, 0.12);
+    color: #1f7f43;
+    font-size: 0.94rem;
+    font-weight: 850;
+    line-height: 1.2;
+    text-align: center;
+    text-decoration: none;
+  }
+
+  .retrospective-link:hover {
+    transform: translateY(-1px);
+    border-color: rgba(31, 155, 74, 0.38);
+    background: rgba(116, 213, 139, 0.18);
+    box-shadow: 0 8px 18px rgba(31, 155, 74, 0.08);
   }
 
   .faq-list {
@@ -713,6 +912,14 @@ const faqSchema = {
       hyphens: none;
     }
 
+    .headline-line-year {
+      white-space: nowrap;
+    }
+
+    .headline-line-state {
+      white-space: normal;
+    }
+
     .lead {
       font-size: 1.02rem;
       line-height: 1.55;
@@ -749,6 +956,14 @@ const faqSchema = {
       line-height: 1.12;
     }
 
+    .next-steps-headline span {
+      display: block;
+    }
+
+    .section-cta-button {
+      width: 100%;
+    }
+
     p {
       font-size: 0.96rem;
       line-height: 1.62;
@@ -759,11 +974,39 @@ const faqSchema = {
       line-height: 1.62;
     }
 
-    .example-box,
     .source-note,
-    .seo-explanation-box {
+    .seo-explanation-box,
+    .next-steps-box,
+    .retrospective-box {
       padding: 20px;
       border-radius: 20px;
+    }
+
+    
+    .next-steps-actions {
+      grid-template-columns: 1fr;
+    }
+
+    .next-step-button {
+      width: 100%;
+      max-width: 100%;
+      min-height: 56px;
+      padding: 15px 12px;
+      font-size: clamp(0.88rem, 3.75vw, 1rem);
+      letter-spacing: -0.02em;
+      overflow-wrap: normal;
+      word-break: normal;
+      white-space: normal;
+    }
+
+    .retrospective-link {
+      width: fit-content;
+      max-width: 100%;
+      min-height: 42px;
+      margin-left: auto;
+      margin-right: auto;
+      padding: 10px 16px;
+      font-size: 0.94rem;
     }
 
     .source-link {

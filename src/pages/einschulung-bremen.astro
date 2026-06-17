@@ -3,13 +3,13 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import StateEnrollmentCalculator from "../components/StateEnrollmentCalculator.astro";
 
 const pageTitle =
-  "Einschulung Bremen 2026: Termin, Stichtag & Rechner";
+  "Einschulung Bremen 2026 & 2027: Termin, Stichtag & Rechner";
 
 const pageDescription =
   "Wann ist die Einschulung in Bremen 2026? Hier findest du Termin, Stichtag 30. Juni, Antrag bis 31. Januar und den kostenlosen Einschulungsrechner.";
 
 const canonical = "https://www.einschulungsrechner.de/einschulung-bremen/";
-const dateModified = "2026-05-28";
+const dateModified = "2026-06-17";
 
 const ADSENSE_ID = import.meta.env.PUBLIC_ADSENSE_ID || "";
 const STATE_CONTENT_AD_SLOT = import.meta.env.PUBLIC_ADSENSE_STATE_CONTENT_SLOT || "";
@@ -103,22 +103,22 @@ const faqSchema = {
   schema={[faqSchema, webPageSchema]}
 >
   <main class="state-page">
-      <a class="back-link" href="/">← Zur Startseite</a>
 
       <article class="state-card">
         <p class="state-kicker">Bremen</p>
 
         <h1>
-          Einschulung Bremen 2026:<br />
-          Wann kommt mein Kind in die Schule?
+          <span class="headline-line headline-line-year">Einschulung 2026/2027</span>
+          <span class="headline-line headline-line-state">in Bremen:</span>
+          <span class="headline-line headline-line-question">Wann kommt mein Kind in die Schule?</span>
         </h1>
 
         <p class="lead">
-          Wann kommt mein Kind in Bremen in die Schule? Gib das Geburtsdatum ein
-          und berechne das voraussichtliche Schuljahr. In Bremen gilt der Stichtag
-          30. Juni. Für das Schuljahr 2026/2027 ist der erste reguläre Schultag
-          Donnerstag, 13. August 2026 – die Einschulung ist offiziell für Samstag,
-          15. August 2026 festgelegt.
+          Wann kommt mein Kind in Bremen in die Schule? Der Einschulungsrechner
+          zeigt dir anhand des Geburtsdatums das voraussichtliche Schuljahr. In
+          Bremen gilt der Stichtag 30. Juni. Für das Schuljahr 2026/2027 ist die
+          Einschulung offiziell für Samstag, 15. August 2026 festgelegt – der
+          erste reguläre Schultag ist Donnerstag, 13. August 2026.
         </p>
 
         <p class="answer-box">
@@ -134,7 +134,7 @@ const faqSchema = {
           calculatorKicker="Bremen-Rechner"
           resultKicker="Bremen-Ergebnis"
           headline="Einschulung in Bremen berechnen"
-          intro="Gib das Geburtsdatum deines Kindes ein. Bremen ist hier bereits vorausgewählt. Wenn du von der Startseite kommst, übernehmen wir das Geburtsdatum automatisch aus dem Link."
+          intro="Gib das Geburtsdatum ein und erfahre, für welches Schuljahr dein Kind in Bremen voraussichtlich schulpflichtig wird."
         />
 
         <div class="quick-facts quick-facts-master" aria-label="Kurzüberblick Einschulung Bremen">
@@ -183,7 +183,7 @@ const faqSchema = {
           </p>
         </section>
 
-        <section class="example-box">
+        <section>
           <h2>Wie funktioniert der Einschulungsrechner für Bremen?</h2>
 
           <p>
@@ -257,7 +257,13 @@ const faqSchema = {
             zuständigen Grundschule während der Anmeldezeit. Die Schule prüft, ob
             das Kind bereits schulreif ist und durch den Schulbesuch nicht
             überfordert wird; dabei spielt auch die schulärztliche Einschätzung
-            eine wichtige Rolle.
+            eine wichtige Rolle. Weitere Informationen findest du direkt bei
+            <a
+              class="inline-source-link"
+              href="https://www.service.bremen.de/dienstleistungen/vorzeitige-aufnahme-in-die-grundschule-beantragen-185044"
+              target="_blank"
+              rel="noopener noreferrer"
+            >Service Bremen zur vorzeitigen Aufnahme</a>.
           </p>
         </section>
 
@@ -269,7 +275,14 @@ const faqSchema = {
             Zuordnung richtet sich grundsätzlich nach dem von der Stadtgemeinde
             Bremen festgelegten Einzugsbezirk. Eltern erhalten rechtzeitig
             Informationen zur Anmeldung, zu den erforderlichen Unterlagen und zu
-            möglichen weiteren Schritten.
+            möglichen weiteren Schritten. Die offizielle Verfahrensseite findest du
+            bei
+            <a
+              class="inline-source-link"
+              href="https://www.service.bremen.de/dienstleistungen/aufnahme-an-einer-grundschule-anmelden-185040"
+              target="_blank"
+              rel="noopener noreferrer"
+            >Service Bremen zur Aufnahme an einer Grundschule</a>.
           </p>
 
           <p>
@@ -280,6 +293,30 @@ const faqSchema = {
           </p>
         </section>
 
+        <section class="next-steps-box">
+          <h2 class="next-steps-headline">
+            <span>Nächste Schritte</span>
+            <span>für Eltern</span>
+          </h2>
+
+          <p>
+            Wenn du jetzt weißt, welches Schuljahr für dein Kind voraussichtlich
+            relevant ist, lohnt sich als Nächstes der Blick auf die praktische
+            Vorbereitung. In unserer Checkliste findest du eine Schritt-für-Schritt-
+            Übersicht zu Unterlagen, Material, Schulweg und Organisation rund um den
+            Schulstart.
+          </p>
+
+          <div class="next-steps-actions">
+            <a class="next-step-button next-step-button-primary" href="/einschulung-checkliste/">
+              Zur Einschulungs-Checkliste
+            </a>
+            <a class="next-step-button next-step-button-secondary" href="/einschulung/">
+              Ratgeber zur Einschulung lesen
+            </a>
+          </div>
+        </section>
+
         <section>
           <h2>Mein Kind ist noch nicht schulreif – was muss ich in Bremen tun?</h2>
 
@@ -288,8 +325,47 @@ const faqSchema = {
             wenn aufgrund des Entwicklungsstands zu erwarten ist, dass das Kind noch
             nicht erfolgreich im ersten Schuljahr der Grundschule oder einer
             Förderschule mitarbeiten kann. Eltern stellen den Antrag bei der
-            zuständigen Grundschule. Verbindliche Auskunft erhältst du bei der
-            zuständigen Grundschule oder Schulbehörde.
+            zuständigen Grundschule. Details zum Verfahren findest du bei
+            <a
+              class="inline-source-link"
+              href="https://www.service.bremen.de/dienstleistungen/zurueckstellung-vom-schulbesuch-beantragen-185042"
+              target="_blank"
+              rel="noopener noreferrer"
+            >Service Bremen zur Zurückstellung vom Schulbesuch</a>. Verbindliche
+            Auskunft erhältst du bei der zuständigen Grundschule oder Schulbehörde.
+          </p>
+        </section>
+
+        <section>
+          <h2>Einschulung 2027 in Bremen: Kann ich das schon berechnen?</h2>
+
+          <p>
+            Ja. Du kannst den Einschulungsrechner auch für die Einschulung 2027 in
+            Bremen nutzen. Gib einfach das Geburtsdatum des Kindes ein. Der Rechner
+            zeigt dir sämtliche relevanten Daten für das voraussichtliche Schuljahr.
+          </p>
+
+          <a class="section-cta-button" href="#bremenCalculatorForm">
+            Einschulung 2027 für Bremen berechnen
+          </a>
+        </section>
+
+        <section class="retrospective-box">
+          <p class="retrospective-kicker">Rückblick berechnen</p>
+          <h2>Wann wurde ich eingeschult?</h2>
+
+          <p>
+            Du kannst den Rechner auch rückblickend nutzen. Gib dein Geburtsdatum
+            ein und wähle dein damaliges Bundesland aus.
+          </p>
+
+          <a class="retrospective-link" href="/#einschulungsrechner">
+            Rückblick berechnen
+          </a>
+
+          <p>
+            Das Ergebnis ist eine Orientierung, weil frühere Einschulung,
+            Zurückstellung, Umzug oder frühere Landesregeln abweichen können.
           </p>
         </section>
 
@@ -332,7 +408,14 @@ const faqSchema = {
                 Bremen unter bestimmten Voraussetzungen auf Antrag ebenfalls zum
                 1. August schulpflichtig werden: vom 1. Juli bis 30. September
                 innerhalb der Anmeldefrist; vom 1. Oktober bis 31. Januar des
-                Folgejahres mit zusätzlicher Prüfung durch die Grundschule.
+                Folgejahres mit zusätzlicher Prüfung durch die Grundschule. Die
+                passende offizielle Verfahrensseite ist
+                <a
+                  class="inline-source-link"
+                  href="https://www.service.bremen.de/dienstleistungen/aufnahme-an-einer-grundschule-anmelden-185040"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >Service Bremen zur Aufnahme an einer Grundschule</a>.
               </p>
             </article>
 
@@ -343,7 +426,13 @@ const faqSchema = {
                 des Folgejahres sechs Jahre alt werden, können in Bremen auf Antrag
                 vorzeitig schulpflichtig werden. Die zuständige Grundschule prüft
                 den Antrag; maßgeblich sind unter anderem die Schulreife und die
-                schulärztliche Einschätzung.
+                schulärztliche Einschätzung. Details findest du bei
+                <a
+                  class="inline-source-link"
+                  href="https://www.service.bremen.de/dienstleistungen/vorzeitige-aufnahme-in-die-grundschule-beantragen-185044"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >Service Bremen zur vorzeitigen Aufnahme</a>.
               </p>
             </article>
 
@@ -354,7 +443,13 @@ const faqSchema = {
                 des Entwicklungsstands zu erwarten ist, dass das Kind noch nicht
                 erfolgreich im ersten Schuljahr mitarbeiten kann. Eltern stellen den
                 Antrag bei der zuständigen Grundschule; verbindlich entscheidet die
-                zuständige Stelle.
+                zuständige Stelle. Details findest du bei
+                <a
+                  class="inline-source-link"
+                  href="https://www.service.bremen.de/dienstleistungen/zurueckstellung-vom-schulbesuch-beantragen-185042"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >Service Bremen zur Zurückstellung vom Schulbesuch</a>.
               </p>
             </article>
 
@@ -433,7 +528,7 @@ const faqSchema = {
             Bildung Bremen.
           </p>
 
-          <p class="stand">Stand der Informationen:<span class="stand-date">Mai 2026</span></p>
+          <p class="stand">Stand der Informationen:<span class="stand-date">Juni 2026</span></p>
         </section>
       </article>
   </main>
@@ -470,19 +565,6 @@ const faqSchema = {
     padding: 32px 20px 64px;
   }
 
-  .back-link {
-    display: block;
-    max-width: 960px;
-    margin: 0 auto 20px;
-    color: #465266;
-    font-weight: 800;
-    text-decoration: none;
-  }
-
-  .back-link:hover {
-    color: #172033;
-    text-decoration: underline;
-  }
 
   .state-card {
     max-width: 960px;
@@ -512,6 +594,10 @@ const faqSchema = {
     font-weight: 950;
     line-height: 1.02;
     letter-spacing: -0.055em;
+  }
+
+  .headline-line {
+    display: block;
   }
 
   .lead {
@@ -633,12 +719,132 @@ const faqSchema = {
     line-height: 1.68;
   }
 
-  .example-box,
-  .source-note {
+  .source-note,
+  .next-steps-box {
     padding: 24px;
     border: 1px solid rgba(129, 97, 38, 0.16);
     border-radius: 22px;
     background: rgba(245, 210, 138, 0.12);
+  }
+
+  .retrospective-box {
+    padding: 24px;
+    border: 1px solid rgba(129, 97, 38, 0.14);
+    border-radius: 22px;
+    background: rgba(255, 255, 255, 0.52);
+  }
+
+  .next-steps-actions {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+    margin-top: 24px;
+  }
+
+  .next-step-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 58px;
+    padding: 16px 14px;
+    border-radius: 16px;
+    color: #172033;
+    font-size: clamp(1rem, 1.2vw, 1.08rem);
+    font-weight: 950;
+    line-height: 1.2;
+    text-align: center;
+    text-decoration: none;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.34);
+  }
+
+  .next-step-button:hover {
+    transform: translateY(-1px);
+  }
+
+  .next-step-button-primary {
+    background: linear-gradient(135deg, #f5bf5b, #e99d25);
+  }
+
+  .next-step-button-secondary {
+    background: linear-gradient(135deg, #74d58b, #1f9b4a);
+    color: #ffffff;
+  }
+
+  .section-cta-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 46px;
+    margin-top: 20px;
+    padding: 12px 18px;
+    border: 1px solid rgba(233, 157, 37, 0.42);
+    border-radius: 999px;
+    background: linear-gradient(135deg, rgba(245, 191, 91, 0.92), rgba(233, 157, 37, 0.9));
+    color: #172033;
+    font-size: 0.98rem;
+    font-weight: 900;
+    line-height: 1.2;
+    text-align: center;
+    text-decoration: none;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.34);
+  }
+
+  .section-cta-button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 10px 24px rgba(233, 157, 37, 0.16);
+  }
+
+  .next-steps-headline span {
+    display: inline;
+  }
+
+  .retrospective-kicker {
+    margin: 0 0 12px;
+    color: #816126;
+    font-size: 0.82rem;
+    font-weight: 950;
+    letter-spacing: 0.14em;
+    line-height: 1.16;
+    text-transform: uppercase;
+  }
+
+  .retrospective-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    min-height: 42px;
+    margin: 18px auto 0;
+    padding: 10px 16px;
+    border: 1px solid rgba(31, 155, 74, 0.26);
+    border-radius: 999px;
+    background: rgba(116, 213, 139, 0.12);
+    color: #1f7f43;
+    font-size: 0.94rem;
+    font-weight: 850;
+    line-height: 1.2;
+    text-align: center;
+    text-decoration: none;
+  }
+
+  .retrospective-link:hover {
+    transform: translateY(-1px);
+    border-color: rgba(31, 155, 74, 0.38);
+    background: rgba(116, 213, 139, 0.18);
+    box-shadow: 0 8px 18px rgba(31, 155, 74, 0.08);
+  }
+
+  .inline-source-link {
+    color: #816126;
+    font-weight: 850;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+  }
+
+  .inline-source-link:hover {
+    color: #172033;
   }
 
   .faq-list {
@@ -751,6 +957,14 @@ const faqSchema = {
       hyphens: none;
     }
 
+    .headline-line-year {
+      white-space: nowrap;
+    }
+
+    .headline-line-state {
+      white-space: normal;
+    }
+
     .lead {
       font-size: 1.02rem;
       line-height: 1.55;
@@ -787,6 +1001,14 @@ const faqSchema = {
       line-height: 1.1;
     }
 
+    .next-steps-headline span {
+      display: block;
+    }
+
+    .section-cta-button {
+      width: 100%;
+    }
+
     p {
       font-size: 1rem;
       line-height: 1.62;
@@ -797,10 +1019,37 @@ const faqSchema = {
       line-height: 1.62;
     }
 
-    .example-box,
-    .source-note {
+    .source-note,
+    .next-steps-box,
+    .retrospective-box {
       padding: 20px;
       border-radius: 20px;
+    }
+
+    .next-steps-actions {
+      grid-template-columns: 1fr;
+    }
+
+    .next-step-button {
+      width: 100%;
+      max-width: 100%;
+      min-height: 56px;
+      padding: 15px 12px;
+      font-size: clamp(0.88rem, 3.75vw, 1rem);
+      letter-spacing: -0.02em;
+      overflow-wrap: normal;
+      word-break: normal;
+      white-space: normal;
+    }
+
+    .retrospective-link {
+      width: fit-content;
+      max-width: 100%;
+      min-height: 42px;
+      margin-left: auto;
+      margin-right: auto;
+      padding: 10px 16px;
+      font-size: 0.94rem;
     }
 
     .source-link {

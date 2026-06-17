@@ -9,7 +9,7 @@ const pageDescription =
   "Einschulung Rheinland-Pfalz 2026: erster Schultag 10. August, Einschulung schulabhängig. Stichtag 31. August. Jetzt kostenlos berechnen.";
 
 const canonical = "https://www.einschulungsrechner.de/einschulung-rheinland-pfalz/";
-const dateModified = "2026-06-16";
+const dateModified = "2026-06-17";
 
 const ADSENSE_ID = import.meta.env.PUBLIC_ADSENSE_ID || "";
 const STATE_CONTENT_AD_SLOT = import.meta.env.PUBLIC_ADSENSE_STATE_CONTENT_SLOT || "";
@@ -242,6 +242,18 @@ const faqSchema = {
         </section>
 
         <section>
+          <h2>Was bedeutet Kann-Kind in Rheinland-Pfalz?</h2>
+
+          <p>
+            Als Kann-Kind gilt in Rheinland-Pfalz ein Kind, das nach dem Stichtag
+            31. August sechs Jahre alt wird und deshalb nicht automatisch
+            schulpflichtig ist. Eine vorzeitige Einschulung kann auf Antrag der
+            Eltern geprüft werden, wenn aufgrund der Entwicklung zu erwarten ist,
+            dass das Kind erfolgreich am Unterricht teilnehmen kann.
+          </p>
+        </section>
+
+        <section>
           <h2>Kann mein Kind in Rheinland-Pfalz früher eingeschult werden?</h2>
 
           <p>
@@ -277,19 +289,12 @@ const faqSchema = {
             <li>Weitere Hinweise der Grundschule und Schulbehörde beachten</li>
           </ol>
         </section>
-        <section>
-          <h2>Einschulung Rheinland-Pfalz 2027: Kann ich das schon berechnen?</h2>
-
-          <p>
-            Ja. Du kannst den Einschulungsrechner auch für die Einschulung in
-            Rheinland-Pfalz 2027 nutzen. Gib einfach das Geburtsdatum deines Kindes
-            ein und wähle Rheinland-Pfalz aus. Der Rechner zeigt dir, welches
-            Schuljahr voraussichtlich relevant ist.
-          </p>
-        </section>
 
         <section class="next-steps-box">
-          <h2>Nächste Schritte für Eltern</h2>
+          <h2 class="next-steps-headline">
+            <span>Nächste Schritte</span>
+            <span>für Eltern</span>
+          </h2>
 
           <p>
             Wenn du jetzt weißt, welches Schuljahr für dein Kind voraussichtlich
@@ -320,6 +325,40 @@ const faqSchema = {
             Die Schulleitung entscheidet gemeinsam mit dem Schularzt und informiert
             die Eltern bis zum 15. Juni schriftlich. Eine Zurückstellung ist nur
             einmal möglich.
+          </p>
+        </section>
+
+        <section>
+          <h2>Einschulung 2027 in Rheinland-Pfalz: Kann ich das schon berechnen?</h2>
+
+          <p>
+            Ja. Du kannst den Einschulungsrechner auch für die Einschulung 2027 in
+            Rheinland-Pfalz nutzen. Gib einfach das Geburtsdatum des Kindes ein.
+            Der Rechner zeigt dir sämtliche relevanten Daten für das voraussichtliche
+            Schuljahr.
+          </p>
+
+          <a class="section-cta-button" href="#rheinland-pfalzCalculatorForm">
+            Einschulung 2027 für Rheinland-Pfalz berechnen
+          </a>
+        </section>
+
+        <section class="retrospective-box">
+          <p class="retrospective-kicker">Rückblick berechnen</p>
+          <h2>Wann wurde ich eingeschult?</h2>
+
+          <p>
+            Du kannst den Rechner auch rückblickend nutzen. Gib dein Geburtsdatum
+            ein und wähle dein damaliges Bundesland aus.
+          </p>
+
+          <a class="retrospective-link" href="/#einschulungsrechner">
+            Rückblick berechnen
+          </a>
+
+          <p>
+            Das Ergebnis ist eine Orientierung, weil frühere Einschulung,
+            Zurückstellung, Umzug oder frühere Landesregeln abweichen können.
           </p>
         </section>
 
@@ -644,7 +683,6 @@ const faqSchema = {
     line-height: 1.68;
   }
 
-  .example-box,
   .source-note,
   .seo-explanation-box,
   .next-steps-box {
@@ -652,6 +690,13 @@ const faqSchema = {
     border: 1px solid rgba(129, 97, 38, 0.16);
     border-radius: 22px;
     background: rgba(245, 210, 138, 0.12);
+  }
+
+  .retrospective-box {
+    padding: 24px;
+    border: 1px solid rgba(129, 97, 38, 0.14);
+    border-radius: 22px;
+    background: rgba(255, 255, 255, 0.52);
   }
   .process-list {
     display: grid;
@@ -704,6 +749,70 @@ const faqSchema = {
   .next-step-button-secondary {
     background: linear-gradient(135deg, #74d58b, #1f9b4a);
     color: #ffffff;
+  }
+
+  .section-cta-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 46px;
+    margin-top: 20px;
+    padding: 12px 18px;
+    border: 1px solid rgba(233, 157, 37, 0.42);
+    border-radius: 999px;
+    background: linear-gradient(135deg, rgba(245, 191, 91, 0.92), rgba(233, 157, 37, 0.9));
+    color: #172033;
+    font-size: 0.98rem;
+    font-weight: 900;
+    line-height: 1.2;
+    text-align: center;
+    text-decoration: none;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.34);
+  }
+
+  .section-cta-button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 10px 24px rgba(233, 157, 37, 0.16);
+  }
+
+  .next-steps-headline span {
+    display: inline;
+  }
+
+  .retrospective-kicker {
+    margin: 0 0 12px;
+    color: #816126;
+    font-size: 0.82rem;
+    font-weight: 950;
+    letter-spacing: 0.14em;
+    line-height: 1.16;
+    text-transform: uppercase;
+  }
+
+  .retrospective-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    min-height: 42px;
+    margin: 18px auto 0;
+    padding: 10px 16px;
+    border: 1px solid rgba(31, 155, 74, 0.26);
+    border-radius: 999px;
+    background: rgba(116, 213, 139, 0.12);
+    color: #1f7f43;
+    font-size: 0.94rem;
+    font-weight: 850;
+    line-height: 1.2;
+    text-align: center;
+    text-decoration: none;
+  }
+
+  .retrospective-link:hover {
+    transform: translateY(-1px);
+    border-color: rgba(31, 155, 74, 0.38);
+    background: rgba(116, 213, 139, 0.18);
+    box-shadow: 0 8px 18px rgba(31, 155, 74, 0.08);
   }
 
   .faq-list {
@@ -860,6 +969,14 @@ const faqSchema = {
       line-height: 1.1;
     }
 
+    .next-steps-headline span {
+      display: block;
+    }
+
+    .section-cta-button {
+      width: 100%;
+    }
+
     p {
       font-size: 1rem;
       line-height: 1.62;
@@ -870,10 +987,10 @@ const faqSchema = {
       line-height: 1.62;
     }
 
-    .example-box,
     .source-note,
     .seo-explanation-box,
-    .next-steps-box {
+    .next-steps-box,
+    .retrospective-box {
       padding: 20px;
       border-radius: 20px;
     }
@@ -892,6 +1009,16 @@ const faqSchema = {
       overflow-wrap: normal;
       word-break: normal;
       white-space: normal;
+    }
+
+    .retrospective-link {
+      width: fit-content;
+      max-width: 100%;
+      min-height: 42px;
+      margin-left: auto;
+      margin-right: auto;
+      padding: 10px 16px;
+      font-size: 0.94rem;
     }
 
     .source-link {
