@@ -127,24 +127,35 @@ const faqSchema = {
           sechs Jahre alt werden.
         </p>
 
-        <StateEnrollmentCalculator
-          stateName="Sachsen-Anhalt"
-          stateSlug="sachsen-anhalt"
-          calculatorKicker="Sachsen-Anhalt-Rechner"
-          resultKicker="Sachsen-Anhalt-Ergebnis"
-          headline="Einschulung in Sachsen-Anhalt berechnen"
-          intro="Gib das Geburtsdatum ein und erfahre, für welches Schuljahr dein Kind in Sachsen-Anhalt voraussichtlich schulpflichtig wird."
-        />
+        <div id="sachsenAnhaltCalculatorForm">
+          <StateEnrollmentCalculator
+            stateName="Sachsen-Anhalt"
+            stateSlug="sachsen-anhalt"
+            calculatorKicker="Sachsen-Anhalt-Rechner"
+            resultKicker="Sachsen-Anhalt-Ergebnis"
+            headline="Einschulung in Sachsen-Anhalt berechnen"
+            intro="Gib das Geburtsdatum ein und erfahre, für welches Schuljahr dein Kind in Sachsen-Anhalt voraussichtlich schulpflichtig wird."
+          />
+        </div>
 
         <div class="quick-facts quick-facts-master" aria-label="Kurzüberblick Einschulung Sachsen-Anhalt">
           <div class="fact-card fact-card-highlight">
             <span>Einschulung 2026</span>
-            <strong>Samstag,<br />15. August 2026</strong>
+            <strong>Samstag,<br />15. August</strong>
           </div>
 
           <div class="fact-card fact-card-highlight">
-            <span>Erster Schultag</span>
-            <strong>Montag,<br />17. August 2026</strong>
+            <span>Erster Schultag 2026</span>
+            <strong>Montag,<br />17. August</strong>
+          </div>
+
+          <div
+            class="fact-card fact-card-season"
+            data-season-card
+            data-state-slug="sachsen-anhalt"
+          >
+            <span data-season-label>Sommerferien 2026</span>
+            <strong data-season-value>Samstag, 4. Juli –<br />Freitag, 14. August</strong>
           </div>
 
           <div class="fact-card">
@@ -273,34 +284,6 @@ const faqSchema = {
           </ol>
         </section>
 
-        <section>
-          <h2>Mein Kind ist noch nicht schulreif – was muss ich in Sachsen-Anhalt tun?</h2>
-
-          <p>
-            Wenn du unsicher bist, ob dein Kind schon schulbereit ist, sprich
-            frühzeitig mit der zuständigen Grundschule. Eine Zurückstellung vom
-            Schulbesuch ist in Sachsen-Anhalt auf Antrag möglich.
-          </p>
-
-          <p>
-            Der Antrag wird über die Grundschule beim Landesschulamt eingereicht und
-            muss begründet werden. Die Entscheidung erfolgt unter Einbeziehung der
-            schulärztlichen Untersuchung. Verbindliche Auskunft erhältst du bei der
-            zuständigen Grundschule, der Schulbehörde oder dem Landesschulamt.
-          </p>
-        </section>
-
-        <section>
-          <h2>Einschulung Sachsen-Anhalt 2027: Kann ich das schon berechnen?</h2>
-
-          <p>
-            Ja. Du kannst den Einschulungsrechner auch für die Einschulung in
-            Sachsen-Anhalt 2027 nutzen. Gib einfach das Geburtsdatum deines Kindes
-            ein und wähle Sachsen-Anhalt aus. Der Rechner zeigt dir, welches
-            Schuljahr voraussichtlich relevant ist.
-          </p>
-        </section>
-
         <section class="next-steps-box">
           <h2>Nächste Schritte für Eltern</h2>
 
@@ -321,6 +304,59 @@ const faqSchema = {
             </a>
           </div>
         </section>
+
+        <section>
+          <h2>Mein Kind ist noch nicht schulreif – was muss ich in Sachsen-Anhalt tun?</h2>
+
+          <p>
+            Wenn du unsicher bist, ob dein Kind schon schulbereit ist, sprich
+            frühzeitig mit der zuständigen Grundschule. Eine Zurückstellung vom
+            Schulbesuch ist in Sachsen-Anhalt auf Antrag möglich.
+          </p>
+
+          <p>
+            Der Antrag wird über die Grundschule beim Landesschulamt eingereicht und
+            muss begründet werden. Die Entscheidung erfolgt unter Einbeziehung der
+            schulärztlichen Untersuchung. Verbindliche Auskunft erhältst du bei der
+            zuständigen Grundschule, der Schulbehörde oder dem Landesschulamt.
+          </p>
+        </section>
+
+        <section>
+          <h2>Einschulung 2027 in Sachsen-Anhalt: Kann ich das schon berechnen?</h2>
+
+          <p>
+            Ja. Du kannst den Einschulungsrechner auch für die Einschulung 2027 in
+            Sachsen-Anhalt nutzen. Gib einfach das Geburtsdatum deines Kindes ein.
+            Der Rechner zeigt dir sämtliche relevanten Daten für das voraussichtliche
+            Schuljahr.
+          </p>
+
+          <a class="section-cta-button" href="#sachsenAnhaltCalculatorForm">
+            Einschulung 2027 für Sachsen-Anhalt berechnen
+          </a>
+        </section>
+
+        <section class="retrospective-box">
+          <p class="retrospective-kicker">Rückblick berechnen</p>
+          <h2>Wann wurde ich eingeschult?</h2>
+
+          <p>
+            Du kannst den Rechner auch rückblickend nutzen. Gib dein Geburtsdatum
+            ein und wähle dein damaliges Bundesland aus.
+          </p>
+
+          <a class="retrospective-link" href="/#einschulungsrechner">
+            Rückblick berechnen
+          </a>
+
+          <p>
+            Das Ergebnis ist eine Orientierung, weil frühere Einschulung,
+            Zurückstellung, Umzug oder frühere Landesregeln abweichen können.
+          </p>
+        </section>
+
+
 
         <section>
           <h2>Häufige Fragen zur Einschulung in Sachsen-Anhalt</h2>
@@ -576,6 +612,11 @@ const faqSchema = {
     background: rgba(245, 210, 138, 0.1);
   }
 
+  .fact-card-season {
+    border-color: rgba(31, 155, 74, 0.16);
+    background: rgba(116, 213, 139, 0.09);
+  }
+
   .fact-card span {
     color: #816126;
     font-size: clamp(0.92rem, 1.1vw, 1.04rem);
@@ -645,11 +686,72 @@ const faqSchema = {
   .example-box,
   .source-note,
   .seo-explanation-box,
-  .next-steps-box {
+  .next-steps-box,
+  .retrospective-box {
     padding: 24px;
     border: 1px solid rgba(129, 97, 38, 0.16);
     border-radius: 22px;
     background: rgba(245, 210, 138, 0.12);
+  }
+
+  .section-cta-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 46px;
+    margin-top: 20px;
+    padding: 12px 18px;
+    border: 1px solid rgba(233, 157, 37, 0.42);
+    border-radius: 999px;
+    background: linear-gradient(135deg, rgba(245, 191, 91, 0.92), rgba(233, 157, 37, 0.9));
+    color: #172033;
+    font-size: 0.98rem;
+    font-weight: 900;
+    line-height: 1.2;
+    text-align: center;
+    text-decoration: none;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.34);
+  }
+
+  .section-cta-button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 10px 24px rgba(233, 157, 37, 0.16);
+  }
+
+  .retrospective-kicker {
+    margin: 0 0 12px;
+    color: #816126;
+    font-size: 0.82rem;
+    font-weight: 950;
+    letter-spacing: 0.14em;
+    line-height: 1.16;
+    text-transform: uppercase;
+  }
+
+  .retrospective-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    min-height: 42px;
+    margin: 18px auto 0;
+    padding: 10px 16px;
+    border: 1px solid rgba(31, 155, 74, 0.26);
+    border-radius: 999px;
+    background: rgba(116, 213, 139, 0.12);
+    color: #1f7f43;
+    font-size: 0.94rem;
+    font-weight: 850;
+    line-height: 1.2;
+    text-align: center;
+    text-decoration: none;
+  }
+
+  .retrospective-link:hover {
+    transform: translateY(-1px);
+    border-color: rgba(31, 155, 74, 0.38);
+    background: rgba(116, 213, 139, 0.18);
+    box-shadow: 0 8px 18px rgba(31, 155, 74, 0.08);
   }
   .process-list {
     display: grid;
@@ -867,21 +969,43 @@ const faqSchema = {
     .example-box,
     .source-note,
     .seo-explanation-box,
-    .next-steps-box {
+    .next-steps-box,
+    .retrospective-box {
       padding: 20px;
       border-radius: 20px;
     }
 
+    .section-cta-button {
+      width: 100%;
+    }
+
+    .retrospective-link {
+      width: fit-content;
+      max-width: 100%;
+      min-height: 42px;
+      margin-left: auto;
+      margin-right: auto;
+      padding: 10px 16px;
+      font-size: 0.94rem;
+    }
+
     .next-steps-actions {
       grid-template-columns: 1fr;
+      gap: 10px;
     }
 
     .next-step-button {
-      min-height: 56px;
-      padding: 15px 16px;
-      font-size: clamp(0.94rem, 4.15vw, 1.02rem);
+      flex: 0 0 auto;
+      width: 100%;
+      max-width: 100%;
+      min-height: 48px;
+      padding: 12px 14px;
+      border-radius: 14px;
+      font-size: clamp(0.88rem, 3.6vw, 0.96rem);
       letter-spacing: -0.02em;
-      white-space: nowrap;
+      overflow-wrap: normal;
+      word-break: normal;
+      white-space: normal;
     }
 
     .source-link {

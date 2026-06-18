@@ -151,24 +151,35 @@ const faqSchema = {
           bis zum 30. September 2026 sechs Jahre alt werden.
         </p>
 
-        <StateEnrollmentCalculator
-          stateName="Brandenburg"
-          stateSlug="brandenburg"
-          calculatorKicker="Brandenburg-Rechner"
-          resultKicker="Brandenburg-Ergebnis"
-          headline="Einschulung in Brandenburg berechnen"
-          intro="Gib das Geburtsdatum deines Kindes ein. Brandenburg ist hier bereits vorausgewählt. Wenn du von der Startseite kommst, übernehmen wir das Geburtsdatum automatisch aus dem Link."
-        />
+        <div id="brandenburgCalculatorForm">
+          <StateEnrollmentCalculator
+            stateName="Brandenburg"
+            stateSlug="brandenburg"
+            calculatorKicker="Brandenburg-Rechner"
+            resultKicker="Brandenburg-Ergebnis"
+            headline="Einschulung in Brandenburg berechnen"
+            intro="Gib das Geburtsdatum deines Kindes ein. Brandenburg ist hier bereits vorausgewählt. Wenn du von der Startseite kommst, übernehmen wir das Geburtsdatum automatisch aus dem Link."
+          />
+        </div>
 
         <div class="quick-facts quick-facts-master" aria-label="Kurzüberblick Einschulung Brandenburg">
           <div class="fact-card fact-card-highlight">
             <span>Einschulung 2026</span>
-            <strong>Samstag,<br />22. August 2026</strong>
+            <strong>Samstag,<br />22. August</strong>
           </div>
 
           <div class="fact-card fact-card-highlight">
-            <span>Erster Schultag</span>
-            <strong>Montag,<br />24. August 2026</strong>
+            <span>Erster Schultag 2026</span>
+            <strong>Montag,<br />24. August</strong>
+          </div>
+
+          <div
+            class="fact-card fact-card-season"
+            data-season-card
+            data-state-slug="brandenburg"
+          >
+            <span data-season-label>Sommerferien 2026</span>
+            <strong data-season-value>Donnerstag, 9. Juli –<br />Samstag, 22. August</strong>
           </div>
 
           <div class="fact-card">
@@ -179,6 +190,11 @@ const faqSchema = {
           <div class="fact-card">
             <span>Sonderregel</span>
             <strong>Kann-Kind auf Antrag</strong>
+          </div>
+
+          <div class="fact-card">
+            <span>Anmeldung</span>
+            <strong>zuständige<br />Grundschule</strong>
           </div>
         </div>
 
@@ -338,6 +354,27 @@ const faqSchema = {
           </p>
         </section>
 
+        <section class="next-steps-box">
+          <h2><span>Nächste Schritte</span> für Eltern</h2>
+
+          <p>
+            Wenn du jetzt weißt, welches Schuljahr für dein Kind voraussichtlich
+            relevant ist, lohnt sich als Nächstes der Blick auf die praktische
+            Vorbereitung. In unserer Checkliste findest du eine Schritt-für-Schritt-
+            Übersicht zu Unterlagen, Material, Schulweg und Organisation rund um
+            den Schulstart.
+          </p>
+
+          <div class="next-steps-actions">
+            <a class="next-step-button next-step-button-primary" href="/einschulung-checkliste/">
+              Zur Einschulungs-Checkliste
+            </a>
+            <a class="next-step-button next-step-button-secondary" href="/einschulung/">
+              Ratgeber zur Einschulung lesen
+            </a>
+          </div>
+        </section>
+
         <section>
           <h2>Mein Kind ist noch nicht schulreif – was muss ich in Brandenburg tun?</h2>
 
@@ -388,14 +425,13 @@ const faqSchema = {
         </section>
 
         <section>
-          <h2>Einschulung Brandenburg 2027 – Ausblick & Stichtagsänderung</h2>
+          <h2>Einschulung 2027 in Brandenburg: Kann ich das schon berechnen?</h2>
 
           <p>
-            Ja, du kannst den Einschulungsrechner auch für die Einschulung in
-            Brandenburg 2027 nutzen. Wenn du das Geburtsdatum deines Kindes
-            eingibst, zeigt dir der Rechner, welches Schuljahr nach der aktuell
-            geltenden Regelung voraussichtlich relevant ist. Das ist besonders
-            hilfreich, wenn der Geburtstag nah am Stichtag liegt.
+            Ja. Du kannst den Einschulungsrechner auch für die Einschulung 2027 in
+            Brandenburg nutzen. Gib einfach das Geburtsdatum deines Kindes ein.
+            Der Rechner zeigt dir sämtliche relevanten Daten für das voraussichtliche
+            Schuljahr nach der aktuell geltenden Regelung.
           </p>
 
           <p>
@@ -406,31 +442,31 @@ const faqSchema = {
             erhältst du bei der zuständigen Grundschule, der Schulbehörde oder beim
             Ministerium für Bildung, Jugend und Sport Brandenburg.
           </p>
+
+          <a class="section-cta-button" href="#brandenburgCalculatorForm">
+            Einschulung 2027 für Brandenburg berechnen
+          </a>
         </section>
 
-        <section class="next-links">
-          <h2>Nächste Schritte für Eltern</h2>
+        <section class="retrospective-box">
+          <p class="retrospective-kicker">Rückblick berechnen</p>
+          <h2>Wann wurde ich eingeschult?</h2>
 
           <p>
-            Wenn du jetzt weißt, welches Schuljahr für dein Kind voraussichtlich
-            relevant ist, lohnt sich als Nächstes der Blick auf die praktische
-            Vorbereitung. In unserer Checkliste findest du eine Schritt-für-Schritt-
-            Übersicht zu Unterlagen, Material, Schulweg und Organisation rund um
-            den Schulstart.
+            Du kannst den Rechner auch rückblickend nutzen. Gib dein Geburtsdatum
+            ein und wähle dein damaliges Bundesland aus.
           </p>
 
-          <div class="next-link-grid">
-            <a class="next-link-card" href="/einschulung-checkliste/">
-              <span>Praktische Vorbereitung</span>
-              <strong>Zur Einschulungs-Checkliste</strong>
-            </a>
+          <a class="retrospective-link" href="/#einschulungsrechner">
+            Rückblick berechnen
+          </a>
 
-            <a class="next-link-card" href="/einschulung/">
-              <span>Grundlagen verstehen</span>
-              <strong>Ratgeber zur Einschulung lesen</strong>
-            </a>
-          </div>
+          <p>
+            Das Ergebnis ist eine Orientierung, weil frühere Einschulung,
+            Zurückstellung, Umzug oder frühere Landesregeln abweichen können.
+          </p>
         </section>
+
 
         <section class="example-box">
           <h2>Hinweis zur geplanten Stichtagsänderung</h2>
@@ -744,6 +780,11 @@ const faqSchema = {
     background: rgba(245, 210, 138, 0.13);
   }
 
+  .fact-card-season {
+    border-color: rgba(31, 155, 74, 0.16);
+    background: rgba(116, 213, 139, 0.09);
+  }
+
   .fact-card span {
     color: #816126;
     font-size: clamp(1.02rem, 1.35vw, 1.22rem);
@@ -830,21 +871,46 @@ const faqSchema = {
 
   .example-box,
   .source-note,
-  .next-links {
+  .next-steps-box,
+  .retrospective-box {
     padding: 24px;
     border: 1px solid rgba(129, 97, 38, 0.16);
     border-radius: 22px;
     background: rgba(245, 210, 138, 0.12);
   }
 
-  .next-link-grid {
+  .section-cta-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 46px;
+    margin-top: 20px;
+    padding: 12px 18px;
+    border: 1px solid rgba(233, 157, 37, 0.42);
+    border-radius: 999px;
+    background: linear-gradient(135deg, rgba(245, 191, 91, 0.92), rgba(233, 157, 37, 0.9));
+    color: #172033;
+    font-size: 0.98rem;
+    font-weight: 900;
+    line-height: 1.2;
+    text-align: center;
+    text-decoration: none;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.34);
+  }
+
+  .section-cta-button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 10px 24px rgba(233, 157, 37, 0.16);
+  }
+
+  .next-steps-actions {
     display: flex;
     flex-wrap: wrap;
     gap: 12px;
     margin-top: 22px;
   }
 
-  .next-link-card {
+  .next-step-button {
     display: inline-flex;
     flex: 1 1 260px;
     align-items: center;
@@ -855,6 +921,9 @@ const faqSchema = {
     border-radius: 16px;
     background: linear-gradient(135deg, #f1b95f 0%, #d89235 100%);
     color: #172033;
+    font-size: 0.98rem;
+    font-weight: 850;
+    line-height: 1.2;
     text-align: center;
     text-decoration: none;
     box-shadow: 0 12px 24px rgba(216, 146, 53, 0.18);
@@ -864,34 +933,59 @@ const faqSchema = {
       box-shadow 0.18s ease;
   }
 
-  .next-link-card:nth-child(2) {
+  .next-step-button-secondary {
     border-color: rgba(47, 143, 70, 0.18);
     background: linear-gradient(135deg, #7ccf8d 0%, #2f8f46 100%);
     color: #fff;
     box-shadow: 0 12px 24px rgba(47, 143, 70, 0.16);
   }
 
-  .next-link-card:hover {
+  .next-step-button:hover {
     transform: translateY(-1px);
     filter: brightness(1.03);
     box-shadow: 0 16px 30px rgba(129, 97, 38, 0.18);
   }
 
-  .next-link-card:nth-child(2):hover {
+  .next-step-button-secondary:hover {
     box-shadow: 0 16px 30px rgba(47, 143, 70, 0.2);
   }
 
-  .next-link-card span {
-    display: none;
+  .retrospective-kicker {
+    margin: 0 0 12px;
+    color: #816126;
+    font-size: 0.82rem;
+    font-weight: 950;
+    letter-spacing: 0.14em;
+    line-height: 1.16;
+    text-transform: uppercase;
   }
 
-  .next-link-card strong {
-    color: inherit;
-    font-size: 0.98rem;
+  .retrospective-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    min-height: 42px;
+    margin: 18px auto 0;
+    padding: 10px 16px;
+    border: 1px solid rgba(31, 155, 74, 0.26);
+    border-radius: 999px;
+    background: rgba(116, 213, 139, 0.12);
+    color: #1f7f43;
+    font-size: 0.94rem;
     font-weight: 850;
     line-height: 1.2;
-    letter-spacing: -0.01em;
+    text-align: center;
+    text-decoration: none;
   }
+
+  .retrospective-link:hover {
+    transform: translateY(-1px);
+    border-color: rgba(31, 155, 74, 0.38);
+    background: rgba(116, 213, 139, 0.18);
+    box-shadow: 0 8px 18px rgba(31, 155, 74, 0.08);
+  }
+
 
   .faq-list {
     display: grid;
@@ -980,10 +1074,6 @@ const faqSchema = {
     .quick-facts {
       grid-template-columns: 1fr;
     }
-
-    .next-link-grid {
-      flex-direction: column;
-    }
   }
 
   @media (max-width: 520px) {
@@ -1064,23 +1154,43 @@ const faqSchema = {
 
     .example-box,
     .source-note,
-    .next-links {
+    .next-steps-box,
+    .retrospective-box {
       padding: 20px;
       border-radius: 20px;
     }
 
-    .next-link-card {
+    .section-cta-button {
       width: 100%;
-      flex: 0 0 auto;
-      min-height: 48px;
-      padding: 0 14px;
-      border-radius: 14px;
-      box-shadow: 0 8px 18px rgba(23, 32, 51, 0.1);
     }
 
-    .next-link-card strong {
-      font-size: 0.92rem;
-      line-height: 1.18;
+    .next-steps-actions {
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .next-step-button {
+      flex: 0 0 auto;
+      width: 100%;
+      max-width: 100%;
+      min-height: 48px;
+      padding: 12px 14px;
+      border-radius: 14px;
+      font-size: clamp(0.88rem, 3.6vw, 0.96rem);
+      letter-spacing: -0.02em;
+      overflow-wrap: normal;
+      word-break: normal;
+      white-space: normal;
+    }
+
+    .retrospective-link {
+      width: fit-content;
+      max-width: 100%;
+      min-height: 42px;
+      margin-left: auto;
+      margin-right: auto;
+      padding: 10px 16px;
+      font-size: 0.94rem;
     }
 
     .source-link {
