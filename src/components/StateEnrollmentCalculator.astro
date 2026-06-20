@@ -836,20 +836,20 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
     let resultHeadline =
       `Dein Kind wird in Hessen voraussichtlich im Schuljahr ${projectedSchoolYear} regulär eingeschult.`;
     let explanation =
-      `Dein Kind wird in Hessen regulär schulpflichtig, weil es bis zum 30. Juni ${cutoffYear} sechs Jahre alt wird und damit ab dem 1. August ${cutoffYear} schulpflichtig ist.`;
+      `Dein Kind wird in Hessen regulär schulpflichtig, weil es bis einschließlich 1. Juli ${cutoffYear - 6} geboren ist und damit bis zum 30. Juni ${cutoffYear} das sechste Lebensjahr vollendet. Die Schulpflicht beginnt am 1. August ${cutoffYear}.`;
     let nextStepTitle = "Nächster sinnvoller Schritt";
     let nextStepText =
       "Informiere dich frühzeitig bei der zuständigen Grundschule über Anmeldung, Unterlagen, Sprachstandsfeststellung und konkrete Termine.";
 
-    const afterJune = month > 6 || (month === 6 && day > 30);
+    const afterJulyFirst = month > 7 || (month === 7 && day > 1);
 
-    if (afterJune) {
+    if (afterJulyFirst) {
       statusLabel = "Kann-Kind";
       statusTone = "optional";
       resultHeadline =
         `Dein Kind ist in Hessen ein Kann-Kind. Eine Einschulung im Schuljahr ${projectedSchoolYear} kann auf Antrag geprüft werden.`;
       explanation =
-        `Dein Kind wird nach dem hessischen Stichtag 30. Juni ${cutoffYear} sechs Jahre alt und ist deshalb nicht automatisch regulär schulpflichtig. Eine vorzeitige Einschulung für das Schuljahr ${projectedSchoolYear} kann auf Antrag der Eltern von der Schulleitung geprüft werden. Wenn dein Kind erst nach dem 31. Dezember ${cutoffYear} sechs Jahre alt wird, kann zusätzlich eine schulpsychologische Überprüfung angeordnet werden.`;
+        `Dein Kind ist nach dem hessischen Stichtag 1. Juli geboren und deshalb nicht automatisch regulär schulpflichtig. Eine vorzeitige Einschulung für das Schuljahr ${projectedSchoolYear} kann auf Antrag der Eltern von der Schulleitung geprüft werden. Wenn dein Kind erst nach dem 31. Dezember ${cutoffYear - 6} geboren ist, kann zusätzlich eine schulpsychologische Überprüfung angeordnet werden.`;
       nextStepTitle = "Wichtig für dich";
       nextStepText =
         "Sprich frühzeitig mit der zuständigen Grundschule. Dort erfährst du, wie der Antrag gestellt wird und welche Einschätzungen für die Entscheidung berücksichtigt werden.";
@@ -947,9 +947,9 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
     let nextStepText =
       "Informiere dich frühzeitig bei der zuständigen Grundschule über Anmeldung, Unterlagen und konkrete Termine.";
 
-    const afterJune = month > 6 || (month === 6 && day > 30);
+    const afterJulyFirst = month > 7 || (month === 7 && day > 1);
 
-    if (afterJune) {
+    if (afterJulyFirst) {
       statusLabel = "Vorzeitige Einschulung auf Antrag möglich";
       statusTone = "optional";
       nextStepTitle = "Wichtig für dich";
@@ -964,13 +964,13 @@ const inputNamePrefix = `${normalizedSlug}_calc_part`;
     let resultHeadline =
       `Dein Kind wird in Hamburg voraussichtlich im Schuljahr ${schoolYear} regulär eingeschult.`;
     let explanation =
-      `Dein Kind wird in Hamburg regulär schulpflichtig, weil es bis zum 30. Juni ${cutoffYear} sechs Jahre alt wird und damit für das Schuljahr ${schoolYear} schulpflichtig ist.`;
+      `Dein Kind wird in Hamburg regulär schulpflichtig, weil es bis zum 1. Juli ${cutoffYear} das sechste Lebensjahr vollendet hat und damit für das Schuljahr ${schoolYear} schulpflichtig ist.`;
 
-    if (afterJune) {
+    if (afterJulyFirst) {
       resultHeadline =
         `Dein Kind ist in Hamburg nicht automatisch regulär schulpflichtig. Eine Einschulung im Schuljahr ${schoolYear} kann auf Antrag geprüft werden.`;
       explanation =
-        `Dein Kind wird nach dem 30. Juni ${cutoffYear} sechs Jahre alt. Deshalb ist es in Hamburg für das Schuljahr ${schoolYear} nicht automatisch regulär schulpflichtig. Eine vorzeitige Einschulung kann auf Antrag der Sorgeberechtigten geprüft werden.`;
+        `Dein Kind vollendet das sechste Lebensjahr nach dem 1. Juli ${cutoffYear}. Deshalb ist es in Hamburg für das Schuljahr ${schoolYear} nicht automatisch regulär schulpflichtig. Eine vorzeitige Einschulung kann auf Antrag der Sorgeberechtigten geprüft werden.`;
     }
 
     return {
