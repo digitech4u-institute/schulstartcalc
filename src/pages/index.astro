@@ -15,23 +15,71 @@ const canonical = "https://www.einschulungsrechner.de/";
 const currentSchoolYear = "2026/2027";
 const currentEnrollmentDates = enrollmentDatesBySchoolYear[currentSchoolYear];
 
-const summerHolidayEndDates2026: Record<string, string> = {
-  "baden-wuerttemberg": "12.09.2026",
-  bayern: "14.09.2026",
-  berlin: "22.08.2026",
-  brandenburg: "22.08.2026",
-  bremen: "12.08.2026",
-  hamburg: "19.08.2026",
-  hessen: "07.08.2026",
-  "mecklenburg-vorpommern": "22.08.2026",
-  niedersachsen: "12.08.2026",
-  "nordrhein-westfalen": "14.08.2026",
-  "rheinland-pfalz": "07.08.2026",
-  saarland: "07.08.2026",
-  sachsen: "14.08.2026",
-  "sachsen-anhalt": "14.08.2026",
-  "schleswig-holstein": "15.08.2026",
-  thueringen: "14.08.2026",
+const summerHolidayPeriods2026: Record<string, { from: string; to: string }> = {
+  "baden-wuerttemberg": {
+    from: "Donnerstag, 30. Juli",
+    to: "Samstag, 12. September",
+  },
+  bayern: {
+    from: "Montag, 3. August",
+    to: "Montag, 14. September",
+  },
+  berlin: {
+    from: "Donnerstag, 9. Juli",
+    to: "Samstag, 22. August",
+  },
+  brandenburg: {
+    from: "Donnerstag, 9. Juli",
+    to: "Samstag, 22. August",
+  },
+  bremen: {
+    from: "Donnerstag, 2. Juli",
+    to: "Mittwoch, 12. August",
+  },
+  hamburg: {
+    from: "Donnerstag, 9. Juli",
+    to: "Mittwoch, 19. August",
+  },
+  hessen: {
+    from: "Montag, 29. Juni",
+    to: "Freitag, 7. August",
+  },
+  "mecklenburg-vorpommern": {
+    from: "Montag, 13. Juli",
+    to: "Samstag, 22. August",
+  },
+  niedersachsen: {
+    from: "Donnerstag, 2. Juli",
+    to: "Mittwoch, 12. August",
+  },
+  "nordrhein-westfalen": {
+    from: "Montag, 20. Juli",
+    to: "Dienstag, 1. September",
+  },
+  "rheinland-pfalz": {
+    from: "Montag, 29. Juni",
+    to: "Freitag, 7. August",
+  },
+  saarland: {
+    from: "Montag, 29. Juni",
+    to: "Freitag, 7. August",
+  },
+  sachsen: {
+    from: "Samstag, 4. Juli",
+    to: "Freitag, 14. August",
+  },
+  "sachsen-anhalt": {
+    from: "Samstag, 4. Juli",
+    to: "Freitag, 14. August",
+  },
+  "schleswig-holstein": {
+    from: "Samstag, 4. Juli",
+    to: "Samstag, 15. August",
+  },
+  thueringen: {
+    from: "Samstag, 4. Juli",
+    to: "Freitag, 14. August",
+  },
 };
 
 const stateOverviewRows = germanStates.map((state) => {
@@ -42,7 +90,7 @@ const stateOverviewRows = germanStates.map((state) => {
     slug: state.slug,
     name: state.name,
     url: state.url,
-    summerHolidaysEnd: summerHolidayEndDates2026[state.slug],
+    summerHolidays: summerHolidayPeriods2026[state.slug],
     enrollment: dates.enrollment,
     enrollmentQualifier: dates.enrollmentQualifier,
     firstSchoolDay: dates.firstSchoolDay,
@@ -475,7 +523,7 @@ const webApplicationSchema = {
 				<thead>
 				  <tr>
 					<th>Bundesland</th>
-					<th>Sommerferien Ende</th>
+					<th>Sommerferien 2026</th>
 					<th>Einschulung 2026</th>
 					<th>1. Schultag 2026</th>
 					<th>Stichtag</th>
@@ -488,7 +536,12 @@ const webApplicationSchema = {
 				  {stateOverviewRows.map((row) => (
 					<tr>
 					  <td><a class="state-table-link" href={row.url}>{row.name}</a></td>
-					  <td>{row.summerHolidaysEnd}</td>
+					  <td>
+						<span class="table-date-range">
+						  <span>{row.summerHolidays.from} –</span>
+						  <span>{row.summerHolidays.to}</span>
+						</span>
+					  </td>
 					  <td>
 						{row.enrollment}
 						{row.enrollmentQualifier && (
@@ -505,8 +558,66 @@ const webApplicationSchema = {
 			  </table>
 			</div>
 
+			<div class="state-mobile-cards" aria-label="Einschulung 2026 nach Bundesland als Kartenansicht">
+			  {stateOverviewRows.map((row) => (
+				<details class="state-mobile-card state-mobile-accordion">
+				  <summary class="state-mobile-summary">
+				    <span>{row.name}</span>
+				    <span class="state-mobile-toggle" aria-hidden="true">+</span>
+				  </summary>
+
+				  <dl class="state-mobile-facts">
+					<div>
+					  <dt>Sommerferien 2026</dt>
+					  <dd>
+						<span class="table-date-range">
+						  <span>{row.summerHolidays.from} –</span>
+						  <span>{row.summerHolidays.to}</span>
+						</span>
+					  </dd>
+					</div>
+
+					<div>
+					  <dt>Einschulung 2026</dt>
+					  <dd>
+						{row.enrollment}
+						{row.enrollmentQualifier && (
+						  <span class="state-mobile-subnote">({row.enrollmentQualifier})</span>
+						)}
+					  </dd>
+					</div>
+
+					<div>
+					  <dt>1. Schultag 2026</dt>
+					  <dd>{row.firstSchoolDay}</dd>
+					</div>
+
+					<div>
+					  <dt>Stichtag</dt>
+					  <dd>{row.cutoffLabel}</dd>
+					</div>
+
+					<div>
+					  <dt>Sonderregel</dt>
+					  <dd>{row.specialRuleLabel}</dd>
+					</div>
+
+					<div>
+					  <dt>Hinweis</dt>
+					  <dd>{row.note}</dd>
+					</div>
+				  </dl>
+
+				  <a class="state-mobile-detail-button" href={row.url}>
+				    Einschulung in {row.name} →
+				  </a>
+				</details>
+			  ))}
+			</div>
+
 			<p class="state-table-hint">
-			  * Stand Juni 2026: Brandenburg plant eine Verlegung des Stichtags auf den
+			  * Hinweis Sommerferien: Bei den Sommerferien ist jeweils der erste und letzte Ferientag angegeben.<br /><br />
+			  * Hinweis Brandenburg: Stand Juni 2026 plant Brandenburg eine Verlegung des Stichtags auf den
 			  30. Juni. Bis zur gesetzlichen Umsetzung gilt der 30. September. Alle
 			  Termine dienen der Orientierung; verbindlich sind die Angaben der
 			  zuständigen Schule oder Schulbehörde.
@@ -2397,12 +2508,14 @@ select {
   border: 1px solid rgba(38, 115, 77, 0.16);
   border-radius: 22px;
   background: rgba(38, 115, 77, 0.08);
+  text-align: center;
 }
 
 .checklist-mini-link {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  align-self: center;
   margin-top: 18px;
   min-height: 50px;
   padding: 0 20px;
@@ -2449,7 +2562,8 @@ select {
   position: relative;
   margin-top: 22px;
   max-width: 100%;
-  overflow-x: auto;
+  max-height: min(72vh, 760px);
+  overflow: auto;
   border: 1px solid rgba(42, 35, 21, 0.1);
   border-radius: 20px;
   background: rgba(255, 255, 255, 0.78);
@@ -2511,12 +2625,28 @@ select {
 }
 
 .state-table th {
+  position: sticky;
+  top: 0;
+  z-index: 4;
   color: #816126;
   font-size: 0.76rem;
   font-weight: 900;
   letter-spacing: 0.085em;
   text-transform: uppercase;
-  background: rgba(245, 210, 138, 0.14);
+  background: rgba(245, 210, 138, 0.96);
+}
+
+.table-date-range {
+  display: inline-grid;
+  gap: 2px;
+  min-width: max-content;
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: 1.32;
+}
+
+.table-date-range span {
+  display: block;
 }
 
 .state-table td {
@@ -2525,9 +2655,189 @@ select {
   line-height: 1.45;
 }
 
+.state-table th:first-child,
+.state-table td:first-child {
+  position: sticky;
+  left: 0;
+  z-index: 3;
+  background: rgba(255, 255, 255, 0.96);
+  box-shadow: 12px 0 18px rgba(42, 35, 21, 0.06);
+}
+
+.state-table th:first-child {
+  z-index: 5;
+  background: #f5d28a;
+}
+
 .state-table td:first-child {
   color: #172033;
   font-weight: 850;
+}
+
+.state-mobile-cards {
+  display: none;
+}
+
+.state-mobile-card {
+  padding: 20px;
+  border: 2px solid rgba(38, 115, 77, 0.24);
+  border-radius: 22px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.94), rgba(38, 115, 77, 0.045));
+  box-shadow:
+    0 14px 36px rgba(42, 35, 21, 0.07),
+    0 0 0 5px rgba(38, 115, 77, 0.045);
+}
+
+.state-mobile-card h3 {
+  margin: 0 0 16px !important;
+  color: #172033;
+  font-size: 1.45rem !important;
+  line-height: 1.12 !important;
+  letter-spacing: -0.04em !important;
+}
+
+.state-mobile-accordion {
+  padding: 0;
+  overflow: hidden;
+}
+
+.state-mobile-accordion:not([open]) {
+  border-color: rgba(38, 115, 77, 0.22);
+  background: linear-gradient(180deg, rgba(38, 115, 77, 0.055), rgba(38, 115, 77, 0.028));
+}
+
+.state-mobile-accordion:not([open]) .state-mobile-summary {
+  background: rgba(255, 255, 255, 0.28);
+}
+
+.state-mobile-accordion[open] .state-mobile-summary {
+  background: linear-gradient(180deg, rgba(38, 115, 77, 0.18), rgba(38, 115, 77, 0.095));
+  border-bottom: 1px solid rgba(38, 115, 77, 0.2);
+  box-shadow: inset 0 -1px 0 rgba(255, 255, 255, 0.58);
+}
+
+.state-mobile-summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 62px;
+  padding: 0 20px;
+  color: #172033;
+  cursor: pointer;
+  font-size: 1.16rem;
+  font-weight: 900;
+  line-height: 1.18;
+  list-style: none;
+}
+
+.state-mobile-summary::-webkit-details-marker {
+  display: none;
+}
+
+.state-mobile-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  flex: 0 0 auto;
+  border: 1px solid rgba(38, 115, 77, 0.22);
+  border-radius: 999px;
+  background: rgba(38, 115, 77, 0.1);
+  color: #26734d;
+  font-size: 1.34rem;
+  font-weight: 950;
+  line-height: 1;
+}
+
+
+.state-mobile-accordion[open] .state-mobile-toggle {
+  border-color: rgba(159, 45, 32, 0.2);
+  background: rgba(159, 45, 32, 0.1);
+  color: #9f2d20;
+  font-size: 0;
+  transform: none;
+}
+
+.state-mobile-accordion[open] .state-mobile-toggle::before {
+  content: "−";
+  font-size: 1.55rem;
+  font-weight: 950;
+  line-height: 1;
+}
+
+.state-mobile-accordion .state-mobile-facts {
+  padding: 0 20px 18px;
+}
+
+.state-mobile-detail-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: calc(100% - 40px);
+  min-height: 52px;
+  margin: 0 20px 20px;
+  padding: 0 18px;
+  border: 1px solid #26734d;
+  border-radius: 16px;
+  background: #26734d;
+  color: #fff;
+  font-size: 1.02rem;
+  font-weight: 950;
+  line-height: 1.18;
+  text-align: center;
+  text-decoration: none;
+  box-shadow: 0 14px 30px rgba(38, 115, 77, 0.2);
+}
+
+.state-mobile-detail-button:hover {
+  background: #1f633f;
+  border-color: #1f633f;
+  color: #fff;
+}
+
+.state-mobile-facts {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+}
+
+.state-mobile-facts div {
+  display: grid;
+  gap: 4px;
+  padding: 12px 0;
+  border-top: 1px solid rgba(42, 35, 21, 0.09);
+}
+
+.state-mobile-facts dt {
+  color: #816126;
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+
+.state-mobile-facts dd {
+  margin: 0;
+  color: #172033;
+  font-size: 1.02rem;
+  font-weight: 800;
+  line-height: 1.38;
+}
+
+.state-mobile-facts div:last-child dd {
+  font-weight: 500;
+}
+
+.state-mobile-subnote {
+  display: block;
+  margin-top: 3px;
+  color: #5d6878;
+  font-size: 0.94rem;
+  font-weight: 760;
 }
 .state-table td:nth-child(2),
 .state-table td:nth-child(3),
@@ -2906,6 +3216,16 @@ select {
 /* === Content Mobile Typography Polish === */
 
 @media (max-width: 720px) {
+  .state-overview-block .table-wrap {
+    display: none;
+  }
+
+  .state-mobile-cards {
+    display: grid;
+    gap: 14px;
+    margin-top: 22px;
+  }
+
   .content-section h2 {
     font-size: 1.55rem !important;
     line-height: 1.12 !important;
@@ -2960,6 +3280,7 @@ select {
 @media (max-width: 520px) {
   .table-wrap {
     margin-top: 18px;
+    max-height: 72vh;
     border-radius: 18px;
   }
 
