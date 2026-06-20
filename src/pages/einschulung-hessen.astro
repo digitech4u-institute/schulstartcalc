@@ -6,10 +6,10 @@ const pageTitle =
   "Einschulung Hessen 2026 & 2027: Termin, Stichtag & Rechner";
 
 const pageDescription =
-  "Wann ist die Einschulung in Hessen 2026 oder 2027? Hier findest du Stichtag 30. Juni, Schulpflicht, Kann-Kind-Regelung, Anmeldung und den kostenlosen Einschulungsrechner.";
+  "Wann ist die Einschulung in Hessen 2026 oder 2027? Hier findest du Stichtag 1. Juli, Schulpflicht, Kann-Kind-Regelung, Anmeldung und den kostenlosen Einschulungsrechner.";
 
 const canonical = "https://www.einschulungsrechner.de/einschulung-hessen/";
-const dateModified = "2026-06-17";
+const dateModified = "2026-06-20";
 
 const ADSENSE_ID = import.meta.env.PUBLIC_ADSENSE_ID || "";
 const STATE_CONTENT_AD_SLOT = import.meta.env.PUBLIC_ADSENSE_STATE_CONTENT_SLOT || "";
@@ -40,7 +40,7 @@ const faqSchema = {
       name: "Welcher Einschulungsstichtag gilt in Hessen?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "In Hessen gilt der 30. Juni als Stichtag für die Einschulung. Kinder, die bis zu diesem Datum sechs Jahre alt werden, sind ab dem 1. August desselben Jahres regulär schulpflichtig. Kinder, die nach dem 30. Juni sechs Jahre alt werden, können auf Antrag der Eltern vorzeitig eingeschult werden.",
+        text: "In Hessen beginnt die Schulpflicht für Kinder, die bis einschließlich 1. Juli geboren sind und damit bis zum 30. Juni das sechste Lebensjahr vollenden, am 1. August desselben Jahres. Kinder, die nach dem 1. Juli geboren sind, können auf Antrag der Eltern vorzeitig eingeschult werden.",
       },
     },
     {
@@ -72,7 +72,7 @@ const faqSchema = {
       name: "Was bedeutet Kann-Kind in Hessen?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Als Kann-Kind gilt in Hessen ein Kind, das nach dem 30. Juni sechs Jahre alt wird und daher nicht automatisch regulär schulpflichtig ist. Eine vorzeitige Einschulung kann auf Antrag der Eltern geprüft werden. Die Entscheidung trifft die Schulleiterin oder der Schulleiter unter Berücksichtigung des schulärztlichen Gutachtens.",
+        text: "Als Kann-Kind gilt in Hessen ein Kind, das nach dem 1. Juli geboren ist und daher nicht automatisch regulär schulpflichtig ist. Eine vorzeitige Einschulung kann auf Antrag der Eltern geprüft werden. Die Entscheidung trifft die Schulleiterin oder der Schulleiter unter Berücksichtigung des schulärztlichen Gutachtens.",
       },
     },
     {
@@ -80,7 +80,7 @@ const faqSchema = {
       name: "Kann mein Kind in Hessen früher eingeschult werden?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Kinder, die nach dem 30. Juni sechs Jahre alt werden, können auf Antrag der Eltern vorzeitig eingeschult werden. Die Entscheidung trifft die Schulleitung in der Regel auf Grundlage eines schulärztlichen Gutachtens und nach Rücksprache mit der Kindertagesstätte. Wenn ein Kind erst nach dem 31. Dezember sechs Jahre alt wird, kann zusätzlich eine schulpsychologische Überprüfung angeordnet werden.",
+        text: "Kinder, die nach dem 1. Juli geboren sind, können auf Antrag der Eltern vorzeitig eingeschult werden. Die Entscheidung trifft die Schulleitung in der Regel auf Grundlage eines schulärztlichen Gutachtens und nach Rücksprache mit der Kindertagesstätte. Wenn ein Kind erst nach dem 31. Dezember sechs Jahre alt wird, kann zusätzlich eine schulpsychologische Überprüfung angeordnet werden.",
       },
     },
     {
@@ -131,7 +131,7 @@ const faqSchema = {
         <p class="lead">
           Wann kommt mein Kind in Hessen in die Schule? Der Einschulungsrechner zeigt
           dir anhand des Geburtsdatums das voraussichtliche Schuljahr. In Hessen gilt
-          der Stichtag 30. Juni. Für das Schuljahr 2026/2027 ist die Einschulung
+          der Stichtag 1. Juli. Für das Schuljahr 2026/2027 ist die Einschulung
           voraussichtlich für Dienstag, 11. August 2026 vorgesehen – der erste
           Schultag ist Montag, 10. August 2026.
         </p>
@@ -139,8 +139,8 @@ const faqSchema = {
         <p class="answer-box">
           Kurzantwort: Die Einschulung in Hessen 2026 ist voraussichtlich für
           Dienstag, 11. August 2026 vorgesehen. Der erste Schultag ist Montag,
-          10. August 2026. Schulpflichtig werden Kinder, die bis zum 30. Juni 2026
-          sechs Jahre alt werden.
+          10. August 2026. Schulpflichtig werden Kinder, die bis einschließlich
+          1. Juli 2020 geboren sind.
         </p>
 
         <StateEnrollmentCalculator
@@ -174,7 +174,7 @@ const faqSchema = {
 
           <div class="fact-card">
             <span>Stichtag</span>
-            <strong>30. Juni</strong>
+            <strong>1. Juli</strong>
           </div>
 
           <div class="fact-card">
@@ -220,21 +220,21 @@ const faqSchema = {
           <p>
             Der Einschulungsrechner prüft das Geburtsdatum deines Kindes und gleicht
             es mit den Regeln zur Einschulung in Hessen ab. Entscheidend sind vor
-            allem der Stichtag 30. Juni und der Beginn der Schulpflicht am 1. August
+            allem der Stichtag 1. Juli und der Beginn der Schulpflicht am 1. August
             desselben Jahres.
           </p>
 
           <p>
-            Beispiel: Wird ein Kind am 15. Juni 2020 geboren, wird es vor dem
-            Stichtag 30. Juni 2026 sechs Jahre alt. Damit ist es in Hessen regulär
-            schulpflichtig und voraussichtlich für das Schuljahr 2026/2027 vorgesehen.
+            Beispiel: Wird ein Kind am 15. Juni 2020 geboren, ist es in Hessen
+            regulär schulpflichtig und voraussichtlich für das Schuljahr 2026/2027
+            vorgesehen.
           </p>
 
           <p>
-            Wird ein Kind dagegen am 1. Juli 2020 oder später geboren, fällt es nicht
-            mehr unter den Stichtag für das Schuljahr 2026/2027. Dann ist in Hessen
-            in der Regel das folgende Schuljahr relevant – eine frühere Einschulung
-            kann aber auf Antrag geprüft werden.
+            Wird ein Kind dagegen nach dem 1. Juli 2020 geboren, fällt es nicht mehr
+            unter den regulären Stichtag für das Schuljahr 2026/2027. Dann ist in
+            Hessen in der Regel das folgende Schuljahr relevant – eine frühere
+            Einschulung kann aber auf Antrag geprüft werden.
           </p>
 
           <p>
@@ -249,9 +249,9 @@ const faqSchema = {
           <h2>Welcher Einschulungsstichtag gilt in Hessen?</h2>
 
           <p>
-            In Hessen gilt der 30. Juni als Stichtag für die Einschulung. Kinder,
-            die bis zu diesem Datum sechs Jahre alt werden, sind ab dem 1. August
-            desselben Jahres regulär schulpflichtig.
+            In Hessen beginnt die Schulpflicht für Kinder, die bis einschließlich
+            1. Juli geboren sind und damit bis zum 30. Juni das sechste Lebensjahr
+            vollenden, am 1. August desselben Jahres.
           </p>
         </section>
 
@@ -259,8 +259,8 @@ const faqSchema = {
           <h2>Was bedeutet Kann-Kind in Hessen?</h2>
 
           <p>
-            Kinder, die nach dem 30. Juni sechs Jahre alt werden, sind in Hessen
-            nicht automatisch regulär schulpflichtig. Sie können aber auf Antrag der
+            Kinder, die nach dem 1. Juli geboren sind, sind in Hessen nicht
+            automatisch regulär schulpflichtig. Sie können aber auf Antrag der
             Eltern vorzeitig eingeschult werden, wenn die Voraussetzungen für den
             Schulbesuch erfüllt sind.
           </p>
@@ -277,10 +277,10 @@ const faqSchema = {
           <h2>Kann mein Kind in Hessen früher eingeschult werden?</h2>
 
           <p>
-            Kinder, die nach dem 30. Juni sechs Jahre alt werden, können auf Antrag
-            der Eltern vorzeitig eingeschult werden. Das betrifft vor allem Kinder,
-            die knapp nach dem Stichtag geboren sind und nach Einschätzung der Eltern
-            bereits ausreichend entwickelt wirken.
+            Kinder, die nach dem 1. Juli geboren sind, können auf Antrag der Eltern
+            vorzeitig eingeschult werden. Das betrifft vor allem Kinder, die knapp
+            nach dem Stichtag geboren sind und nach Einschätzung der Eltern bereits
+            ausreichend entwickelt wirken.
           </p>
 
           <p>
@@ -392,10 +392,10 @@ const faqSchema = {
             <article class="faq-item">
               <h3>Welcher Einschulungsstichtag gilt in Hessen?</h3>
               <p>
-                In Hessen gilt der 30. Juni als Stichtag für die Einschulung. Kinder,
-                die bis zu diesem Datum sechs Jahre alt werden, sind ab dem 1. August
-                desselben Jahres regulär schulpflichtig. Kinder, die nach dem 30. Juni
-                sechs Jahre alt werden, können auf Antrag der Eltern vorzeitig
+                In Hessen beginnt die Schulpflicht für Kinder, die bis einschließlich
+                1. Juli geboren sind und damit bis zum 30. Juni das sechste Lebensjahr
+                vollenden, am 1. August desselben Jahres. Kinder, die nach dem
+                1. Juli geboren sind, können auf Antrag der Eltern vorzeitig
                 eingeschult werden.
               </p>
             </article>
@@ -436,8 +436,8 @@ const faqSchema = {
             <article class="faq-item">
               <h3>Was bedeutet Kann-Kind in Hessen?</h3>
               <p>
-                Als Kann-Kind gilt in Hessen ein Kind, das nach dem 30. Juni sechs
-                Jahre alt wird und daher nicht automatisch regulär schulpflichtig ist.
+                Als Kann-Kind gilt in Hessen ein Kind, das nach dem 1. Juli geboren
+                ist und daher nicht automatisch regulär schulpflichtig ist.
                 Eine vorzeitige Einschulung kann auf Antrag der Eltern geprüft werden.
                 Die Entscheidung trifft die Schulleiterin oder der Schulleiter unter
                 Berücksichtigung des schulärztlichen Gutachtens.
@@ -447,8 +447,8 @@ const faqSchema = {
             <article class="faq-item">
               <h3>Kann mein Kind in Hessen früher eingeschult werden?</h3>
               <p>
-                Kinder, die nach dem 30. Juni sechs Jahre alt werden, können auf
-                Antrag der Eltern vorzeitig eingeschult werden. Die Entscheidung trifft
+                Kinder, die nach dem 1. Juli geboren sind, können auf Antrag der
+                Eltern vorzeitig eingeschult werden. Die Entscheidung trifft
                 die Schulleitung in der Regel auf Grundlage eines schulärztlichen
                 Gutachtens und nach Rücksprache mit der Kindertagesstätte. Wenn ein
                 Kind erst nach dem 31. Dezember sechs Jahre alt wird, kann zusätzlich

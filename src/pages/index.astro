@@ -15,6 +15,17 @@ const canonical = "https://www.einschulungsrechner.de/";
 const currentSchoolYear = "2026/2027";
 const currentEnrollmentDates = enrollmentDatesBySchoolYear[currentSchoolYear];
 
+const cutoffOverrides: Record<string, { cutoff: string; cutoffLabel: string }> = {
+  hamburg: {
+    cutoff: "07-01",
+    cutoffLabel: "1. Juli",
+  },
+  hessen: {
+    cutoff: "07-01",
+    cutoffLabel: "1. Juli",
+  },
+};
+
 const summerHolidayPeriods2026: Record<string, { from: string; to: string }> = {
   "baden-wuerttemberg": {
     from: "Donnerstag, 30. Juli",
@@ -84,6 +95,7 @@ const summerHolidayPeriods2026: Record<string, { from: string; to: string }> = {
 
 const stateOverviewRows = germanStates.map((state) => {
   const rule = enrollmentRules[state.slug];
+  const cutoffOverride = cutoffOverrides[state.slug];
   const dates = currentEnrollmentDates[state.slug];
 
   return {
@@ -95,7 +107,9 @@ const stateOverviewRows = germanStates.map((state) => {
     enrollmentQualifier: dates.enrollmentQualifier,
     firstSchoolDay: dates.firstSchoolDay,
     cutoffLabel:
-      state.slug === "brandenburg" ? `${rule.cutoffLabel} *` : rule.cutoffLabel,
+      state.slug === "brandenburg"
+        ? `${rule.cutoffLabel} *`
+        : cutoffOverride?.cutoffLabel ?? rule.cutoffLabel,
     specialRuleLabel: rule.specialRuleLabel,
     note: dates.note,
   };
@@ -104,16 +118,17 @@ const stateOverviewRows = germanStates.map((state) => {
 const calculatorStateRules = Object.fromEntries(
   germanStates.map((state) => {
     const rule = enrollmentRules[state.slug];
+    const cutoffOverride = cutoffOverrides[state.slug];
 
     return [
       state.slug,
       {
         name: state.name,
-        cutoff: rule.cutoff,
+        cutoff: cutoffOverride?.cutoff ?? rule.cutoff,
         type:
           rule.type === "optional" ? "standard_with_optional" : rule.type,
         specialWindow: rule.specialWindow,
-        label: `Stichtag ${rule.cutoffLabel}`,
+        label: `Stichtag ${cutoffOverride?.cutoffLabel ?? rule.cutoffLabel}`,
       },
     ];
   }),

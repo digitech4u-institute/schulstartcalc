@@ -6,10 +6,10 @@ const pageTitle =
   "Einschulung Hamburg 2026 & 2027: Termin, Stichtag & Rechner";
 
 const pageDescription =
-  "Wann ist die Einschulung in Hamburg 2026? Hier findest du Termin, Stichtag 30. Juni, Kann-Kind-Regelung und den kostenlosen Einschulungsrechner.";
+  "Wann ist die Einschulung in Hamburg 2026? Hier findest du Termin, Stichtag 1. Juli, Kann-Kind-Regelung und den kostenlosen Einschulungsrechner.";
 
 const canonical = "https://www.einschulungsrechner.de/einschulung-hamburg/";
-const dateModified = "2026-06-17";
+const dateModified = "2026-06-20";
 
 const ADSENSE_ID = import.meta.env.PUBLIC_ADSENSE_ID || "";
 const STATE_CONTENT_AD_SLOT = import.meta.env.PUBLIC_ADSENSE_STATE_CONTENT_SLOT || "";
@@ -40,7 +40,7 @@ const faqSchema = {
       name: "Welcher Einschulungsstichtag gilt in Hamburg?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "In Hamburg werden Kinder am 1. August schulpflichtig, wenn sie vor dem 1. Juli desselben Kalenderjahres das sechste Lebensjahr vollendet haben. Praktisch betrifft das Kinder, die bis einschließlich 30. Juni sechs Jahre alt werden. Hamburg hat keinen Einschulungskorridor; eine vorzeitige Einschulung kann auf Antrag geprüft werden.",
+        text: "In Hamburg werden Kinder am 1. August schulpflichtig, wenn sie bis zum 1. Juli desselben Kalenderjahres das sechste Lebensjahr vollendet haben. Kinder, die nach dem 1. Juli sechs Jahre alt werden, können auf Antrag vorzeitig eingeschult werden.",
       },
     },
     {
@@ -64,7 +64,7 @@ const faqSchema = {
       name: "Was bedeutet Kann-Kind in Hamburg?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Als Kann-Kind werden Kinder bezeichnet, die nach dem regulären Stichtag sechs Jahre alt werden und nicht automatisch schulpflichtig sind. In Hamburg betrifft das Kinder, die nach dem 30. Juni sechs Jahre alt werden. Eine vorzeitige Einschulung kann auf Antrag der Sorgeberechtigten geprüft werden.",
+        text: "Als Kann-Kind werden Kinder bezeichnet, die nach dem regulären Stichtag sechs Jahre alt werden und nicht automatisch schulpflichtig sind. In Hamburg betrifft das Kinder, die nach dem 1. Juli sechs Jahre alt werden. Eine vorzeitige Einschulung kann auf Antrag der Sorgeberechtigten geprüft werden.",
       },
     },
     {
@@ -72,7 +72,7 @@ const faqSchema = {
       name: "Kann mein Kind in Hamburg früher eingeschult werden?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Kinder, die nach dem 30. Juni sechs Jahre alt werden, sind in Hamburg nicht automatisch regulär schulpflichtig. Eine vorzeitige Einschulung kann auf Antrag der Sorgeberechtigten geprüft werden. Die Schule berücksichtigt dabei, ob das Kind geistig, seelisch, körperlich und sprachlich ausreichend entwickelt ist.",
+        text: "Kinder, die nach dem 1. Juli sechs Jahre alt werden, sind in Hamburg nicht automatisch regulär schulpflichtig. Eine vorzeitige Einschulung kann auf Antrag der Sorgeberechtigten geprüft werden. Die Schule berücksichtigt dabei, ob das Kind geistig, seelisch, körperlich und sprachlich ausreichend entwickelt ist.",
       },
     },
     {
@@ -115,7 +115,7 @@ const faqSchema = {
         <p class="lead">
           Wann kommt mein Kind in Hamburg in die Schule? Der Einschulungsrechner
           zeigt dir anhand des Geburtsdatums das voraussichtliche Schuljahr. In
-          Hamburg gilt der Stichtag 30. Juni. Für das Schuljahr 2026/2027 ist der
+          Hamburg gilt der Stichtag 1. Juli. Für das Schuljahr 2026/2027 ist der
           erste Schultag Donnerstag, 20. August 2026 – die Einschulung der ersten
           Klassen legt die jeweilige Grundschule fest.
         </p>
@@ -124,7 +124,7 @@ const faqSchema = {
           Kurzantwort: Der erste Schultag in Hamburg 2026 ist Donnerstag,
           20. August 2026. Die Einschulung wird schulabhängig von der jeweiligen
           Grundschule festgelegt. Schulpflichtig werden Kinder, die bis zum
-          30. Juni 2026 sechs Jahre alt werden.
+          1. Juli 2026 das sechste Lebensjahr vollendet haben.
         </p>
 
         <StateEnrollmentCalculator
@@ -158,7 +158,7 @@ const faqSchema = {
 
           <div class="fact-card">
             <span>Stichtag</span>
-            <strong>30. Juni</strong>
+            <strong>1. Juli</strong>
           </div>
 
           <div class="fact-card">
@@ -204,8 +204,8 @@ const faqSchema = {
           <p>
             Der Einschulungsrechner prüft das Geburtsdatum deines Kindes und
             vergleicht es mit den Einschulungsregeln in Hamburg. Entscheidend ist
-            der Stichtag 30. Juni. Wird dein Kind bis zu diesem Datum sechs Jahre
-            alt, ist es in Hamburg regulär schulpflichtig.
+            der Stichtag 1. Juli. Hat dein Kind bis zu diesem Datum das sechste
+            Lebensjahr vollendet, ist es in Hamburg regulär schulpflichtig.
           </p>
 
           <p>
@@ -216,7 +216,7 @@ const faqSchema = {
           </p>
 
           <p>
-            Wird ein Kind dagegen am 1. Juli 2020 oder später geboren, ist es in
+            Wird ein Kind dagegen nach dem 1. Juli 2020 geboren, ist es in
             Hamburg nicht automatisch regulär schulpflichtig. Eine vorzeitige
             Einschulung kann auf Antrag der Sorgeberechtigten geprüft werden.
           </p>
@@ -226,10 +226,9 @@ const faqSchema = {
           <h2>Welcher Einschulungsstichtag gilt in Hamburg?</h2>
 
           <p>
-            Ein Kind wird in Hamburg regulär schulpflichtig, wenn es vor dem
+            Ein Kind wird in Hamburg regulär schulpflichtig, wenn es bis zum
             1. Juli des jeweiligen Kalenderjahres das sechste Lebensjahr vollendet
-            hat. Praktisch betrifft das Kinder, die bis zum 30. Juni sechs Jahre
-            alt werden. Die Schulpflicht beginnt dann am 1. August desselben Jahres.
+            hat. Die Schulpflicht beginnt dann am 1. August desselben Jahres.
           </p>
         </section>
 
@@ -239,7 +238,7 @@ const faqSchema = {
           <p>
             Als Kann-Kind werden Kinder bezeichnet, die nach dem regulären Stichtag
             sechs Jahre alt werden und deshalb nicht automatisch schulpflichtig sind.
-            In Hamburg betrifft das Kinder, die nach dem 30. Juni sechs Jahre alt
+            In Hamburg betrifft das Kinder, die nach dem 1. Juli sechs Jahre alt
             werden.
           </p>
 
@@ -254,7 +253,7 @@ const faqSchema = {
           <h2>Kann mein Kind in Hamburg früher eingeschult werden?</h2>
 
           <p>
-            Ja. Kinder, die nach dem 30. Juni sechs Jahre alt werden, können in
+            Ja. Kinder, die nach dem 1. Juli sechs Jahre alt werden, können in
             Hamburg auf Antrag der Sorgeberechtigten vorzeitig eingeschult werden.
             Die Entscheidung hängt davon ab, ob das Kind die Voraussetzungen für
             einen erfolgreichen Schulbesuch erfüllt.
@@ -365,11 +364,10 @@ const faqSchema = {
             <article class="faq-item">
               <h3>Welcher Einschulungsstichtag gilt in Hamburg?</h3>
               <p>
-                In Hamburg werden Kinder am 1. August schulpflichtig, wenn sie vor
-                dem 1. Juli desselben Kalenderjahres das sechste Lebensjahr
-                vollendet haben. Praktisch betrifft das Kinder, die bis einschließlich
-                30. Juni sechs Jahre alt werden. Hamburg hat keinen Einschulungskorridor;
-                eine vorzeitige Einschulung kann auf Antrag geprüft werden.
+                In Hamburg werden Kinder am 1. August schulpflichtig, wenn sie bis
+                zum 1. Juli desselben Kalenderjahres das sechste Lebensjahr
+                vollendet haben. Kinder, die nach dem 1. Juli sechs Jahre alt werden,
+                können auf Antrag vorzeitig eingeschult werden.
               </p>
             </article>
 
@@ -400,7 +398,7 @@ const faqSchema = {
               <p>
                 Als Kann-Kind werden Kinder bezeichnet, die nach dem regulären
                 Stichtag sechs Jahre alt werden und nicht automatisch schulpflichtig
-                sind. In Hamburg betrifft das Kinder, die nach dem 30. Juni sechs
+                sind. In Hamburg betrifft das Kinder, die nach dem 1. Juli sechs
                 Jahre alt werden. Eine vorzeitige Einschulung kann auf Antrag der
                 Sorgeberechtigten geprüft werden.
               </p>
@@ -409,7 +407,7 @@ const faqSchema = {
             <article class="faq-item">
               <h3>Kann mein Kind in Hamburg früher eingeschult werden?</h3>
               <p>
-                Kinder, die nach dem 30. Juni sechs Jahre alt werden, sind in
+                Kinder, die nach dem 1. Juli sechs Jahre alt werden, sind in
                 Hamburg nicht automatisch regulär schulpflichtig. Eine vorzeitige
                 Einschulung kann auf Antrag der Sorgeberechtigten geprüft werden.
                 Die Schule berücksichtigt dabei, ob das Kind geistig, seelisch,

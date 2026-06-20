@@ -1,0 +1,416 @@
+---
+import {
+  getQuickFactCards,
+  stateFactSheetList,
+  type SchoolYear,
+} from "../data/stateFactSheet";
+
+const pageTitle = "Dev Fact-Sheet Test | Einschulungsrechner";
+const schoolYears: SchoolYear[] = ["2026/2027", "2027/2028", "2028/2029"];
+---
+
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>{pageTitle}</title>
+  </head>
+  <body>
+    <main class="dev-page">
+      <header class="dev-hero">
+        <p class="dev-kicker">Interne Testseite</p>
+        <h1>Fact-Sheet-Datenprüfung</h1>
+        <p>
+          Diese Seite prüft lokal die zentrale Datenstruktur aus
+          <code>stateFactSheet.ts</code>. Sie ist nicht für Indexierung oder
+          öffentliche Verlinkung gedacht.
+        </p>
+      </header>
+
+      <section class="dev-summary" aria-label="Übersicht">
+        <article>
+          <strong>{stateFactSheetList.length}</strong>
+          <span>Bundesländer</span>
+        </article>
+        <article>
+          <strong>{schoolYears.length}</strong>
+          <span>Schuljahre</span>
+        </article>
+        <article>
+          <strong>noindex</strong>
+          <span>Robots-Meta</span>
+        </article>
+      </section>
+
+      <section class="dev-grid" aria-label="Fact-Sheet-Daten nach Bundesland">
+        {stateFactSheetList.map((state) => (
+          <article class="state-card">
+            <header class="state-card-header">
+              <div>
+                <p class="state-order">#{state.displayOrder}</p>
+                <h2>{state.name}</h2>
+                <a href={state.url}>Live-Seite öffnen →</a>
+              </div>
+              <span>{state.dataStatus}</span>
+            </header>
+
+            <dl class="rule-list">
+              <div>
+                <dt>Stichtag</dt>
+                <dd>{state.rules.cutoffLabel}</dd>
+              </div>
+              <div>
+                <dt>Regeltyp</dt>
+                <dd>{state.rules.type}</dd>
+              </div>
+              <div>
+                <dt>Sonderregel</dt>
+                <dd>{state.rules.specialRuleLabel}</dd>
+              </div>
+              <div>
+                <dt>Zurückstellung</dt>
+                <dd>{state.rules.allowsDeferral ? "ja" : "nein"}</dd>
+              </div>
+            </dl>
+
+            {state.specialNote && (
+              <aside class="special-note">
+                <strong>{state.specialNote.title}</strong>
+                <p>{state.specialNote.text}</p>
+              </aside>
+            )}
+
+            <div class="school-year-table-wrap">
+              <table class="school-year-table">
+                <thead>
+                  <tr>
+                    <th>Schuljahr</th>
+                    <th>Einschulung</th>
+                    <th>1. Schultag</th>
+                    <th>Sommerferien</th>
+                    <th>Status</th>
+                    <th>Geprüft</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {schoolYears.map((schoolYear) => {
+                    const facts = state.schoolYears[schoolYear];
+
+                    return (
+                      <tr>
+                        <td>{schoolYear}</td>
+                        <td>{facts.enrollmentLabel}</td>
+                        <td>{facts.firstSchoolDayLabel}</td>
+                        <td>{facts.summerHolidays.label}</td>
+                        <td>
+                          <span class:list={["status-pill", facts.hasConfirmedDate ? "is-confirmed" : "is-open"]}>
+                            {facts.sourceStatus}
+                          </span>
+                        </td>
+                        <td>{facts.lastVerified}</td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
+
+            <details class="quick-facts-test">
+              <summary>Quick-Fact-Cards 2027/2028 anzeigen</summary>
+              <div class="quick-fact-grid">
+                {getQuickFactCards(state.slug, "2027/2028").map((card) => (
+                  <article class:list={["quick-fact-card", card.variant ? `variant-${card.variant}` : "variant-default"]}>
+                    <h3>{card.title}</h3>
+                    <strong>{card.value}</strong>
+                    <p>{card.text}</p>
+                  </article>
+                ))}
+              </div>
+            </details>
+          </article>
+        ))}
+      </section>
+    </main>
+  </body>
+</html>
+
+<style>
+  :root {
+    color: #23382d;
+    background: #f6f1e8;
+    font-family:
+      Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+      sans-serif;
+  }
+
+  body {
+    margin: 0;
+    background:
+      radial-gradient(circle at top left, rgba(38, 115, 77, 0.14), transparent 34rem),
+      #f6f1e8;
+  }
+
+  code {
+    padding: 0.12rem 0.35rem;
+    border-radius: 0.4rem;
+    background: rgba(38, 115, 77, 0.1);
+    color: #1f5f41;
+  }
+
+  .dev-page {
+    width: min(1180px, calc(100% - 32px));
+    margin: 0 auto;
+    padding: 48px 0 72px;
+  }
+
+  .dev-hero {
+    max-width: 860px;
+    padding: 32px;
+    border: 1px solid rgba(38, 115, 77, 0.16);
+    border-radius: 28px;
+    background: rgba(255, 252, 246, 0.86);
+    box-shadow: 0 22px 60px rgba(51, 42, 30, 0.1);
+  }
+
+  .dev-kicker,
+  .state-order {
+    margin: 0 0 8px;
+    color: #26734d;
+    font-size: 0.78rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  h1,
+  h2,
+  h3,
+  p {
+    margin-top: 0;
+  }
+
+  h1 {
+    margin-bottom: 14px;
+    font-size: clamp(2.1rem, 5vw, 4rem);
+    line-height: 1.02;
+  }
+
+  h2 {
+    margin-bottom: 8px;
+    font-size: clamp(1.4rem, 2.3vw, 2rem);
+  }
+
+  .dev-hero p:last-child,
+  .special-note p,
+  .quick-fact-card p {
+    margin-bottom: 0;
+  }
+
+  .dev-summary {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+    margin: 24px 0;
+  }
+
+  .dev-summary article,
+  .state-card,
+  .quick-fact-card {
+    border: 1px solid rgba(38, 115, 77, 0.14);
+    border-radius: 22px;
+    background: rgba(255, 252, 246, 0.92);
+    box-shadow: 0 16px 42px rgba(51, 42, 30, 0.08);
+  }
+
+  .dev-summary article {
+    padding: 20px;
+  }
+
+  .dev-summary strong {
+    display: block;
+    margin-bottom: 4px;
+    font-size: 1.8rem;
+    color: #1f5f41;
+  }
+
+  .dev-summary span,
+  .state-card-header span {
+    color: rgba(35, 56, 45, 0.72);
+    font-size: 0.92rem;
+  }
+
+  .dev-grid {
+    display: grid;
+    gap: 22px;
+  }
+
+  .state-card {
+    padding: 24px;
+  }
+
+  .state-card-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 18px;
+    margin-bottom: 18px;
+  }
+
+  .state-card-header a {
+    color: #26734d;
+    font-weight: 800;
+    text-decoration: none;
+  }
+
+  .rule-list {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 12px;
+    margin: 0 0 18px;
+  }
+
+  .rule-list div {
+    padding: 14px;
+    border-radius: 16px;
+    background: rgba(38, 115, 77, 0.08);
+  }
+
+  dt {
+    margin-bottom: 5px;
+    color: rgba(35, 56, 45, 0.64);
+    font-size: 0.78rem;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  dd {
+    margin: 0;
+    font-weight: 800;
+  }
+
+  .special-note {
+    margin-bottom: 18px;
+    padding: 16px;
+    border: 1px solid rgba(159, 45, 32, 0.18);
+    border-radius: 16px;
+    background: rgba(159, 45, 32, 0.07);
+  }
+
+  .special-note strong {
+    display: block;
+    margin-bottom: 6px;
+    color: #9f2d20;
+  }
+
+  .school-year-table-wrap {
+    overflow-x: auto;
+    border: 1px solid rgba(38, 115, 77, 0.12);
+    border-radius: 18px;
+  }
+
+  .school-year-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 900px;
+    background: #fffdf8;
+  }
+
+  th,
+  td {
+    padding: 13px 14px;
+    border-bottom: 1px solid rgba(38, 115, 77, 0.1);
+    text-align: left;
+    vertical-align: top;
+  }
+
+  th {
+    background: rgba(38, 115, 77, 0.1);
+    color: #1f5f41;
+    font-size: 0.78rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  tr:last-child td {
+    border-bottom: 0;
+  }
+
+  .status-pill {
+    display: inline-flex;
+    align-items: center;
+    border-radius: 999px;
+    padding: 5px 9px;
+    font-size: 0.78rem;
+    font-weight: 850;
+    white-space: nowrap;
+  }
+
+  .status-pill.is-confirmed {
+    background: rgba(38, 115, 77, 0.12);
+    color: #1f5f41;
+  }
+
+  .status-pill.is-open {
+    background: rgba(159, 45, 32, 0.09);
+    color: #9f2d20;
+  }
+
+  .quick-facts-test {
+    margin-top: 16px;
+  }
+
+  .quick-facts-test summary {
+    cursor: pointer;
+    color: #26734d;
+    font-weight: 850;
+  }
+
+  .quick-fact-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+    margin-top: 14px;
+  }
+
+  .quick-fact-card {
+    padding: 16px;
+  }
+
+  .quick-fact-card h3 {
+    margin-bottom: 8px;
+    color: rgba(35, 56, 45, 0.72);
+    font-size: 0.82rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  .quick-fact-card strong {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 1.08rem;
+    color: #1f5f41;
+  }
+
+  .quick-fact-card.variant-season {
+    background: rgba(218, 149, 67, 0.08);
+  }
+
+  .quick-fact-card.variant-highlight {
+    background: rgba(38, 115, 77, 0.1);
+  }
+
+  @media (max-width: 760px) {
+    .dev-summary,
+    .rule-list,
+    .quick-fact-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .state-card-header {
+      flex-direction: column;
+    }
+  }
+</style>
