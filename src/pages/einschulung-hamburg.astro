@@ -139,12 +139,21 @@ const faqSchema = {
         <div class="quick-facts quick-facts-master" aria-label="Kurzüberblick Einschulung Hamburg">
           <div class="fact-card fact-card-highlight">
             <span>Einschulung 2026</span>
-            <strong>schulabhängig,<br />ab 24. August 2026</strong>
+            <strong>schulabhängig,<br />ab 24. August</strong>
           </div>
 
           <div class="fact-card fact-card-highlight">
-            <span>Erster Schultag</span>
-            <strong>Donnerstag,<br />20. August 2026</strong>
+            <span>Erster Schultag 2026</span>
+            <strong>Donnerstag,<br />20. August</strong>
+          </div>
+
+          <div
+            class="fact-card fact-card-season"
+            data-season-card
+            data-state-slug="hamburg"
+          >
+            <span data-season-label>Sommerferien 2026</span>
+            <strong data-season-value>Donnerstag, 9. Juli –<br />Mittwoch, 19. August</strong>
           </div>
 
           <div class="fact-card">
@@ -155,6 +164,11 @@ const faqSchema = {
           <div class="fact-card">
             <span>Sonderregel</span>
             <strong>Kann-Kind auf Antrag</strong>
+          </div>
+
+          <div class="fact-card">
+            <span>Anmeldung</span>
+            <strong>zuständige<br />Grundschule</strong>
           </div>
         </div>
 
@@ -603,6 +617,11 @@ const faqSchema = {
     background: rgba(245, 210, 138, 0.1);
   }
 
+  .fact-card-season {
+    border-color: rgba(31, 155, 74, 0.16);
+    background: rgba(116, 213, 139, 0.09);
+  }
+
   .fact-card span {
     color: #816126;
     font-size: clamp(0.92rem, 1.1vw, 1.04rem);
@@ -680,9 +699,9 @@ const faqSchema = {
 
   .retrospective-box {
     padding: 24px;
-    border: 1px solid rgba(129, 97, 38, 0.14);
+    border: 1px solid rgba(129, 97, 38, 0.16);
     border-radius: 22px;
-    background: rgba(255, 255, 255, 0.52);
+    background: rgba(245, 210, 138, 0.12);
   }
 
   .process-list {

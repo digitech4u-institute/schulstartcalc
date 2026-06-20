@@ -135,12 +135,21 @@ const faqSchema = {
         <div class="quick-facts quick-facts-master" aria-label="Kurzüberblick Einschulung Bayern">
           <div class="fact-card fact-card-highlight">
             <span>Einschulung 2026</span>
-            <strong>Mittwoch,<br />16. September 2026</strong>
+            <strong>Mittwoch,<br />16. September</strong>
           </div>
 
           <div class="fact-card fact-card-highlight">
-            <span>Erster Schultag</span>
-            <strong>Dienstag,<br />15. September 2026</strong>
+            <span>Erster Schultag 2026</span>
+            <strong>Dienstag,<br />15. September</strong>
+          </div>
+
+          <div
+            class="fact-card fact-card-season"
+            data-season-card
+            data-state-slug="bayern"
+          >
+            <span data-season-label>Sommerferien 2026</span>
+            <strong data-season-value>Montag, 3. August –<br />Montag, 14. September</strong>
           </div>
 
           <div class="fact-card">
@@ -635,6 +644,11 @@ const faqSchema = {
     background: rgba(245, 210, 138, 0.1);
   }
 
+  .fact-card-season {
+    border-color: rgba(31, 155, 74, 0.16);
+    background: rgba(116, 213, 139, 0.09);
+  }
+
   .ad-slot {
     margin: 30px 0 0;
     padding: 14px 0;
@@ -695,9 +709,9 @@ const faqSchema = {
 
   .retrospective-box {
     padding: 24px;
-    border: 1px solid rgba(129, 97, 38, 0.14);
+    border: 1px solid rgba(129, 97, 38, 0.16);
     border-radius: 22px;
-    background: rgba(255, 255, 255, 0.52);
+    background: rgba(245, 210, 138, 0.12);
   }
 
   .faq-list {
