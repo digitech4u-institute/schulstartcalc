@@ -1146,18 +1146,29 @@ const webApplicationSchema = {
 
         const nextEnrollmentYear = sixthBirthdayYear + 1;
 
-        const earlyEnrollmentText = stateRule.type === "standard_with_optional"
-          ? ` In ${stateRule.name} kann für Kinder nach dem Stichtag eine vorzeitige Einschulung auf Antrag geprüft werden.`
-          : "";
+        if (stateRule.type === "standard_with_optional") {
+          return {
+            status: "optional",
+            title: `Dein Kind ist in ${stateRule.name} ein Kann-Kind.`,
+            shortText: `In ${stateRule.name} gilt der ${stateRule.label}. Dein Kind wird am ${formatDate(sixthBirthday)} sechs Jahre alt und erreicht den Stichtag für das Schuljahr ${sixthBirthdayYear}/${sixthBirthdayYear + 1} knapp nicht. Eine vorzeitige Einschulung kann auf Antrag geprüft werden. Regulär schulpflichtig wird dein Kind voraussichtlich im Schuljahr ${nextEnrollmentYear}/${nextEnrollmentYear + 1}.`,
+            whyText: `Dein Kind wird nach dem Stichtag sechs Jahre alt. Deshalb ist es für das Schuljahr ${sixthBirthdayYear}/${sixthBirthdayYear + 1} nicht automatisch regulär schulpflichtig, kann aber als Kann-Kind beziehungsweise auf Antrag vorzeitig eingeschult werden.`,
+            nextStep: `Wenn du eine Einschulung schon im Schuljahr ${sixthBirthdayYear}/${sixthBirthdayYear + 1} prüfen möchtest, informiere dich frühzeitig bei der zuständigen Grundschule über Antrag, Voraussetzungen und Fristen.`,
+            meta: {
+              state: stateRule.name,
+              cutoff: formatDate(cutoffDate),
+              schoolYear: `${sixthBirthdayYear}/${sixthBirthdayYear + 1}`,
+              regularSchoolYear: `${nextEnrollmentYear}/${nextEnrollmentYear + 1}`,
+              statusLabel: "Kann-Kind auf Antrag",
+            },
+          };
+        }
 
         return {
           status: "next_year",
           title: `Dein Kind wird voraussichtlich im Schuljahr ${nextEnrollmentYear}/${nextEnrollmentYear + 1} eingeschult.`,
-          shortText: `In ${stateRule.name} gilt der ${stateRule.label}. Da dein Kind erst nach diesem Stichtag sechs Jahre alt wird, fällt es voraussichtlich in das Schuljahr ${nextEnrollmentYear}/${nextEnrollmentYear + 1}.${earlyEnrollmentText}`,
-          whyText: `In ${stateRule.name} gilt der ${stateRule.label}. Dein Kind wird am ${formatDate(sixthBirthday)} sechs Jahre alt und erreicht den Stichtag in diesem Jahr voraussichtlich nicht.${earlyEnrollmentText}`,
-          nextStep: stateRule.type === "standard_with_optional"
-            ? `Wenn du eine Einschulung schon im Schuljahr ${sixthBirthdayYear}/${sixthBirthdayYear + 1} prüfen möchtest, informiere dich frühzeitig bei der zuständigen Grundschule über Antrag, Voraussetzungen und Fristen.`
-            : `Wenn du über eine frühere Einschulung nachdenkst, informiere dich bei der zuständigen Grundschule über die Voraussetzungen.`,
+          shortText: `In ${stateRule.name} gilt der ${stateRule.label}. Da dein Kind erst nach diesem Stichtag sechs Jahre alt wird, fällt es voraussichtlich in das Schuljahr ${nextEnrollmentYear}/${nextEnrollmentYear + 1}.`,
+          whyText: `In ${stateRule.name} gilt der ${stateRule.label}. Dein Kind wird am ${formatDate(sixthBirthday)} sechs Jahre alt und erreicht den Stichtag in diesem Jahr voraussichtlich nicht.`,
+          nextStep: `Wenn du über eine frühere Einschulung nachdenkst, informiere dich bei der zuständigen Grundschule über die Voraussetzungen.`,
           meta: {
             state: stateRule.name,
             cutoff: formatDate(createDateFromMMDD(nextEnrollmentYear, stateRule.cutoff)),
@@ -1390,7 +1401,12 @@ const webApplicationSchema = {
     ]);
     const isNonDefinitiveResult = nonDefinitiveResultStatuses.has(result.status);
 
-    if (!isRetrospectiveResult && !isPastSchoolYear && !isActiveSchoolYear && isNonDefinitiveResult) {
+    if (!isRetrospectiveResult && !isPastSchoolYear && !isActiveSchoolYear && result.status === "optional" && result.meta.regularSchoolYear) {
+      resultPreline = `Dein Kind ist in ${result.meta.state} für das`;
+      resultHighlightText = `Schuljahr ${result.meta.schoolYear}`;
+      resultHighlightClass = "result-schoolyear";
+      resultPostline = `ein Kann-Kind. Regulär schulpflichtig wird es voraussichtlich im Schuljahr ${result.meta.regularSchoolYear}.`;
+    } else if (!isRetrospectiveResult && !isPastSchoolYear && !isActiveSchoolYear && isNonDefinitiveResult) {
       resultPreline = "";
       resultHighlightText = result.title;
       resultHighlightClass = "result-schoolyear result-schoolyear-range";
