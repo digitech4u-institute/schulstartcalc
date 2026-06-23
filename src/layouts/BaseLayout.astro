@@ -8,7 +8,7 @@ interface Props {
 
 const { title, description, canonical, schema } = Astro.props;
 
-const CONSENTMANAGER_ID = import.meta.env.PUBLIC_CONSENTMANAGER_ID || "";
+const COOKIEBOT_ID = import.meta.env.PUBLIC_COOKIEBOT_ID || "";
 const ADSENSE_ID = import.meta.env.PUBLIC_ADSENSE_ID || "";
 const schemaItems = schema ? (Array.isArray(schema) ? schema : [schema]) : [];
 const currentPath = new URL(canonical).pathname;
@@ -39,15 +39,14 @@ const currentPath = new URL(canonical).pathname;
     </script>
 
     {
-      CONSENTMANAGER_ID ? (
+      COOKIEBOT_ID ? (
         <script
+          id="Cookiebot"
+          src="https://consent.cookiebot.com/uc.js"
+          data-cbid={COOKIEBOT_ID}
+          data-blockingmode="auto"
           type="text/javascript"
-          data-cmp-ab="1"
-          src={`https://cdn.consentmanager.net/delivery/autoblocking/${CONSENTMANAGER_ID}.js`}
-          data-cmp-host="c.delivery.consentmanager.net"
-          data-cmp-cdn="cdn.consentmanager.net"
-          data-cmp-codesrc="0"
-          is:inline
+          async
         />
       ) : null
     }
@@ -107,8 +106,8 @@ const currentPath = new URL(canonical).pathname;
       <nav class="base-footer-nav" aria-label="Rechtliches">
         {currentPath !== "/impressum/" ? <a class="base-footer-link" href="/impressum/">Impressum</a> : null}
         {currentPath !== "/datenschutz/" ? <a class="base-footer-link" href="/datenschutz/">Datenschutz</a> : null}
-        {CONSENTMANAGER_ID ? (
-          <button type="button" class="base-footer-button" data-consentmanager-settings>
+        {COOKIEBOT_ID ? (
+          <button type="button" class="base-footer-button" data-cookiebot-settings>
             Cookie-Einstellungen
           </button>
         ) : null}
@@ -117,14 +116,14 @@ const currentPath = new URL(canonical).pathname;
 
     <script>
       document.addEventListener("click", (event) => {
-        const consentTarget = event.target instanceof Element
-          ? event.target.closest("[data-consentmanager-settings]")
+        const cookiebotTarget = event.target instanceof Element
+          ? event.target.closest("[data-cookiebot-settings]")
           : null;
 
-        if (consentTarget) {
+        if (cookiebotTarget) {
           event.preventDefault();
-          if (typeof window.__cmp === "function") {
-            window.__cmp("showScreen");
+          if (window.Cookiebot && typeof window.Cookiebot.renew === "function") {
+            window.Cookiebot.renew();
           }
           return;
         }

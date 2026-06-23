@@ -3,6 +3,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import { germanStates } from "../data/states";
 import { enrollmentRules } from "../data/enrollmentRules";
 import { enrollmentDatesBySchoolYear } from "../data/enrollmentDatesBySchoolYear";
+import { stateFactSheets } from "../data/stateFactSheet";
 
 const pageTitle =
   "Einschulungsrechner Deutschland 2026/2027 – Stichtag & Schuljahr berechnen";
@@ -156,6 +157,22 @@ const calculatorEnrollmentDatesBySchoolYear = Object.fromEntries(
     ),
   ]),
 );
+
+const calculatorFactSheetFacts = {
+  saarland: {
+    "2027/2028": {
+      enrollmentLabel:
+        stateFactSheets.saarland.schoolYears["2027/2028"].enrollmentLabel,
+      firstSchoolDayLabel:
+        stateFactSheets.saarland.schoolYears["2027/2028"].firstSchoolDayLabel,
+      summerHolidays:
+        stateFactSheets.saarland.schoolYears["2027/2028"].summerHolidays,
+      note: stateFactSheets.saarland.schoolYears["2027/2028"].note,
+      registration:
+        stateFactSheets.saarland.schoolYears["2027/2028"].registration,
+    },
+  },
+};
 
 const faqSchema = {
   "@context": "https://schema.org",
@@ -1025,9 +1042,10 @@ const webApplicationSchema = {
 
     </main>
 
-    <script define:vars={{ calculatorStateRules, calculatorEnrollmentDatesBySchoolYear, currentSchoolYear }}>
+    <script define:vars={{ calculatorStateRules, calculatorEnrollmentDatesBySchoolYear, calculatorFactSheetFacts, currentSchoolYear }}>
       const stateRules = calculatorStateRules;
       const stateEnrollmentDatesBySchoolYear = calculatorEnrollmentDatesBySchoolYear;
+      const stateFactSheetFacts = calculatorFactSheetFacts;
       const referenceSchoolYear = currentSchoolYear;
 
       function parseDateInput(value) {
@@ -1369,10 +1387,40 @@ const webApplicationSchema = {
     const selectedEnrollmentDates = selectedStateKey
       ? stateEnrollmentDatesBySchoolYear?.[result.meta.schoolYear]?.[selectedStateKey]
       : null;
+    const selectedFactSheetFacts = selectedStateKey === "saarland"
+      ? stateFactSheetFacts?.[selectedStateKey]?.[result.meta.schoolYear]
+      : null;
     const hasEnrollmentDates = Boolean(
       selectedEnrollmentDates?.enrollment && selectedEnrollmentDates?.firstSchoolDay,
     );
+    const hasFactSheetFacts = Boolean(
+      selectedFactSheetFacts?.enrollmentLabel && selectedFactSheetFacts?.firstSchoolDayLabel,
+    );
     const formatDateFactValue = (value) => value.replace(", ", ",<br />");
+    const formatFullDateFactValue = (value) => value.replace(", ", ",<br />");
+    const weekdayShortNames = {
+      Montag: "Mo",
+      Dienstag: "Di",
+      Mittwoch: "Mi",
+      Donnerstag: "Do",
+      Freitag: "Fr",
+      Samstag: "Sa",
+      Sonntag: "So",
+    };
+    const shortenWeekday = (value) => value.replace(
+      /^(Montag|Dienstag|Mittwoch|Donnerstag|Freitag|Samstag|Sonntag),/,
+      (_, weekday) => `${weekdayShortNames[weekday]},`,
+    );
+    const formatDateRangeFactValue = (value) => {
+      const [from, to] = value.split(" – ");
+
+      if (!from || !to) {
+        return value;
+      }
+
+      return `${shortenWeekday(from)} –<br />${shortenWeekday(to)}`;
+    };
+    const stripYearFromDateValue = (value) => value.replace(/\s+\d{4}(\*)?$/, "$1");
     const stripWeekday = (value) => value.replace(/^[^,]+,\s*/, "");
     const formatHeadlineDateRange = (value) => value.replace(/(\d+\.)–(\d+\.)/, "$1 oder $2");
     const enrollmentQualifierText = selectedEnrollmentDates?.enrollmentQualifier
@@ -1385,9 +1433,16 @@ const webApplicationSchema = {
       ? formatDateFactValue(selectedEnrollmentDates.firstSchoolDay)
       : "";
 
-    if (!isRetrospectiveResult && !isPastSchoolYear && !isActiveSchoolYear && isFutureSchoolYear && !hasEnrollmentDates) {
+    if (!isRetrospectiveResult && !isPastSchoolYear && !isActiveSchoolYear && isFutureSchoolYear && !hasEnrollmentDates && !hasFactSheetFacts) {
       resultSectionText = `Dein Kind wird im Jahr ${resultSchoolYearStart} sechs Jahre alt. Nach den Regeln in ${result.meta.state} fällt es voraussichtlich in das Schuljahr ${result.meta.schoolYear}.`;
       nextStepText = `Notiere dir das voraussichtliche Schuljahr ${result.meta.schoolYear} und prüfe die Schulanmeldung, Fristen und Termine rechtzeitig bei der zuständigen Grundschule. Konkrete Einschulungstermine werden je nach Bundesland und Schule später festgelegt.`;
+    }
+
+    if (!isRetrospectiveResult && !isPastSchoolYear && !isActiveSchoolYear && hasFactSheetFacts) {
+      resultSectionText = `Dein Kind wird im Jahr ${resultSchoolYearStart} sechs Jahre alt. Nach den Regeln in ${result.meta.state} fällt es voraussichtlich in das Schuljahr ${result.meta.schoolYear}. Für dieses Schuljahr sind bereits zusätzliche Rahmendaten hinterlegt.`;
+      nextStepText = selectedFactSheetFacts.registration
+        ? `Prüfe die Schulanmeldung rechtzeitig: ${selectedFactSheetFacts.registration.timingLabel}. Zuständig ist in der Regel: ${selectedFactSheetFacts.registration.placeLabel}.`
+        : result.nextStep;
     }
 
     const nonDefinitiveResultStatuses = new Set([
@@ -1449,6 +1504,77 @@ const webApplicationSchema = {
         </div>
       `
       : "";
+    const stripTentativePrefix = (value) => value.replace(/^voraussichtlich\s+/i, "");
+    const addTentativeMarker = (value) => value.endsWith("*") ? value : `${value}*`;
+    const formatFactSheetDateValue = (value) => formatFullDateFactValue(addTentativeMarker(stripTentativePrefix(value)));
+    const formatFactSheetEnrollmentValue = (value, fallbackDateValue) => {
+      if (!value) return "Termin folgt*";
+
+      if (value.includes("schulabhängig") && value.includes("Sommerferien") && fallbackDateValue) {
+        return `frühestens ab ${formatFactSheetDateValue(fallbackDateValue)}`;
+      }
+
+      if (value.includes("schulabhängig") && value.includes("Sommerferien")) {
+        return "nach den Sommerferien*";
+      }
+
+      return formatFactSheetDateValue(value);
+    };
+    const formatFactSheetRegistrationValue = (value) => {
+      if (!value) return "Termin folgt*";
+
+      return addTentativeMarker(value.replace(" oder ", " / "));
+    };
+    const hasTentativeFactSheetFacts = Boolean(
+      hasFactSheetFacts &&
+      (
+        selectedFactSheetFacts.enrollmentLabel?.includes("voraussichtlich") ||
+        selectedFactSheetFacts.enrollmentLabel?.includes("schulabhängig") ||
+        selectedFactSheetFacts.firstSchoolDayLabel?.includes("voraussichtlich") ||
+        selectedFactSheetFacts.registration?.sourceStatus === "voraussichtlich" ||
+        selectedFactSheetFacts.sourceStatus === "voraussichtlich"
+      ),
+    );
+    const factSheetFootnoteHtml = hasTentativeFactSheetFacts
+      ? `
+        <p class="result-facts-footnote">
+          * voraussichtlich oder schulabhängig. Verbindlich sind die Angaben der zuständigen Grundschule, Kommune oder Schulbehörde.
+        </p>
+      `
+      : "";
+    const factSheetSchoolYearStart = result.meta.schoolYear.split("/")[0];
+    const factSheetEnrollmentFactHtml = hasFactSheetFacts && !hasEnrollmentDates && !isRetrospectiveResult
+      ? `
+        <div class="result-fact result-fact-highlight">
+          <span class="result-fact-label">Einschulung</span>
+          <span class="result-fact-value">${formatFactSheetEnrollmentValue(selectedFactSheetFacts.enrollmentLabel, selectedFactSheetFacts.firstSchoolDayLabel)}</span>
+        </div>
+      `
+      : "";
+    const factSheetSummerHolidayFactHtml = hasFactSheetFacts && !hasEnrollmentDates && !isRetrospectiveResult
+      ? `
+        <div class="result-fact">
+          <span class="result-fact-label">Sommerferien ${factSheetSchoolYearStart}</span>
+          <span class="result-fact-value">${stripYearFromDateValue(formatDateRangeFactValue(selectedFactSheetFacts.summerHolidays.label))}</span>
+        </div>
+      `
+      : "";
+    const factSheetFirstSchoolDayFactHtml = hasFactSheetFacts && !hasEnrollmentDates && !isRetrospectiveResult
+      ? `
+        <div class="result-fact result-fact-highlight">
+          <span class="result-fact-label">Erster Schultag</span>
+          <span class="result-fact-value">${formatFactSheetDateValue(selectedFactSheetFacts.firstSchoolDayLabel)}</span>
+        </div>
+      `
+      : "";
+    const factSheetRegistrationFactHtml = hasFactSheetFacts && !hasEnrollmentDates && !isRetrospectiveResult
+      ? `
+        <div class="result-fact">
+          <span class="result-fact-label">Schulanmeldung</span>
+          <span class="result-fact-value">${formatFactSheetRegistrationValue(selectedFactSheetFacts.registration?.timingLabel)}</span>
+        </div>
+      `
+      : "";
     const stateDetailUrl = selectedStateKey
       ? `/einschulung-${selectedStateKey}/${selectedBirthdate ? `?geburtsdatum=${selectedBirthdate}` : ""}`
       : "";
@@ -1485,11 +1611,6 @@ const webApplicationSchema = {
         </div>
 
         <div class="result-fact">
-          <span class="result-fact-label">Stichtag</span>
-          <span class="result-fact-value">${result.meta.cutoff}</span>
-        </div>
-
-        <div class="result-fact">
           <span class="result-fact-label">Status</span>
           <span class="result-fact-value">${isRetrospectiveResult ? "Rückblick" : result.meta.statusLabel}</span>
         </div>
@@ -1499,7 +1620,19 @@ const webApplicationSchema = {
           <span class="result-fact-value">${result.meta.schoolYear}</span>
         </div>
 
-        ${dateFactsHtml}
+        ${dateFactsHtml || factSheetEnrollmentFactHtml}
+
+        ${factSheetSummerHolidayFactHtml}
+        ${factSheetFirstSchoolDayFactHtml}
+
+        <div class="result-fact">
+          <span class="result-fact-label">Stichtag</span>
+          <span class="result-fact-value">${stripYearFromDateValue(result.meta.cutoff)}</span>
+        </div>
+
+        ${factSheetRegistrationFactHtml}
+
+        ${factSheetFootnoteHtml}
       </div>
 
       <div class="result-section">
@@ -2232,6 +2365,15 @@ select {
   font-size: 1.02rem;
   font-weight: 900;
   line-height: 1.25;
+}
+
+.result-facts-footnote {
+  grid-column: 1 / -1;
+  margin: 0;
+  color: rgba(255, 255, 255, 0.68) !important;
+  font-size: 0.82rem;
+  font-weight: 650;
+  line-height: 1.42;
 }
 
 .result-fact-highlight {

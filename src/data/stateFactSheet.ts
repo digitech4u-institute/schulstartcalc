@@ -1,6 +1,6 @@
 import type { StateSlug } from "./states";
 
-export type SchoolYear = "2026/2027" | "2027/2028" | "2028/2029";
+export type SchoolYear = `${number}/${number}`;
 
 export type EnrollmentDateQualifier = "schulabhängig" | "voraussichtlich" | null;
 
@@ -53,10 +53,19 @@ export type StateRules = {
   ruleVersion: string;
 };
 
+
 export type SummerHolidayFacts = {
   start: string | null;
   end: string | null;
   label: string;
+};
+
+export type SchoolRegistrationFacts = {
+  timingLabel: string;
+  placeLabel: string;
+  note: string;
+  sourceStatus: SourceStatus;
+  lastVerified: string;
 };
 
 export type StateSchoolYearFacts = {
@@ -71,6 +80,7 @@ export type StateSchoolYearFacts = {
   sourceStatus: SourceStatus;
   lastVerified: string;
   summerHolidays: SummerHolidayFacts;
+  registration: SchoolRegistrationFacts;
 };
 
 export type StateFactSheet = {
@@ -93,6 +103,40 @@ const CURRENT_SCHOOL_YEAR: SchoolYear = "2026/2027";
 const FUTURE_DATA_NOTE =
   "Die offiziellen Einschulungs- und Schuljahrestermine für dieses Schuljahr sind noch nicht vollständig veröffentlicht. Sobald belastbare Angaben vorliegen, werden sie zentral ergänzt.";
 
+
+function createRegistrationFacts({
+  timingLabel,
+  placeLabel,
+  note,
+  sourceStatus = "offiziell bestätigt",
+  lastVerified = "2026-06-21",
+}: {
+  timingLabel: string;
+  placeLabel: string;
+  note: string;
+  sourceStatus?: SourceStatus;
+  lastVerified?: string;
+}): SchoolRegistrationFacts {
+  return {
+    timingLabel,
+    placeLabel,
+    note,
+    sourceStatus,
+    lastVerified,
+  };
+}
+
+function createDefaultRegistrationFacts(schoolYear: SchoolYear): SchoolRegistrationFacts {
+  return createRegistrationFacts({
+    timingLabel: "Termin wird später bekanntgegeben",
+    placeLabel: "zuständige Grundschule oder Schulträger",
+    note: `Die Angaben zur Schulanmeldung für das Schuljahr ${schoolYear} werden ergänzt, sobald belastbare Informationen veröffentlicht sind.`,
+    sourceStatus: "noch nicht veröffentlicht",
+    lastVerified: "2026-06-21",
+  });
+}
+
+
 function createUnpublishedSchoolYear(
   schoolYear: SchoolYear,
   summerHolidays: SummerHolidayFacts = {
@@ -113,6 +157,42 @@ function createUnpublishedSchoolYear(
     sourceStatus: "noch nicht veröffentlicht",
     lastVerified: "2026-06-20",
     summerHolidays,
+    registration: createDefaultRegistrationFacts(schoolYear),
+  };
+}
+
+function createProjectedSchoolYearFacts({
+  schoolYear,
+  summerHolidays,
+  firstSchoolDayLabel,
+  enrollmentLabel = "Einschulungstermin wird später bekanntgegeben",
+  note,
+  lastVerified = "2026-06-20",
+  registration,
+}: {
+  schoolYear: SchoolYear;
+  summerHolidays: SummerHolidayFacts;
+  firstSchoolDayLabel: string;
+  enrollmentLabel?: string;
+  note?: string;
+  lastVerified?: string;
+  registration?: SchoolRegistrationFacts;
+}): StateSchoolYearFacts {
+  return {
+    schoolYear,
+    enrollment: null,
+    enrollmentLabel,
+    enrollmentQualifier: "schulabhängig",
+    firstSchoolDay: null,
+    firstSchoolDayLabel,
+    note:
+      note ??
+      "Die Sommerferien für dieses Schuljahr sind bereits veröffentlicht. Der erste Schultag lässt sich daraus voraussichtlich einordnen. Der konkrete Einschulungstermin für Erstklässlerinnen und Erstklässler wird später von Land, Kommune oder Schule bekanntgegeben.",
+    hasConfirmedDate: false,
+    sourceStatus: "voraussichtlich",
+    lastVerified,
+    summerHolidays,
+    registration: registration ?? createDefaultRegistrationFacts(schoolYear),
   };
 }
 
@@ -128,6 +208,7 @@ function createSchoolYearFacts({
   summerHolidays,
   enrollmentLabel,
   firstSchoolDayLabel,
+  registration,
 }: {
   schoolYear: SchoolYear;
   enrollment: string | null;
@@ -140,6 +221,7 @@ function createSchoolYearFacts({
   summerHolidays: SummerHolidayFacts;
   enrollmentLabel?: string;
   firstSchoolDayLabel?: string;
+  registration?: SchoolRegistrationFacts;
 }): StateSchoolYearFacts {
   return {
     schoolYear,
@@ -153,6 +235,7 @@ function createSchoolYearFacts({
     sourceStatus,
     lastVerified,
     summerHolidays,
+    registration: registration ?? createDefaultRegistrationFacts(schoolYear),
   };
 }
 
@@ -238,6 +321,24 @@ const summerHolidayPeriods2027: Record<StateSlug, SummerHolidayFacts> = {
     label: "Samstag, 10. Juli – Freitag, 20. August",
   },
 };
+const projectedFirstSchoolDayLabels2027: Record<StateSlug, string> = {
+  "baden-wuerttemberg": "voraussichtlich Montag, 13. September 2027",
+  bayern: "voraussichtlich Dienstag, 14. September 2027",
+  berlin: "voraussichtlich Montag, 16. August 2027",
+  brandenburg: "voraussichtlich Montag, 16. August 2027",
+  bremen: "voraussichtlich Donnerstag, 19. August 2027",
+  hamburg: "voraussichtlich Donnerstag, 12. August 2027",
+  hessen: "voraussichtlich Montag, 9. August 2027",
+  "mecklenburg-vorpommern": "voraussichtlich Montag, 16. August 2027",
+  niedersachsen: "voraussichtlich Donnerstag, 19. August 2027",
+  "nordrhein-westfalen": "voraussichtlich Mittwoch, 1. September 2027",
+  "rheinland-pfalz": "voraussichtlich Montag, 9. August 2027",
+  saarland: "voraussichtlich Montag, 9. August 2027",
+  sachsen: "voraussichtlich Montag, 23. August 2027",
+  "sachsen-anhalt": "voraussichtlich Montag, 23. August 2027",
+  "schleswig-holstein": "voraussichtlich Montag, 16. August 2027",
+  thueringen: "voraussichtlich Montag, 23. August 2027",
+};
 const unpublished2028 = createUnpublishedSchoolYear("2028/2029");
 
 export const stateFactSheets = {
@@ -276,7 +377,20 @@ export const stateFactSheets = {
           label: "Donnerstag, 30. Juli – Samstag, 12. September",
         },
       }),
-      "2027/2028": createUnpublishedSchoolYear("2027/2028", summerHolidayPeriods2027["baden-wuerttemberg"]),
+      "2027/2028": createProjectedSchoolYearFacts({
+        schoolYear: "2027/2028",
+        summerHolidays: summerHolidayPeriods2027["baden-wuerttemberg"],
+        firstSchoolDayLabel: projectedFirstSchoolDayLabels2027["baden-wuerttemberg"],
+        enrollmentLabel: "voraussichtlich schulabhängig nach den Sommerferien 2027",
+        note:
+          "Für Baden-Württemberg sind die Sommerferien 2027 bereits eingetragen. Der erste Schultag lässt sich voraussichtlich einordnen; den konkreten Einschulungstermin legt in der Regel die zuständige Grundschule fest.",
+        registration: createRegistrationFacts({
+          timingLabel: "Einladung oder Termin durch zuständige Grundschule",
+          placeLabel: "zuständige Grundschule",
+          note:
+            "Eltern erhalten in Baden-Württemberg in der Regel eine schriftliche Einladung von der zuständigen Grundschule. Der genaue Anmeldetermin wird häufig zusätzlich örtlich bekanntgegeben.",
+        }),
+      }),
       "2028/2029": unpublished2028,
     },
     sources: [],
@@ -321,7 +435,20 @@ export const stateFactSheets = {
           label: "Montag, 3. August – Montag, 14. September",
         },
       }),
-      "2027/2028": createUnpublishedSchoolYear("2027/2028", summerHolidayPeriods2027.bayern),
+      "2027/2028": createProjectedSchoolYearFacts({
+        schoolYear: "2027/2028",
+        summerHolidays: summerHolidayPeriods2027.bayern,
+        firstSchoolDayLabel: projectedFirstSchoolDayLabels2027.bayern,
+        enrollmentLabel: "voraussichtlich Mittwoch, 15. September 2027",
+        note:
+          "Für Bayern sind die Sommerferien 2027 bereits eingetragen. Schulanfängerinnen und Schulanfänger starten voraussichtlich am Tag nach dem ersten Schultag; der endgültige Termin bleibt zu prüfen, sobald die offiziellen Schuljahrestermine veröffentlicht sind.",
+        registration: createRegistrationFacts({
+          timingLabel: "März 2027",
+          placeLabel: "zuständige Grundschule",
+          note:
+            "In Bayern findet die Schuleinschreibung für die 1. Klasse jeweils im März statt. Den genauen Termin legt die Schulleitung fest.",
+        }),
+      }),
       "2028/2029": unpublished2028,
     },
     sources: [],
@@ -366,7 +493,20 @@ export const stateFactSheets = {
           label: "Donnerstag, 9. Juli – Samstag, 22. August",
         },
       }),
-      "2027/2028": createUnpublishedSchoolYear("2027/2028", summerHolidayPeriods2027.berlin),
+      "2027/2028": createProjectedSchoolYearFacts({
+        schoolYear: "2027/2028",
+        summerHolidays: summerHolidayPeriods2027.berlin,
+        firstSchoolDayLabel: projectedFirstSchoolDayLabels2027.berlin,
+        enrollmentLabel: "voraussichtlich schulabhängig nach den Sommerferien 2027",
+        note:
+          "Für Berlin sind die Sommerferien 2027 bereits eingetragen. Der erste Schultag lässt sich voraussichtlich einordnen; die konkrete Einschulungsfeier wird später von der zuständigen Grundschule bekanntgegeben.",
+        registration: createRegistrationFacts({
+          timingLabel: "5. bis 16. Oktober 2026",
+          placeLabel: "zuständige Grundschule laut Bezirksschulamt",
+          note:
+            "Für das Schuljahr 2027/2028 nennt Berlin den Anmeldezeitraum 5. bis 16. Oktober 2026. Die Anmeldung erfolgt bei der zuständigen Grundschule, die vom Bezirksschulamt mitgeteilt wird.",
+        }),
+      }),
       "2028/2029": unpublished2028,
     },
     sources: [],
@@ -410,7 +550,20 @@ export const stateFactSheets = {
           label: "Donnerstag, 9. Juli – Samstag, 22. August",
         },
       }),
-      "2027/2028": createUnpublishedSchoolYear("2027/2028", summerHolidayPeriods2027.brandenburg),
+      "2027/2028": createProjectedSchoolYearFacts({
+        schoolYear: "2027/2028",
+        summerHolidays: summerHolidayPeriods2027.brandenburg,
+        firstSchoolDayLabel: projectedFirstSchoolDayLabels2027.brandenburg,
+        enrollmentLabel: "voraussichtlich Samstag, 14. August 2027",
+        note:
+          "Für Brandenburg sind die Sommerferien 2027 bereits eingetragen. Die Einschulungsfeiern finden häufig am Samstag vor dem ersten Schultag statt; der endgültige Termin ist später anhand der offiziellen Angaben zu prüfen.",
+        registration: createRegistrationFacts({
+          timingLabel: "in der Regel ab November 2026",
+          placeLabel: "digital über das Schulportal Brandenburg; persönliche Vorstellung bleibt möglich",
+          note:
+            "In Brandenburg ist die digitale Anmeldung zum Aufnahmeverfahren in die Grundschule in der Regel ab November des Vorjahres möglich. Der genaue Öffnungstermin wird jährlich bekanntgegeben.",
+        }),
+      }),
       "2028/2029": unpublished2028,
     },
     specialNote: {
@@ -460,7 +613,21 @@ export const stateFactSheets = {
           label: "Donnerstag, 2. Juli – Mittwoch, 12. August",
         },
       }),
-      "2027/2028": createUnpublishedSchoolYear("2027/2028", summerHolidayPeriods2027.bremen),
+      "2027/2028": createProjectedSchoolYearFacts({
+        schoolYear: "2027/2028",
+        summerHolidays: summerHolidayPeriods2027.bremen,
+        firstSchoolDayLabel: projectedFirstSchoolDayLabels2027.bremen,
+        enrollmentLabel: "voraussichtlich Samstag, 21. August 2027",
+        note:
+          "Für Bremen sind die Sommerferien 2027 bereits eingetragen. Die Einschulungsfeier für Erstklässlerinnen und Erstklässler liegt voraussichtlich kurz nach dem ersten Schultag; der endgültige Termin bleibt offiziell zu prüfen.",
+        registration: createRegistrationFacts({
+          timingLabel: "voraussichtlich Herbst 2026 nach Benachrichtigung",
+          placeLabel: "zuständige Anmeldeschule oder Grundschule",
+          note:
+            "In Bremen erhalten Eltern üblicherweise eine Einschulungsbenachrichtigung mit Anmeldezeiten und Anmeldeschule. Vorzeitige Einschulung ist innerhalb der Anmeldefrist bei der zuständigen Grundschule zu beantragen.",
+          sourceStatus: "voraussichtlich",
+        }),
+      }),
       "2028/2029": unpublished2028,
     },
     sources: [],
@@ -500,7 +667,20 @@ export const stateFactSheets = {
           label: "Donnerstag, 9. Juli – Mittwoch, 19. August",
         },
       }),
-      "2027/2028": createUnpublishedSchoolYear("2027/2028", summerHolidayPeriods2027.hamburg),
+      "2027/2028": createProjectedSchoolYearFacts({
+        schoolYear: "2027/2028",
+        summerHolidays: summerHolidayPeriods2027.hamburg,
+        firstSchoolDayLabel: projectedFirstSchoolDayLabels2027.hamburg,
+        enrollmentLabel: "voraussichtlich schulabhängig nach dem ersten Schultag",
+        note:
+          "Für Hamburg sind die Sommerferien 2027 bereits eingetragen. Der erste Schultag lässt sich voraussichtlich einordnen; die Einschulungstermine werden in Hamburg von den Schulen bekanntgegeben.",
+        registration: createRegistrationFacts({
+          timingLabel: "voraussichtlich Januar 2027",
+          placeLabel: "Grundschule der Wahl; Einladung durch regional zuständige Grundschule",
+          note:
+            "In Hamburg erhalten Eltern rechtzeitig vor der in der Regel im Januar stattfindenden Anmelderunde ein Einladungsschreiben mit Anmeldeformblatt. Während der dreiwöchigen Anmelderunde kann eine Grundschule der Wahl angegeben werden.",
+        }),
+      }),
       "2028/2029": unpublished2028,
     },
     sources: [],
@@ -540,7 +720,21 @@ export const stateFactSheets = {
           label: "Montag, 29. Juni – Freitag, 7. August",
         },
       }),
-      "2027/2028": createUnpublishedSchoolYear("2027/2028", summerHolidayPeriods2027.hessen),
+      "2027/2028": createProjectedSchoolYearFacts({
+        schoolYear: "2027/2028",
+        summerHolidays: summerHolidayPeriods2027.hessen,
+        firstSchoolDayLabel: projectedFirstSchoolDayLabels2027.hessen,
+        enrollmentLabel: "voraussichtlich Dienstag, 10. August 2027",
+        note:
+          "Für Hessen sind die Sommerferien 2027 bereits eingetragen. Die Einschulung liegt häufig am Dienstag nach dem ersten Schultag; den endgültigen Termin legt die zuständige Grundschule fest.",
+        registration: createRegistrationFacts({
+          timingLabel: "voraussichtlich Frühjahr 2026",
+          placeLabel: "zuständige Grundschule",
+          note:
+            "In Hessen findet die Schulanmeldung üblicherweise im Frühjahr vor dem eigentlichen Einschulungsjahr statt. Die zuständige Grundschule informiert die Eltern über den konkreten Termin.",
+          sourceStatus: "voraussichtlich",
+        }),
+      }),
       "2028/2029": unpublished2028,
     },
     sources: [],
@@ -580,7 +774,20 @@ export const stateFactSheets = {
           label: "Montag, 13. Juli – Samstag, 22. August",
         },
       }),
-      "2027/2028": createUnpublishedSchoolYear("2027/2028", summerHolidayPeriods2027["mecklenburg-vorpommern"]),
+      "2027/2028": createProjectedSchoolYearFacts({
+        schoolYear: "2027/2028",
+        summerHolidays: summerHolidayPeriods2027["mecklenburg-vorpommern"],
+        firstSchoolDayLabel: projectedFirstSchoolDayLabels2027["mecklenburg-vorpommern"],
+        enrollmentLabel: "voraussichtlich Samstag, 14. August 2027",
+        note:
+          "Für Mecklenburg-Vorpommern sind die Sommerferien 2027 bereits eingetragen. Die Einschulung findet voraussichtlich am Ende der Sommerferien statt; den konkreten Ablauf legt die zuständige Grundschule fest.",
+        registration: createRegistrationFacts({
+          timingLabel: "bis 31. Oktober 2026",
+          placeLabel: "örtlich zuständige Grundschule in staatlicher Trägerschaft",
+          note:
+            "In Mecklenburg-Vorpommern muss die Anmeldung bis zum 31. Oktober des Jahres vor Beginn der Schulpflicht erfolgen. Auch bei gewünschter freier Schule ist die Anmeldung an der örtlich zuständigen staatlichen Grundschule erforderlich.",
+        }),
+      }),
       "2028/2029": unpublished2028,
     },
     sources: [],
@@ -625,7 +832,20 @@ export const stateFactSheets = {
           label: "Donnerstag, 2. Juli – Mittwoch, 12. August",
         },
       }),
-      "2027/2028": createUnpublishedSchoolYear("2027/2028", summerHolidayPeriods2027.niedersachsen),
+      "2027/2028": createProjectedSchoolYearFacts({
+        schoolYear: "2027/2028",
+        summerHolidays: summerHolidayPeriods2027.niedersachsen,
+        firstSchoolDayLabel: projectedFirstSchoolDayLabels2027.niedersachsen,
+        enrollmentLabel: "voraussichtlich Samstag, 21. August 2027",
+        note:
+          "Für Niedersachsen sind die Sommerferien 2027 bereits eingetragen. Die Einschulung liegt voraussichtlich kurz nach dem ersten Schultag; der endgültige Termin bleibt offiziell zu prüfen.",
+        registration: createRegistrationFacts({
+          timingLabel: "etwa 15 Monate vor der Einschulung",
+          placeLabel: "zuständige Grundschule; Termin durch Schulträger oder Schule",
+          note:
+            "In Niedersachsen werden Eltern etwa 15 Monate vor der Einschulung zur Anmeldung in die zuständige Grundschule eingeladen. Den genauen Termin teilt der Schulträger oder die Grundschule mit.",
+        }),
+      }),
       "2028/2029": unpublished2028,
     },
     sources: [],
@@ -666,7 +886,20 @@ export const stateFactSheets = {
           label: "Montag, 20. Juli – Dienstag, 1. September",
         },
       }),
-      "2027/2028": createUnpublishedSchoolYear("2027/2028", summerHolidayPeriods2027["nordrhein-westfalen"]),
+      "2027/2028": createProjectedSchoolYearFacts({
+        schoolYear: "2027/2028",
+        summerHolidays: summerHolidayPeriods2027["nordrhein-westfalen"],
+        firstSchoolDayLabel: projectedFirstSchoolDayLabels2027["nordrhein-westfalen"],
+        enrollmentLabel: "voraussichtlich spätestens Donnerstag, 2. September 2027",
+        note:
+          "Für Nordrhein-Westfalen sind die Sommerferien 2027 bereits eingetragen. Die Einschulung findet in der Regel spätestens am zweiten Schultag nach den Sommerferien statt; der konkrete Termin ist schulabhängig.",
+        registration: createRegistrationFacts({
+          timingLabel: "bis 15. November 2026",
+          placeLabel: "Grundschule; genaue Hinweise durch Kommune oder Schule",
+          note:
+            "In Nordrhein-Westfalen müssen Kinder, die im folgenden Jahr schulpflichtig werden, bis zum 15. November angemeldet sein. Die konkreten Anmeldewege und Termine werden örtlich mitgeteilt.",
+        }),
+      }),
       "2028/2029": unpublished2028,
     },
     sources: [],
@@ -706,7 +939,20 @@ export const stateFactSheets = {
           label: "Montag, 29. Juni – Freitag, 7. August",
         },
       }),
-      "2027/2028": createUnpublishedSchoolYear("2027/2028", summerHolidayPeriods2027["rheinland-pfalz"]),
+      "2027/2028": createProjectedSchoolYearFacts({
+        schoolYear: "2027/2028",
+        summerHolidays: summerHolidayPeriods2027["rheinland-pfalz"],
+        firstSchoolDayLabel: projectedFirstSchoolDayLabels2027["rheinland-pfalz"],
+        enrollmentLabel: "voraussichtlich schulabhängig nach den Sommerferien 2027",
+        note:
+          "Für Rheinland-Pfalz sind die Sommerferien 2027 bereits eingetragen. Der erste Schultag lässt sich voraussichtlich einordnen; der konkrete Einschulungstermin kann je nach Schule abweichen.",
+        registration: createRegistrationFacts({
+          timingLabel: "Februar 2026 für schulpflichtige Kinder; Februar 2027 für Kann-Kinder",
+          placeLabel: "zuständige Grundschule; Aufforderung durch Schulträger",
+          note:
+            "In Rheinland-Pfalz werden schulpflichtig werdende Kinder im Februar an der zuständigen Grundschule angemeldet. Die Eltern erhalten eine Aufforderung zur Anmeldung durch den Schulträger; Kann-Kinder werden im Februar vor der Einschulung angemeldet.",
+        }),
+      }),
       "2028/2029": unpublished2028,
     },
     sources: [],
@@ -744,7 +990,21 @@ export const stateFactSheets = {
           label: "Montag, 29. Juni – Freitag, 7. August",
         },
       }),
-      "2027/2028": createUnpublishedSchoolYear("2027/2028", summerHolidayPeriods2027.saarland),
+      "2027/2028": createProjectedSchoolYearFacts({
+        schoolYear: "2027/2028",
+        summerHolidays: summerHolidayPeriods2027.saarland,
+        firstSchoolDayLabel: projectedFirstSchoolDayLabels2027.saarland,
+        enrollmentLabel: "voraussichtlich schulabhängig nach den Sommerferien 2027",
+        note:
+          "Für das Saarland sind die Sommerferien 2027 bereits eingetragen. Der erste Schultag lässt sich voraussichtlich einordnen; der konkrete Einschulungstermin kann je nach Schule abweichen.",
+        registration: createRegistrationFacts({
+          timingLabel: "Termin durch Schule oder Schulträger",
+          placeLabel: "zuständige Grundschule",
+          note:
+            "Für das Saarland werden die konkreten Termine zur Schulanmeldung durch die zuständige Grundschule oder den Schulträger mitgeteilt. Eltern sollten die Hinweise der Kommune und der zuständigen Grundschule beachten.",
+          sourceStatus: "voraussichtlich",
+        }),
+      }),
       "2028/2029": unpublished2028,
     },
     sources: [],
@@ -788,7 +1048,20 @@ export const stateFactSheets = {
           label: "Samstag, 4. Juli – Freitag, 14. August",
         },
       }),
-      "2027/2028": createUnpublishedSchoolYear("2027/2028", summerHolidayPeriods2027.sachsen),
+      "2027/2028": createProjectedSchoolYearFacts({
+        schoolYear: "2027/2028",
+        summerHolidays: summerHolidayPeriods2027.sachsen,
+        firstSchoolDayLabel: projectedFirstSchoolDayLabels2027.sachsen,
+        enrollmentLabel: "Samstag, 21. August 2027",
+        note:
+          "Für Sachsen ist die Schuleinführung für Samstag, 21. August 2027 vorgesehen; der erste Schultag ist voraussichtlich Montag, 23. August 2027.",
+        registration: createRegistrationFacts({
+          timingLabel: "1. August bis 15. September 2026",
+          placeLabel: "zuständige Grundschule; Ort und Zeit durch Stadt oder Gemeinde",
+          note:
+            "In Sachsen geben Städte und Gemeinden Ort und Zeit der Schulanmeldung bekannt. Die Anmeldungen sollen im Zeitraum 1. August bis 15. September im Jahr vor der Einschulung stattfinden.",
+        }),
+      }),
       "2028/2029": unpublished2028,
     },
     sources: [],
@@ -827,7 +1100,20 @@ export const stateFactSheets = {
           label: "Samstag, 4. Juli – Freitag, 14. August",
         },
       }),
-      "2027/2028": createUnpublishedSchoolYear("2027/2028", summerHolidayPeriods2027["sachsen-anhalt"]),
+      "2027/2028": createProjectedSchoolYearFacts({
+        schoolYear: "2027/2028",
+        summerHolidays: summerHolidayPeriods2027["sachsen-anhalt"],
+        firstSchoolDayLabel: projectedFirstSchoolDayLabels2027["sachsen-anhalt"],
+        enrollmentLabel: "voraussichtlich schulabhängig nach den Sommerferien 2027",
+        note:
+          "Für Sachsen-Anhalt sind die Sommerferien 2027 bereits eingetragen. Der erste Schultag lässt sich voraussichtlich einordnen; der konkrete Einschulungstermin wird später bekanntgegeben.",
+        registration: createRegistrationFacts({
+          timingLabel: "bis 1. März 2026",
+          placeLabel: "zuständige Grundschule; ggf. Serviceportal Schule Sachsen-Anhalt",
+          note:
+            "Für Sachsen-Anhalt muss die Anmeldung zur Einschulung 2027/2028 bis zum 1. März 2026 an der zuständigen Grundschule erfolgen. Das Serviceportal Schule Sachsen-Anhalt kann genutzt werden, wenn der Schulträger es freigegeben hat.",
+        }),
+      }),
       "2028/2029": unpublished2028,
     },
     sources: [],
@@ -865,7 +1151,20 @@ export const stateFactSheets = {
           label: "Samstag, 4. Juli – Samstag, 15. August",
         },
       }),
-      "2027/2028": createUnpublishedSchoolYear("2027/2028", summerHolidayPeriods2027["schleswig-holstein"]),
+      "2027/2028": createProjectedSchoolYearFacts({
+        schoolYear: "2027/2028",
+        summerHolidays: summerHolidayPeriods2027["schleswig-holstein"],
+        firstSchoolDayLabel: projectedFirstSchoolDayLabels2027["schleswig-holstein"],
+        enrollmentLabel: "voraussichtlich schulabhängig nach den Sommerferien 2027",
+        note:
+          "Für Schleswig-Holstein sind die Sommerferien 2027 bereits eingetragen. Der erste Schultag lässt sich voraussichtlich einordnen; der konkrete Einschulungstermin wird später von der zuständigen Schule bekanntgegeben.",
+        registration: createRegistrationFacts({
+          timingLabel: "Termin per Presse, Post oder zuständige Grundschule",
+          placeLabel: "zuständige Grundschule im Wohnbezirk",
+          note:
+            "In Schleswig-Holstein erfahren Eltern die Termine zur Anmeldung aus der Presse, per Post oder durch die zuständige Grundschule im Wohnbezirk. Die Schulleitung ist Ansprechperson für Fragen zur Einschulung.",
+        }),
+      }),
       "2028/2029": unpublished2028,
     },
     sources: [],
@@ -905,7 +1204,20 @@ export const stateFactSheets = {
           label: "Samstag, 4. Juli – Freitag, 14. August",
         },
       }),
-      "2027/2028": createUnpublishedSchoolYear("2027/2028", summerHolidayPeriods2027.thueringen),
+      "2027/2028": createProjectedSchoolYearFacts({
+        schoolYear: "2027/2028",
+        summerHolidays: summerHolidayPeriods2027.thueringen,
+        firstSchoolDayLabel: projectedFirstSchoolDayLabels2027.thueringen,
+        enrollmentLabel: "voraussichtlich schulabhängig nach den Sommerferien 2027",
+        note:
+          "Für Thüringen sind die Sommerferien 2027 bereits eingetragen. Der erste Schultag lässt sich voraussichtlich einordnen; der konkrete Einschulungstermin wird später bekanntgegeben.",
+        registration: createRegistrationFacts({
+          timingLabel: "2. bis 10. Mai 2026",
+          placeLabel: "Grundschule des Schulbezirks; ggf. vorgesehene Gemeinschaftsschule",
+          note:
+            "In Thüringen liegt der Anmeldezeitraum für die Klassenstufe 1 im Schuljahr 2027/2028 vom 2. bis 10. Mai 2026. Die Anmeldung erfolgt an der zuständigen Grundschule des Schulbezirks oder an einer vom Schulträger vorgesehenen Gemeinschaftsschule.",
+        }),
+      }),
       "2028/2029": unpublished2028,
     },
     sources: [],
@@ -957,9 +1269,7 @@ export function getQuickFactCards(
     {
       title: "Nächste Einschulung",
       value: schoolYearFacts.enrollmentLabel,
-      text: schoolYearFacts.hasConfirmedDate
-        ? schoolYearFacts.note
-        : "Der Termin wird ergänzt, sobald die offiziellen Angaben veröffentlicht sind.",
+      text: schoolYearFacts.note,
     },
     {
       title: "Erster Schultag",
