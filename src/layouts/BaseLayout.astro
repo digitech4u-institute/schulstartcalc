@@ -8,7 +8,7 @@ interface Props {
 
 const { title, description, canonical, schema } = Astro.props;
 
-const COOKIEBOT_ID = import.meta.env.PUBLIC_COOKIEBOT_ID || "";
+const COOKIEYES_ID = import.meta.env.PUBLIC_COOKIEYES_ID || "";
 const ADSENSE_ID = import.meta.env.PUBLIC_ADSENSE_ID || "";
 const schemaItems = schema ? (Array.isArray(schema) ? schema : [schema]) : [];
 const currentPath = new URL(canonical).pathname;
@@ -39,14 +39,11 @@ const currentPath = new URL(canonical).pathname;
     </script>
 
     {
-      COOKIEBOT_ID ? (
+      COOKIEYES_ID ? (
         <script
-          id="Cookiebot"
-          src="https://consent.cookiebot.com/uc.js"
-          data-cbid={COOKIEBOT_ID}
-          data-blockingmode="auto"
+          id="cookieyes"
           type="text/javascript"
-          async
+          src={`https://cdn-cookieyes.com/client_data/${COOKIEYES_ID}/script.js`}
         />
       ) : null
     }
@@ -106,8 +103,8 @@ const currentPath = new URL(canonical).pathname;
       <nav class="base-footer-nav" aria-label="Rechtliches">
         {currentPath !== "/impressum/" ? <a class="base-footer-link" href="/impressum/">Impressum</a> : null}
         {currentPath !== "/datenschutz/" ? <a class="base-footer-link" href="/datenschutz/">Datenschutz</a> : null}
-        {COOKIEBOT_ID ? (
-          <button type="button" class="base-footer-button" data-cookiebot-settings>
+        {COOKIEYES_ID ? (
+          <button type="button" class="base-footer-button" data-cookieyes-settings>
             Cookie-Einstellungen
           </button>
         ) : null}
@@ -116,14 +113,16 @@ const currentPath = new URL(canonical).pathname;
 
     <script>
       document.addEventListener("click", (event) => {
-        const cookiebotTarget = event.target instanceof Element
-          ? event.target.closest("[data-cookiebot-settings]")
+        const cookieyesTarget = event.target instanceof Element
+          ? event.target.closest("[data-cookieyes-settings]")
           : null;
 
-        if (cookiebotTarget) {
+        if (cookieyesTarget) {
           event.preventDefault();
-          if (window.Cookiebot && typeof window.Cookiebot.renew === "function") {
-            window.Cookiebot.renew();
+          if (typeof window.showCookieConsent === "function") {
+            window.showCookieConsent();
+          } else if (typeof window.CookieYes === "object" && typeof window.CookieYes.show === "function") {
+            window.CookieYes.show();
           }
           return;
         }
